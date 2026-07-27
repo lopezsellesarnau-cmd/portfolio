@@ -8,10 +8,12 @@
 export const PERFIL = {
   nombre: 'Arnau Lopez',
   rol: 'Full-Stack AI Product Engineer',
-  eyebrow: '[ 22 años · autodidacta · sin título ]',
+  eyebrow: '[ 22 años · autodidacta ]',
   hero: 'Construyo productos de IA de punta a punta — de la idea a producción — y entiendo su gobernanza, no solo su código.',
   sub: 'El 78% de las ofertas de IA en España no piden título. Piden portfolio real. Este es el mío.',
 }
+
+export const HERO_PLANT_SEED = 433
 
 export const STATS = [
   { v: '5', l: 'productos shippeados' },
@@ -30,6 +32,7 @@ export type CaseStudy = {
   decisiones: { titulo: string; detalle: string }[]
   resultado: string
   stack: string[]
+  seed: number
 }
 
 export const CASOS: CaseStudy[] = [
@@ -61,6 +64,7 @@ export const CASOS: CaseStudy[] = [
     resultado:
       'En producción, atendiendo llamadas reales de administradores de fincas sin intervención humana en el camino feliz.',
     stack: ['Voice AI', 'LLM', 'Automatización de tickets', 'Producción'],
+    seed: 100,
   },
   {
     slug: 'louvr-labs',
@@ -90,6 +94,7 @@ export const CASOS: CaseStudy[] = [
     ],
     resultado: 'Reporte semanal automático por email, cero intervención manual, en producción con clientes reales.',
     stack: ['OAuth', 'Meta Ads API', 'Python', 'Claude (Sonnet) API', 'Make.com'],
+    seed: 322,
   },
   {
     slug: 'rostry',
@@ -123,6 +128,7 @@ export const CASOS: CaseStudy[] = [
     ],
     resultado: 'Aprobada en la App Store en la build 7, con pagos reales entre jugadores ya funcionando.',
     stack: ['Flutter', 'Riverpod', 'Firebase', 'Stripe Connect', 'App Store'],
+    seed: 507,
   },
 ]
 
@@ -131,6 +137,7 @@ export type ProyectoLigero = {
   tagline: string
   estado: string
   stack: string[]
+  seed: number
 }
 
 export const LIGEROS: ProyectoLigero[] = [
@@ -139,12 +146,14 @@ export const LIGEROS: ProyectoLigero[] = [
     tagline: 'SaaS de reservas en tiempo real para clubs de pádel.',
     estado: 'En producción',
     stack: ['SaaS', 'Reservas en tiempo real'],
+    seed: 803,
   },
   {
     nombre: 'SMASH',
     tagline: 'App social de pádel — vídeos, squads, comunidad.',
     estado: 'Aprobada en App Store',
     stack: ['iOS', 'App Store'],
+    seed: 951,
   },
 ]
 

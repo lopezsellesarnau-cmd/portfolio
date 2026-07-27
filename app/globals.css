@@ -106,3 +106,14 @@
   .fade-up, .pulse-dot, .breathe { animation: none; }
   .panel-live .tick-fill { animation: none; }
 }
+
+/* Pista de "esto se puede abrir" — solo en dispositivos con hover real
+   (ratón/trackpad). En touch (móvil) no existe: ahí se abre directo al tocar,
+   sin necesidad de una pista previa que nadie va a ver. */
+@media (hover: hover) and (pointer: fine) {
+  .peek-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -16px rgba(21, 20, 18, 0.35);
+  }
+}
+

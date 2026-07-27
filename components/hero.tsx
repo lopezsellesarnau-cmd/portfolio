@@ -1,9 +1,18 @@
-import { PERFIL, STATS } from './copy'
+import { PERFIL, STATS, HERO_PLANT_SEED } from './copy'
+import { PlantCanvas } from './plant-canvas'
 
 export function Hero() {
   return (
     <section id="top" className="grain relative overflow-hidden border-b border-line bg-glow">
-      <div className="container-page pb-14 pt-16 sm:pb-20 sm:pt-24">
+      <PlantCanvas
+        seed={HERO_PLANT_SEED}
+        len={430}
+        depth={5}
+        anchor="corner-tr"
+        color="#151412"
+        className="pointer-events-none absolute bottom-0 right-0 top-[64px] hidden w-[50%] md:block"
+      />
+      <div className="container-page relative pb-14 pt-16 sm:pb-20 sm:pt-24">
         <p className="fade-up font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{PERFIL.eyebrow}</p>
 
         <h1
@@ -49,6 +58,15 @@ export function Hero() {
             </div>
           ))}
         </div>
+
+        <PlantCanvas
+          seed={HERO_PLANT_SEED}
+          len={230}
+          depth={4}
+          anchor="center"
+          color="#151412"
+          className="mt-10 block h-[220px] w-full md:hidden"
+        />
       </div>
     </section>
   )
