@@ -167,7 +167,7 @@ export function PlantCanvas({
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx!.clearRect(0, 0, W, H)
 
-      const pad = 6
+      const pad = anchor === 'corner-tr' ? 2 : 6
       const scale = Math.min(1, (W - pad * 2) / b.w, (H - pad * 2) / b.h)
       const cs = CELL * scale
       const ds = Math.min(DOT * scale, cs * 0.62)

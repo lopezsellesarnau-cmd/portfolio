@@ -10,7 +10,7 @@ export function Hero() {
         depth={5}
         anchor="corner-tr"
         color="#151412"
-        className="pointer-events-none absolute bottom-0 right-0 top-[64px] hidden w-[50%] md:block"
+        className="pointer-events-none absolute bottom-0 right-0 top-0 hidden w-[64%] md:block"
       />
       <div className="container-page relative pb-14 pt-16 sm:pb-20 sm:pt-24">
         <p className="fade-up font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{PERFIL.eyebrow}</p>
