@@ -66,11 +66,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-/** Wide horizontal plant band (mirror = two-sided crown → fills the strip). */
+/** Wide horizontal plant band. Mirror makes a two-sided crown (wide, low), and
+ *  cover fills the whole strip — with a wide plant it fills edge-to-edge at a
+ *  good size instead of sitting small in the middle. Taller band so the cover
+ *  crop keeps most of the foliage. */
 function PlantBand({ seed }: { seed: number }) {
   return (
-    <div className="relative h-[150px] w-full overflow-hidden border border-line bg-raised sm:h-[170px]">
-      <PlantCanvas seed={seed} len={340} depth={5} anchor="center" growAngle={2.55} mirror fit="contain" color="#151412" className="pointer-events-none absolute inset-0 h-full w-full" />
+    <div className="relative h-[180px] w-full overflow-hidden border border-line bg-raised sm:h-[210px]">
+      <PlantCanvas seed={seed} len={360} depth={5} anchor="center" growAngle={2.82} mirror fit="cover" color="#151412" className="pointer-events-none absolute inset-0 h-full w-full" />
       <span className="absolute bottom-2 left-3 font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">Fig. {String(seed).slice(0, 2)} · procedural</span>
     </div>
   )
