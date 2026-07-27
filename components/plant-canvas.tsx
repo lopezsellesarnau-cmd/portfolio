@@ -24,7 +24,7 @@ function mulberry32(seed: number) {
 const CELL = 7
 const DOT = 4.2
 
-function buildPlant(seed: number, len = 430, depth = 5) {
+function buildPlant(seed: number, len = 430, depth = 5, growAngle = 2.85) {
   const rand = mulberry32(seed)
   const cells = new Map<string, number>()
   const add = (cx: number, cy: number) => {
@@ -95,7 +95,7 @@ function buildPlant(seed: number, len = 430, depth = 5) {
     }
   }
 
-  grow(0, 0, 2.85, len, depth, 3)
+  grow(0, 0, growAngle, len, depth, 3)
   return cells
 }
 
@@ -119,20 +119,26 @@ function bounds(cells: Map<string, number>) {
 /**
  * `anchor` decide cómo se ancla la planta en el lienzo:
  *  · 'corner-tr' — esquina superior derecha (hero desktop)
- *  · 'center'    — centrada (tarjetas, banda móvil)
+ *  · 'center'    — centrada (banda móvil)
+ *  · 'bottom'    — raíz abajo, crece hacia arriba (plantas verticales de las tarjetas)
+ *
+ * `growAngle` orienta el tallo: 2.85 barre en apaisado (hero); ~-1.55 crece
+ * casi vertical, que es lo que piden las columnas estrechas de las carpetas.
  */
 export function PlantCanvas({
   seed,
   len = 430,
   depth = 5,
   anchor = 'center',
+  growAngle = 2.85,
   color = '#151412',
   className,
 }: {
   seed: number
   len?: number
   depth?: number
-  anchor?: 'corner-tr' | 'center'
+  anchor?: 'corner-tr' | 'center' | 'bottom'
+  growAngle?: number
   color?: string
   className?: string
 }) {
@@ -145,7 +151,7 @@ export function PlantCanvas({
     if (!ctx) return
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
 
-    const cells = buildPlant(seed, len, depth)
+    const cells = buildPlant(seed, len, depth, growAngle)
     const b = bounds(cells)
     const maxDist = Math.max(...Array.from(cells.values()))
     const puntos = Array.from(cells.entries()).map(([key, dist]) => {
@@ -168,13 +174,25 @@ export function PlantCanvas({
       ctx!.clearRect(0, 0, W, H)
 
       const pad = anchor === 'corner-tr' ? 2 : 6
-      const scale = Math.min(1, (W - pad * 2) / b.w, (H - pad * 2) / b.h)
+      const fit = Math.min((W - pad * 2) / b.w, (H - pad * 2) / b.h)
+      // Por defecto no se amplía (nunca más de 1). Pero las plantas verticales
+      // de las tarjetas ('bottom') sí llenan su columna estrecha — si no,
+      // quedan diminutas apoyadas abajo; se permite ampliar hasta 2.6×.
+      const scale = anchor === 'bottom' ? Math.min(2.6, fit) : Math.min(1, fit)
       const cs = CELL * scale
       const ds = Math.min(DOT * scale, cs * 0.62)
       const off = (cs - ds) / 2
 
+      // X: la esquina ancla a la derecha; el resto centra horizontalmente.
       const offX = anchor === 'corner-tr' ? W - pad - b.maxX * cs : (W - b.w * scale) / 2 - b.minX * cs
-      const offY = anchor === 'corner-tr' ? pad - b.minY * cs : (H - b.h * scale) / 2 - b.minY * cs
+      // Y: la esquina ancla arriba; 'bottom' apoya la raíz (maxY) en el suelo
+      // del lienzo — una planta crece desde abajo, no flotando; el resto centra.
+      const offY =
+        anchor === 'corner-tr'
+          ? pad - b.minY * cs
+          : anchor === 'bottom'
+            ? H - pad - b.maxY * cs
+            : (H - b.h * scale) / 2 - b.minY * cs
 
       const t1 = tiempo * 0.00035
       const t2 = tiempo * 0.00022
@@ -220,7 +238,7 @@ export function PlantCanvas({
       cancelAnimationFrame(raf)
       ro.disconnect()
     }
-  }, [seed, len, depth, anchor, color])
+  }, [seed, len, depth, anchor, growAngle, color])
 
   return <canvas ref={ref} aria-hidden className={className} />
 }
