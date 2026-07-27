@@ -1,15 +1,14 @@
 'use client'
 
 /**
- * Work as ONE folder — a real folder shape (tab + rounded body, ink border,
- * bone/light, like the folder-stack I built earlier), not a black box. Closed,
- * each row is a line of the index; hovering lifts the hint on desktop, tap
- * opens on mobile. Open, the row inverts to ink and a light sheet drops out
- * with the fields, a full-width horizontal plant band woven between the text
- * and the mockup (like Aithority's /lab dashboard tree), and a mockup built
- * for that product. An × closes it.
+ * Work as a STACK OF FOLDERS — same drawer look as StackD's folder-stack:
+ * each project is its own folder with its own staggered tab, folders overlap,
+ * and a dark base closes the stack. Interactive: click a folder (tab or
+ * header) to open it — a light sheet drops out with the fields, a wide
+ * horizontal plant band woven between the text and the mockup, and a mockup
+ * built for that product. An × closes it.
  *
- * Aithority is NOT here: it's the cofounder project and has its own section.
+ * Aithority is NOT here: it's the cofounder project, with its own section.
  */
 
 import { useState } from 'react'
@@ -27,6 +26,9 @@ const MOCKUP: Record<string, React.ComponentType> = {
   'louvr-labs': LouvrMockup,
   rostry: RostryMockup,
 }
+
+// Staggered tab positions per folder — the file-drawer look.
+const LEFTS = ['4%', '23%', '42%', '13%', '32%']
 
 function CloseIcon() {
   return (
@@ -64,62 +66,13 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-/** Full-width horizontal plant band, woven into the content flow. */
+/** Wide horizontal plant band (mirror = two-sided crown → fills the strip). */
 function PlantBand({ seed }: { seed: number }) {
   return (
-    <div className="relative h-[130px] w-full overflow-hidden border border-line bg-raised sm:h-[150px]">
-      <PlantCanvas seed={seed} len={430} depth={5} anchor="center" fit="cover" color="#151412" className="pointer-events-none absolute inset-0 h-full w-full opacity-90" />
+    <div className="relative h-[150px] w-full overflow-hidden border border-line bg-raised sm:h-[170px]">
+      <PlantCanvas seed={seed} len={340} depth={5} anchor="center" growAngle={2.55} mirror fit="contain" color="#151412" className="pointer-events-none absolute inset-0 h-full w-full" />
       <span className="absolute bottom-2 left-3 font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">Fig. {String(seed).slice(0, 2)} · procedural</span>
     </div>
-  )
-}
-
-function RowHeader({
-  open,
-  onToggle,
-  index,
-  name,
-  tagline,
-  statusText,
-  statusTone,
-  first,
-}: {
-  open: boolean
-  onToggle: () => void
-  index: string
-  name: string
-  tagline: string
-  statusText: string
-  statusTone: string
-  first: boolean
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-expanded={open}
-      className={`peek-row flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 ${first ? '' : 'border-t border-hair'} ${
-        open ? 'bg-ink' : 'bg-transparent'
-      }`}
-    >
-      <div className="flex min-w-0 items-center gap-4">
-        <span className={`shrink-0 font-mono text-[10.5px] uppercase tracking-[0.14em] ${open ? 'text-[rgba(240,238,233,0.5)]' : 'text-fg-faint'}`}>{index}</span>
-        <div className="min-w-0">
-          <p className={`truncate text-[16px] font-medium ${open ? 'text-bg' : 'text-ink'}`}>{name}</p>
-          <p className={`mt-0.5 truncate text-[12.5px] ${open ? 'text-[rgba(240,238,233,0.6)]' : 'text-fg-muted'}`}>{tagline}</p>
-        </div>
-      </div>
-      <div className="flex shrink-0 items-center gap-3">
-        <span
-          className="hidden items-center gap-1.5 whitespace-nowrap border px-1.5 py-[3px] font-mono text-[9px] uppercase tracking-[0.08em] sm:inline-flex"
-          style={{ borderColor: statusTone, color: statusTone }}
-        >
-          <span className="h-1 w-1" style={{ backgroundColor: statusTone }} aria-hidden />
-          {statusText}
-        </span>
-        <span className={open ? 'text-bg' : 'text-fg-dim'}>{open ? <CloseIcon /> : <PlusIcon />}</span>
-      </div>
-    </button>
   )
 }
 
@@ -127,22 +80,84 @@ function Sheet({ open, children }: { open: boolean; children: React.ReactNode })
   return (
     <div className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
       <div className="overflow-hidden">
-        <div className="border-t border-hair bg-bg">{children}</div>
+        <div className="border-t border-hair">{children}</div>
       </div>
     </div>
   )
 }
 
-function DeepRow({ caso, first }: { caso: CaseStudy; first: boolean }) {
+/** One folder: staggered tab + rounded-top body, overlapping the previous. */
+function Folder({
+  index,
+  left,
+  name,
+  tagline,
+  statusText,
+  statusTone,
+  z,
+  first,
+  children,
+}: {
+  index: string
+  left: string
+  name: string
+  tagline: string
+  statusText: string
+  statusTone: string
+  z: number
+  first: boolean
+  children: React.ReactNode
+}) {
   const [open, setOpen] = useState(false)
+  return (
+    <div className={`relative ${first ? '' : '-mt-3'}`} style={{ zIndex: open ? 50 : z }}>
+      {/* Tab */}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="absolute -top-[19px] left-[var(--l)] flex h-[20px] items-center gap-2 rounded-t-[7px] border border-b-0 border-ink bg-bg px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink"
+        style={{ '--l': left } as React.CSSProperties}
+      >
+        <span className="text-accent">{index}</span>
+        <span className="hidden sm:inline">{name}</span>
+      </button>
+
+      {/* Body */}
+      <div className={`rounded-t-[18px] border border-b-0 border-ink ${open ? 'bg-bg' : 'bg-surface'}`}>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="peek-row flex w-full items-center justify-between gap-4 px-5 pb-6 pt-7 text-left sm:px-7"
+        >
+          <div className="min-w-0">
+            <p className="truncate text-[16px] font-medium text-ink">{name}</p>
+            <p className="mt-1 truncate font-mono text-[10px] uppercase tracking-[0.1em]" style={{ color: TERRA }}>
+              {tagline}
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-3">
+            <span className="hidden items-center gap-1.5 whitespace-nowrap border px-1.5 py-[3px] font-mono text-[9px] uppercase tracking-[0.08em] sm:inline-flex" style={{ borderColor: statusTone, color: statusTone }}>
+              <span className="h-1 w-1" style={{ backgroundColor: statusTone }} aria-hidden />
+              {statusText}
+            </span>
+            <span className="text-fg-dim">{open ? <CloseIcon /> : <PlusIcon />}</span>
+          </div>
+        </button>
+        <Sheet open={open}>{children}</Sheet>
+      </div>
+    </div>
+  )
+}
+
+function DeepFolder({ caso, index, left, z, first }: { caso: CaseStudy; index: string; left: string; z: number; first: boolean }) {
   const tone = caso.status.tone === 'ok' ? OK : TERRA
   const Mockup = MOCKUP[caso.slug]
-
   return (
     <div id={caso.slug} className="scroll-mt-20">
-      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={caso.index} name={caso.name} tagline={caso.tagline} statusText={caso.status.text} statusTone={tone} first={first} />
-      <Sheet open={open}>
-        <div className="p-5 sm:p-7">
+      <Folder index={index} left={left} name={caso.name} tagline={caso.tagline} statusText={caso.status.text} statusTone={tone} z={z} first={first}>
+        <div className="px-5 pb-8 pt-5 sm:px-7">
           <div className="grid gap-6 sm:grid-cols-2">
             <Field label="Problem">
               <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.problem}</p>
@@ -159,7 +174,6 @@ function DeepRow({ caso, first }: { caso: CaseStudy; first: boolean }) {
             </Field>
           </div>
 
-          {/* Horizontal plant band, between the text and the mockup */}
           <div className="my-7">
             <PlantBand seed={caso.seed} />
           </div>
@@ -192,55 +206,44 @@ function DeepRow({ caso, first }: { caso: CaseStudy; first: boolean }) {
             </div>
           )}
         </div>
-      </Sheet>
+      </Folder>
     </div>
   )
 }
 
-function LightRow({ proyecto, index }: { proyecto: LightProject; index: string }) {
-  const [open, setOpen] = useState(false)
-  const tone = proyecto.status.toLowerCase().includes('production') ? OK : TERRA
-
+function LightFolder({ p, index, left, z }: { p: LightProject; index: string; left: string; z: number }) {
+  const tone = p.status.toLowerCase().includes('production') ? OK : TERRA
   return (
-    <div>
-      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={index} name={proyecto.name} tagline={proyecto.tagline} statusText={proyecto.status} statusTone={tone} first={false} />
-      <Sheet open={open}>
-        <div className="p-5 sm:p-7">
-          <p className="max-w-[52ch] text-[13.5px] leading-relaxed text-fg-muted">{proyecto.tagline}</p>
-          <div className="my-6">
-            <PlantBand seed={proyecto.seed} />
-          </div>
-          <StackChips stack={proyecto.stack} />
+    <Folder index={index} left={left} name={p.name} tagline={p.tagline} statusText={p.status} statusTone={tone} z={z} first={false}>
+      <div className="px-5 pb-8 pt-5 sm:px-7">
+        <p className="max-w-[52ch] text-[13.5px] leading-relaxed text-fg-muted">{p.tagline}</p>
+        <div className="my-6">
+          <PlantBand seed={p.seed} />
         </div>
-      </Sheet>
-    </div>
+        <StackChips stack={p.stack} />
+      </div>
+    </Folder>
   )
 }
 
 export function ProjectArchive() {
+  const total = CASES.length + LIGHT.length
   return (
-    <div className="relative pt-[19px]">
-      {/* One folder tab for the whole block */}
-      <div
-        className="absolute -top-px left-0 flex h-[20px] items-center gap-2 rounded-t-[7px] border border-b-0 border-ink bg-bg px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink"
-        aria-hidden
-      >
-        <span className="text-accent">✦</span>
-        <span>Work · {CASES.length + LIGHT.length} projects</span>
-      </div>
+    <div className="relative pt-7">
+      {CASES.map((c, i) => (
+        <DeepFolder key={c.slug} caso={c} index={c.index} left={LEFTS[i % LEFTS.length]} z={i + 1} first={i === 0} />
+      ))}
+      {LIGHT.map((p, i) => {
+        const idx = CASES.length + i
+        return <LightFolder key={p.name} p={p} index={`0${idx + 1}`} left={LEFTS[idx % LEFTS.length]} z={idx + 1} />
+      })}
 
-      <div className="overflow-hidden rounded-[18px] rounded-tl-none border border-ink bg-surface">
-        {CASES.map((c, i) => (
-          <DeepRow key={c.slug} caso={c} first={i === 0} />
-        ))}
-
-        <div className="border-t border-ink bg-[rgba(21,20,18,0.045)] px-5 py-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-fg-dim sm:px-6">
-          Also shipped
+      {/* Dark base — closes the stack */}
+      <div className="relative -mt-3 rounded-t-[18px] bg-ink px-5 py-6 text-bg sm:px-7" style={{ zIndex: total + 1 }}>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]">Every line above is real — in production or on the App Store.</p>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: TERRA }}>Built solo, end to end</p>
         </div>
-
-        {LIGHT.map((p, i) => (
-          <LightRow key={p.name} proyecto={p} index={`0${CASES.length + i + 1}`} />
-        ))}
       </div>
     </div>
   )

@@ -24,7 +24,7 @@ function mulberry32(seed: number) {
 const CELL = 7
 const DOT = 4.2
 
-function buildPlant(seed: number, len = 430, depth = 5, growAngle = 2.85) {
+function buildPlant(seed: number, len = 430, depth = 5, growAngle = 2.85, mirror = false) {
   const rand = mulberry32(seed)
   const cells = new Map<string, number>()
   const add = (cx: number, cy: number) => {
@@ -96,6 +96,10 @@ function buildPlant(seed: number, len = 430, depth = 5, growAngle = 2.85) {
   }
 
   grow(0, 0, growAngle, len, depth, 3)
+  // Espejo: una segunda copa hacia el otro lado (π - ángulo) desde la misma
+  // raíz → una planta ANCHA y baja que llena una banda horizontal sin tener
+  // que ampliarla a lo bestia (que es lo que la hacía verse gigante).
+  if (mirror) grow(0, 0, Math.PI - growAngle, len, depth, 3)
   return cells
 }
 
@@ -132,6 +136,7 @@ export function PlantCanvas({
   anchor = 'center',
   growAngle = 2.85,
   fit = 'contain',
+  mirror = false,
   color = '#151412',
   className,
 }: {
@@ -143,6 +148,8 @@ export function PlantCanvas({
   /** 'contain' encaja dentro; 'cover' llena la caja recortando lo que sobra —
    *  es lo que quita el espacio muerto arriba/abajo del hero y las bandas. */
   fit?: 'contain' | 'cover'
+  /** Copa doble (izq + der): planta ancha para bandas horizontales. */
+  mirror?: boolean
   color?: string
   className?: string
 }) {
@@ -155,7 +162,7 @@ export function PlantCanvas({
     if (!ctx) return
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
 
-    const cells = buildPlant(seed, len, depth, growAngle)
+    const cells = buildPlant(seed, len, depth, growAngle, mirror)
     const b = bounds(cells)
     const maxDist = Math.max(...Array.from(cells.values()))
     const puntos = Array.from(cells.entries()).map(([key, dist]) => {
@@ -244,7 +251,7 @@ export function PlantCanvas({
       cancelAnimationFrame(raf)
       ro.disconnect()
     }
-  }, [seed, len, depth, anchor, growAngle, fit, color])
+  }, [seed, len, depth, anchor, growAngle, fit, mirror, color])
 
   return <canvas ref={ref} aria-hidden className={className} />
 }
