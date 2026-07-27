@@ -8,7 +8,7 @@
  * funciona el producto y con qué se construye, igual que los demás.
  */
 
-import { MockupFrame, OK, TERRA, INK, Meter, BlockGrid } from './frame'
+import { MockupFrame, OK, TERRA, INK, Meter } from './frame'
 
 const ALTO = '#B8433F'
 const TRANSP = '#5A5FA0'
@@ -64,10 +64,15 @@ export function AithorityMockup() {
             <Meter pct={41} tone={TERRA} delay={900} />
           </div>
 
-          <div className="mt-4 space-y-2.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[9.5px] uppercase tracking-[0.1em] text-fg-dim">Obligaciones</span>
-              <BlockGrid filled={11} max={27} delay={1100} />
+          <div className="mt-4 space-y-3">
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[9.5px] uppercase tracking-[0.1em] text-fg-dim">Obligaciones</span>
+                <span className="font-mono text-[11px] tabular-nums text-ink">11 / 27</span>
+              </div>
+              <div className="mt-1.5">
+                <Meter pct={41} tone={INK} delay={1100} />
+              </div>
             </div>
             <div className="flex items-center justify-between">
               <span className="font-mono text-[9.5px] uppercase tracking-[0.1em] text-fg-dim">Alto riesgo</span>

@@ -178,7 +178,7 @@ export function PlantCanvas({
       // Por defecto no se amplía (nunca más de 1). Pero las plantas verticales
       // de las tarjetas ('bottom') sí llenan su columna estrecha — si no,
       // quedan diminutas apoyadas abajo; se permite ampliar hasta 2.6×.
-      const scale = anchor === 'bottom' ? Math.min(2.6, fit) : Math.min(1, fit)
+      const scale = anchor === 'bottom' ? Math.min(3.4, fit) : Math.min(1, fit)
       const cs = CELL * scale
       const ds = Math.min(DOT * scale, cs * 0.62)
       const off = (cs - ds) / 2

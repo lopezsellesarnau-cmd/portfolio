@@ -1,16 +1,14 @@
 'use client'
 
 /**
- * El trabajo, como un ÚNICO archivador (no carpetas sueltas): una pestaña
- * arriba, un solo borde de tinta alrededor, y dentro las filas separadas por
- * hairlines — misma idea que el folder-stack de StackD pero interactivo.
+ * El trabajo como un ÚNICO archivador oscuro (referencia: el fichero negro de
+ * hilloris): una pestaña, un borde de tinta, y dentro las filas — la carpeta
+ * es oscura y de ella salen "hojas" claras. Cerrada, cada fila es una línea
+ * del índice sobre tinta. Abierta, la hoja se despliega en hueso con la
+ * ilustración de planta (vertical, grande), la ficha y un mockup propio del
+ * producto. Botón × para cerrar.
  *
- * Cerrada, cada fila es una línea del índice. En desktop, pasar el cursor la
- * levanta un pelo (pista de que se abre) sin desplegar nada; en móvil, que no
- * tiene hover, se toca y se abre. Abierta: sale una hoja con la ilustración
- * de planta (vertical, estrecha, propia de cada proyecto), la ficha, y un
- * mockup que de verdad representa ese producto — árbol donde encaja, tabla,
- * flujo o dashboard donde no. Un botón × cierra.
+ * Aithority NO está aquí: es el proyecto de cofundador y tiene sección propia.
  */
 
 import { useState } from 'react'
@@ -18,7 +16,6 @@ import { PlantCanvas } from './plant-canvas'
 import { BlockFlowMockup } from './mockups/blockflow-mockup'
 import { LouvrMockup } from './mockups/louvr-mockup'
 import { RostryMockup } from './mockups/rostry-mockup'
-import { AithorityMockup } from './mockups/aithority-mockup'
 import { CASOS, LIGEROS, type CaseStudy, type ProyectoLigero } from './copy'
 
 const TERRA = '#C1663D'
@@ -28,11 +25,8 @@ const MOCKUP: Record<string, React.ComponentType> = {
   blockflow: BlockFlowMockup,
   'louvr-labs': LouvrMockup,
   rostry: RostryMockup,
-  aithority: AithorityMockup,
 }
 
-// Ángulo casi vertical: las plantas de las tarjetas crecen hacia arriba en
-// columnas estrechas, en vez del barrido apaisado del hero.
 const VERT = -1.55
 
 function CloseIcon() {
@@ -71,6 +65,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
+/** Fila sobre tinta. Abierta invierte a hueso — la "hoja" que sale del fichero. */
 function RowHeader({
   open,
   onToggle,
@@ -95,17 +90,16 @@ function RowHeader({
       type="button"
       onClick={onToggle}
       aria-expanded={open}
-      className={`peek-row flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 ${first ? '' : 'border-t border-hair'} ${
-        open ? 'bg-ink' : 'bg-transparent'
-      }`}
+      className={`peek-dark flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 ${
+        first ? '' : 'border-t'
+      } ${open ? 'bg-bg' : 'bg-transparent'}`}
+      style={{ borderColor: open ? 'transparent' : 'rgba(240,238,233,0.14)' }}
     >
       <div className="flex min-w-0 items-center gap-4">
-        <span className={`shrink-0 font-mono text-[10.5px] uppercase tracking-[0.14em] ${open ? 'text-[rgba(240,238,233,0.5)]' : 'text-fg-faint'}`}>
-          {index}
-        </span>
+        <span className={`shrink-0 font-mono text-[10.5px] uppercase tracking-[0.14em] ${open ? 'text-accent' : 'text-accent'}`}>{index}</span>
         <div className="min-w-0">
-          <p className={`truncate text-[16px] font-medium ${open ? 'text-bg' : 'text-ink'}`}>{nombre}</p>
-          <p className={`mt-0.5 truncate text-[12.5px] ${open ? 'text-[rgba(240,238,233,0.6)]' : 'text-fg-muted'}`}>{tagline}</p>
+          <p className={`truncate text-[16px] font-medium ${open ? 'text-ink' : 'text-bg'}`}>{nombre}</p>
+          <p className={`mt-0.5 truncate text-[12.5px] ${open ? 'text-fg-muted' : 'text-[rgba(240,238,233,0.55)]'}`}>{tagline}</p>
         </div>
       </div>
       <div className="flex shrink-0 items-center gap-3">
@@ -116,7 +110,7 @@ function RowHeader({
           <span className="h-1 w-1" style={{ backgroundColor: estadoTono }} aria-hidden />
           {estadoTexto}
         </span>
-        <span className={open ? 'text-bg' : 'text-fg-dim'}>{open ? <CloseIcon /> : <PlusIcon />}</span>
+        <span className={open ? 'text-ink' : 'text-bg'}>{open ? <CloseIcon /> : <PlusIcon />}</span>
       </div>
     </button>
   )
@@ -126,7 +120,7 @@ function Sheet({ open, children }: { open: boolean; children: React.ReactNode })
   return (
     <div className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
       <div className="overflow-hidden">
-        <div className="border-t border-hair bg-raised">{children}</div>
+        <div className="bg-bg">{children}</div>
       </div>
     </div>
   )
@@ -139,21 +133,12 @@ function DeepRow({ caso, first }: { caso: CaseStudy; first: boolean }) {
 
   return (
     <div id={caso.slug} className="scroll-mt-20">
-      <RowHeader
-        open={open}
-        onToggle={() => setOpen((v) => !v)}
-        index={caso.index}
-        nombre={caso.nombre}
-        tagline={caso.tagline}
-        estadoTexto={caso.estado.texto}
-        estadoTono={tono}
-        first={first}
-      />
+      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={caso.index} nombre={caso.nombre} tagline={caso.tagline} estadoTexto={caso.estado.texto} estadoTono={tono} first={first} />
       <Sheet open={open}>
-        <div className="grid gap-0 md:grid-cols-[150px_1fr]">
-          {/* Planta vertical, estrecha, apoyada abajo */}
-          <div className="flex items-end justify-center border-b border-hair bg-bg p-4 md:border-b-0 md:border-r">
-            <PlantCanvas seed={caso.seed} len={360} depth={5} anchor="bottom" growAngle={VERT} color="#151412" className="block h-[200px] w-full md:h-[300px]" />
+        <div className="grid gap-0 md:grid-cols-[210px_1fr]">
+          {/* Planta vertical, grande, apoyada abajo */}
+          <div className="flex items-end justify-center border-b border-line bg-surface p-3 md:border-b-0 md:border-r">
+            <PlantCanvas seed={caso.seed} len={320} depth={5} anchor="bottom" growAngle={VERT} color="#151412" className="block h-[240px] w-full md:h-[360px]" />
           </div>
 
           <div className="min-w-0 p-5 sm:p-7">
@@ -210,20 +195,11 @@ function LightRow({ proyecto, index }: { proyecto: ProyectoLigero; index: string
 
   return (
     <div>
-      <RowHeader
-        open={open}
-        onToggle={() => setOpen((v) => !v)}
-        index={index}
-        nombre={proyecto.nombre}
-        tagline={proyecto.tagline}
-        estadoTexto={proyecto.estado}
-        estadoTono={tono}
-        first={false}
-      />
+      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={index} nombre={proyecto.nombre} tagline={proyecto.tagline} estadoTexto={proyecto.estado} estadoTono={tono} first={false} />
       <Sheet open={open}>
-        <div className="grid gap-0 md:grid-cols-[130px_1fr]">
-          <div className="flex items-end justify-center border-b border-hair bg-bg p-4 md:border-b-0 md:border-r">
-            <PlantCanvas seed={proyecto.seed} len={280} depth={4} anchor="bottom" growAngle={VERT} color="#151412" className="block h-[150px] w-full md:h-[200px]" />
+        <div className="grid gap-0 md:grid-cols-[180px_1fr]">
+          <div className="flex items-end justify-center border-b border-line bg-surface p-3 md:border-b-0 md:border-r">
+            <PlantCanvas seed={proyecto.seed} len={280} depth={4} anchor="bottom" growAngle={VERT} color="#151412" className="block h-[190px] w-full md:h-[240px]" />
           </div>
           <div className="flex flex-col justify-center gap-4 p-5 sm:p-7">
             <p className="max-w-[52ch] text-[13.5px] leading-relaxed text-fg-muted">{proyecto.tagline}</p>
@@ -240,19 +216,19 @@ export function ProjectArchive() {
     <div className="relative pt-[19px]">
       {/* Pestaña del archivador — una sola, para todo el bloque */}
       <div
-        className="absolute -top-px left-0 flex h-[20px] items-center gap-2 rounded-t-[7px] border border-b-0 border-ink bg-bg px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink"
+        className="absolute -top-px left-0 flex h-[20px] items-center gap-2 rounded-t-[7px] border border-b-0 border-ink bg-ink px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-bg"
         aria-hidden
       >
         <span className="text-accent">✦</span>
         <span>Trabajo · {CASOS.length + LIGEROS.length} proyectos</span>
       </div>
 
-      <div className="overflow-hidden rounded-[18px] rounded-tl-none border border-ink bg-surface">
+      <div className="overflow-hidden rounded-[18px] rounded-tl-none border border-ink bg-ink">
         {CASOS.map((c, i) => (
           <DeepRow key={c.slug} caso={c} first={i === 0} />
         ))}
 
-        <div className="border-t border-ink bg-[rgba(21,20,18,0.045)] px-5 py-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-fg-dim sm:px-6">
+        <div className="border-t px-5 py-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-[rgba(240,238,233,0.5)] sm:px-6" style={{ borderColor: 'rgba(240,238,233,0.14)' }}>
           También shippeado
         </div>
 

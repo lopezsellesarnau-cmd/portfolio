@@ -13,7 +13,9 @@ export const PERFIL = {
   sub: 'El 78% de las ofertas de IA en España no piden título. Piden portfolio real. Este es el mío.',
 }
 
-export const HERO_PLANT_SEED = 433
+// El mismo árbol "largo" del hero de StackD y Aithority (su DotTree usa SEED
+// 315): unifica la identidad entre las tres superficies de Arnau.
+export const HERO_PLANT_SEED = 315
 
 export const STATS = [
   { v: '5', l: 'productos shippeados' },
@@ -130,37 +132,43 @@ export const CASOS: CaseStudy[] = [
     stack: ['Flutter', 'Riverpod', 'Firebase', 'Stripe Connect', 'App Store'],
     seed: 507,
   },
-  {
-    slug: 'aithority',
-    index: '04',
-    nombre: 'Aithority',
-    tagline: 'Cumplimiento del AI Act europeo — como cofundador técnico',
-    estado: { texto: 'Cofundador · en construcción', tono: 'accent' },
-    problema:
-      'Una empresa que usa IA en RRHH, crédito o biometría tiene que cumplir el AI Act: inventariar cada sistema, clasificar su riesgo y documentarlo. Hoy lo hacen a mano, en hojas de cálculo, sin saber qué les aplica ni qué falta.',
-    enfoque: [
-      'Motor de clasificación real: entra la descripción de un sistema y sale su riesgo según el Anexo III y las obligaciones concretas que le tocan, con el razonamiento — no una caja negra.',
-      'Descubrimiento automático del inventario: conecta Microsoft 365 por OAuth (consentimiento de admin, solo lectura) y detecta las herramientas de IA que la organización ya tiene autorizadas.',
-      'Documentación del Art. 11 y registro de evidencias con fecha, para que el expediente de auditoría se componga solo y nunca describa un estado viejo.',
-    ],
-    decisiones: [
-      {
-        titulo: 'Detectar no es clasificar',
-        detalle:
-          'El descubrimiento rellena el inventario, pero no decide el riesgo: que aparezca "Notion AI" no dice si es de alto riesgo — eso depende del uso. Vender "clasificación automática total" sería la sobrepromesa que te pillan en dos preguntas.',
-      },
-      {
-        titulo: 'Sin guardar tokens de terceros',
-        detalle:
-          'El flujo con Microsoft Graph pide un token app-only en cada sincronización en vez de persistirlo — menos superficie que proteger, y el consentimiento es de solo lectura sobre el directorio.',
-      },
-    ],
-    resultado:
-      'Backend propio (motor de clasificación + API) y dashboard en producción. La startup tiene su primer cliente de pago y entrada en Lanzadera.',
-    stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act'],
-    seed: 655,
-  },
 ]
+
+/**
+ * Aithority va aparte del archivador: es el proyecto de cofundador, tiene su
+ * propia sección con dashboard + árbol de info y no comparte peso con los
+ * trabajos ya cerrados.
+ */
+export const AITHORITY_CASO: CaseStudy = {
+  slug: 'aithority',
+  index: '—',
+  nombre: 'Aithority',
+  tagline: 'Cumplimiento del AI Act europeo — como cofundador técnico',
+  estado: { texto: 'Cofundador · en construcción', tono: 'accent' },
+  problema:
+    'Una empresa que usa IA en RRHH, crédito o biometría tiene que cumplir el AI Act: inventariar cada sistema, clasificar su riesgo y documentarlo. Hoy lo hacen a mano, en hojas de cálculo, sin saber qué les aplica ni qué falta.',
+  enfoque: [
+    'Motor de clasificación real: entra la descripción de un sistema y sale su riesgo según el Anexo III y las obligaciones concretas que le tocan, con el razonamiento — no una caja negra.',
+    'Descubrimiento automático del inventario: conecta Microsoft 365 por OAuth (consentimiento de admin, solo lectura) y detecta las herramientas de IA que la organización ya tiene autorizadas.',
+    'Documentación del Art. 11 y registro de evidencias con fecha, para que el expediente de auditoría se componga solo y nunca describa un estado viejo.',
+  ],
+  decisiones: [
+    {
+      titulo: 'Detectar no es clasificar',
+      detalle:
+        'El descubrimiento rellena el inventario, pero no decide el riesgo: que aparezca "Notion AI" no dice si es de alto riesgo — eso depende del uso. Vender "clasificación automática total" sería la sobrepromesa que te pillan en dos preguntas.',
+    },
+    {
+      titulo: 'Sin guardar tokens de terceros',
+      detalle:
+        'El flujo con Microsoft Graph pide un token app-only en cada sincronización en vez de persistirlo — menos superficie que proteger, y el consentimiento es de solo lectura sobre el directorio.',
+    },
+  ],
+  resultado:
+    'Backend propio (motor de clasificación + API) y dashboard en producción. La startup tiene su primer cliente de pago y entrada en Lanzadera.',
+  stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act'],
+  seed: 655,
+}
 
 export type ProyectoLigero = {
   nombre: string

@@ -53,6 +53,12 @@
   background-image: repeating-linear-gradient(45deg, rgba(21, 20, 18, 0.03) 0 1px, transparent 1px 7px);
 }
 
+/* Damero — la franja técnica del borde superior del hero (brutalist). */
+.checker {
+  background-image: conic-gradient(#151412 25%, transparent 0 50%, #151412 0 75%, transparent 0);
+  background-size: 12px 12px;
+}
+
 .btn-solid,
 .btn-ghost {
   display: inline-flex;
@@ -174,6 +180,11 @@
   }
   .peek-row:not(.bg-ink):hover {
     background: rgba(21, 20, 18, 0.035);
+  }
+  /* Archivador oscuro: la fila cerrada (sobre tinta) se aclara un pelo; la
+     abierta ya es hueso, no se toca. */
+  .peek-dark.bg-transparent:hover {
+    background: rgba(240, 238, 233, 0.06);
   }
 }
 

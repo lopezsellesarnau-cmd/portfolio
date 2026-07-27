@@ -1,6 +1,7 @@
 import { Nav } from '@/components/nav'
 import { Hero } from '@/components/hero'
 import { ProjectArchive } from '@/components/project-archive'
+import { AithoritySection } from '@/components/aithority-section'
 import { Contact } from '@/components/contact'
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         <ProjectArchive />
       </section>
 
+      <AithoritySection />
       <Contact />
     </main>
   )

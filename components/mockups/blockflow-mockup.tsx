@@ -11,7 +11,9 @@ import { MockupFrame, OK, TERRA, Chip } from './frame'
 
 // Alturas deterministas (nada de Math.random en render → sin desajuste de
 // hidratación); la animación de la onda es puramente CSS.
-const BARS = Array.from({ length: 32 }, (_, i) => 3 + Math.abs(Math.sin(i * 1.7)) * 15)
+// Redondeado a entero a propósito: sin(i) da decimales que difieren en el
+// último dígito entre Node (SSR) y el navegador → mismatch de hidratación.
+const BARS = Array.from({ length: 32 }, (_, i) => Math.round(3 + Math.abs(Math.sin(i * 1.7)) * 15))
 
 const TRANSCRIPT = [
   ['VECINO', 'Hola, hay una fuga de agua en el garaje, cae del techo…'],
