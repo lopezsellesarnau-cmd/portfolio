@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    background: #f0eee9;
+    color: #151412;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  ::selection {
+    background: rgba(193, 102, 61, 0.25);
+  }
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #f0eee9, 0 0 0 4px #151412;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1180px] px-6;
+  }
+  .display {
+    @apply font-display leading-[1.0] tracking-display;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Trama diagonal muy tenue de fondo — misma idea que el /lab de Aithority:
+   profundidad sin sombras, paneles en hueso sólido recortados encima. */
+.grain {
+  background-image: repeating-linear-gradient(45deg, rgba(21, 20, 18, 0.03) 0 1px, transparent 1px 7px);
+}
+
+.btn-solid,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: opacity 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn-solid {
+  background: #151412;
+  color: #f0eee9;
+}
+.btn-solid:hover {
+  opacity: 0.82;
+}
+.btn-ghost {
+  border: 1px solid rgba(21, 20, 18, 0.3);
+  color: #151412;
+}
+.btn-ghost:hover {
+  background: #151412;
+  border-color: #151412;
+  color: #f0eee9;
+}
+
+/* Barra de ticks que se rellena al entrar en viewport (.panel-live). */
+@keyframes tick-fill {
+  from { transform: scaleX(0); }
+}
+.tick-fill {
+  transform-origin: left;
+}
+.panel-live .tick-fill {
+  animation: tick-fill 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.025); opacity: 0.92; }
+}
+.breathe {
+  animation: breathe 3.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up, .pulse-dot, .breathe { animation: none; }
+  .panel-live .tick-fill { animation: none; }
+}
