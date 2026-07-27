@@ -46,30 +46,30 @@ function Amount({
 
 export function RostryMockup() {
   return (
-    <MockupFrame title="Stripe Connect · destination charge" context="cobro → reparto" status="status: liquidado" tone={OK}>
+    <MockupFrame title="Stripe Connect · destination charge" context="charge → split" status="status: settled" tone={OK}>
       <div className="grid items-center gap-3 lg:grid-cols-[1fr_64px_1fr]">
-        {/* Entrada */}
-        <Amount label="Pago de liga" monto="40,00 €" sub="jugador → app" tone={INK} ink delay={300} />
+        {/* Input */}
+        <Amount label="League payment" monto="$40.00" sub="player → app" tone={INK} ink delay={300} />
 
-        {/* Conector que se divide */}
+        {/* Splitting connector */}
         <svg viewBox="0 0 64 120" className="hidden h-[120px] w-full lg:block" aria-hidden>
           <path className="tree-line" pathLength={1} strokeDasharray={1} strokeDashoffset={1} d="M0 60 H26 V26 H64" fill="none" stroke={OK} strokeWidth="1.5" style={{ animationDelay: '700ms' }} />
           <path className="tree-line" pathLength={1} strokeDasharray={1} strokeDashoffset={1} d="M0 60 H26 V94 H64" fill="none" stroke={TERRA} strokeWidth="1.5" style={{ animationDelay: '750ms' }} />
         </svg>
         <div className="flex justify-center py-1 lg:hidden" aria-hidden>
-          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint">se divide en</span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint">splits into</span>
         </div>
 
-        {/* Salidas */}
+        {/* Outputs */}
         <div className="grid gap-3">
-          <Amount label="Organizador" monto="38,00 €" sub="cuenta propia · directo" tone={OK} pct="95%" delay={1000} />
-          <Amount label="Rostry" monto="2,00 €" sub="comisión de plataforma" tone={TERRA} pct="5%" delay={1150} />
+          <Amount label="Organizer" monto="$38.00" sub="own account · direct" tone={OK} pct="95%" delay={1000} />
+          <Amount label="Rostry" monto="$2.00" sub="platform fee" tone={TERRA} pct="5%" delay={1150} />
         </div>
       </div>
 
       <p className="mt-3 border-t border-hair pt-3 font-mono text-[10px] leading-relaxed text-fg-dim">
-        El dinero no pasa por una cuenta de Rostry: Stripe lo abona directo al organizador y retiene la comisión
-        en el mismo cobro. Menos carga regulatoria, cero reparto manual.
+        The money never sits in a Rostry account: Stripe pays the organizer directly and withholds the fee in the
+        same charge. Less regulatory weight, zero manual split.
       </p>
     </MockupFrame>
   )

@@ -16,28 +16,28 @@ import { MockupFrame, OK, TERRA, Chip } from './frame'
 const BARS = Array.from({ length: 32 }, (_, i) => Math.round(3 + Math.abs(Math.sin(i * 1.7)) * 15))
 
 const TRANSCRIPT = [
-  ['VECINO', 'Hola, hay una fuga de agua en el garaje, cae del techo…'],
-  ['AGENTE', '¿Sabe de qué planta viene el agua?'],
-  ['VECINO', 'Creo que del primero, está bajando bastante.'],
+  ['CALLER', 'Hi, there\'s a water leak in the garage, dripping from the ceiling…'],
+  ['AGENT', 'Do you know which floor the water is coming from?'],
+  ['CALLER', 'The first floor, I think — it\'s coming down fast.'],
 ]
 
-const CAMPOS = [
-  ['Propiedad', 'Edif. Muntaner 88 · Garaje -1'],
-  ['Tipo', 'Fuga de agua'],
-  ['Urgencia', 'Alta'],
-  ['Resumen', 'Agua desde 1ª planta al garaje. Requiere corte y fontanero.'],
+const FIELDS = [
+  ['Property', 'Muntaner 88 · Garage -1'],
+  ['Type', 'Water leak'],
+  ['Urgency', 'High'],
+  ['Summary', 'Water from 1st floor into the garage. Needs shut-off + plumber.'],
 ]
 
 export function BlockFlowMockup() {
   return (
-    <MockupFrame title="Agente de voz · en vivo" context="llamada → ticket" status="status: ticket creado" tone={OK}>
+    <MockupFrame title="Voice agent · live" context="call → ticket" status="status: ticket created" tone={OK}>
       <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
         {/* Llamada */}
         <div className="border border-line bg-surface">
           <div className="flex items-center justify-between border-b border-hair px-3 py-2 font-mono text-[9.5px] uppercase tracking-[0.12em] text-fg-dim">
             <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-[#C1663D] pulse-dot" aria-hidden />
-              Llamada entrante
+              Incoming call
             </span>
             <span className="tabular-nums">00:47</span>
           </div>
@@ -53,10 +53,10 @@ export function BlockFlowMockup() {
           </div>
 
           <div className="space-y-2 border-t border-hair px-3 py-3">
-            {TRANSCRIPT.map(([quien, texto], i) => (
+            {TRANSCRIPT.map(([who, text], i) => (
               <div key={i} className="tree-node" style={{ animationDelay: `${400 + i * 500}ms` }}>
-                <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">{quien}</p>
-                <p className="mt-0.5 text-[12px] leading-snug text-fg-muted">{texto}</p>
+                <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">{who}</p>
+                <p className="mt-0.5 text-[12px] leading-snug text-fg-muted">{text}</p>
               </div>
             ))}
           </div>
@@ -69,7 +69,7 @@ export function BlockFlowMockup() {
             <Chip label="Auto" tone={OK} />
           </div>
           <div className="divide-y divide-hair">
-            {CAMPOS.map(([k, v], i) => (
+            {FIELDS.map(([k, v], i) => (
               <div key={k} className="tree-node px-3 py-2" style={{ animationDelay: `${900 + i * 350}ms` }}>
                 <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">{k}</p>
                 <p className="mt-0.5 text-[12px] leading-snug text-ink">{v}</p>
@@ -77,9 +77,9 @@ export function BlockFlowMockup() {
             ))}
           </div>
           <div className="flex items-center justify-between border-t border-hair px-3 py-2">
-            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-fg-dim">Sin intervención humana</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-fg-dim">No human intervention</span>
             <span className="font-mono text-[9px] uppercase tracking-[0.12em]" style={{ color: TERRA }}>
-              4 / 4 campos
+              4 / 4 fields
             </span>
           </div>
         </div>

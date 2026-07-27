@@ -1,14 +1,15 @@
 'use client'
 
 /**
- * El trabajo como un ÚNICO archivador oscuro (referencia: el fichero negro de
- * hilloris): una pestaña, un borde de tinta, y dentro las filas — la carpeta
- * es oscura y de ella salen "hojas" claras. Cerrada, cada fila es una línea
- * del índice sobre tinta. Abierta, la hoja se despliega en hueso con la
- * ilustración de planta (vertical, grande), la ficha y un mockup propio del
- * producto. Botón × para cerrar.
+ * Work as ONE folder — a real folder shape (tab + rounded body, ink border,
+ * bone/light, like the folder-stack I built earlier), not a black box. Closed,
+ * each row is a line of the index; hovering lifts the hint on desktop, tap
+ * opens on mobile. Open, the row inverts to ink and a light sheet drops out
+ * with the fields, a full-width horizontal plant band woven between the text
+ * and the mockup (like Aithority's /lab dashboard tree), and a mockup built
+ * for that product. An × closes it.
  *
- * Aithority NO está aquí: es el proyecto de cofundador y tiene sección propia.
+ * Aithority is NOT here: it's the cofounder project and has its own section.
  */
 
 import { useState } from 'react'
@@ -16,7 +17,7 @@ import { PlantCanvas } from './plant-canvas'
 import { BlockFlowMockup } from './mockups/blockflow-mockup'
 import { LouvrMockup } from './mockups/louvr-mockup'
 import { RostryMockup } from './mockups/rostry-mockup'
-import { CASOS, LIGEROS, type CaseStudy, type ProyectoLigero } from './copy'
+import { CASES, LIGHT, type CaseStudy, type LightProject } from './copy'
 
 const TERRA = '#C1663D'
 const OK = '#3F7A4E'
@@ -26,8 +27,6 @@ const MOCKUP: Record<string, React.ComponentType> = {
   'louvr-labs': LouvrMockup,
   rostry: RostryMockup,
 }
-
-const VERT = -1.55
 
 function CloseIcon() {
   return (
@@ -65,24 +64,33 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-/** Fila sobre tinta. Abierta invierte a hueso — la "hoja" que sale del fichero. */
+/** Full-width horizontal plant band, woven into the content flow. */
+function PlantBand({ seed }: { seed: number }) {
+  return (
+    <div className="relative h-[130px] w-full overflow-hidden border border-line bg-raised sm:h-[150px]">
+      <PlantCanvas seed={seed} len={430} depth={5} anchor="center" fit="cover" color="#151412" className="pointer-events-none absolute inset-0 h-full w-full opacity-90" />
+      <span className="absolute bottom-2 left-3 font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">Fig. {String(seed).slice(0, 2)} · procedural</span>
+    </div>
+  )
+}
+
 function RowHeader({
   open,
   onToggle,
   index,
-  nombre,
+  name,
   tagline,
-  estadoTexto,
-  estadoTono,
+  statusText,
+  statusTone,
   first,
 }: {
   open: boolean
   onToggle: () => void
   index: string
-  nombre: string
+  name: string
   tagline: string
-  estadoTexto: string
-  estadoTono: string
+  statusText: string
+  statusTone: string
   first: boolean
 }) {
   return (
@@ -90,27 +98,26 @@ function RowHeader({
       type="button"
       onClick={onToggle}
       aria-expanded={open}
-      className={`peek-dark flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 ${
-        first ? '' : 'border-t'
-      } ${open ? 'bg-bg' : 'bg-transparent'}`}
-      style={{ borderColor: open ? 'transparent' : 'rgba(240,238,233,0.14)' }}
+      className={`peek-row flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 ${first ? '' : 'border-t border-hair'} ${
+        open ? 'bg-ink' : 'bg-transparent'
+      }`}
     >
       <div className="flex min-w-0 items-center gap-4">
-        <span className={`shrink-0 font-mono text-[10.5px] uppercase tracking-[0.14em] ${open ? 'text-accent' : 'text-accent'}`}>{index}</span>
+        <span className={`shrink-0 font-mono text-[10.5px] uppercase tracking-[0.14em] ${open ? 'text-[rgba(240,238,233,0.5)]' : 'text-fg-faint'}`}>{index}</span>
         <div className="min-w-0">
-          <p className={`truncate text-[16px] font-medium ${open ? 'text-ink' : 'text-bg'}`}>{nombre}</p>
-          <p className={`mt-0.5 truncate text-[12.5px] ${open ? 'text-fg-muted' : 'text-[rgba(240,238,233,0.55)]'}`}>{tagline}</p>
+          <p className={`truncate text-[16px] font-medium ${open ? 'text-bg' : 'text-ink'}`}>{name}</p>
+          <p className={`mt-0.5 truncate text-[12.5px] ${open ? 'text-[rgba(240,238,233,0.6)]' : 'text-fg-muted'}`}>{tagline}</p>
         </div>
       </div>
       <div className="flex shrink-0 items-center gap-3">
         <span
           className="hidden items-center gap-1.5 whitespace-nowrap border px-1.5 py-[3px] font-mono text-[9px] uppercase tracking-[0.08em] sm:inline-flex"
-          style={{ borderColor: estadoTono, color: estadoTono }}
+          style={{ borderColor: statusTone, color: statusTone }}
         >
-          <span className="h-1 w-1" style={{ backgroundColor: estadoTono }} aria-hidden />
-          {estadoTexto}
+          <span className="h-1 w-1" style={{ backgroundColor: statusTone }} aria-hidden />
+          {statusText}
         </span>
-        <span className={open ? 'text-ink' : 'text-bg'}>{open ? <CloseIcon /> : <PlusIcon />}</span>
+        <span className={open ? 'text-bg' : 'text-fg-dim'}>{open ? <CloseIcon /> : <PlusIcon />}</span>
       </div>
     </button>
   )
@@ -120,7 +127,7 @@ function Sheet({ open, children }: { open: boolean; children: React.ReactNode })
   return (
     <div className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
       <div className="overflow-hidden">
-        <div className="bg-bg">{children}</div>
+        <div className="border-t border-hair bg-bg">{children}</div>
       </div>
     </div>
   )
@@ -128,83 +135,82 @@ function Sheet({ open, children }: { open: boolean; children: React.ReactNode })
 
 function DeepRow({ caso, first }: { caso: CaseStudy; first: boolean }) {
   const [open, setOpen] = useState(false)
-  const tono = caso.estado.tono === 'ok' ? OK : TERRA
+  const tone = caso.status.tone === 'ok' ? OK : TERRA
   const Mockup = MOCKUP[caso.slug]
 
   return (
     <div id={caso.slug} className="scroll-mt-20">
-      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={caso.index} nombre={caso.nombre} tagline={caso.tagline} estadoTexto={caso.estado.texto} estadoTono={tono} first={first} />
+      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={caso.index} name={caso.name} tagline={caso.tagline} statusText={caso.status.text} statusTone={tone} first={first} />
       <Sheet open={open}>
-        <div className="grid gap-0 md:grid-cols-[210px_1fr]">
-          {/* Planta vertical, grande, apoyada abajo */}
-          <div className="flex items-end justify-center border-b border-line bg-surface p-3 md:border-b-0 md:border-r">
-            <PlantCanvas seed={caso.seed} len={320} depth={5} anchor="bottom" growAngle={VERT} color="#151412" className="block h-[240px] w-full md:h-[360px]" />
+        <div className="p-5 sm:p-7">
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Field label="Problem">
+              <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.problem}</p>
+            </Field>
+            <Field label="Approach">
+              <ul className="space-y-2">
+                {caso.approach.map((e, i) => (
+                  <li key={i} className="flex gap-2 text-[13px] leading-relaxed text-fg-muted">
+                    <span className="mt-[6px] h-1 w-1 shrink-0 bg-accent" aria-hidden />
+                    <span>{e}</span>
+                  </li>
+                ))}
+              </ul>
+            </Field>
           </div>
 
-          <div className="min-w-0 p-5 sm:p-7">
-            <div className="grid gap-6 sm:grid-cols-2">
-              <Field label="Problema">
-                <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.problema}</p>
-              </Field>
-              <Field label="Enfoque">
-                <ul className="space-y-2">
-                  {caso.enfoque.map((e, i) => (
-                    <li key={i} className="flex gap-2 text-[13px] leading-relaxed text-fg-muted">
-                      <span className="mt-[6px] h-1 w-1 shrink-0 bg-accent" aria-hidden />
-                      <span>{e}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Field>
-              <Field label="Decisiones técnicas">
-                <div className="space-y-3">
-                  {caso.decisiones.map((d) => (
-                    <div key={d.titulo}>
-                      <p className="text-[12.5px] font-medium text-ink">{d.titulo}</p>
-                      <p className="mt-0.5 text-[12.5px] leading-relaxed text-fg-muted">{d.detalle}</p>
-                    </div>
-                  ))}
-                </div>
-              </Field>
-              <div className="flex flex-col justify-between gap-4">
-                <Field label="Resultado">
-                  <p className="text-[13.5px] leading-relaxed text-ink">{caso.resultado}</p>
-                </Field>
-                <Field label="Stack">
-                  <StackChips stack={caso.stack} />
-                </Field>
+          {/* Horizontal plant band, between the text and the mockup */}
+          <div className="my-7">
+            <PlantBand seed={caso.seed} />
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Field label="Technical decisions">
+              <div className="space-y-3">
+                {caso.decisions.map((d) => (
+                  <div key={d.title}>
+                    <p className="text-[12.5px] font-medium text-ink">{d.title}</p>
+                    <p className="mt-0.5 text-[12.5px] leading-relaxed text-fg-muted">{d.detail}</p>
+                  </div>
+                ))}
               </div>
+            </Field>
+            <div className="flex flex-col justify-between gap-4">
+              <Field label="Result">
+                <p className="text-[13.5px] leading-relaxed text-ink">{caso.result}</p>
+              </Field>
+              <Field label="Stack">
+                <StackChips stack={caso.stack} />
+              </Field>
             </div>
-
-            {Mockup && (
-              <div className="mt-7">
-                <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">Cómo funciona, en vivo</p>
-                <Mockup />
-              </div>
-            )}
           </div>
+
+          {Mockup && (
+            <div className="mt-7">
+              <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">How it works, live</p>
+              <Mockup />
+            </div>
+          )}
         </div>
       </Sheet>
     </div>
   )
 }
 
-function LightRow({ proyecto, index }: { proyecto: ProyectoLigero; index: string }) {
+function LightRow({ proyecto, index }: { proyecto: LightProject; index: string }) {
   const [open, setOpen] = useState(false)
-  const tono = proyecto.estado.toLowerCase().includes('producción') ? OK : TERRA
+  const tone = proyecto.status.toLowerCase().includes('production') ? OK : TERRA
 
   return (
     <div>
-      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={index} nombre={proyecto.nombre} tagline={proyecto.tagline} estadoTexto={proyecto.estado} estadoTono={tono} first={false} />
+      <RowHeader open={open} onToggle={() => setOpen((v) => !v)} index={index} name={proyecto.name} tagline={proyecto.tagline} statusText={proyecto.status} statusTone={tone} first={false} />
       <Sheet open={open}>
-        <div className="grid gap-0 md:grid-cols-[180px_1fr]">
-          <div className="flex items-end justify-center border-b border-line bg-surface p-3 md:border-b-0 md:border-r">
-            <PlantCanvas seed={proyecto.seed} len={280} depth={4} anchor="bottom" growAngle={VERT} color="#151412" className="block h-[190px] w-full md:h-[240px]" />
+        <div className="p-5 sm:p-7">
+          <p className="max-w-[52ch] text-[13.5px] leading-relaxed text-fg-muted">{proyecto.tagline}</p>
+          <div className="my-6">
+            <PlantBand seed={proyecto.seed} />
           </div>
-          <div className="flex flex-col justify-center gap-4 p-5 sm:p-7">
-            <p className="max-w-[52ch] text-[13.5px] leading-relaxed text-fg-muted">{proyecto.tagline}</p>
-            <StackChips stack={proyecto.stack} />
-          </div>
+          <StackChips stack={proyecto.stack} />
         </div>
       </Sheet>
     </div>
@@ -214,26 +220,26 @@ function LightRow({ proyecto, index }: { proyecto: ProyectoLigero; index: string
 export function ProjectArchive() {
   return (
     <div className="relative pt-[19px]">
-      {/* Pestaña del archivador — una sola, para todo el bloque */}
+      {/* One folder tab for the whole block */}
       <div
-        className="absolute -top-px left-0 flex h-[20px] items-center gap-2 rounded-t-[7px] border border-b-0 border-ink bg-ink px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-bg"
+        className="absolute -top-px left-0 flex h-[20px] items-center gap-2 rounded-t-[7px] border border-b-0 border-ink bg-bg px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink"
         aria-hidden
       >
         <span className="text-accent">✦</span>
-        <span>Trabajo · {CASOS.length + LIGEROS.length} proyectos</span>
+        <span>Work · {CASES.length + LIGHT.length} projects</span>
       </div>
 
-      <div className="overflow-hidden rounded-[18px] rounded-tl-none border border-ink bg-ink">
-        {CASOS.map((c, i) => (
+      <div className="overflow-hidden rounded-[18px] rounded-tl-none border border-ink bg-surface">
+        {CASES.map((c, i) => (
           <DeepRow key={c.slug} caso={c} first={i === 0} />
         ))}
 
-        <div className="border-t px-5 py-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-[rgba(240,238,233,0.5)] sm:px-6" style={{ borderColor: 'rgba(240,238,233,0.14)' }}>
-          También shippeado
+        <div className="border-t border-ink bg-[rgba(21,20,18,0.045)] px-5 py-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-fg-dim sm:px-6">
+          Also shipped
         </div>
 
-        {LIGEROS.map((p, i) => (
-          <LightRow key={p.nombre} proyecto={p} index={`0${CASOS.length + i + 1}`} />
+        {LIGHT.map((p, i) => (
+          <LightRow key={p.name} proyecto={p} index={`0${CASES.length + i + 1}`} />
         ))}
       </div>
     </div>

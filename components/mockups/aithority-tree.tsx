@@ -62,23 +62,23 @@ function Bloques({ x, y, filled, max = 6, delay }: { x: number; y: number; fille
 }
 
 const OBLIG = [
-  { art: 'Art. 11', sub: 'Ficha técnica', tono: 'cubierta' as Tono, ev: 5, evmax: 6 },
-  { art: 'Art. 14', sub: 'Supervisión humana', tono: 'pendiente' as Tono, ev: 2, evmax: 6 },
-  { art: 'Art. 12', sub: 'Registro de eventos', tono: 'pendiente' as Tono, ev: 1, evmax: 6 },
-  { art: 'Art. 26', sub: 'Informar a las personas', tono: 'cubierta' as Tono, ev: 6, evmax: 6 },
+  { art: 'Art. 11', sub: 'Technical file', tono: 'cubierta' as Tono, ev: 5, evmax: 6 },
+  { art: 'Art. 14', sub: 'Human oversight', tono: 'pendiente' as Tono, ev: 2, evmax: 6 },
+  { art: 'Art. 12', sub: 'Event logging', tono: 'pendiente' as Tono, ev: 1, evmax: 6 },
+  { art: 'Art. 26', sub: 'Notify people', tono: 'cubierta' as Tono, ev: 6, evmax: 6 },
 ]
 const ART_Y = [70, 130, 190, 250]
 
 const PASOS = [
-  { nivel: 'Sistema', label: 'CRIBADO DE CV', sub: 'RRHH · Workday', tono: 'ruta' as Tono },
-  { nivel: 'Ámbito', decision: 'ES IA', label: 'ART. 3(1)', sub: 'definición de IA', tono: 'ruta' as Tono },
-  { nivel: 'Rol', decision: 'DEPLOYER', label: 'ART. 3(4)', sub: 'usa el sistema', tono: 'ruta' as Tono },
-  { nivel: 'Clasificación', decision: 'ANEXO III.4', label: 'ALTO RIESGO', sub: 'Empleo', tono: 'pendiente' as Tono },
+  { nivel: 'System', label: 'CV SCREENING', sub: 'HR · Workday', tono: 'ruta' as Tono },
+  { nivel: 'Scope', decision: 'IS AI', label: 'ART. 3(1)', sub: 'definition of AI', tono: 'ruta' as Tono },
+  { nivel: 'Role', decision: 'DEPLOYER', label: 'ART. 3(4)', sub: 'uses the system', tono: 'ruta' as Tono },
+  { nivel: 'Classification', decision: 'ANNEX III.4', label: 'HIGH RISK', sub: 'Employment', tono: 'pendiente' as Tono },
 ]
 
 export function AithorityTree() {
   return (
-    <MockupFrame title="Motor de clasificación · AI Act" context="input / cribado de currículums" status="status: classified" tone={TERRA}>
+    <MockupFrame title="Classification engine · AI Act" context="input / CV screening" status="status: classified" tone={TERRA}>
       {/* Móvil — vertical */}
       <div className="lg:hidden">
         {PASOS.map((p, i) => (
@@ -115,14 +115,14 @@ export function AithorityTree() {
       </div>
 
       {/* Desktop — SVG */}
-      <svg viewBox="0 0 780 300" className="hidden w-full min-w-[700px] lg:block" role="img" aria-label="Árbol de clasificación del AI Act: cómo se clasifica un sistema y qué obligaciones le aplican">
+      <svg viewBox="0 0 780 300" className="hidden w-full min-w-[700px] lg:block" role="img" aria-label="AI Act classification tree: how a system is classified and which obligations apply">
         <g aria-hidden>
           {[
-            { x: 20, t: 'Sistema' },
-            { x: 180, t: 'Ámbito' },
-            { x: 340, t: 'Rol' },
-            { x: 480, t: 'Clasificación' },
-            { x: 640, t: 'Obligaciones' },
+            { x: 20, t: 'System' },
+            { x: 180, t: 'Scope' },
+            { x: 340, t: 'Role' },
+            { x: 480, t: 'Classification' },
+            { x: 640, t: 'Obligations' },
           ].map((n) => (
             <text key={n.t} x={n.x - 11} y={20} fill="rgba(21,20,18,0.38)" fontSize="8.5" letterSpacing="0.16em" style={{ fontFamily: MONO }}>{n.t.toUpperCase()}</text>
           ))}
@@ -138,18 +138,18 @@ export function AithorityTree() {
           <Rama key={o.art} d={elbow(560, 160, 629, ART_Y[i])} delay={2000 + i * 90} tono={o.tono} />
         ))}
 
-        {/* Nodos */}
-        <Nodo x={20} y={160} label="CRIBADO DE CV" sub="RRHH · Workday" delay={200} />
-        <Nodo x={180} y={160} label="ART. 3(1)" sub="definición de IA" delay={800} />
-        <Nodo x={340} y={90} label="ART. 25" sub="proveedor — no procede" delay={1350} tono="descartada" />
-        <Nodo x={340} y={200} label="ART. 3(4)" sub="usa el sistema" delay={1450} />
-        <Nodo x={480} y={160} label="ALTO RIESGO" sub="Empleo" delay={1900} tono="pendiente" />
+        {/* Nodes */}
+        <Nodo x={20} y={160} label="CV SCREENING" sub="HR · Workday" delay={200} />
+        <Nodo x={180} y={160} label="ART. 3(1)" sub="definition of AI" delay={800} />
+        <Nodo x={340} y={90} label="ART. 25" sub="provider — n/a" delay={1350} tono="descartada" />
+        <Nodo x={340} y={200} label="ART. 3(4)" sub="uses the system" delay={1450} />
+        <Nodo x={480} y={160} label="HIGH RISK" sub="Employment" delay={1900} tono="pendiente" />
 
-        {/* Aristas */}
-        <Arista x={169} y={160} label="ES IA" delay={900} />
-        <Arista x={329} y={90} label="PROVEEDOR" delay={1400} dim />
+        {/* Edges */}
+        <Arista x={169} y={160} label="IS AI" delay={900} />
+        <Arista x={329} y={90} label="PROVIDER" delay={1400} dim />
         <Arista x={329} y={200} label="DEPLOYER" delay={1500} />
-        <Arista x={469} y={160} label="ANEXO III.4" delay={2000} />
+        <Arista x={469} y={160} label="ANNEX III.4" delay={2000} />
 
         {/* Obligaciones + evidencias */}
         {OBLIG.map((o, i) => (

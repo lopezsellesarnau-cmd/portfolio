@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react'
 
 const LINKS = [
-  { label: 'Trabajo', href: '#trabajo' },
+  { label: 'Work', href: '#work' },
   { label: 'Aithority', href: '#aithority' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Toolkit', href: '#toolkit' },
+  { label: 'Contact', href: '#contact' },
 ]
 
 export function Nav() {
@@ -45,7 +46,7 @@ export function Nav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Menú"
+          aria-label="Menu"
           aria-expanded={open}
           className="flex h-6 w-6 flex-col items-center justify-center gap-[4px] md:hidden"
         >

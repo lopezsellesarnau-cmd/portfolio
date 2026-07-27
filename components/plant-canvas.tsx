@@ -131,6 +131,7 @@ export function PlantCanvas({
   depth = 5,
   anchor = 'center',
   growAngle = 2.85,
+  fit = 'contain',
   color = '#151412',
   className,
 }: {
@@ -139,6 +140,9 @@ export function PlantCanvas({
   depth?: number
   anchor?: 'corner-tr' | 'center' | 'bottom'
   growAngle?: number
+  /** 'contain' encaja dentro; 'cover' llena la caja recortando lo que sobra —
+   *  es lo que quita el espacio muerto arriba/abajo del hero y las bandas. */
+  fit?: 'contain' | 'cover'
   color?: string
   className?: string
 }) {
@@ -174,11 +178,13 @@ export function PlantCanvas({
       ctx!.clearRect(0, 0, W, H)
 
       const pad = anchor === 'corner-tr' ? 2 : 6
-      const fit = Math.min((W - pad * 2) / b.w, (H - pad * 2) / b.h)
-      // Por defecto no se amplía (nunca más de 1). Pero las plantas verticales
-      // de las tarjetas ('bottom') sí llenan su columna estrecha — si no,
-      // quedan diminutas apoyadas abajo; se permite ampliar hasta 2.6×.
-      const scale = anchor === 'bottom' ? Math.min(3.4, fit) : Math.min(1, fit)
+      const fitContain = Math.min((W - pad * 2) / b.w, (H - pad * 2) / b.h)
+      const fitCover = Math.max((W - pad * 2) / b.w, (H - pad * 2) / b.h)
+      // 'cover' llena la caja (recorta lo que sobra) — quita el hueco muerto
+      // del hero y de las bandas horizontales. 'bottom' amplía para que las
+      // plantas verticales no queden diminutas. Por defecto no se amplía.
+      const scale =
+        fit === 'cover' ? Math.min(4, fitCover) : anchor === 'bottom' ? Math.min(3.4, fitContain) : Math.min(1, fitContain)
       const cs = CELL * scale
       const ds = Math.min(DOT * scale, cs * 0.62)
       const off = (cs - ds) / 2
@@ -238,7 +244,7 @@ export function PlantCanvas({
       cancelAnimationFrame(raf)
       ro.disconnect()
     }
-  }, [seed, len, depth, anchor, growAngle, color])
+  }, [seed, len, depth, anchor, growAngle, fit, color])
 
   return <canvas ref={ref} aria-hidden className={className} />
 }

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
   title: 'Arnau Lopez — Full-Stack AI Product Engineer',
   description:
-    '22 años, autodidacta, sin título. Construyo productos de IA reales de punta a punta — de la idea a producción — y entiendo su gobernanza, no solo su código.',
+    '22, self-taught, no degree. I build real AI products end to end — from idea to production — and understand their governance, not just their code.',
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
   openGraph: {
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     siteName: 'Arnau Lopez',
     title: 'Arnau Lopez — Full-Stack AI Product Engineer',
     description:
-      '22 años, autodidacta, sin título. Construyo productos de IA reales de punta a punta — de la idea a producción.',
+      '22, self-taught, no degree. I build real AI products end to end — from idea to production.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Arnau Lopez — Full-Stack AI Product Engineer',
     description:
-      '22 años, autodidacta, sin título. Construyo productos de IA reales de punta a punta — de la idea a producción.',
+      '22, self-taught, no degree. I build real AI products end to end — from idea to production.',
   },
 }
 
@@ -37,13 +37,13 @@ export const viewport: Viewport = { themeColor: '#F0EEE9', colorScheme: 'light' 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${inter.variable} ${mono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className={inter.className}>
         <a
           href="#contenido"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-[11px] focus:uppercase focus:tracking-[0.12em] focus:text-bg"
         >
-          Saltar al contenido
+          Skip to content
         </a>
         {children}
       </body>

@@ -1,209 +1,204 @@
 /**
- * Copy — fuente única de verdad. Los 3 casos de estudio llevan contenido
- * técnico real (no relleno): lo que Arnau ya dio en el brief. Lo que falta
- * de verdad (capturas, links, métricas exactas) se pide al final del build,
- * no se inventa aquí.
+ * Copy — single source of truth, English. The three case studies carry real
+ * technical content (not filler): what Arnau gave in the brief. What's genuinely
+ * missing (screenshots, links, exact metrics) is asked for at the end of the
+ * build, not invented here.
  */
 
-export const PERFIL = {
-  nombre: 'Arnau Lopez',
-  rol: 'Full-Stack AI Product Engineer',
-  eyebrow: '[ 22 años · autodidacta ]',
-  hero: 'Construyo productos de IA de punta a punta — de la idea a producción — y entiendo su gobernanza, no solo su código.',
-  sub: 'El 78% de las ofertas de IA en España no piden título. Piden portfolio real. Este es el mío.',
+export const PROFILE = {
+  name: 'Arnau Lopez',
+  role: 'Full-Stack AI Product Engineer',
+  eyebrow: '[ 22 · self-taught ]',
+  hero: 'I build AI products end to end — from idea to production — and understand their governance, not just their code.',
+  sub: "Most AI roles don't ask for a degree. They ask for a real portfolio. This is mine.",
 }
 
-// El mismo árbol "largo" del hero de StackD y Aithority (su DotTree usa SEED
-// 315): unifica la identidad entre las tres superficies de Arnau.
+// The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
+// 315): it ties Arnau's three surfaces into one identity.
 export const HERO_PLANT_SEED = 315
-
-export const STATS = [
-  { v: '5', l: 'productos shippeados' },
-  { v: '3', l: 'en producción o App Store' },
-  { v: '0', l: 'títulos universitarios' },
-]
 
 export type CaseStudy = {
   slug: string
   index: string
-  nombre: string
+  name: string
   tagline: string
-  estado: { texto: string; tono: 'ok' | 'accent' }
-  problema: string
-  enfoque: string[]
-  decisiones: { titulo: string; detalle: string }[]
-  resultado: string
+  status: { text: string; tone: 'ok' | 'accent' }
+  problem: string
+  approach: string[]
+  decisions: { title: string; detail: string }[]
+  result: string
   stack: string[]
   seed: number
 }
 
-export const CASOS: CaseStudy[] = [
+export const CASES: CaseStudy[] = [
   {
     slug: 'blockflow',
     index: '01',
-    nombre: 'BlockFlow',
-    tagline: 'Agente de voz IA para administradores de fincas',
-    estado: { texto: 'En producción', tono: 'ok' },
-    problema:
-      'Un administrador de fincas recibe llamadas todo el día por las mismas incidencias — una fuga, un ascensor parado, una queja de ruido — y cada una interrumpe lo que sea que esté haciendo. Contestar bien cuesta tiempo que no sobra; no contestar cuesta clientes.',
-    enfoque: [
-      'Un agente de voz que descuelga, entiende la incidencia por conversación natural (no un árbol de "pulse 1"), y decide qué hacer con ella.',
-      'Triaje automático: clasifica la urgencia y el tipo de incidencia según lo que se ha dicho en la llamada, sin intervención humana en el camino feliz.',
-      'Crea el ticket ya estructurado (propiedad, tipo, urgencia, resumen) en el sistema de gestión, listo para que el administrador solo tenga que decidir, no transcribir.',
+    name: 'BlockFlow',
+    tagline: 'AI voice agent for property managers',
+    status: { text: 'In production', tone: 'ok' },
+    problem:
+      'A property manager fields calls all day about the same incidents — a leak, a stuck lift, a noise complaint — and each one interrupts whatever they were doing. Answering well costs time they don\'t have; not answering costs clients.',
+    approach: [
+      'A voice agent that picks up, understands the incident through natural conversation (not a "press 1" tree), and decides what to do with it.',
+      'Automatic triage: it classifies urgency and incident type from what was said on the call, with no human in the happy path.',
+      'It files the ticket already structured (property, type, urgency, summary) into the management system — ready for the manager to just decide, not transcribe.',
     ],
-    decisiones: [
+    decisions: [
       {
-        titulo: 'Conversación, no árbol de decisión',
-        detalle:
-          'El reto no era "hacer que hable", era que la llamada se resolviera igual de bien si el vecino describe el problema en cualquier orden, con cualquier nivel de detalle — la extracción de campos estructurados tiene que sobrevivir a una conversación real, no a un guion.',
+        title: 'Conversation, not a phone tree',
+        detail:
+          'The challenge wasn\'t "make it talk", it was making the call resolve just as well whether the caller describes the problem in any order, at any level of detail — structured field extraction has to survive a real conversation, not a script.',
       },
       {
-        titulo: 'Sin intervención humana como objetivo, no como opción',
-        detalle:
-          'El sistema está diseñado para que el camino feliz (incidencia clara, no urgente) no toque a nadie del equipo — el humano entra solo en la excepción, no en cada llamada.',
+        title: 'No human intervention as the goal, not an option',
+        detail:
+          'The system is built so the happy path (clear, non-urgent incident) never touches anyone on the team — a human steps in only on the exception, not on every call.',
       },
     ],
-    resultado:
-      'En producción, atendiendo llamadas reales de administradores de fincas sin intervención humana en el camino feliz.',
-    stack: ['Voice AI', 'LLM', 'Automatización de tickets', 'Producción'],
+    result: 'In production, handling real property-manager calls with no human intervention on the happy path.',
+    stack: ['Voice AI', 'LLM', 'Ticket automation', 'Production'],
     seed: 100,
   },
   {
     slug: 'louvr-labs',
     index: '02',
-    nombre: 'Louvr Labs',
-    tagline: 'Plataforma de ranking y reporting para Meta Ads',
-    estado: { texto: 'En producción', tono: 'ok' },
-    problema:
-      'Un gestor de campañas de Meta Ads mira decenas de anuncios a la semana y decide a mano cuáles escalar, pausar, mantener o refrescar — un juicio que se repite, es medible, y consume tiempo que debería ir a estrategia, no a mirar tablas.',
-    enfoque: [
-      'Conexión OAuth con la API de Meta Ads: el cliente autoriza acceso de solo lectura a sus cuentas publicitarias, sin compartir credenciales.',
-      'Capa 1 — reglas y heurística: cada anuncio se rankea contra umbrales concretos (CPA, frecuencia, CTR, gasto) y se le asigna un badge — Scale, Pause, Hold o Refresh. Determinista y explicable: el motivo de cada badge se puede señalar.',
-      'Capa 2 — Claude (Sonnet) vía API razona SOBRE los datos ya rankeados, no en su lugar: genera el insight en lenguaje natural que explica el patrón detrás de los números, ya con el ranking hecho por reglas.',
-      'Automatización con Make.com que dispara el pipeline y entrega un reporte semanal por email — cero intervención manual entre "se cierra la semana" y "el cliente lo tiene en el correo".',
+    name: 'Louvr Labs',
+    tagline: 'Ranking & reporting platform for Meta Ads',
+    status: { text: 'In production', tone: 'ok' },
+    problem:
+      'A Meta Ads manager reviews dozens of ads a week and decides by hand which to scale, pause, hold or refresh — a judgment that repeats, is measurable, and eats time that should go to strategy, not staring at tables.',
+    approach: [
+      'OAuth connection to the Meta Ads API: the client authorizes read-only access to their ad accounts, without sharing credentials.',
+      'Layer 1 — rules & heuristics: each ad is ranked against concrete thresholds (CPA, frequency, CTR, spend) and given a badge — Scale, Pause, Hold or Refresh. Deterministic and explainable: the reason for each badge can be pointed to.',
+      'Layer 2 — Claude (Sonnet) via API reasons OVER the already-ranked data, not in its place: it writes the natural-language insight that explains the pattern behind the numbers, with the ranking already done by rules.',
+      'Make.com fires the pipeline and delivers a weekly report by email — zero manual work between "the week closes" and "the client has it in their inbox".',
     ],
-    decisiones: [
+    decisions: [
       {
-        titulo: 'Arquitectura de dos capas, a propósito',
-        detalle:
-          'El ranking de negocio (qué anuncio se escala) sale de reglas y umbrales, no de un LLM — es la parte que tiene que ser determinista, auditable y barata de ejecutar en cada anuncio. El LLM se reserva para lo que un LLM hace mejor que una regla: explicar el patrón en lenguaje natural, no decidir la clasificación.',
+        title: 'Two-layer architecture, on purpose',
+        detail:
+          'The business ranking (which ad gets scaled) comes from rules and thresholds, not an LLM — it\'s the part that has to be deterministic, auditable and cheap to run on every ad. The LLM is reserved for what it does better than a rule: explaining the pattern in words, not deciding the class.',
       },
       {
-        titulo: 'Backend Python, orquestación con Make.com',
-        detalle:
-          'La lógica de negocio (llamadas a la API de Meta, ranking, generación del insight) vive en Python; Make.com orquesta el disparo semanal y el envío — separar "qué calcula" de "cuándo se dispara" hizo que cambiar la cadencia de reporting no tocara ni una línea de la lógica.',
+        title: 'Python backend, Make.com orchestration',
+        detail:
+          'The business logic (Meta API calls, ranking, insight generation) lives in Python; Make.com orchestrates the weekly trigger and delivery — separating "what it computes" from "when it fires" meant changing the reporting cadence never touched a line of logic.',
       },
     ],
-    resultado: 'Reporte semanal automático por email, cero intervención manual, en producción con clientes reales.',
+    result: 'Automatic weekly report by email, zero manual work, in production with real clients.',
     stack: ['OAuth', 'Meta Ads API', 'Python', 'Claude (Sonnet) API', 'Make.com'],
     seed: 322,
   },
   {
     slug: 'rostry',
     index: '03',
-    nombre: 'Rostry',
-    tagline: 'Ligas deportivas amateur, con pagos reales entre jugadores',
-    estado: { texto: 'Aprobada en App Store · build 7', tono: 'accent' },
-    problema:
-      'Organizar una liga amateur (pádel, fútbol 7, lo que sea) a mano es un grupo de WhatsApp, una hoja de cálculo y alguien cobrando en efectivo. Rostry lo convierte en una app real, con cobro integrado y sin que el organizador tenga que ser quien retiene el dinero.',
-    enfoque: [
-      'Flutter + Riverpod para la app, con un patrón de repositorio (RostryRepository) que define una interfaz abstracta única — hoy con una sola implementación real, pero la capa de datos nunca se acopla directamente al widget tree.',
-      'Firebase como backend (datos, auth).',
-      'Stripe Connect con destination charges: el dinero va directo a la cuenta del organizador de la liga, con una comisión de plataforma del 5% retenida automáticamente en cada cobro — sin que Rostry tenga que mover el dinero manualmente ni el organizador gestionar facturación aparte.',
+    name: 'Rostry',
+    tagline: 'Amateur sports leagues, with real payments between players',
+    status: { text: 'App Store approved · build 7', tone: 'accent' },
+    problem:
+      'Running an amateur league (padel, 7-a-side, whatever) by hand is a WhatsApp group, a spreadsheet and someone collecting cash. Rostry turns it into a real app, with payments built in and without the organizer being the one who holds the money.',
+    approach: [
+      'Flutter + Riverpod for the app, with a repository pattern (RostryRepository) defining a single abstract interface — one real implementation today, but the data layer never couples directly to the widget tree.',
+      'Firebase as the backend (data, auth).',
+      'Stripe Connect with destination charges: money goes straight to the league organizer\'s account, with a 5% platform fee withheld automatically on each charge — no manual money movement, no separate invoicing for the organizer.',
     ],
-    decisiones: [
+    decisions: [
       {
-        titulo: 'Destination charges, no cobro propio + reparto manual',
-        detalle:
-          'Con destination charges, Stripe mueve el dinero directo al organizador y retiene la comisión de Rostry en el mismo cobro — evita que la plataforma tenga que sostener el dinero de terceros como si fuera propio, con toda la carga regulatoria que eso implicaría.',
+        title: 'Destination charges, not own-collect + manual split',
+        detail:
+          'With destination charges, Stripe moves the money straight to the organizer and withholds Rostry\'s fee in the same charge — it avoids the platform holding third-party money as its own, with all the regulatory weight that implies.',
       },
       {
-        titulo: 'Interfaz de repositorio desde el día uno',
-        detalle:
-          'Aunque hoy solo hay una implementación real de RostryRepository, la interfaz abstracta estaba desde el principio — el coste de definirla es bajo y evita que la lógica de la app quede acoplada a Firebase si algún día cambia el backend.',
+        title: 'Repository interface from day one',
+        detail:
+          'Even with only one real RostryRepository implementation today, the abstract interface was there from the start — cheap to define, and it keeps the app logic from coupling to Firebase if the backend ever changes.',
       },
       {
-        titulo: 'El proceso de aprobación como parte del trabajo, no un trámite',
-        detalle:
-          'Build 7 aprobada: seis iteraciones antes que se rechazaran o pidieran cambios (revisión de guidelines de pagos in-app, metadata, flujos de cuenta) — la app en producción es también la app que sobrevivió a la revisión real de Apple.',
+        title: 'The review process as part of the work',
+        detail:
+          'Build 7 approved: six iterations before parts got rejected or change-requested (in-app payment guidelines, metadata, account flows) — the app in production is also the app that survived Apple\'s real review.',
       },
     ],
-    resultado: 'Aprobada en la App Store en la build 7, con pagos reales entre jugadores ya funcionando.',
+    result: 'Approved on the App Store at build 7, with real payments between players already working.',
     stack: ['Flutter', 'Riverpod', 'Firebase', 'Stripe Connect', 'App Store'],
     seed: 507,
   },
 ]
 
 /**
- * Aithority va aparte del archivador: es el proyecto de cofundador, tiene su
- * propia sección con dashboard + árbol de info y no comparte peso con los
- * trabajos ya cerrados.
+ * Aithority sits apart from the archive: it's the cofounder project, with its
+ * own section (dashboard + info tree) and doesn't share weight with the closed
+ * work.
  */
-export const AITHORITY_CASO: CaseStudy = {
+export const AITHORITY_CASE: CaseStudy = {
   slug: 'aithority',
   index: '—',
-  nombre: 'Aithority',
-  tagline: 'Cumplimiento del AI Act europeo — como cofundador técnico',
-  estado: { texto: 'Cofundador · en construcción', tono: 'accent' },
-  problema:
-    'Una empresa que usa IA en RRHH, crédito o biometría tiene que cumplir el AI Act: inventariar cada sistema, clasificar su riesgo y documentarlo. Hoy lo hacen a mano, en hojas de cálculo, sin saber qué les aplica ni qué falta.',
-  enfoque: [
-    'Motor de clasificación real: entra la descripción de un sistema y sale su riesgo según el Anexo III y las obligaciones concretas que le tocan, con el razonamiento — no una caja negra.',
-    'Descubrimiento automático del inventario: conecta Microsoft 365 por OAuth (consentimiento de admin, solo lectura) y detecta las herramientas de IA que la organización ya tiene autorizadas.',
-    'Documentación del Art. 11 y registro de evidencias con fecha, para que el expediente de auditoría se componga solo y nunca describa un estado viejo.',
+  name: 'Aithority',
+  tagline: 'EU AI Act compliance — as technical cofounder',
+  status: { text: 'Cofounder · building', tone: 'accent' },
+  problem:
+    'A company using AI in HR, credit or biometrics has to comply with the AI Act: inventory every system, classify its risk and document it. Today they do it by hand, in spreadsheets, without knowing what applies or what\'s missing.',
+  approach: [
+    'A real classification engine: feed in a system\'s description and out comes its risk under Annex III and the concrete obligations that apply, with the reasoning — not a black box.',
+    'Automatic inventory discovery: connect Microsoft 365 over OAuth (admin consent, read-only) and detect the AI tools the organization has already authorized.',
+    'Art. 11 documentation and a dated evidence log, so the audit file composes itself and never describes a stale state.',
   ],
-  decisiones: [
+  decisions: [
     {
-      titulo: 'Detectar no es clasificar',
-      detalle:
-        'El descubrimiento rellena el inventario, pero no decide el riesgo: que aparezca "Notion AI" no dice si es de alto riesgo — eso depende del uso. Vender "clasificación automática total" sería la sobrepromesa que te pillan en dos preguntas.',
+      title: "Detecting isn't classifying",
+      detail:
+        'Discovery fills the inventory, but doesn\'t decide the risk: "Notion AI" showing up doesn\'t say whether it\'s high-risk — that depends on use. Selling "fully automatic classification" would be the overpromise you get caught on in two questions.',
     },
     {
-      titulo: 'Sin guardar tokens de terceros',
-      detalle:
-        'El flujo con Microsoft Graph pide un token app-only en cada sincronización en vez de persistirlo — menos superficie que proteger, y el consentimiento es de solo lectura sobre el directorio.',
+      title: 'No third-party tokens stored',
+      detail:
+        'The Microsoft Graph flow requests an app-only token on each sync instead of persisting it — less surface to protect, and consent is read-only over the directory.',
     },
   ],
-  resultado:
-    'Backend propio (motor de clasificación + API) y dashboard en producción. La startup tiene su primer cliente de pago y entrada en Lanzadera.',
+  result:
+    'Own backend (classification engine + API) and dashboard in production. The startup has its first paying client and a place in Lanzadera.',
   stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act'],
   seed: 655,
 }
 
-export type ProyectoLigero = {
-  nombre: string
+export type LightProject = {
+  name: string
   tagline: string
-  estado: string
+  status: string
   stack: string[]
   seed: number
 }
 
-export const LIGEROS: ProyectoLigero[] = [
+export const LIGHT: LightProject[] = [
   {
-    nombre: 'Volea',
-    tagline: 'SaaS de reservas en tiempo real para clubs de pádel.',
-    estado: 'En producción',
-    stack: ['SaaS', 'Reservas en tiempo real'],
+    name: 'Volea',
+    tagline: 'Real-time booking SaaS for padel clubs.',
+    status: 'In production',
+    stack: ['SaaS', 'Real-time booking'],
     seed: 803,
   },
   {
-    nombre: 'SMASH',
-    tagline: 'App social de pádel — vídeos, squads, comunidad.',
-    estado: 'Aprobada en App Store',
+    name: 'SMASH',
+    tagline: 'Social padel app — videos, squads, community.',
+    status: 'App Store approved',
     stack: ['iOS', 'App Store'],
     seed: 951,
   },
 ]
 
-export const AITHORITY = {
-  eyebrow: 'Actualmente construyendo',
-  nombre: 'Aithority',
-  texto:
-    'Cofundador técnico de Aithority, una startup de cumplimiento del AI Act europeo. No es solo otro producto: es la otra mitad del perfil — construir con IA no basta si no entiendes también sus implicaciones regulatorias y de gobernanza, y eso es exactamente lo que Aithority obliga a entender a fondo.',
-}
+export const TOOLKIT: { group: string; items: string[] }[] = [
+  { group: 'Languages', items: ['TypeScript', 'Python', 'Dart', 'JavaScript', 'SQL'] },
+  { group: 'Frameworks', items: ['Next.js', 'React', 'Flutter', 'Node / Express', 'Riverpod'] },
+  { group: 'AI', items: ['Claude API', 'LLM orchestration', 'Voice AI', 'Prompt & eval design'] },
+  { group: 'Data & infra', items: ['Firebase', 'SQLite', 'Vercel', 'Render', 'Make.com'] },
+  { group: 'Integrations', items: ['Stripe Connect', 'Meta Ads API', 'Microsoft Graph', 'OAuth'] },
+  { group: 'Craft', items: ['Product design', 'Dashboards', 'App Store shipping', 'AI governance'] },
+]
 
-export const CONTACTO = {
-  eyebrow: '¿Construimos algo?',
-  titulo: 'Hablemos',
-  cta: 'Escríbeme',
+export const CONTACT = {
+  eyebrow: 'Building something?',
+  title: "Let's talk",
+  cta: 'Email me',
 }
