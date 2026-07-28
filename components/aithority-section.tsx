@@ -23,10 +23,8 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 export function AithoritySection() {
-  // Fondo terracota suave (~18% del acento sobre blanco): cálido y estable
-  // entre pantallas, en vez del hueso neutro que en Mac tiraba a verdoso.
   return (
-    <section id="aithority" className="scroll-mt-16 border-t border-line bg-[#F4E4DC] py-16 sm:py-24">
+    <section id="aithority" className="scroll-mt-16 border-t border-line bg-[#F7F5F0] py-16 sm:py-24">
       <div className="container-page">
         {/* Dossier header */}
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink pb-5">

@@ -28,7 +28,7 @@ export function Contact() {
               href={l.href}
               target={l.href.startsWith('http') ? '_blank' : undefined}
               rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="group flex flex-col gap-1 bg-bg px-4 py-4 transition-colors hover:bg-surface"
+              className="group flex flex-col gap-1 bg-surface px-4 py-4 transition-colors hover:bg-raised"
             >
               <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-fg-faint">
                 {l.label}
