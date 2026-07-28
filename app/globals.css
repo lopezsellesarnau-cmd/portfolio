@@ -9,7 +9,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    background: #eaf5e0;
+    background: #eaeee6;
     color: #151412;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
@@ -18,7 +18,7 @@
   }
   :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px #eaf5e0, 0 0 0 4px #151412;
+    box-shadow: 0 0 0 2px #eaeee6, 0 0 0 4px #151412;
   }
 }
 
