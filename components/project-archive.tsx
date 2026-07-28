@@ -16,6 +16,8 @@ import { PlantCanvas } from './plant-canvas'
 import { BlockFlowMockup } from './mockups/blockflow-mockup'
 import { LouvrMockup } from './mockups/louvr-mockup'
 import { RostryMockup } from './mockups/rostry-mockup'
+import { VoleaMockup } from './mockups/volea-mockup'
+import { SmashMockup } from './mockups/smash-mockup'
 import { CASES, LIGHT, type CaseStudy, type LightProject } from './copy'
 
 const TERRA = '#C1663D'
@@ -25,6 +27,12 @@ const MOCKUP: Record<string, React.ComponentType> = {
   blockflow: BlockFlowMockup,
   'louvr-labs': LouvrMockup,
   rostry: RostryMockup,
+}
+
+// Light projects keyed by name — same "live" mockup slot as the deep cases.
+const MOCKUP_LIGHT: Record<string, React.ComponentType> = {
+  Volea: VoleaMockup,
+  SMASH: SmashMockup,
 }
 
 // Staggered tab positions per folder — the file-drawer look.
@@ -216,14 +224,38 @@ function DeepFolder({ caso, index, left, z, first }: { caso: CaseStudy; index: s
 
 function LightFolder({ p, index, left, z }: { p: LightProject; index: string; left: string; z: number }) {
   const tone = p.status.toLowerCase().includes('production') ? OK : TERRA
+  const Mockup = MOCKUP_LIGHT[p.name]
   return (
     <Folder index={index} left={left} name={p.name} tagline={p.tagline} statusText={p.status} statusTone={tone} z={z} first={false}>
       <div className="px-5 pb-8 pt-5 sm:px-7">
-        <p className="max-w-[52ch] text-[13.5px] leading-relaxed text-fg-muted">{p.tagline}</p>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <Field label="What it is">
+            <p className="text-[13.5px] leading-relaxed text-fg-muted">{p.blurb}</p>
+          </Field>
+          <Field label="At a glance">
+            <div className="space-y-2.5">
+              {p.fields.map((f) => (
+                <div key={f.label} className="flex gap-3 text-[12.5px] leading-relaxed">
+                  <span className="w-[92px] shrink-0 font-mono text-[10.5px] uppercase tracking-[0.12em] text-fg-faint">
+                    {f.label}
+                  </span>
+                  <span className="text-ink">{f.value}</span>
+                </div>
+              ))}
+            </div>
+          </Field>
+        </div>
         <div className="my-6">
           <PlantBand seed={p.seed} />
         </div>
         <StackChips stack={p.stack} />
+
+        {Mockup && (
+          <div className="mt-7">
+            <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">How it works, live</p>
+            <Mockup />
+          </div>
+        )}
       </div>
     </Folder>
   )

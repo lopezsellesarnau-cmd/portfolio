@@ -167,6 +167,8 @@ export type LightProject = {
   name: string
   tagline: string
   status: string
+  blurb: string
+  fields: { label: string; value: string }[]
   stack: string[]
   seed: number
 }
@@ -174,16 +176,30 @@ export type LightProject = {
 export const LIGHT: LightProject[] = [
   {
     name: 'Volea',
-    tagline: 'Real-time booking SaaS for padel clubs.',
-    status: 'In production',
-    stack: ['SaaS', 'Real-time booking'],
+    tagline: 'Booking SaaS for padel clubs — courts, leagues, payments.',
+    status: 'Live — deployed',
+    blurb:
+      'A full booking SaaS for padel clubs: a real-time court timeline that spots peak and off-peak hours, league management, and public booking with no login. Each club connects its own bank through Stripe Connect, so reservations are charged straight to the club — Volea never touches the money. Built end to end and deployed; it’s where SMASH’s club bookings point.',
+    fields: [
+      { label: 'Role', value: 'Solo — product, backend, deploy' },
+      { label: 'Type', value: 'B2B SaaS · booking + leagues' },
+      { label: 'Payments', value: 'Stripe Connect · direct-to-club' },
+    ],
+    stack: ['Next.js', 'Supabase', 'Stripe Connect', 'TypeScript', 'Vercel'],
     seed: 803,
   },
   {
     name: 'SMASH',
-    tagline: 'Social padel app — videos, squads, community.',
-    status: 'App Store approved',
-    stack: ['iOS', 'App Store'],
+    tagline: 'Social padel app — short-form video, squads, clubs.',
+    status: 'Live on the App Store',
+    blurb:
+      'A TikTok-style feed built for one sport: padel highlights, squads to organize matches, and real clubs where you can book a court (through Volea). Live on the App Store — shipped end to end through Apple’s review, with UGC moderation (block, report, EULA), in-app purchases and DAC7 compliance all handled solo.',
+    fields: [
+      { label: 'Role', value: 'Solo — product, design, build, submission' },
+      { label: 'Platform', value: 'iOS · Flutter + Firebase' },
+      { label: 'Cleared solo', value: 'UGC moderation · IAP · DAC7' },
+    ],
+    stack: ['Flutter', 'Firebase', 'iOS'],
     seed: 951,
   },
 ]
