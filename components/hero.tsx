@@ -40,7 +40,7 @@ export function Hero() {
           {/* Top bar: TYPE · location · available */}
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-ink px-5 py-3 sm:px-7">
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink">
-              <span className="text-fg-faint">Type:</span> Full-stack · AI product engineer
+              <span className="text-fg-faint">Type:</span> Full-stack · Agentic AI engineer
             </p>
             <p className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-fg-dim md:block">Barcelona · remote · EU</p>
             <span className="bg-ink px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-[0.14em] text-bg">Available</span>
@@ -52,9 +52,9 @@ export function Hero() {
               <p className="fade-up font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{PROFILE.eyebrow}</p>
 
               <h1 className="display fade-up mt-4 text-[clamp(2.5rem,6.5vw,4.4rem)] font-medium text-ink" style={{ animationDelay: '60ms' }}>
-                Full-Stack AI
+                Full-Stack Agentic
                 <br />
-                Product Engineer
+                AI Engineer
                 <span className="align-super text-[0.3em] text-accent"> ✦</span>
               </h1>
 

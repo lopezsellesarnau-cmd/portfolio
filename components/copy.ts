@@ -7,9 +7,9 @@
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'Full-Stack AI Product Engineer',
+  role: 'Full-Stack Agentic AI Engineer',
   eyebrow: '[ 22 · self-taught ]',
-  hero: 'I build AI products end to end — from idea to production — and understand their governance, not just their code.',
+  hero: 'I build agentic AI systems end to end — from idea to production — and understand their governance, not just their code.',
   sub: "Most AI roles don't ask for a degree. They ask for a real portfolio. This is mine.",
 }
 

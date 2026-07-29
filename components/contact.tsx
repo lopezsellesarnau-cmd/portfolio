@@ -40,7 +40,7 @@ export function Contact() {
         </div>
 
         <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-hair pt-6">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Arnau Lopez — Full-Stack AI Product Engineer</p>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Arnau Lopez — Full-Stack Agentic AI Engineer</p>
           <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Barcelona · remote · EU</p>
         </div>
       </div>

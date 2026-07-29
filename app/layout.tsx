@@ -12,24 +12,24 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
-  title: 'Arnau Lopez — Full-Stack AI Product Engineer',
+  title: 'Arnau Lopez — Full-Stack Agentic AI Engineer',
   description:
-    '22, self-taught, no degree. I build real AI products end to end — from idea to production — and understand their governance, not just their code.',
+    '22, self-taught, no degree. I build real agentic AI systems end to end — from idea to production — and understand their governance, not just their code.',
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: 'https://arnau-lopez.com',
     siteName: 'Arnau Lopez',
-    title: 'Arnau Lopez — Full-Stack AI Product Engineer',
+    title: 'Arnau Lopez — Full-Stack Agentic AI Engineer',
     description:
-      '22, self-taught, no degree. I build real AI products end to end — from idea to production.',
+      '22, self-taught, no degree. I build real agentic AI systems end to end — from idea to production.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Arnau Lopez — Full-Stack AI Product Engineer',
+    title: 'Arnau Lopez — Full-Stack Agentic AI Engineer',
     description:
-      '22, self-taught, no degree. I build real AI products end to end — from idea to production.',
+      '22, self-taught, no degree. I build real agentic AI systems end to end — from idea to production.',
   },
 }
 
