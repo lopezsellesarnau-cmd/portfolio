@@ -19,6 +19,7 @@ import { RostryMockup } from './mockups/rostry-mockup'
 import { VoleaMockup } from './mockups/volea-mockup'
 import { SmashMockup } from './mockups/smash-mockup'
 import { F1Mockup } from './mockups/f1-mockup'
+import { AiActEvalMockup } from './mockups/ai-act-eval-mockup'
 import { CASES, LIGHT, type CaseStudy, type LightProject } from './copy'
 
 const TERRA = '#C1663D'
@@ -35,6 +36,7 @@ const MOCKUP_LIGHT: Record<string, React.ComponentType> = {
   Volea: VoleaMockup,
   SMASH: SmashMockup,
   'F1 Strategy Agent': F1Mockup,
+  'ai-act-eval': AiActEvalMockup,
 }
 
 // Staggered tab positions per folder — the file-drawer look.

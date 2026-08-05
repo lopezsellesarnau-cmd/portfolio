@@ -196,6 +196,21 @@ export const LIGHT: LightProject[] = [
     link: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent',
   },
   {
+    name: 'ai-act-eval',
+    tagline: 'Open, honestly-evaluated EU AI Act risk classifier',
+    status: 'Open source · public repo',
+    blurb:
+      'A two-layer risk classifier for the EU AI Act — deterministic rules over Art. 5, Annex III and the Art. 6(3) carve-outs, corrected by an LLM-as-judge that degrades cleanly with no API key. The point isn\'t the classifier, it\'s the evaluation: 43 labelled cases, each citing the article that justifies its label, scored per "trap" so the weak spots are visible instead of averaged away. Rules alone score 86% overall but 0% on emotion-context — the judge closes that gap and pushes combined accuracy to 100%.',
+    fields: [
+      { label: 'Role', value: 'Solo — engine, eval harness, report' },
+      { label: 'Type', value: 'Compliance · rules + LLM-as-judge' },
+      { label: 'Result', value: '86% rules → 100% combined tier-acc' },
+    ],
+    stack: ['TypeScript', 'LLM-as-judge', 'Eval harness', 'Open source'],
+    seed: 419,
+    link: 'https://github.com/lopezsellesarnau-cmd/ai-act-eval',
+  },
+  {
     name: 'Volea',
     tagline: 'Booking SaaS for padel clubs — courts, leagues, payments.',
     status: 'Live — deployed',
