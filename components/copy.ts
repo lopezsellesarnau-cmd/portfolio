@@ -7,7 +7,7 @@
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'AI Engineer · Compliance-First',
+  role: 'Full-Stack AI Engineer',
   eyebrow: '[ 22 · self-taught ]',
   hero: 'I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for: inventory, risk classification, documentation and evidence.',
   sub: "Most AI roles don't ask for a degree. They ask for a real portfolio. The EU AI Act is why mine is built the way it is.",
@@ -243,7 +243,7 @@ export const LIGHT: LightProject[] = [
 export const TOOLKIT: { group: string; items: string[] }[] = [
   { group: 'Languages', items: ['TypeScript', 'Python', 'Dart', 'JavaScript', 'SQL'] },
   { group: 'Frameworks', items: ['Next.js', 'React', 'Flutter', 'Node / Express', 'Riverpod'] },
-  { group: 'AI', items: ['Claude API', 'LLM orchestration', 'RAG', 'Voice AI', 'Eval design', 'LLM-as-judge'] },
+  { group: 'AI', items: ['Claude API', 'Prompt Engineering', 'LLM orchestration', 'RAG', 'AI Agents', 'Voice AI', 'Eval design', 'LLM-as-judge'] },
   { group: 'Governance', items: ['EU AI Act', 'Risk classification · Annex III', 'Auditability', 'Evidence logs', 'Deterministic rules over LLM'] },
   { group: 'ML', items: ['scikit-learn', 'RandomForest', 'Evaluation', 'Feature engineering', 'Reproducible reports'] },
   { group: 'Data & infra', items: ['Firebase', 'SQLite', 'Vercel', 'Render', 'Make.com'] },

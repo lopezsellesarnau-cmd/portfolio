@@ -12,7 +12,7 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
-  title: 'Arnau Lopez — AI Engineer · Compliance-First',
+  title: 'Arnau Lopez — Full-Stack AI Engineer',
   description:
     '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for: inventory, risk classification, documentation and evidence.',
   robots: { index: true, follow: true },
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://arnau-lopez.com',
     siteName: 'Arnau Lopez',
-    title: 'Arnau Lopez — AI Engineer · Compliance-First',
+    title: 'Arnau Lopez — Full-Stack AI Engineer',
     description:
       '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Arnau Lopez — AI Engineer · Compliance-First',
+    title: 'Arnau Lopez — Full-Stack AI Engineer',
     description:
       '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for.',
   },
