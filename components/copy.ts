@@ -7,10 +7,10 @@
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'Full-Stack Agentic AI Engineer',
+  role: 'AI Engineer · Compliance-First',
   eyebrow: '[ 22 · self-taught ]',
-  hero: 'I build agentic AI systems end to end — from idea to production — and understand their governance, not just their code.',
-  sub: "Most AI roles don't ask for a degree. They ask for a real portfolio. This is mine.",
+  hero: 'I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for: inventory, risk classification, documentation and evidence.',
+  sub: "Most AI roles don't ask for a degree. They ask for a real portfolio. The EU AI Act is why mine is built the way it is.",
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -156,10 +156,15 @@ export const AITHORITY_CASE: CaseStudy = {
       detail:
         'The Microsoft Graph flow requests an app-only token on each sync instead of persisting it — less surface to protect, and consent is read-only over the directory.',
     },
+    {
+      title: "Suggests, doesn't decide",
+      detail:
+        'The classification engine and remediation roadmaps are suggestions from a rules engine plus an LLM — the customer validates them with their own legal counsel. Aithority tracks evidence of what was declared, when and by whom; it does not certify compliance.',
+    },
   ],
   result:
-    'Own backend (classification engine + API) and dashboard in production. The startup has its first paying client and a place in Lanzadera.',
-  stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act'],
+    'Own backend (classification engine + API) and dashboard in production, with the evidence system shipping. The startup has its first paying client and a place in Lanzadera.',
+  stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act · Annex III'],
   seed: 655,
 }
 
@@ -171,9 +176,25 @@ export type LightProject = {
   fields: { label: string; value: string }[]
   stack: string[]
   seed: number
+  link?: string
 }
 
 export const LIGHT: LightProject[] = [
+  {
+    name: 'F1 Strategy Agent',
+    tagline: 'ML + agentic — race strategy prediction',
+    status: 'Open source · public repo',
+    blurb:
+      'A machine-learning project on F1 race strategy: predicting lap times and simulating pit-stop strategies, with a self-contained HTML report (no server) and an animated SVG track. The lesson is the honest evaluation: a simple model fails to generalize across circuits (MAE 3.49s) until the objective changes from absolute lap time to the delta over each circuit\'s base pace — which drops error to 0.73s. Published open source because the community asked for the code.',
+    fields: [
+      { label: 'Role', value: 'Solo — ML, evaluation, content' },
+      { label: 'Type', value: 'ML · prediction + simulation' },
+      { label: 'Lesson', value: 'The right objective beats more features' },
+    ],
+    stack: ['Python', 'scikit-learn', 'RandomForest', 'Evaluation', 'Open source'],
+    seed: 261,
+    link: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent',
+  },
   {
     name: 'Volea',
     tagline: 'Booking SaaS for padel clubs — courts, leagues, payments.',
@@ -207,9 +228,11 @@ export const LIGHT: LightProject[] = [
 export const TOOLKIT: { group: string; items: string[] }[] = [
   { group: 'Languages', items: ['TypeScript', 'Python', 'Dart', 'JavaScript', 'SQL'] },
   { group: 'Frameworks', items: ['Next.js', 'React', 'Flutter', 'Node / Express', 'Riverpod'] },
-  { group: 'AI', items: ['Claude API', 'LLM orchestration', 'Voice AI', 'Prompt & eval design'] },
+  { group: 'AI', items: ['Claude API', 'LLM orchestration', 'RAG', 'Voice AI', 'Eval design', 'LLM-as-judge'] },
+  { group: 'Governance', items: ['EU AI Act', 'Risk classification · Annex III', 'Auditability', 'Evidence logs', 'Deterministic rules over LLM'] },
+  { group: 'ML', items: ['scikit-learn', 'RandomForest', 'Evaluation', 'Feature engineering', 'Reproducible reports'] },
   { group: 'Data & infra', items: ['Firebase', 'SQLite', 'Vercel', 'Render', 'Make.com'] },
-  { group: 'Integrations', items: ['Stripe Connect', 'Meta Ads API', 'Microsoft Graph', 'OAuth'] },
+  { group: 'Integrations', items: ['Stripe Connect', 'Meta Ads API', 'Microsoft Graph', 'OAuth', 'OpenAI / Anthropic Admin APIs'] },
   { group: 'Craft', items: ['Product design', 'Dashboards', 'App Store shipping', 'AI governance'] },
 ]
 

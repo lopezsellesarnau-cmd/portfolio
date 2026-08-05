@@ -40,7 +40,7 @@ export function Hero() {
           {/* Top bar: TYPE · location · available */}
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-ink px-5 py-3 sm:px-7">
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink">
-              <span className="text-fg-faint">Type:</span> Full-stack · Agentic AI engineer
+              <span className="text-fg-faint">Type:</span> AI Engineer · Compliance-First
             </p>
             <p className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-fg-dim md:block">Barcelona · remote · EU</p>
             <span className="bg-ink px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-[0.14em] text-bg">Available</span>
@@ -52,15 +52,15 @@ export function Hero() {
               <p className="fade-up font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{PROFILE.eyebrow}</p>
 
               <h1 className="display fade-up mt-4 text-[clamp(2.5rem,6.5vw,4.4rem)] font-medium text-ink" style={{ animationDelay: '60ms' }}>
-                Full-Stack Agentic
-                <br />
                 AI Engineer
+                <br />
+                · Compliance-First
                 <span className="align-super text-[0.3em] text-accent"> ✦</span>
               </h1>
 
               <div className="fade-up mt-6 space-y-1.5" style={{ animationDelay: '120ms' }}>
                 <p className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.1em] text-ink">
-                  From idea to production <span className="text-fg-faint">&gt;&gt;&gt;&gt;&gt;&gt;</span>
+                  From idea to auditable production <span className="text-fg-faint">&gt;&gt;&gt;&gt;&gt;&gt;</span>
                 </p>
                 <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-fg-dim">Build · govern · ship</p>
               </div>

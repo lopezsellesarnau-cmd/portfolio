@@ -12,24 +12,24 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
-  title: 'Arnau Lopez — Full-Stack Agentic AI Engineer',
+  title: 'Arnau Lopez — AI Engineer · Compliance-First',
   description:
-    '22, self-taught, no degree. I build real agentic AI systems end to end — from idea to production — and understand their governance, not just their code.',
+    '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for: inventory, risk classification, documentation and evidence.',
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: 'https://arnau-lopez.com',
     siteName: 'Arnau Lopez',
-    title: 'Arnau Lopez — Full-Stack Agentic AI Engineer',
+    title: 'Arnau Lopez — AI Engineer · Compliance-First',
     description:
-      '22, self-taught, no degree. I build real agentic AI systems end to end — from idea to production.',
+      '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Arnau Lopez — Full-Stack Agentic AI Engineer',
+    title: 'Arnau Lopez — AI Engineer · Compliance-First',
     description:
-      '22, self-taught, no degree. I build real agentic AI systems end to end — from idea to production.',
+      '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for.',
   },
 }
 

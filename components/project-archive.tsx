@@ -18,6 +18,7 @@ import { LouvrMockup } from './mockups/louvr-mockup'
 import { RostryMockup } from './mockups/rostry-mockup'
 import { VoleaMockup } from './mockups/volea-mockup'
 import { SmashMockup } from './mockups/smash-mockup'
+import { F1Mockup } from './mockups/f1-mockup'
 import { CASES, LIGHT, type CaseStudy, type LightProject } from './copy'
 
 const TERRA = '#C1663D'
@@ -33,6 +34,7 @@ const MOCKUP: Record<string, React.ComponentType> = {
 const MOCKUP_LIGHT: Record<string, React.ComponentType> = {
   Volea: VoleaMockup,
   SMASH: SmashMockup,
+  'F1 Strategy Agent': F1Mockup,
 }
 
 // Staggered tab positions per folder — the file-drawer look.
@@ -250,6 +252,16 @@ function LightFolder({ p, index, left, z }: { p: LightProject; index: string; le
         </div>
         <StackChips stack={p.stack} />
 
+        {p.link && (
+          <a
+            href={p.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 border border-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ink hover:text-bg"
+          >
+            Open repository ↗
+          </a>
+        )}
         {Mockup && (
           <div className="mt-7">
             <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">How it works, live</p>
