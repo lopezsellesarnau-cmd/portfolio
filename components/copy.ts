@@ -92,38 +92,38 @@ export const CASES: CaseStudy[] = [
     seed: 322,
   },
   {
-    slug: 'rostry',
+    slug: 'trace',
     index: '03',
-    name: 'Rostry',
-    tagline: 'Amateur sports leagues, with real payments between players',
-    status: { text: 'App Store approved · build 7', tone: 'accent' },
+    name: 'TRACE',
+    tagline: 'Find your exposed data, then get it removed — for real',
+    status: { text: 'Submitted for App Store review', tone: 'accent' },
     problem:
-      'Running an amateur league (padel, 7-a-side, whatever) by hand is a WhatsApp group, a spreadsheet and someone collecting cash. Rostry turns it into a real app, with payments built in and without the organizer being the one who holds the money.',
+      'Personal data is already scattered across old breaches and dozens of US data-broker sites — most people never find out until it\'s used against them. Every "data removal" app on the market either scrapes to confirm a listing first (expensive, fragile) or fakes the confirmation step to look automated. TRACE does neither.',
     approach: [
-      'Flutter + Riverpod for the app, with a repository pattern (RostryRepository) defining a single abstract interface — one real implementation today, but the data layer never couples directly to the widget tree.',
-      'Firebase as the backend (data, auth).',
-      'Stripe Connect with destination charges: money goes straight to the league organizer\'s account, with a 5% platform fee withheld automatically on each charge — no manual money movement, no separate invoicing for the organizer.',
+      'React Native/Expo app + Node/Express backend (Render): checks a user\'s email against real breach records and computes an Exposure Score from actual breach severity, not a black-box number.',
+      'Proactive removal, not detected removal: instead of paying for a per-user broker-search API to confirm a listing before acting, TRACE requests removal from all 11 targeted US brokers directly — GDPR Art. 17 and CCPA don\'t require proof of listing first, so that cost doesn\'t need to exist.',
+      'For the 2 brokers with a verified privacy-contact email (checked against their live policy pages, not a stale registry), the backend sends the removal request for real via Resend. For the rest, the app opens the broker\'s own opt-out page with the request text pre-drafted — no fake automation for what genuinely can\'t be automated yet.',
     ],
     decisions: [
       {
-        title: 'Destination charges, not own-collect + manual split',
+        title: 'Two-step status, not optimistic UI',
         detail:
-          'With destination charges, Stripe moves the money straight to the organizer and withholds Rostry\'s fee in the same charge — it avoids the platform holding third-party money as its own, with all the regulatory weight that implies.',
+          'Tapping "Request deletion" on a form-only broker used to mark it "Submitted" immediately — before the user had actually filled anything in. Fixed to a real two-step flow: opening the page doesn\'t change status, only the user\'s own "I submitted this" confirmation does. Every status shown is something that actually happened.',
       },
       {
-        title: 'Repository interface from day one',
+        title: 'Rate-limited by default, not after an incident',
         detail:
-          'Even with only one real RostryRepository implementation today, the abstract interface was there from the start — cheap to define, and it keeps the app logic from coupling to Firebase if the backend ever changes.',
+          'A security pass on the backend found every endpoint was unauthenticated by design (no login wall on scanning) and unlimited — meaning it could be used as a free breach-lookup proxy, a push-notification spam relay, or a way to flood real brokers with junk email through the verified sending domain. Added per-route rate limits before shipping, tightest on the one route that sends a real email to a real company.',
       },
       {
-        title: 'The review process as part of the work',
+        title: 'Delete account means delete, not mostly delete',
         detail:
-          'Build 7 approved: six iterations before parts got rejected or change-requested (in-app payment guidelines, metadata, account flows) — the app in production is also the app that survived Apple\'s real review.',
+          'Found — before shipping — that "Delete account" only removed the Firebase Auth login, leaving the Firestore record (name, email, breach data, broker history) orphaned. For an app built on GDPR/CCPA right-to-erasure messaging, that gap would have been the app failing its own premise. Fixed to delete the record first, in the order the security rules actually require.',
       },
     ],
-    result: 'Approved on the App Store at build 7, with real payments between players already working.',
-    stack: ['Flutter', 'Riverpod', 'Firebase', 'Stripe Connect', 'App Store'],
-    seed: 507,
+    result: 'Submitted for App Store review with a working RevenueCat subscription, confirmed end-to-end email delivery to verified brokers, and an activity log where every status is real — not simulated.',
+    stack: ['React Native', 'Expo', 'Node/Express', 'Firebase', 'RevenueCat', 'Resend'],
+    seed: 641,
   },
 ]
 
@@ -249,6 +249,17 @@ export const TOOLKIT: { group: string; items: string[] }[] = [
   { group: 'Data & infra', items: ['Firebase', 'SQLite', 'Vercel', 'Render', 'Make.com'] },
   { group: 'Integrations', items: ['Stripe Connect', 'Meta Ads API', 'Microsoft Graph', 'OAuth', 'OpenAI / Anthropic Admin APIs'] },
   { group: 'Craft', items: ['Product design', 'Dashboards', 'App Store shipping', 'AI governance'] },
+]
+
+export type Credential = { name: string; issuer: string; date: string; link?: string }
+
+export const CREDENTIALS: Credential[] = [
+  {
+    name: 'Introduction to Generative AI',
+    issuer: 'Google Cloud',
+    date: 'Aug 2026',
+    link: 'https://www.skills.google/paths/118',
+  },
 ]
 
 export const CONTACT = {

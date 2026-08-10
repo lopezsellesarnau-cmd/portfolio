@@ -1,17 +1,17 @@
 'use client'
 
 /**
- * Rostry — lo que hay que explicar es el reparto del dinero: un único cobro
- * (destination charge) que se divide 95/5 sin que la plataforma llegue a
- * sostener fondos de terceros. Un diagrama de flujo del pago lo cuenta mejor
- * que un árbol de decisión: el dinero entra por un sitio y sale por dos.
+ * TRACE — the thing worth showing isn't a screen, it's the honesty split:
+ * 2 brokers get a real automated email, the other 9 get a real page opened
+ * for the user with nothing faked in between. Same shape as Rostry's
+ * payment-split diagram (one input, two real outputs), different subject.
  */
 
 import { MockupFrame, OK, TERRA, INK } from './frame'
 
-function Amount({
+function Node({
   label,
-  monto,
+  value,
   sub,
   tone,
   pct,
@@ -19,7 +19,7 @@ function Amount({
   delay,
 }: {
   label: string
-  monto: string
+  value: string
   sub: string
   tone: string
   pct?: string
@@ -36,20 +36,20 @@ function Amount({
           </span>
         )}
       </div>
-      <p className="mt-1 font-mono text-[19px] tabular-nums tracking-tight" style={{ color: tone }}>
-        {monto}
+      <p className="mt-1 font-mono text-[17px] tabular-nums tracking-tight" style={{ color: tone }}>
+        {value}
       </p>
       <p className="mt-0.5 font-mono text-[10px] text-fg-dim">{sub}</p>
     </div>
   )
 }
 
-export function RostryMockup() {
+export function TraceMockup() {
   return (
-    <MockupFrame title="Stripe Connect · destination charge" context="charge → split" status="status: settled" tone={OK}>
+    <MockupFrame title="Removal request · dispatch" context="scan → 11 brokers" status="status: honest by design" tone={OK}>
       <div className="grid items-center gap-3 lg:grid-cols-[1fr_64px_1fr]">
         {/* Input */}
-        <Amount label="League payment" monto="$40.00" sub="player → app" tone={INK} ink delay={300} />
+        <Node label="Exposure scan" value="64" sub="score · 4 breaches found" tone={INK} ink delay={300} />
 
         {/* Splitting connector */}
         <svg viewBox="0 0 64 120" className="hidden h-[120px] w-full lg:block" aria-hidden>
@@ -62,14 +62,15 @@ export function RostryMockup() {
 
         {/* Outputs */}
         <div className="grid gap-3">
-          <Amount label="Organizer" monto="$38.00" sub="own account · direct" tone={OK} pct="95%" delay={1000} />
-          <Amount label="Rostry" monto="$2.00" sub="platform fee" tone={TERRA} pct="5%" delay={1150} />
+          <Node label="Spokeo · ZoomInfo" value="Sent" sub="real email, verified contact" tone={OK} pct="2 brokers" delay={1000} />
+          <Node label="The other 9" value="Opened" sub="user submits, then confirms" tone={TERRA} pct="9 brokers" delay={1150} />
         </div>
       </div>
 
       <p className="mt-3 border-t border-hair pt-3 font-mono text-[10px] leading-relaxed text-fg-dim">
-        The money never sits in a Rostry account: Stripe pays the organizer directly and withholds the fee in the
-        same charge. Less regulatory weight, zero manual split.
+        Status never gets ahead of what actually happened: "Sent" only shows once Resend confirms delivery, and
+        "Submitted" only shows once the user confirms they filled the broker's own form — not the moment a button
+        gets tapped.
       </p>
     </MockupFrame>
   )

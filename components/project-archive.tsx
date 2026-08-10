@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { PlantCanvas } from './plant-canvas'
 import { BlockFlowMockup } from './mockups/blockflow-mockup'
 import { LouvrMockup } from './mockups/louvr-mockup'
-import { RostryMockup } from './mockups/rostry-mockup'
+import { TraceMockup } from './mockups/trace-mockup'
 import { VoleaMockup } from './mockups/volea-mockup'
 import { SmashMockup } from './mockups/smash-mockup'
 import { F1Mockup } from './mockups/f1-mockup'
@@ -28,7 +28,7 @@ const OK = '#3F7A4E'
 const MOCKUP: Record<string, React.ComponentType> = {
   blockflow: BlockFlowMockup,
   'louvr-labs': LouvrMockup,
-  rostry: RostryMockup,
+  trace: TraceMockup,
 }
 
 // Light projects keyed by name — same "live" mockup slot as the deep cases.

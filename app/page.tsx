@@ -3,6 +3,7 @@ import { Hero } from '@/components/hero'
 import { ProjectArchive } from '@/components/project-archive'
 import { AithoritySection } from '@/components/aithority-section'
 import { Toolkit } from '@/components/toolkit'
+import { Credentials } from '@/components/credentials'
 import { Contact } from '@/components/contact'
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
 
       <AithoritySection />
       <Toolkit />
+      <Credentials />
       <Contact />
     </main>
   )
