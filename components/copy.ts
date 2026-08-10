@@ -260,6 +260,18 @@ export const CREDENTIALS: Credential[] = [
     date: 'Aug 2026',
     link: 'https://www.skills.google/paths/118',
   },
+  {
+    name: 'Introduction to Large Language Models',
+    issuer: 'Google Cloud',
+    date: 'Aug 2026',
+    link: 'https://www.skills.google/paths/118',
+  },
+  {
+    name: 'Introduction to Responsible AI',
+    issuer: 'Google Cloud',
+    date: 'Aug 2026',
+    link: 'https://www.skills.google/paths/118',
+  },
 ]
 
 export const CONTACT = {
