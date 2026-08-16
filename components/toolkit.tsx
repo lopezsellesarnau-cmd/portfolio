@@ -13,7 +13,7 @@ export function Toolkit() {
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">What I build with</p>
             <h2 className="display mt-3 text-[clamp(1.8rem,4.5vw,2.8rem)] font-medium text-ink">Toolkit</h2>
           </div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-fg-faint">Full-stack · AI-native</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-fg-faint">Full-stack · AI-native · Design-first</p>
         </div>
 
         <div className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">

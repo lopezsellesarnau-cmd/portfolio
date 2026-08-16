@@ -14,6 +14,7 @@
 import { useState } from 'react'
 import { PlantCanvas } from './plant-canvas'
 import { BlockFlowMockup } from './mockups/blockflow-mockup'
+import { DrossMockup } from './mockups/dross-mockup'
 import { LouvrMockup } from './mockups/louvr-mockup'
 import { TraceMockup } from './mockups/trace-mockup'
 import { VoleaMockup } from './mockups/volea-mockup'
@@ -27,6 +28,7 @@ const OK = '#3F7A4E'
 
 const MOCKUP: Record<string, React.ComponentType> = {
   blockflow: BlockFlowMockup,
+  dross: DrossMockup,
   'louvr-labs': LouvrMockup,
   trace: TraceMockup,
 }
@@ -290,7 +292,7 @@ export function ProjectArchive() {
       {/* Dark base — closes the stack */}
       <div className="relative -mt-3 rounded-t-[18px] bg-ink px-5 py-6 text-bg sm:px-7" style={{ zIndex: total + 1 }}>
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]">Every line above is real — in production or on the App Store.</p>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]">Every line above is real — shipped, in review, or open source.</p>
           <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: TERRA }}>Built solo, end to end</p>
         </div>
       </div>

@@ -12,24 +12,24 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
-  title: 'Arnau Lopez — Full-Stack AI Engineer',
+  title: 'Arnau Lopez — Full-Stack AI Engineer · Design-first',
   description:
-    '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for: inventory, risk classification, documentation and evidence.',
+    '22, self-taught, no degree. I design, build and ship software end to end — interface, backend, App Store — with a full-stack AI background and no design handoff needed. Open to UK / Ireland / Netherlands.',
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: 'https://arnau-lopez.com',
     siteName: 'Arnau Lopez',
-    title: 'Arnau Lopez — Full-Stack AI Engineer',
+    title: 'Arnau Lopez — Full-Stack AI Engineer · Design-first',
     description:
-      '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for.',
+      '22, self-taught, no degree. I design, build and ship software end to end — interface, backend, App Store — with a full-stack AI background and no design handoff needed.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Arnau Lopez — Full-Stack AI Engineer',
+    title: 'Arnau Lopez — Full-Stack AI Engineer · Design-first',
     description:
-      '22, self-taught, no degree. I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for.',
+      '22, self-taught, no degree. I design, build and ship software end to end — interface, backend, App Store — with a full-stack AI background and no design handoff needed.',
   },
 }
 

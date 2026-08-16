@@ -1,16 +1,23 @@
 /**
- * Copy — single source of truth, English. The three case studies carry real
+ * Copy — single source of truth, English. The case studies carry real
  * technical content (not filler): what Arnau gave in the brief. What's genuinely
  * missing (screenshots, links, exact metrics) is asked for at the end of the
  * build, not invented here.
+ *
+ * Positioning since 16 aug 2026 — design-first, for the UK / Ireland /
+ * Netherlands job market: the differentiator is a developer who also owns the
+ * visual system, so no design handoff or dedicated UI designer is needed to
+ * ship a polished product. AI + compliance stay as the second signal, not the
+ * title. TRACE and Dross are the two interview talking points and lead the
+ * archive.
  */
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'Full-Stack AI Engineer',
+  role: 'Full-Stack AI Engineer · Design-first',
   eyebrow: '[ 22 · self-taught ]',
-  hero: 'I build AI systems end to end — agents, voice, ML, dashboards — and ship them with the governance the EU AI Act is asking for: inventory, risk classification, documentation and evidence.',
-  sub: "Most AI roles don't ask for a degree. They ask for a real portfolio. The EU AI Act is why mine is built the way it is.",
+  hero: "I design, build and ship software end to end — the interface, the backend, the App Store submission. The visual system is my job too, not a handoff: most teams have to stitch design and engineering together; here it's one person, and it ships.",
+  sub: "Engineering roles don't ask for a degree — they ask for a real, shipped portfolio, and the rare developer who can also design it. Five products shipped solo, four in front of users or in review.",
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -33,8 +40,90 @@ export type CaseStudy = {
 
 export const CASES: CaseStudy[] = [
   {
-    slug: 'blockflow',
+    slug: 'trace',
     index: '01',
+    name: 'TRACE',
+    tagline: 'Privacy iOS app — find your exposed data, then get it removed',
+    status: { text: 'Submitted for App Store review', tone: 'accent' },
+    problem:
+      'Personal data is already scattered across old breaches and dozens of US data-broker sites — most people never find out until it\'s used against them. Every "data removal" app on the market either scrapes to confirm a listing first (expensive, fragile) or fakes the confirmation step to look automated. TRACE does neither — and unlike an Incogni-style to-do list, it\'s designed to be shared, not buried in a dashboard.',
+    approach: [
+      'React Native/Expo app + Node/Express backend (Render): checks a user\'s email against real breach records and computes an Exposure Score from actual breach severity, not a black-box number.',
+      'Proactive removal, not detected removal: instead of paying for a per-user broker-search API to confirm a listing before acting, TRACE requests removal from all 24 targeted US brokers directly — GDPR Art. 17 and CCPA don\'t require proof of listing first, so that cost doesn\'t need to exist.',
+      'For the 2 brokers with a verified privacy-contact email (Spokeo, ZoomInfo — checked against their live policy pages, not a stale registry), the backend sends the removal request for real via Resend. The other 22 open the broker\'s own opt-out page with the request pre-drafted — no fake automation for what genuinely can\'t be automated yet.',
+      'Designed around the share card: the report is a vertical, story-sized card (score + breach/broker counts) built for one tap to share. The growth engine is a screenshot people want to post, not a generic dashboard.',
+    ],
+    decisions: [
+      {
+        title: 'Two-step status, not optimistic UI',
+        detail:
+          'Tapping "Request deletion" on a form-only broker used to mark it "Submitted" immediately — before the user had actually filled anything in. Fixed to a real two-step flow: opening the page doesn\'t change status, only the user\'s own "I submitted this" confirmation does. Every status shown is something that actually happened.',
+      },
+      {
+        title: 'Rate-limited by default, not after an incident',
+        detail:
+          'A security pass on the backend found every endpoint was unauthenticated by design (no login wall on scanning) and unlimited — usable as a free breach-lookup proxy, a push-notification spam relay, or a way to flood real brokers with junk email through the verified sending domain. Added per-route rate limits before shipping, tightest on the one route that sends a real email to a real company.',
+      },
+      {
+        title: 'Delete account means delete, not mostly delete',
+        detail:
+          'Found — before shipping — that "Delete account" only removed the Firebase Auth login, leaving the Firestore record (name, email, breach data, broker history) orphaned. For an app built on GDPR/CCPA right-to-erasure messaging, that gap would have been the app failing its own premise. Fixed to delete the record first, in the order the security rules actually require.',
+      },
+      {
+        title: 'The product is the share card, not the dashboard',
+        detail:
+          'Most data-removal products read like Incogni: a to-do list of brokers. TRACE\'s report is a forensically-styled share card people actually want to post, and removal is the paid second act behind it. The one-liner competitors can\'t copy without lying: "the breach you can screenshot."',
+      },
+    ],
+    result:
+      'Submitted for App Store review (build 21) with a working RevenueCat subscription, verified end-to-end email delivery to real brokers, and an activity log where every status is real — not simulated. v2 direction: share-card-first home, deletion as the paid second act.',
+    stack: ['React Native', 'Expo', 'Node/Express', 'Firebase', 'RevenueCat', 'Resend'],
+    seed: 641,
+  },
+  {
+    slug: 'dross',
+    index: '02',
+    name: 'Dross',
+    tagline: 'macOS app + CLI — detects when your app and your backend stop agreeing',
+    status: { text: 'Notarized · v0.1 DMG', tone: 'accent' },
+    problem:
+      'The bugs that actually bite AI-written code aren\'t syntax errors — they\'re meaning errors: a live endpoint nobody calls anymore, demo data stamped into production, a client calling an API that suddenly demands a token it never sends. Static analysis can\'t catch these; they only surface when you read both sides of a system at once.',
+    approach: [
+      'Built as a native macOS app (SwiftUI) with the engine as an embedded TypeScript CLI. Deterministic checks run first — dead exports, env drift, TODO density, hardcoded demo data — free, fully offline, instant.',
+      'Contract drift is the hook: scan a full-stack repo and it flags where the client\'s calls no longer match the routes the server actually serves. Parsed with the TypeScript compiler API, so string literals that only look like routes don\'t count.',
+      'Shipped with its own eval harness instead of trusting demos: a golden corpus of fixtures whose precision AND recall must both hold at 100%, CI fails the build otherwise — every false positive found is locked in as a regression fixture.',
+      'Monetized like the product it\'s for: Ed25519-signed license keys verified fully offline. The free tier never touches the network; the Pro LLM drift pass runs with your own Anthropic key, never proxying or reselling tokens.',
+    ],
+    decisions: [
+      {
+        title: 'Contract drift is the one-liner, not "another linter"',
+        detail:
+          'Three real production bugs in the creator\'s own repos all had the same shape: two sides of one system that stopped agreeing. That specific failure is what CodeRabbit, Augment, Factory and Code Metal don\'t check — they review single repos at PR time.',
+      },
+      {
+        title: 'For the solo builder, not a PR-time team service',
+        detail:
+          'The funded competitors are cloud, team, PR-time products. Dross targets the developer deploying straight to main with heavy AI assistance — no PR process to hook into. A native app for the human, a CI-ready CLI for the pipeline.',
+      },
+      {
+        title: 'AST over regex, eval over vibes',
+        detail:
+          'Moving contract-drift parsing to the TypeScript compiler API killed a whole false-positive class (precision 83% → 100% on the worst fixture), and the golden-corpus eval made the improvement permanent instead of a vibes-based demo.',
+      },
+      {
+        title: 'Dogfooding was the pitch',
+        detail:
+          'Dross found real contract drift inside TRACE and Aithority during development — a backend demanding a Firebase token the client wasn\'t sending yet. The story it tells is literally something it caught on the creator\'s own shipped code.',
+      },
+    ],
+    result:
+      'v1 shipped as a notarized macOS DMG with an offline license system and a CI-ready CLI — validated against the exact kind of AI-written full-stack repos where this class of bug actually happens.',
+    stack: ['SwiftUI', 'macOS', 'TypeScript', 'TS compiler API', 'Ed25519', 'Claude API', 'Eval harness'],
+    seed: 222,
+  },
+  {
+    slug: 'blockflow',
+    index: '03',
     name: 'BlockFlow',
     tagline: 'AI voice agent for property managers',
     status: { text: 'In production', tone: 'ok' },
@@ -63,7 +152,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'louvr-labs',
-    index: '02',
+    index: '04',
     name: 'Louvr Labs',
     tagline: 'Ranking & reporting platform for Meta Ads',
     status: { text: 'In production', tone: 'ok' },
@@ -91,46 +180,13 @@ export const CASES: CaseStudy[] = [
     stack: ['OAuth', 'Meta Ads API', 'Python', 'Claude (Sonnet) API', 'Make.com'],
     seed: 322,
   },
-  {
-    slug: 'trace',
-    index: '03',
-    name: 'TRACE',
-    tagline: 'Find your exposed data, then get it removed — for real',
-    status: { text: 'Submitted for App Store review', tone: 'accent' },
-    problem:
-      'Personal data is already scattered across old breaches and dozens of US data-broker sites — most people never find out until it\'s used against them. Every "data removal" app on the market either scrapes to confirm a listing first (expensive, fragile) or fakes the confirmation step to look automated. TRACE does neither.',
-    approach: [
-      'React Native/Expo app + Node/Express backend (Render): checks a user\'s email against real breach records and computes an Exposure Score from actual breach severity, not a black-box number.',
-      'Proactive removal, not detected removal: instead of paying for a per-user broker-search API to confirm a listing before acting, TRACE requests removal from all 11 targeted US brokers directly — GDPR Art. 17 and CCPA don\'t require proof of listing first, so that cost doesn\'t need to exist.',
-      'For the 2 brokers with a verified privacy-contact email (checked against their live policy pages, not a stale registry), the backend sends the removal request for real via Resend. For the rest, the app opens the broker\'s own opt-out page with the request text pre-drafted — no fake automation for what genuinely can\'t be automated yet.',
-    ],
-    decisions: [
-      {
-        title: 'Two-step status, not optimistic UI',
-        detail:
-          'Tapping "Request deletion" on a form-only broker used to mark it "Submitted" immediately — before the user had actually filled anything in. Fixed to a real two-step flow: opening the page doesn\'t change status, only the user\'s own "I submitted this" confirmation does. Every status shown is something that actually happened.',
-      },
-      {
-        title: 'Rate-limited by default, not after an incident',
-        detail:
-          'A security pass on the backend found every endpoint was unauthenticated by design (no login wall on scanning) and unlimited — meaning it could be used as a free breach-lookup proxy, a push-notification spam relay, or a way to flood real brokers with junk email through the verified sending domain. Added per-route rate limits before shipping, tightest on the one route that sends a real email to a real company.',
-      },
-      {
-        title: 'Delete account means delete, not mostly delete',
-        detail:
-          'Found — before shipping — that "Delete account" only removed the Firebase Auth login, leaving the Firestore record (name, email, breach data, broker history) orphaned. For an app built on GDPR/CCPA right-to-erasure messaging, that gap would have been the app failing its own premise. Fixed to delete the record first, in the order the security rules actually require.',
-      },
-    ],
-    result: 'Submitted for App Store review with a working RevenueCat subscription, confirmed end-to-end email delivery to verified brokers, and an activity log where every status is real — not simulated.',
-    stack: ['React Native', 'Expo', 'Node/Express', 'Firebase', 'RevenueCat', 'Resend'],
-    seed: 641,
-  },
 ]
 
 /**
  * Aithority sits apart from the archive: it's the cofounder project, with its
  * own section (dashboard + info tree) and doesn't share weight with the closed
- * work.
+ * work. It's also the credibility anchor behind the governance signal — the
+ * reason compliance talk isn't empty.
  */
 export const AITHORITY_CASE: CaseStudy = {
   slug: 'aithority',
@@ -215,7 +271,7 @@ export const LIGHT: LightProject[] = [
     tagline: 'Booking SaaS for padel clubs — courts, leagues, payments.',
     status: 'Live — deployed',
     blurb:
-      'A full booking SaaS for padel clubs: a real-time court timeline that spots peak and off-peak hours, league management, and public booking with no login. Each club connects its own bank through Stripe Connect, so reservations are charged straight to the club — Volea never touches the money. Built end to end and deployed; it’s where SMASH’s club bookings point.',
+      'A full booking SaaS for padel clubs: a real-time court timeline that spots peak and off-peak hours, league management, and public booking with no login. Each club connects its own bank through Stripe Connect, so reservations are charged straight to the club — Volea never touches the money. Built end to end and deployed; it\'s where SMASH\'s club bookings point.',
     fields: [
       { label: 'Role', value: 'Solo — product, backend, deploy' },
       { label: 'Type', value: 'B2B SaaS · booking + leagues' },
@@ -229,7 +285,7 @@ export const LIGHT: LightProject[] = [
     tagline: 'Social padel app — short-form video, squads, clubs.',
     status: 'Live on the App Store',
     blurb:
-      'A TikTok-style feed built for one sport: padel highlights, squads to organize matches, and real clubs where you can book a court (through Volea). Live on the App Store — shipped end to end through Apple’s review, with UGC moderation (block, report, EULA), in-app purchases and DAC7 compliance all handled solo.',
+      'A TikTok-style feed built for one sport: padel highlights, squads to organize matches, and real clubs where you can book a court (through Volea). Live on the App Store — shipped end to end through Apple\'s review, with UGC moderation (block, report, EULA), in-app purchases and DAC7 compliance all handled solo.',
     fields: [
       { label: 'Role', value: 'Solo — product, design, build, submission' },
       { label: 'Platform', value: 'iOS · Flutter + Firebase' },
@@ -241,14 +297,15 @@ export const LIGHT: LightProject[] = [
 ]
 
 export const TOOLKIT: { group: string; items: string[] }[] = [
+  { group: 'Design', items: ['Design systems', 'Visual identity', 'Typography', 'UI / Interaction', 'Figma → code', 'Motion', 'Procedural graphics'] },
   { group: 'Languages', items: ['TypeScript', 'Python', 'Dart', 'JavaScript', 'SQL'] },
-  { group: 'Frameworks', items: ['Next.js', 'React', 'Flutter', 'Node / Express', 'Riverpod'] },
+  { group: 'Frameworks', items: ['Next.js', 'React', 'React Native', 'Flutter', 'Node / Express', 'SwiftUI'] },
   { group: 'AI', items: ['Claude API', 'Prompt Engineering', 'LLM orchestration', 'RAG', 'AI Agents', 'Voice AI', 'Eval design', 'LLM-as-judge'] },
   { group: 'Governance', items: ['EU AI Act', 'Risk classification · Annex III', 'Auditability', 'Evidence logs', 'Deterministic rules over LLM'] },
   { group: 'ML', items: ['scikit-learn', 'RandomForest', 'Evaluation', 'Feature engineering', 'Reproducible reports'] },
   { group: 'Data & infra', items: ['Firebase', 'SQLite', 'Vercel', 'Render', 'Make.com'] },
   { group: 'Integrations', items: ['Stripe Connect', 'Meta Ads API', 'Microsoft Graph', 'OAuth', 'OpenAI / Anthropic Admin APIs'] },
-  { group: 'Craft', items: ['Product design', 'Dashboards', 'App Store shipping', 'AI governance'] },
+  { group: 'Craft', items: ['Product design', 'App Store shipping', 'End-to-end ownership', 'Design · build · ship'] },
 ]
 
 export type Credential = { name: string; issuer: string; date: string; link?: string }

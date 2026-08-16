@@ -40,9 +40,9 @@ export function Hero() {
           {/* Top bar: TYPE · location · available */}
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-ink px-5 py-3 sm:px-7">
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink">
-              <span className="text-fg-faint">Type:</span> Full-Stack AI Engineer
+              <span className="text-fg-faint">Type:</span> Full-Stack AI Engineer · Design-first
             </p>
-            <p className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-fg-dim md:block">Barcelona · remote · EU</p>
+            <p className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-fg-dim md:block">Barcelona · Remote · UK / IE / NL / EU</p>
             <span className="bg-ink px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-[0.14em] text-bg">Available</span>
           </div>
 
@@ -60,9 +60,9 @@ export function Hero() {
 
               <div className="fade-up mt-6 space-y-1.5" style={{ animationDelay: '120ms' }}>
                 <p className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.1em] text-ink">
-                  From idea to auditable production <span className="text-fg-faint">&gt;&gt;&gt;&gt;&gt;&gt;</span>
+                  Design · build · ship <span className="text-fg-faint">&gt;&gt;&gt;&gt;&gt;&gt;</span>
                 </p>
-                <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-fg-dim">Build · govern · ship</p>
+                <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-fg-dim">No handoff · no designer dependency</p>
               </div>
 
               <p className="fade-up mt-5 max-w-[48ch] text-[15px] leading-relaxed text-fg-muted" style={{ animationDelay: '160ms' }}>
@@ -115,7 +115,7 @@ export function Hero() {
               <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint sm:inline">Portfolio · v01</span>
             </div>
             <div className="grid flex-1 grid-cols-3 divide-x divide-hair border-l border-ink sm:max-w-[440px]">
-              <SpecField label="Products" value="05" sub="shipped" />
+              <SpecField label="Products" value="06" sub="shipped" />
               <SpecField label="In production" value="03" sub="or App Store" />
               <SpecField label="Degrees" value="00" sub="self-taught" accent />
             </div>
