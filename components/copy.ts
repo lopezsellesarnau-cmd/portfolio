@@ -246,6 +246,7 @@ export const LIGHT: LightProject[] = [
       { label: 'Role', value: 'Solo — ML, evaluation, content' },
       { label: 'Type', value: 'ML · prediction + simulation' },
       { label: 'Lesson', value: 'The right objective beats more features' },
+      { label: 'Distribution', value: 'Vertical video → comments asked for the code' },
     ],
     stack: ['Python', 'scikit-learn', 'RandomForest', 'Evaluation', 'Open source'],
     seed: 261,
@@ -305,7 +306,7 @@ export const TOOLKIT: { group: string; items: string[] }[] = [
   { group: 'ML', items: ['scikit-learn', 'RandomForest', 'Evaluation', 'Feature engineering', 'Reproducible reports'] },
   { group: 'Data & infra', items: ['Firebase', 'SQLite', 'Vercel', 'Render', 'Make.com'] },
   { group: 'Integrations', items: ['Stripe Connect', 'Meta Ads API', 'Microsoft Graph', 'OAuth', 'OpenAI / Anthropic Admin APIs'] },
-  { group: 'Craft', items: ['Product design', 'App Store shipping', 'End-to-end ownership', 'Design · build · ship'] },
+  { group: 'Craft', items: ['Product design', 'App Store shipping', 'End-to-end ownership', 'Short-form content & distribution', 'Design · build · ship'] },
 ]
 
 export type Credential = { name: string; issuer: string; date: string; link?: string }
