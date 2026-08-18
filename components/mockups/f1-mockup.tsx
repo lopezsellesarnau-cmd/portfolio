@@ -11,7 +11,7 @@
 
 import { MockupFrame, OK, TERRA, INK } from './frame'
 
-const SWATCHES = ['#C1663D', '#B8433F', '#151412', '#5A6B8C', '#3F7A4E']
+const SWATCHES = ['#B8433F', '#111111', '#5A6B8C', '#3F7A4E', '#888888']
 
 const STRATEGIES = [
   { name: 'One stop — Medium → Hard', mins: '87.8 min', gap: '+0.0s', best: true, dur: '6.00s' },
@@ -39,7 +39,7 @@ function Track() {
           <path
             d="M120,40 L780,40 A100,100 0 0 1 780,240 L120,240 A100,100 0 0 1 120,40 Z"
             fill="none"
-            stroke="#F0EEE9"
+            stroke="#F0F0F0"
             strokeWidth="2"
             strokeDasharray="6 6"
           />
@@ -59,7 +59,7 @@ function Track() {
         {STRATEGIES.map((s, i) => (
           <div key={s.name} className="tree-node" style={{ animationDelay: `${600 + i * 160}ms` }}>
             <svg viewBox="-30 -50 980 400" className="absolute inset-0 h-full w-full" aria-hidden>
-              <circle r="7" fill={SWATCHES[i]} stroke="#F0EEE9" strokeWidth="1.5">
+              <circle r="7" fill={SWATCHES[i]} stroke="#F0F0F0" strokeWidth="1.5">
                 <animateMotion dur={s.dur} repeatCount="indefinite" rotate="auto">
                   <mpath href="#f1-track" />
                 </animateMotion>
@@ -119,7 +119,7 @@ export function F1Mockup() {
               <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: s.name[0] === 'O' ? SWATCHES[0] : undefined }} aria-hidden />
               <span className="truncate">{s.name}</span>
               {s.best && (
-                <span className="ml-1 shrink-0 bg-[#C1663D] px-1 py-[1px] font-mono text-[7.5px] uppercase tracking-[0.08em] text-[#F0EEE9]">BEST</span>
+                <span className="ml-1 shrink-0 bg-[#B8433F] px-1 py-[1px] font-mono text-[7.5px] uppercase tracking-[0.08em] text-[#F0F0F0]">BEST</span>
               )}
             </span>
             <span className="text-right font-mono text-[10px] tabular-nums text-fg-muted">{s.mins}</span>

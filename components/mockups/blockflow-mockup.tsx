@@ -36,7 +36,7 @@ export function BlockFlowMockup() {
         <div className="border border-line bg-surface">
           <div className="flex items-center justify-between border-b border-hair px-3 py-2 font-mono text-[9.5px] uppercase tracking-[0.12em] text-fg-dim">
             <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#C1663D] pulse-dot" aria-hidden />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#B8433F] pulse-dot" aria-hidden />
               Incoming call
             </span>
             <span className="tabular-nums">00:47</span>

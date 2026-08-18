@@ -67,13 +67,13 @@ export function LouvrMockup() {
           <div>
             <p className="font-mono text-[8.5px] uppercase tracking-[0.12em] text-[rgba(240,238,233,0.5)]">Deterministic ranking</p>
             <div className="mt-1.5">
-              <Meter pct={100} tone="#F0EEE9" delay={1400} />
+              <Meter pct={100} tone="#F0F0F0" delay={1400} />
             </div>
           </div>
           <div>
             <p className="font-mono text-[8.5px] uppercase tracking-[0.12em] text-[rgba(240,238,233,0.5)]">Weekly report · auto</p>
             <div className="mt-1.5">
-              <Meter pct={100} tone="#C1663D" delay={1550} />
+              <Meter pct={100} tone="#B8433F" delay={1550} />
             </div>
           </div>
         </div>

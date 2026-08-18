@@ -17,7 +17,7 @@ export const PROFILE = {
   role: 'Full-Stack AI Engineer · Design-first',
   eyebrow: '[ 22 · self-taught ]',
   hero: "I design, build and ship software end to end — the interface, the backend, the App Store submission. The visual system is my job too, not a handoff: most teams have to stitch design and engineering together; here it's one person, and it ships.",
-  sub: "Engineering roles don't ask for a degree — they ask for a real, shipped portfolio, and the rare developer who can also design it. Five products shipped solo, four in front of users or in review.",
+  sub: "Engineering roles don't ask for a degree — they ask for a real, shipped portfolio, and the rare developer who can also design it. Six products shipped solo, several in front of users or in review.",
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED

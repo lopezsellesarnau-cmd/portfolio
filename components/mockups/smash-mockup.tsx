@@ -52,7 +52,7 @@ export function SmashMockup() {
           <div className="flex items-center justify-between px-3 pt-3 font-mono text-[8px] uppercase tracking-[0.12em] text-bg/70">
             <span>For you</span>
             <span className="flex items-center gap-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#C1663D] pulse-dot" aria-hidden />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#B8433F] pulse-dot" aria-hidden />
               live
             </span>
           </div>

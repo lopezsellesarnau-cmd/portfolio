@@ -13,8 +13,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-export const INK = '#151412'
-export const TERRA = '#C1663D'
+export const INK = '#111111'
+export const TERRA = '#B8433F'
 export const OK = '#3F7A4E'
 export const MONO = 'var(--font-mono, monospace)'
 
@@ -90,7 +90,7 @@ export function BlockGrid({ filled, max, delay = 0 }: { filled: number; max: num
           style={
             i < filled
               ? { backgroundColor: INK, animationDelay: `${delay + i * 45}ms` }
-              : { border: '1px solid rgba(21,20,18,0.28)', animationDelay: `${delay + i * 45}ms` }
+              : { border: '1px solid rgba(17,17,17,0.28)', animationDelay: `${delay + i * 45}ms` }
           }
         />
       ))}

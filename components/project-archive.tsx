@@ -23,7 +23,7 @@ import { F1Mockup } from './mockups/f1-mockup'
 import { AiActEvalMockup } from './mockups/ai-act-eval-mockup'
 import { CASES, LIGHT, type CaseStudy, type LightProject } from './copy'
 
-const TERRA = '#C1663D'
+const TERRA = '#B8433F'
 const OK = '#3F7A4E'
 
 const MOCKUP: Record<string, React.ComponentType> = {
@@ -33,7 +33,6 @@ const MOCKUP: Record<string, React.ComponentType> = {
   trace: TraceMockup,
 }
 
-// Light projects keyed by name — same "live" mockup slot as the deep cases.
 const MOCKUP_LIGHT: Record<string, React.ComponentType> = {
   Volea: VoleaMockup,
   SMASH: SmashMockup,
@@ -41,7 +40,6 @@ const MOCKUP_LIGHT: Record<string, React.ComponentType> = {
   'ai-act-eval': AiActEvalMockup,
 }
 
-// Staggered tab positions per folder — the file-drawer look.
 const LEFTS = ['4%', '23%', '42%', '13%', '32%']
 
 function CloseIcon() {
@@ -80,14 +78,10 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-/** Wide horizontal plant band. Mirror makes a two-sided crown (wide, low), and
- *  cover fills the whole strip — with a wide plant it fills edge-to-edge at a
- *  good size instead of sitting small in the middle. Taller band so the cover
- *  crop keeps most of the foliage. */
 function PlantBand({ seed }: { seed: number }) {
   return (
     <div className="relative h-[180px] w-full overflow-hidden border border-line bg-raised sm:h-[210px]">
-      <PlantCanvas seed={seed} len={360} depth={5} anchor="center" growAngle={2.82} mirror fit="cover" color="#151412" className="pointer-events-none absolute inset-0 h-full w-full" />
+      <PlantCanvas seed={seed} len={360} depth={5} anchor="center" growAngle={2.82} mirror fit="cover" color="#111111" className="pointer-events-none absolute inset-0 h-full w-full" />
       <span className="absolute bottom-2 left-3 font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">Fig. {String(seed).slice(0, 2)} · procedural</span>
     </div>
   )
@@ -103,7 +97,6 @@ function Sheet({ open, children }: { open: boolean; children: React.ReactNode })
   )
 }
 
-/** One folder: staggered tab + rounded-top body, overlapping the previous. */
 function Folder({
   index,
   left,
@@ -128,7 +121,6 @@ function Folder({
   const [open, setOpen] = useState(false)
   return (
     <div className={`relative ${first ? '' : '-mt-3'}`} style={{ zIndex: open ? 50 : z }}>
-      {/* Tab */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -140,7 +132,6 @@ function Folder({
         <span className="hidden sm:inline">{name}</span>
       </button>
 
-      {/* Body */}
       <div className={`rounded-t-[18px] border border-b-0 border-ink ${open ? 'bg-bg' : 'bg-surface'}`}>
         <button
           type="button"
@@ -289,7 +280,6 @@ export function ProjectArchive() {
         return <LightFolder key={p.name} p={p} index={`0${idx + 1}`} left={LEFTS[idx % LEFTS.length]} z={idx + 1} />
       })}
 
-      {/* Dark base — closes the stack */}
       <div className="relative -mt-3 rounded-t-[18px] bg-ink px-5 py-6 text-bg sm:px-7" style={{ zIndex: total + 1 }}>
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
           <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]">Every line above is real — shipped, in review, or open source.</p>

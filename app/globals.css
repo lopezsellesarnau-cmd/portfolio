@@ -9,16 +9,16 @@
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    background: #fcfff8;
-    color: #151412;
+    background: #f0f0f0;
+    color: #111111;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
   ::selection {
-    background: rgba(193, 102, 61, 0.25);
+    background: rgba(184, 67, 63, 0.25);
   }
   :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px #fcfff8, 0 0 0 4px #151412;
+    box-shadow: 0 0 0 2px #f0f0f0, 0 0 0 4px #111111;
   }
 }
 
@@ -50,13 +50,13 @@
 /* Trama diagonal muy tenue de fondo — misma idea que el /lab de Aithority:
    profundidad sin sombras, paneles en hueso sólido recortados encima. */
 .grain {
-  background-image: repeating-linear-gradient(45deg, rgba(21, 20, 18, 0.03) 0 1px, transparent 1px 7px);
+  background-image: repeating-linear-gradient(45deg, rgba(17, 17, 17, 0.035) 0 1px, transparent 1px 7px);
 }
 
-/* Damero — la franja técnica del borde superior del hero (brutalist). */
+/* Damero — 1-bit ruler, same cell size as Dross CheckerStrip. */
 .checker {
-  background-image: conic-gradient(#151412 25%, transparent 0 50%, #151412 0 75%, transparent 0);
-  background-size: 12px 12px;
+  background-image: conic-gradient(#111111 25%, transparent 0 50%, #111111 0 75%, transparent 0);
+  background-size: 7px 7px;
 }
 
 .btn-solid,
@@ -73,20 +73,20 @@
   transition: opacity 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
 }
 .btn-solid {
-  background: #151412;
-  color: #f0eee9;
+  background: #111111;
+  color: #f0f0f0;
 }
 .btn-solid:hover {
   opacity: 0.82;
 }
 .btn-ghost {
   border: 1px solid rgba(21, 20, 18, 0.3);
-  color: #151412;
+  color: #111111;
 }
 .btn-ghost:hover {
-  background: #151412;
-  border-color: #151412;
-  color: #f0eee9;
+  background: #111111;
+  border-color: #111111;
+  color: #f0f0f0;
 }
 
 /* Barra de ticks que se rellena al entrar en viewport (.panel-live). */
@@ -172,19 +172,16 @@
    (ratón/trackpad). En touch (móvil) no existe: ahí se abre directo al tocar,
    sin necesidad de una pista previa que nadie va a ver. Dentro del archivador
    la fila no se puede levantar (rompería el borde único), así que la pista es
-   un tinte de fondo y el índice en terracota. */
+   un tinte de fondo y el índice en rust. Sin sombras (regla Dross). */
 @media (hover: hover) and (pointer: fine) {
   .peek-hover:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px -16px rgba(21, 20, 18, 0.35);
   }
   .peek-row:not(.bg-ink):hover {
-    background: rgba(21, 20, 18, 0.035);
+    background: rgba(17, 17, 17, 0.035);
   }
-  /* Archivador oscuro: la fila cerrada (sobre tinta) se aclara un pelo; la
-     abierta ya es hueso, no se toca. */
   .peek-dark.bg-transparent:hover {
-    background: rgba(240, 238, 233, 0.06);
+    background: rgba(240, 240, 240, 0.06);
   }
 }
 

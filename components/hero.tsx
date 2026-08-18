@@ -91,7 +91,7 @@ export function Hero() {
                   depth={5}
                   anchor="center"
                   fit="cover"
-                  color="#151412"
+                  color="#111111"
                   className="pointer-events-none absolute inset-0 h-full w-full"
                 />
               </div>

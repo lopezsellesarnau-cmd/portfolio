@@ -137,7 +137,7 @@ export function PlantCanvas({
   growAngle = 2.85,
   fit = 'contain',
   mirror = false,
-  color = '#151412',
+  color = '#111111',
   className,
 }: {
   seed: number

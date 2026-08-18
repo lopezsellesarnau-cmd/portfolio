@@ -11,7 +11,7 @@ import { AithorityMockup } from './mockups/aithority-mockup'
 import { AithorityTree } from './mockups/aithority-tree'
 import { AITHORITY_CASE as C } from './copy'
 
-const TERRA = '#C1663D'
+const TERRA = '#B8433F'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -24,7 +24,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 export function AithoritySection() {
   return (
-    <section id="aithority" className="scroll-mt-16 border-t border-line bg-[#F7F5F0] py-16 sm:py-24">
+    <section id="aithority" className="scroll-mt-16 border-t border-line bg-bg py-16 sm:py-24">
       <div className="container-page">
         {/* Dossier header */}
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink pb-5">
