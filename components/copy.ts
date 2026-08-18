@@ -36,6 +36,10 @@ export type CaseStudy = {
   result: string
   stack: string[]
   seed: number
+  /** Extra datasheet rows — used on Kiblo to lead with pace / why / how. */
+  pace?: string
+  why?: string
+  how?: string
 }
 
 export const CASES: CaseStudy[] = [
@@ -43,14 +47,20 @@ export const CASES: CaseStudy[] = [
     slug: 'kiblo',
     index: '01',
     name: 'Kiblo',
-    tagline: 'Pet-food iOS app — scan the bag, portion the bowl, reorder before it runs out',
-    status: { text: 'Building · RevenueCat Plus', tone: 'accent' },
+    tagline: 'Pet-food iOS app — from idea to working loop in days, with Cursor and Claude',
+    status: { text: 'Building · days, not months', tone: 'accent' },
+    pace:
+      'Concept locked 16 Aug 2026. By 18 Aug: onboarding → scan → portions → home bowl → reorder → multi-dog Plus (RevenueCat). One person, no designer, no backend team — speed is the point of the case.',
+    why:
+      'After TRACE went into App Store review I wanted a consumer product that can make money without B2B sales calls. Pet food is a weekly habit (bags empty, people repurchase). Kiblo is Mealia for dogs: scan what is in the cupboard, portion from the dog, reorder before the bag ends. Built to prove I can ship a full consumer loop fast — not a tutorial clone.',
+    how:
+      'Directed in Cursor with Claude as the pair-programmer: I set product, visual lock (circular home), and constraints (no invented UPCs, no home rescale). Claude/Cursor write and iterate the Expo app; I review, reject, and ship. Native-feeling iOS via Expo SDK 57, local-first then Firebase catalog + Auth, IAP through RevenueCat. The AI does not own the product — I do.',
     problem:
-      'Pet food is guesswork: owners over-scoop, bags run out mid-week, and "good food" is marketing copy. Kiblo is Mealia for dogs — scan what\'s in the cupboard, get a real portion from the dog\'s profile, and reorder on time (Chewy for kibble, Amazon for fresh).',
+      'Pet food is guesswork: owners over-scoop, bags run out mid-week, and "good food" is marketing copy. Kiblo turns the cupboard into a bowl you can act on.',
     approach: [
-      'Expo SDK 57 (React Native) end to end: onboarding → food catalog → barcode scan → extras plan → home bowl. Local-first (AsyncStorage), Firebase Auth (anonymous → linked account) and a public Firestore foods catalog with a local fallback.',
-      'Nutrition from the Waltham formula (RER = 70 × kg^0.75 × MER), bag days-left, and extras with their own stock cadence — not a calorie diary, a bowl you can act on.',
-      'Home is a locked circular composition (bowl + orbit of ingredients + share card), designed without a handoff. Reorder deep-links to Chewy/Amazon. Free = one dog; Kiblo Plus (RevenueCat, entitlement plus, bundle com.arnolop.goodbowl) unlocks multi-dog.',
+      'Expo / React Native, expo-router, TypeScript: onboarding (Waltham RER/MER) → ~50-bag US catalog → camera barcode (exact GTIN) → extras swipe-plan → home bowl + share + Chewy/Amazon reorder.',
+      'Firebase Auth (anonymous, then link email) and Firestore foods (public read, local catalog fallback). Free = one dog on-device; Plus = multi-dog + 14-day trends.',
+      'IAP: RevenueCat entitlement plus, App Store bundle com.arnolop.goodbowl (display name Kiblo). Import was empty until that bundle matched Connect.',
     ],
     decisions: [
       {
@@ -64,14 +74,14 @@ export const CASES: CaseStudy[] = [
           'The bowl, ring and four ingredient sats are sized once and not "fixed" with a global rescale. Grade lives in copy ("Great choice"), not as a letter on the orbit — the screen has to stay a bowl, not a poster.',
       },
       {
-        title: 'Plus is multi-dog, not a fake lock',
+        title: 'Cursor + Claude, with me as the bottleneck on purpose',
         detail:
-          'Free tier is one dog on-device. Adding another dog opens the RevenueCat paywall (plus entitlement). Store is keyed per dog with a migration from the old single-dog shape — paid is a real capability, not a greyed button.',
+          'Speed comes from a tight loop: I specify (home geometry, exact barcodes, Plus = multi-dog not a fake lock), the agent implements, I run the simulator and change what is wrong. Claiming "AI built it" would be false — claiming I typed every line by hand would also be false. The stack includes the tools.',
       },
     ],
     result:
-      'Full onboarding-to-home loop on a dev client, remote catalog, scan, reorder links, multi-dog, and Plus wired to App Store Connect via RevenueCat (bundle com.arnolop.goodbowl). Not on the App Store yet — the interview story is shipping a consumer loop solo, including IAP.',
-    stack: ['React Native', 'Expo', 'Firebase', 'RevenueCat', 'expo-camera', 'Firestore'],
+      'A working consumer loop in days: scan, portion, log, reorder, Plus paywall. Not on the App Store yet. The interview story is pace plus judgment — what to automate, what to lock, what not to fake.',
+    stack: ['Cursor', 'Claude', 'React Native', 'Expo SDK 57', 'TypeScript', 'Firebase', 'RevenueCat', 'expo-camera'],
     seed: 418,
   },
   {

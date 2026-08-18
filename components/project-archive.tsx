@@ -168,6 +168,25 @@ function DeepFolder({ caso, index, left, z, first }: { caso: CaseStudy; index: s
     <div id={caso.slug} className="scroll-mt-20">
       <Folder index={index} left={left} name={caso.name} tagline={caso.tagline} statusText={caso.status.text} statusTone={tone} z={z} first={first}>
         <div className="px-5 pb-8 pt-5 sm:px-7">
+          {(caso.pace || caso.why || caso.how) && (
+            <div className="mb-7 grid gap-6 sm:grid-cols-3">
+              {caso.pace && (
+                <Field label="Pace">
+                  <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.pace}</p>
+                </Field>
+              )}
+              {caso.why && (
+                <Field label="Why">
+                  <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.why}</p>
+                </Field>
+              )}
+              {caso.how && (
+                <Field label="How">
+                  <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.how}</p>
+                </Field>
+              )}
+            </div>
+          )}
           <div className="grid gap-6 sm:grid-cols-2">
             <Field label="Problem">
               <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.problem}</p>
