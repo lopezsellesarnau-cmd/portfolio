@@ -51,23 +51,29 @@ export const CASES: CaseStudy[] = [
     tagline: 'Pet-food iOS app — from idea to working loop in days, with Cursor and Claude',
     status: { text: 'Building · days, not months', tone: 'accent' },
     pace:
-      'Concept locked 16 Aug 2026. By 18 Aug: onboarding → scan → portions → home bowl → reorder → multi-dog Plus (RevenueCat). One person, no designer, no backend team — speed is the point of the case.',
+      'Concept locked 16 Aug 2026. By 18 Aug: onboarding → scan → portions → home bowl → reorder → multi-dog Plus (RevenueCat) → push reminders → deterministic feeding-tips engine → 14-day trends. One person, no designer, no backend team — speed is the point of the case.',
     why:
       'After TRACE went into App Store review I wanted a consumer product that can make money without B2B sales calls. Pet food is a weekly habit (bags empty, people repurchase). Kiblo is Mealia for dogs: scan what is in the cupboard, portion from the dog, reorder before the bag ends. Built to prove I can ship a full consumer loop fast — not a tutorial clone.',
     how:
-      'Directed in Cursor with Claude as the pair-programmer: I set product, visual lock (circular home), and constraints (no invented UPCs, no home rescale). Claude/Cursor write and iterate the Expo app; I review, reject, and ship. Native-feeling iOS via Expo SDK 57, local-first then Firebase catalog + Auth, IAP through RevenueCat. The AI does not own the product — I do.',
+      'Directed in Cursor with Claude as the pair-programmer: I set product, visual lock (circular home), and constraints (no invented UPCs, no home rescale, no LLM where a rule engine is safer). Claude/Cursor write and iterate the Expo app; I review, reject, and ship. Native-feeling iOS via Expo SDK 57, local-first then Firebase catalog + Auth, IAP through RevenueCat. The AI does not own the product — I do.',
     problem:
       'Pet food is guesswork: owners over-scoop, bags run out mid-week, and "good food" is marketing copy. Kiblo turns the cupboard into a bowl you can act on.',
     approach: [
       'Expo / React Native, expo-router, TypeScript: onboarding (Waltham RER/MER) → ~50-bag US catalog → camera barcode (exact GTIN) → extras swipe-plan → home bowl + share + Chewy/Amazon reorder.',
-      'Firebase Auth (anonymous, then link email) and Firestore foods (public read, local catalog fallback). Free = one dog on-device; Plus = multi-dog + 14-day trends.',
-      'IAP: RevenueCat entitlement plus, App Store bundle com.arnolop.goodbowl (display name Kiblo). Import was empty until that bundle matched Connect.',
+      'Firebase Auth (anonymous, then link email) and Firestore foods (public read, local catalog fallback). Free = one dog on-device; Plus = multi-dog + 14-day trends + a rule-based feeding-tips engine.',
+      'Local push reminders (expo-notifications, no backend): a bag or extra 2 days from empty nudges straight to the reorder link instead of waiting for the user to notice a "5d" chip; daily meal-time reminders per dog. Reorder links prefer the verified UPC as the search query over a text name — lands closer to the exact product.',
+      'IAP: RevenueCat entitlement plus, App Store bundle com.arnolop.goodbowl (display name Kiblo). Import was empty until that bundle matched Connect. Custom paywall (not RevenueCat\'s hosted template) after the default converted like a bare price list.',
     ],
     decisions: [
       {
         title: 'Exact barcodes, never invented UPCs',
         detail:
-          'Catalog matches GTIN exactly (UPC-A ↔ EAN-13 with a leading zero). Fresh and subscription packs with no retail code stay unscannable rather than fake a hit — a wrong bag is worse than no scan.',
+          'Catalog matches GTIN exactly (UPC-A ↔ EAN-13 with a leading zero). Fresh and subscription packs with no retail code stay unscannable rather than fake a hit — a wrong bag is worse than no scan. Same rule extended to ingredient panels: only real, sourced label text, cited, or left blank.',
+      },
+      {
+        title: 'Feeding advice: deterministic, not an LLM call',
+        detail:
+          'Asked for Mealia-style "recipe advice." Built it as a rule engine instead of a wired-up LLM: treat-calorie budget vs a vet 10% guideline, food-flag surfacing, senior→joint-supplement and active→omega suggestions with a one-tap add. Same reasoning as Dross — deterministic-first where a wrong answer about a dog\'s health is worse than a missing one, and it ships free of per-call cost or a backend.',
       },
       {
         title: 'Home geometry is a product decision',
@@ -77,12 +83,22 @@ export const CASES: CaseStudy[] = [
       {
         title: 'Cursor + Claude, with me as the bottleneck on purpose',
         detail:
-          'Speed comes from a tight loop: I specify (home geometry, exact barcodes, Plus = multi-dog not a fake lock), the agent implements, I run the simulator and change what is wrong. Claiming "AI built it" would be false — claiming I typed every line by hand would also be false. The stack includes the tools.',
+          'Speed comes from a tight loop: I specify (home geometry, exact barcodes, Plus = multi-dog not a fake lock, LLM vs. rule engine), the agent implements, I run the simulator and change what is wrong. Claiming "AI built it" would be false — claiming I typed every line by hand would also be false. The stack includes the tools.',
       },
     ],
     result:
-      'A working consumer loop in days: scan, portion, log, reorder, Plus paywall. Not on the App Store yet. The interview story is pace plus judgment — what to automate, what to lock, what not to fake.',
-    stack: ['Cursor', 'Claude', 'React Native', 'Expo SDK 57', 'TypeScript', 'Firebase', 'RevenueCat', 'expo-camera'],
+      'A working consumer loop in days: scan, portion, log, reorder (with push nudges before the bag runs out), Plus paywall, 14-day trends, deterministic feeding tips. Not on the App Store yet. The interview story is pace plus judgment — what to automate, what to lock, what not to fake, and when an LLM is the wrong tool for the job.',
+    stack: [
+      'Cursor',
+      'Claude',
+      'React Native',
+      'Expo SDK 57',
+      'TypeScript',
+      'Firebase',
+      'RevenueCat',
+      'expo-camera',
+      'expo-notifications',
+    ],
     seed: 418,
   },
   {
