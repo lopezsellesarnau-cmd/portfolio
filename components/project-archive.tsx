@@ -13,6 +13,7 @@
 
 import { useState } from 'react'
 import { PlantCanvas } from './plant-canvas'
+import { KibloMockup } from './mockups/kiblo-mockup'
 import { BlockFlowMockup } from './mockups/blockflow-mockup'
 import { DrossMockup } from './mockups/dross-mockup'
 import { LouvrMockup } from './mockups/louvr-mockup'
@@ -27,6 +28,7 @@ const TERRA = '#B8433F'
 const OK = '#3F7A4E'
 
 const MOCKUP: Record<string, React.ComponentType> = {
+  kiblo: KibloMockup,
   blockflow: BlockFlowMockup,
   dross: DrossMockup,
   'louvr-labs': LouvrMockup,

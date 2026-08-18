@@ -14,7 +14,7 @@ export default function Home() {
 
       <section id="work" className="container-page py-14 sm:py-20">
         <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.16em] text-fg-faint sm:mb-8">
-          Work — click any project to open it
+          Work — Kiblo, TRACE, Dross (interview) · then shipped work
         </p>
         <ProjectArchive />
       </section>

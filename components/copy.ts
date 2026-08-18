@@ -8,8 +8,8 @@
  * Netherlands job market: the differentiator is a developer who also owns the
  * visual system, so no design handoff or dedicated UI designer is needed to
  * ship a polished product. AI + compliance stay as the second signal, not the
- * title. TRACE and Dross are the two interview talking points and lead the
- * archive.
+ * title. Kiblo, TRACE and Dross are the three interview talking points and
+ * lead the archive.
  */
 
 export const PROFILE = {
@@ -17,7 +17,7 @@ export const PROFILE = {
   role: 'Full-Stack AI Engineer · Design-first',
   eyebrow: '[ 22 · self-taught ]',
   hero: "I design, build and ship software end to end — the interface, the backend, the App Store submission. The visual system is my job too, not a handoff: most teams have to stitch design and engineering together; here it's one person, and it ships.",
-  sub: "Engineering roles don't ask for a degree — they ask for a real, shipped portfolio, and the rare developer who can also design it. Six products shipped solo, several in front of users or in review.",
+  sub: "Engineering roles don't ask for a degree — they ask for a real, shipped portfolio, and the rare developer who can also design it. Interview cases: Kiblo, TRACE, Dross — plus production work (BlockFlow, SMASH, Louvr).",
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -40,8 +40,43 @@ export type CaseStudy = {
 
 export const CASES: CaseStudy[] = [
   {
-    slug: 'trace',
+    slug: 'kiblo',
     index: '01',
+    name: 'Kiblo',
+    tagline: 'Pet-food iOS app — scan the bag, portion the bowl, reorder before it runs out',
+    status: { text: 'Building · RevenueCat Plus', tone: 'accent' },
+    problem:
+      'Pet food is guesswork: owners over-scoop, bags run out mid-week, and "good food" is marketing copy. Kiblo is Mealia for dogs — scan what\'s in the cupboard, get a real portion from the dog\'s profile, and reorder on time (Chewy for kibble, Amazon for fresh).',
+    approach: [
+      'Expo SDK 57 (React Native) end to end: onboarding → food catalog → barcode scan → extras plan → home bowl. Local-first (AsyncStorage), Firebase Auth (anonymous → linked account) and a public Firestore foods catalog with a local fallback.',
+      'Nutrition from the Waltham formula (RER = 70 × kg^0.75 × MER), bag days-left, and extras with their own stock cadence — not a calorie diary, a bowl you can act on.',
+      'Home is a locked circular composition (bowl + orbit of ingredients + share card), designed without a handoff. Reorder deep-links to Chewy/Amazon. Free = one dog; Kiblo Plus (RevenueCat, entitlement plus, bundle com.arnolop.goodbowl) unlocks multi-dog.',
+    ],
+    decisions: [
+      {
+        title: 'Exact barcodes, never invented UPCs',
+        detail:
+          'Catalog matches GTIN exactly (UPC-A ↔ EAN-13 with a leading zero). Fresh and subscription packs with no retail code stay unscannable rather than fake a hit — a wrong bag is worse than no scan.',
+      },
+      {
+        title: 'Home geometry is a product decision',
+        detail:
+          'The bowl, ring and four ingredient sats are sized once and not "fixed" with a global rescale. Grade lives in copy ("Great choice"), not as a letter on the orbit — the screen has to stay a bowl, not a poster.',
+      },
+      {
+        title: 'Plus is multi-dog, not a fake lock',
+        detail:
+          'Free tier is one dog on-device. Adding another dog opens the RevenueCat paywall (plus entitlement). Store is keyed per dog with a migration from the old single-dog shape — paid is a real capability, not a greyed button.',
+      },
+    ],
+    result:
+      'Full onboarding-to-home loop on a dev client, remote catalog, scan, reorder links, multi-dog, and Plus wired to App Store Connect via RevenueCat (bundle com.arnolop.goodbowl). Not on the App Store yet — the interview story is shipping a consumer loop solo, including IAP.',
+    stack: ['React Native', 'Expo', 'Firebase', 'RevenueCat', 'expo-camera', 'Firestore'],
+    seed: 418,
+  },
+  {
+    slug: 'trace',
+    index: '02',
     name: 'TRACE',
     tagline: 'Privacy iOS app — find your exposed data, then get it removed',
     status: { text: 'Submitted for App Store review', tone: 'accent' },
@@ -82,7 +117,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'dross',
-    index: '02',
+    index: '03',
     name: 'Dross',
     tagline: 'macOS app + CLI — detects when your app and your backend stop agreeing',
     status: { text: 'Notarized · v0.1 DMG', tone: 'accent' },
@@ -123,7 +158,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'blockflow',
-    index: '03',
+    index: '04',
     name: 'BlockFlow',
     tagline: 'AI voice agent for property managers',
     status: { text: 'In production', tone: 'ok' },
@@ -152,7 +187,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'louvr-labs',
-    index: '04',
+    index: '05',
     name: 'Louvr Labs',
     tagline: 'Ranking & reporting platform for Meta Ads',
     status: { text: 'In production', tone: 'ok' },

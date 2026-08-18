@@ -112,7 +112,9 @@ export function Hero() {
           <div className="flex flex-wrap items-stretch justify-between gap-y-4 border-t border-ink">
             <div className="flex items-center gap-4 px-5 py-4 sm:px-7">
               <Marks />
-              <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint sm:inline">Portfolio · v01</span>
+              <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint sm:inline">
+                Interview · Kiblo · TRACE · Dross
+              </span>
             </div>
             <div className="grid flex-1 grid-cols-3 divide-x divide-hair border-l border-ink sm:max-w-[440px]">
               <SpecField label="Products" value="06" sub="shipped" />
