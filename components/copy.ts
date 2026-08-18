@@ -36,6 +36,7 @@ export type CaseStudy = {
   result: string
   stack: string[]
   seed: number
+  link?: string
   /** Extra datasheet rows — used on Kiblo to lead with pace / why / how. */
   pace?: string
   why?: string
@@ -165,6 +166,7 @@ export const CASES: CaseStudy[] = [
       'v1 shipped as a notarized macOS DMG with an offline license system and a CI-ready CLI — validated against the exact kind of AI-written full-stack repos where this class of bug actually happens.',
     stack: ['SwiftUI', 'macOS', 'TypeScript', 'TS compiler API', 'Ed25519', 'Claude API', 'Eval harness'],
     seed: 222,
+    link: 'https://github.com/lopezsellesarnau-cmd/dross',
   },
   {
     slug: 'blockflow',

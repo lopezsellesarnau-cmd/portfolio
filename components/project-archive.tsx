@@ -225,6 +225,16 @@ function DeepFolder({ caso, index, left, z, first }: { caso: CaseStudy; index: s
               <Field label="Stack">
                 <StackChips stack={caso.stack} />
               </Field>
+              {caso.link && (
+                <a
+                  href={caso.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-fit items-center gap-2 border border-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ink hover:text-bg"
+                >
+                  Open repository ↗
+                </a>
+              )}
             </div>
           </div>
 

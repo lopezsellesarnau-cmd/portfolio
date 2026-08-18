@@ -1,89 +1,80 @@
 'use client'
 
 /**
- * Dross — the thing worth showing isn't a scan report, it's the detected
- * fracture: two halves of one system that stopped agreeing, with the free /
- * Pro split and the eval harness that keeps precision and recall at 100%.
+ * Mini Dross window — checker, logo, contract-drift finding, GATE FAILED.
+ * Same bone/ink/rust language as the Mac app.
  */
 
 import { MockupFrame, Chip, INK, TERRA, OK } from './frame'
 
-function Side({
-  label,
-  title,
-  sub,
-  tone,
-  delay,
-}: {
-  label: string
-  title: string
-  sub: string
-  tone: string
-  delay: number
-}) {
-  return (
-    <div className="tree-node border bg-surface px-3 py-2.5" style={{ borderColor: 'rgba(21,20,18,0.16)', animationDelay: `${delay}ms` }}>
-      <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-fg-faint">{label}</p>
-      <p className="mt-1.5 font-mono text-[15px] leading-none tracking-tight" style={{ color: tone }}>
-        {title}
-      </p>
-      <p className="mt-1 font-mono text-[10px] leading-snug text-fg-dim">{sub}</p>
-    </div>
-  )
-}
-
 export function DrossMockup() {
   return (
-    <MockupFrame
-      title="Contract drift · detected"
-      context="scan ./trace-app --also ./trace-backend"
-      status="status: 7/7 fixtures · p=1.0 r=1.0"
-      tone={OK}
-    >
-      {/* The fracture: server route vs client call, drifted apart */}
-      <div className="grid items-center gap-3 lg:grid-cols-[1fr_84px_1fr]">
-        <Side label="Server · route" title="`POST /scan`" sub="now requires a Bearer token" tone={INK} delay={250} />
-        <div className="flex flex-col items-center gap-1.5">
-          <span className="tree-node border px-2 py-[3px] font-mono text-[9px] uppercase tracking-[0.12em]" style={{ borderColor: TERRA, color: TERRA, animationDelay: '650ms' }}>
-            drift
+    <MockupFrame title="Dross · macOS" context="scan ./trace-app —also ./trace-backend" status="notarized · v0.1" tone={OK}>
+      <div className="overflow-hidden border border-ink bg-[#F0F0F0]">
+        <div className="checker h-[7px] w-full border-b border-ink" aria-hidden />
+
+        <div className="flex items-center gap-3 border-b border-ink px-3 py-2.5">
+          <img src="/dross-icon.png" alt="" width={36} height={36} className="h-9 w-9 shrink-0" />
+          <div className="min-w-0 flex-1">
+            <p className="font-mono text-[13px] font-medium uppercase tracking-[0.16em] text-ink">Dross</p>
+            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-fg-faint">Type: scan / contract drift</p>
+          </div>
+          <a
+            href="https://github.com/lopezsellesarnau-cmd/dross"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 border border-ink px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-ink hover:bg-ink hover:text-bg"
+          >
+            Repo ↗
+          </a>
+        </div>
+
+        <div className="grid sm:grid-cols-[1fr_1px_1fr]">
+          <div className="px-3 py-3">
+            <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">Client · call</p>
+            <p className="mt-1 font-mono text-[14px] text-ink">fetch(&apos;/scan&apos;)</p>
+            <p className="mt-0.5 font-mono text-[10px] text-fg-dim">no Authorization header</p>
+          </div>
+          <div className="hidden bg-ink sm:block" aria-hidden />
+          <div className="border-t border-hair px-3 py-3 sm:border-t-0">
+            <p className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">Server · route</p>
+            <p className="mt-1 font-mono text-[14px]" style={{ color: TERRA }}>
+              POST /scan
+            </p>
+            <p className="mt-0.5 font-mono text-[10px] text-fg-dim">now requires a Bearer token</p>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between border-y border-ink bg-ink px-3 py-2">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-bg">Gate</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: '#F0F0F0' }}>
+            Failed · 1 contract-drift
           </span>
-          {/* diagonal zig lines */}
-          <svg viewBox="0 0 84 34" className="hidden w-full max-w-[84px] lg:block" aria-hidden>
-            <path className="tree-line" d="M4 30 H22 L30 4 H48" fill="none" stroke={TERRA} strokeWidth="1" style={{ animationDelay: '700ms' }} />
-            <path className="tree-line" d="M8 26 H30 L38 8 H52" fill="none" stroke="rgba(21,20,18,0.25)" strokeWidth="1" style={{ animationDelay: '760ms' }} />
-          </svg>
-          <span className="font-mono text-[8.5px] uppercase tracking-[0.1em] text-fg-faint lg:hidden">stopped agreeing</span>
         </div>
-        <Side label="Client · call" title="fetch('/scan')" sub="sends no token yet" tone={TERRA} delay={350} />
-      </div>
 
-      {/* Free vs Pro split + eval readout */}
-      <div className="mt-4 grid grid-cols-3 border border-ink">
-        <div className="border-r border-hair bg-surface px-3 py-3 sm:px-4">
-          <p className="font-mono text-[8.5px] uppercase tracking-[0.1em] text-fg-faint">Deterministic checks</p>
-          <p className="mt-1.5 font-mono text-[19px] tabular-nums leading-none text-fg-muted">free</p>
-          <p className="mt-1 font-mono text-[9px] text-fg-dim">offline · instant</p>
+        <div className="grid grid-cols-3 divide-x divide-hair">
+          <div className="px-3 py-2.5">
+            <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-fg-faint">Deterministic</p>
+            <p className="mt-0.5 font-mono text-[12px] text-ink">Free · offline</p>
+          </div>
+          <div className="px-3 py-2.5">
+            <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-fg-faint">LLM pass</p>
+            <p className="mt-0.5 font-mono text-[12px] text-ink">Pro · your key</p>
+          </div>
+          <div className="px-3 py-2.5">
+            <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-fg-faint">Eval</p>
+            <p className="mt-0.5 font-mono text-[12px]" style={{ color: OK }}>
+              p=1.0 r=1.0
+            </p>
+          </div>
         </div>
-        <div className="border-r border-hair bg-surface px-3 py-3 sm:px-4">
-          <p className="font-mono text-[8.5px] uppercase tracking-[0.1em] text-fg-faint">LLM drift pass</p>
-          <p className="mt-1.5 font-mono text-[19px] tabular-nums leading-none text-fg-muted">Pro</p>
-          <p className="mt-1 font-mono text-[9px] text-fg-dim">your Anthropic key</p>
-        </div>
-        <div className="bg-ink px-3 py-3 sm:px-4">
-          <p className="font-mono text-[8.5px] uppercase tracking-[0.1em] text-[rgba(240,238,233,0.65)]">Eval harness</p>
-          <p className="mt-1.5 font-mono text-[19px] tabular-nums leading-none" style={{ color: OK }}>100%</p>
-          <p className="mt-1 font-mono text-[9px] text-[rgba(240,238,233,0.55)]">precision · recall</p>
-        </div>
-      </div>
 
-      {/* Check list */}
-      <div className="mt-3 flex flex-wrap items-center gap-2 border border-line bg-surface px-3 py-2.5">
-        <span className="font-mono text-[8.5px] uppercase tracking-[0.12em] text-fg-faint">Checks</span>
-        <Chip label="dead-exports" tone={INK} />
-        <Chip label="env-drift" tone={INK} />
-        <Chip label="todo-density" tone={INK} />
-        <Chip label="hardcoded-demo" tone={INK} />
-        <Chip label="semantic drift · gated" tone={TERRA} />
+        <div className="flex flex-wrap items-center gap-1.5 border-t border-hair px-3 py-2">
+          <Chip label="contract-drift" tone={TERRA} />
+          <Chip label="dead-exports" tone={INK} />
+          <Chip label="env-drift" tone={INK} />
+          <Chip label="hardcoded-demo" tone={INK} />
+        </div>
       </div>
     </MockupFrame>
   )
