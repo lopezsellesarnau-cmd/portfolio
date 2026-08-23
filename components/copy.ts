@@ -435,5 +435,5 @@ export const CONTACT = {
   eyebrow: 'NL · Germany · UK if sponsored',
   title: "Let's talk",
   cta: 'Email me',
-  note: 'Product Engineer · Full-stack. GitHub and LinkedIn below.',
+  note: 'Product Engineer · Full-stack. GitHub, LinkedIn, and CV below.',
 }

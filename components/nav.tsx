@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 const LINKS = [
   { label: 'Work', href: '#work' },
   { label: 'How I work', href: '#how' },
+  { label: 'CV', href: '/Arnau-Lopez-Selles-CV.pdf' },
   { label: 'Contact', href: '#contact' },
 ]
 

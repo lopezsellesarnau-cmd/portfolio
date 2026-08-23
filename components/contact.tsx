@@ -25,6 +25,9 @@ export function Contact() {
           <a href="https://www.linkedin.com/in/arnau-lopez-selles/" target="_blank" rel="noopener noreferrer" className="btn-ghost">
             LinkedIn
           </a>
+          <a href="/Arnau-Lopez-Selles-CV.pdf" className="btn-ghost">
+            CV
+          </a>
         </div>
 
         <div className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">

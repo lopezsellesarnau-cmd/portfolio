@@ -77,6 +77,9 @@ export function Hero() {
                 <a href="#contact" className="btn-ghost">
                   Contact
                 </a>
+                <a href="/Arnau-Lopez-Selles-CV.pdf" className="btn-ghost">
+                  CV
+                </a>
               </div>
             </div>
 
