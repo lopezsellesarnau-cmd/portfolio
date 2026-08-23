@@ -8,7 +8,7 @@
  * horizontal plant band woven between the text and the mockup, and a mockup
  * built for that product. An × closes it.
  *
- * Aithority is NOT here: it's the cofounder project, with its own section.
+ * Aithority is folder 04 — technical cofounder, interview case.
  */
 
 import { useState } from 'react'
@@ -22,6 +22,8 @@ import { VoleaMockup } from './mockups/volea-mockup'
 import { SmashMockup } from './mockups/smash-mockup'
 import { F1Mockup } from './mockups/f1-mockup'
 import { AiActEvalMockup } from './mockups/ai-act-eval-mockup'
+import { AithorityMockup } from './mockups/aithority-mockup'
+import { AithorityTree } from './mockups/aithority-tree'
 import { CASES, LIGHT, type CaseStudy, type LightProject } from './copy'
 
 const TERRA = '#B8433F'
@@ -33,6 +35,7 @@ const MOCKUP: Record<string, React.ComponentType> = {
   dross: DrossMockup,
   'louvr-labs': LouvrMockup,
   trace: TraceMockup,
+  aithority: AithorityMockup,
 }
 
 const MOCKUP_LIGHT: Record<string, React.ComponentType> = {
@@ -240,8 +243,16 @@ function DeepFolder({ caso, index, left, z, first }: { caso: CaseStudy; index: s
 
           {Mockup && (
             <div className="mt-7">
-              <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">How it works, live</p>
+              <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">
+                {caso.slug === 'aithority' ? 'Dashboard · how it looks' : 'How it works, live'}
+              </p>
               <Mockup />
+            </div>
+          )}
+          {caso.slug === 'aithority' && (
+            <div className="mt-8">
+              <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">The engine · how it reasons</p>
+              <AithorityTree />
             </div>
           )}
         </div>

@@ -10,26 +10,27 @@ const mono = IBM_Plex_Mono({
   variable: '--font-mono',
 })
 
+const TITLE = 'Arnau Lopez — Product Engineer · Full-stack'
+const DESCRIPTION =
+  'I design the interface and write the software. Passionate about tech, architecture, geopolitics, and shipping real products — not prototypes. Kiblo is in distribution; Dross is a notarized Mac app; TRACE is live on the App Store in the US and Canada; Aithority is EU AI Act compliance (technical cofounder). Based in Alcoy; Netherlands and Germany; UK if sponsored. Deutsche Post / DHL, Paderborn.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
-  title: 'Arnau Lopez — Full-Stack AI Engineer · Design-first',
-  description:
-    '22, self-taught, no degree. I design, build and ship software end to end — interface, backend, App Store — with a full-stack AI background and no design handoff needed. Open to UK / Ireland / Netherlands.',
+  title: TITLE,
+  description: DESCRIPTION,
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: 'https://arnau-lopez.com',
     siteName: 'Arnau Lopez',
-    title: 'Arnau Lopez — Full-Stack AI Engineer · Design-first',
-    description:
-      '22, self-taught, no degree. I design, build and ship software end to end — interface, backend, App Store — with a full-stack AI background and no design handoff needed.',
+    title: TITLE,
+    description: DESCRIPTION,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Arnau Lopez — Full-Stack AI Engineer · Design-first',
-    description:
-      '22, self-taught, no degree. I design, build and ship software end to end — interface, backend, App Store — with a full-stack AI background and no design handoff needed.',
+    title: TITLE,
+    description: DESCRIPTION,
   },
 }
 

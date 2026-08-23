@@ -9,18 +9,24 @@ const LINKS = [
 
 export function Contact() {
   return (
-    <footer id="contact" className="border-t border-line py-16 sm:py-24">
+    <footer id="contact" className="border-t border-ink py-16 sm:py-20">
       <div className="container-page">
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-fg-faint">{CONTACT.eyebrow}</p>
         <h2 className="display mt-3 max-w-[16ch] text-[clamp(2rem,6vw,3.4rem)] font-medium text-ink">{CONTACT.title}</h2>
+        <p className="mt-3 max-w-[48ch] text-[15px] leading-relaxed text-fg-muted">{CONTACT.note}</p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a href="mailto:lopezsellesarnau@gmail.com" className="btn-solid">
             {CONTACT.cta}
           </a>
+          <a href="https://github.com/lopezsellesarnau-cmd" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/arnau-lopez-selles/" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+            LinkedIn
+          </a>
         </div>
 
-        {/* Links any company would want to see */}
         <div className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {LINKS.map((l) => (
             <a
@@ -32,16 +38,18 @@ export function Contact() {
             >
               <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-fg-faint">
                 {l.label}
-                <span className="text-fg-ghost transition-colors group-hover:text-accent" aria-hidden>↗</span>
+                <span className="text-fg-ghost transition-colors group-hover:text-accent" aria-hidden>
+                  ↗
+                </span>
               </span>
               <span className="truncate font-mono text-[12px] text-ink">{l.handle}</span>
             </a>
           ))}
         </div>
 
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-hair pt-6">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Arnau Lopez — Full-Stack Agentic AI Engineer</p>
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Barcelona · remote · EU</p>
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-ink pt-5">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Arnau Lopez — Product Engineer · Full-stack</p>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Alcoy · NL / DE · UK if sponsored</p>
         </div>
       </div>
     </footer>

@@ -1,32 +1,20 @@
 import { TOOLKIT } from './copy'
 
 /**
- * Global toolkit — everything Arnau reaches for, grouped. Not tied to one
- * project: the whole surface of what he builds with, in one panel.
+ * Stack in service of the cases — not toolkit-as-identity.
  */
+const GROUPS = TOOLKIT.filter((g) => g.group === 'Languages' || g.group === 'Frameworks' || g.group === 'Craft')
+
 export function Toolkit() {
   return (
-    <section id="toolkit" className="scroll-mt-16 border-t border-line py-16 sm:py-24">
+    <section id="toolkit" className="scroll-mt-16 border-t border-hair py-10 sm:py-12">
       <div className="container-page">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink pb-5">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">What I build with</p>
-            <h2 className="display mt-3 text-[clamp(1.8rem,4.5vw,2.8rem)] font-medium text-ink">Toolkit</h2>
-          </div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-fg-faint">Full-stack · AI-native · Design-first</p>
-        </div>
-
-        <div className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-          {TOOLKIT.map((g) => (
-            <div key={g.group} className="bg-surface p-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-fg-faint">{g.group}</p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {g.items.map((it) => (
-                  <span key={it} className="border border-hair px-2 py-0.5 font-mono text-[10.5px] tracking-[0.02em] text-fg-muted">
-                    {it}
-                  </span>
-                ))}
-              </div>
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-fg-faint">Stack — used in the work above</p>
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:gap-10">
+          {GROUPS.map((g) => (
+            <div key={g.group} className="min-w-0 flex-1">
+              <p className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-ghost">{g.group}</p>
+              <p className="mt-1.5 text-[13px] leading-relaxed text-fg-muted">{g.items.join(' · ')}</p>
             </div>
           ))}
         </div>

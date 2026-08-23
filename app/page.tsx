@@ -1,9 +1,8 @@
 import { Nav } from '@/components/nav'
 import { Hero } from '@/components/hero'
 import { ProjectArchive } from '@/components/project-archive'
-import { AithoritySection } from '@/components/aithority-section'
+import { HowIWork } from '@/components/how-i-work'
 import { Toolkit } from '@/components/toolkit'
-import { Credentials } from '@/components/credentials'
 import { Contact } from '@/components/contact'
 
 export default function Home() {
@@ -14,14 +13,13 @@ export default function Home() {
 
       <section id="work" className="container-page py-14 sm:py-20">
         <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.16em] text-fg-faint sm:mb-8">
-          Work — Kiblo, TRACE, Dross (interview) · then shipped work
+          Work — Kiblo, Dross, TRACE, Aithority · then BlockFlow and shipped work
         </p>
         <ProjectArchive />
       </section>
 
-      <AithoritySection />
+      <HowIWork />
       <Toolkit />
-      <Credentials />
       <Contact />
     </main>
   )
