@@ -15,7 +15,7 @@ export const PROFILE = {
   name: 'Arnau Lopez',
   role: 'Product Engineer · Full-stack',
   eyebrow: '[ 22 · Alcoy · NL / DE · UK if sponsored ]',
-  hero: 'I design the interface and write the software — one person, live products, not prototypes. Kiblo is in distribution; Dross ships as a notarized Mac app; TRACE is live on the App Store in the US and Canada; Aithority is EU AI Act compliance, as technical cofounder. BlockFlow’s voice agent is in production (built to run, not sold like Kiblo). I show the builds on social as I ship.',
+  hero: 'I design the interface and write the software — one person, live products, not prototypes. TRACE is live on the App Store in the US; Kiblo is in App Store review for the US and Canada; Dross ships as a notarized Mac app; Aithority is EU AI Act compliance, as technical cofounder. BlockFlow’s voice agent is in production (built to run, not sold like Kiblo). I show the builds on social as I ship.',
   sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. ~2 years in Paderborn at Deutsche Post / DHL. Open to the Netherlands and Germany; UK when the role sponsors.',
 }
 
@@ -51,13 +51,13 @@ export const CASES: CaseStudy[] = [
     slug: 'kiblo',
     index: '01',
     name: 'Kiblo',
-    tagline: 'Pet-food iOS app — live consumer loop I am distributing',
-    status: { text: 'Live · distributing', tone: 'ok' },
+    tagline: 'Pet-food iOS app — full consumer loop, in App Store review',
+    status: { text: 'In review · US & Canada', tone: 'accent' },
     layout: 'lead',
     pace:
       'Concept locked 16 Aug 2026. By 18 Aug: onboarding → scan → portions → home bowl → reorder → multi-dog Plus (RevenueCat) → push reminders → deterministic feeding-tips engine → 14-day trends. One person, no designer, no backend team — speed is the point of the case.',
     why:
-      'After TRACE went into App Store review I wanted a consumer product that can make money without B2B sales calls. Pet food is a weekly habit (bags empty, people repurchase). Kiblo is Mealia for dogs: scan what is in the cupboard, portion from the dog, reorder before the bag ends. Built to prove I can ship a full consumer loop fast — not a tutorial clone.',
+      'After TRACE went live on the US App Store I wanted a consumer product that can make money without B2B sales calls. Pet food is a weekly habit (bags empty, people repurchase). Kiblo is Mealia for dogs: scan what is in the cupboard, portion from the dog, reorder before the bag ends. Built to prove I can ship a full consumer loop fast — not a tutorial clone.',
     how:
       'Directed in Cursor with Claude as the pair-programmer: I set product, visual lock (circular home), and constraints (no invented UPCs, no home rescale, no LLM where a rule engine is safer). Claude/Cursor write and iterate the Expo app; I review, reject, and ship. Native-feeling iOS via Expo SDK 57, local-first then Firebase catalog + Auth, IAP through RevenueCat. The AI does not own the product — I do.',
     problem:
@@ -91,7 +91,7 @@ export const CASES: CaseStudy[] = [
       },
     ],
     result:
-      'A live consumer loop I am distributing: scan, portion, log, reorder (with push nudges before the bag runs out), Plus paywall, 14-day trends, deterministic feeding tips. Not a prototype. Not claiming a public App Store listing. Pace plus judgment — what to automate, what to lock, what not to fake.',
+      'In App Store review for the US and Canada: scan, portion, log, reorder (with push nudges before the bag runs out), Plus paywall, 14-day trends, deterministic feeding tips. Not a prototype. Not live on the store yet — territories are US & Canada. Pace plus judgment — what to automate, what to lock, what not to fake.',
     stack: [
       'Cursor',
       'Claude',
@@ -153,7 +153,7 @@ export const CASES: CaseStudy[] = [
     index: '03',
     name: 'TRACE',
     tagline: 'Privacy iOS app — find your exposed data, then get it removed',
-    status: { text: 'Live · App Store US & Canada', tone: 'ok' },
+    status: { text: 'Live · App Store US', tone: 'ok' },
     layout: 'surface',
     problem:
       'Personal data is already scattered across old breaches and dozens of US data-broker sites — most people never find out until it\'s used against them. Every "data removal" app on the market either scrapes to confirm a listing first (expensive, fragile) or fakes the confirmation step to look automated. TRACE does neither — and unlike an Incogni-style to-do list, it\'s designed to be shared, not buried in a dashboard.',
@@ -186,7 +186,7 @@ export const CASES: CaseStudy[] = [
       },
     ],
     result:
-      'Live on the App Store in the US and Canada: RevenueCat subscription, verified email to real brokers, activity log where every status is real — not a prototype. v2: share-card-first home, deletion as the paid second act.',
+      'Live on the App Store in the US: RevenueCat subscription, verified email to real brokers, activity log where every status is real — not a prototype. Not listed in Canada. v2: share-card-first home, deletion as the paid second act.',
     stack: ['React Native', 'Expo', 'Node/Express', 'Firebase', 'RevenueCat', 'Resend'],
     seed: 641,
   },
