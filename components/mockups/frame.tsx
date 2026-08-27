@@ -55,7 +55,7 @@ export function MockupFrame({
   const { ref, live } = useLiveOnView<HTMLDivElement>()
   return (
     <div ref={ref} className={live ? 'tree-live' : ''}>
-      <div className="border border-line bg-bg">
+      <div className="overflow-hidden rounded-[24px] border border-line bg-bg">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-b border-line px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-fg-muted">
           <span>{title}</span>
           <span className="hidden text-fg-dim sm:inline">{context}</span>
@@ -101,7 +101,7 @@ export function BlockGrid({ filled, max, delay = 0 }: { filled: number; max: num
 export function Chip({ label, tone }: { label: string; tone: string }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center gap-1.5 border px-1.5 py-[2px] font-mono text-[9px] uppercase tracking-[0.08em]"
+      className="inline-flex shrink-0 items-center gap-1.5 rounded-[6px] border px-1.5 py-[2px] font-mono text-[9px] uppercase tracking-[0.08em]"
       style={{ borderColor: tone, color: tone }}
     >
       <span className="h-1 w-1" style={{ backgroundColor: tone }} aria-hidden />

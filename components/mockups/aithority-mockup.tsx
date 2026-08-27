@@ -71,7 +71,7 @@ export function AithorityMockup() {
   return (
     <MockupFrame title="Trust Center · AI Act" context="inventory · risk · obligations" status="status: 6 systems" tone={TERRA}>
       {/* Metric cards */}
-      <div className="grid grid-cols-2 divide-x divide-y divide-hair border border-line bg-surface sm:grid-cols-4 sm:divide-y-0">
+      <div className="grid grid-cols-2 divide-x divide-y divide-hair overflow-hidden rounded-[14px] border border-line bg-surface sm:grid-cols-4 sm:divide-y-0">
         <Metric label="AI systems" value="6" sub="inventoried" />
         <Metric label="High risk" value="3" sub="open files" accent={ALTO} />
         <Metric label="Undocumented" value="4" sub="pending" />
@@ -80,7 +80,7 @@ export function AithorityMockup() {
 
       <div className="mt-3 grid gap-3 lg:grid-cols-[1.4fr_1fr]">
         {/* Inventory */}
-        <div className="border border-line bg-surface">
+        <div className="overflow-hidden rounded-[14px] border border-line bg-surface">
           <div className="border-b border-hair px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint">AI systems inventory</div>
           {SYSTEMS.map((s, i) => (
             <div key={s.n} className="tree-node flex items-center justify-between gap-3 border-b border-hair px-3 py-2 last:border-b-0" style={{ animationDelay: `${300 + i * 180}ms` }}>
@@ -96,7 +96,7 @@ export function AithorityMockup() {
         </div>
 
         {/* Readiness gauge */}
-        <div className="flex flex-col items-center border border-line bg-surface p-4">
+        <div className="flex flex-col items-center overflow-hidden rounded-[14px] border border-line bg-surface p-4">
           <p className="self-start font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint">Deadline readiness</p>
           <div className="my-3">
             <DonutTicks pct={41} />

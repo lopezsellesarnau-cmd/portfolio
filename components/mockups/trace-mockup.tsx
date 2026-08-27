@@ -27,7 +27,7 @@ function Node({
   delay: number
 }) {
   return (
-    <div className="tree-node border bg-surface px-3 py-2.5" style={{ borderColor: ink ? INK : 'rgba(21,20,18,0.16)', animationDelay: `${delay}ms` }}>
+    <div className="tree-node overflow-hidden rounded-[12px] border bg-surface px-3 py-2.5" style={{ borderColor: ink ? INK : 'rgba(21,20,18,0.16)', animationDelay: `${delay}ms` }}>
       <div className="flex items-center justify-between">
         <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-fg-faint">{label}</p>
         {pct && (

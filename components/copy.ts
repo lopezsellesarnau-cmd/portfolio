@@ -15,35 +15,28 @@ export const PROFILE = {
   name: 'Arnau Lopez',
   role: 'Product Engineer · Full-stack',
   eyebrow: '[ 22 · Alcoy · NL / DE · UK if sponsored ]',
-  hero: 'I design the interface and write the software — one person, live products, not prototypes. TRACE is live on the App Store in the US; Kiblo is in App Store review for the US and Canada; Dross ships as a notarized Mac app; Aithority is EU AI Act compliance, as technical cofounder. BlockFlow’s voice agent is in production (built to run, not sold like Kiblo). I show the builds on social as I ship.',
-  sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. ~2 years in Paderborn at Deutsche Post / DHL. Open to the Netherlands and Germany; UK when the role sponsors.',
+  hero: 'Founder of Kiblo — pet-food iOS, in App Store review for the US and Canada. Technical cofounder of Aithority (EU AI Act); the company is in Lanzadera, Spain. TRACE live on the App Store US. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
+  sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. ~2 years in Paderborn at Deutsche Post / DHL. NL / DE; UK when the role sponsors.',
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
 // 315): it ties Arnau's three surfaces into one identity.
 export const HERO_PLANT_SEED = 315
 
-export type CaseLayout = 'lead' | 'constraints' | 'surface' | 'quiet'
-
 export type CaseStudy = {
   slug: string
   index: string
   name: string
+  role: string
   tagline: string
   status: { text: string; tone: 'ok' | 'accent' }
-  /** Visual weight — the four featured cases are not a equal gallery. */
-  layout: CaseLayout
-  problem: string
-  approach: string[]
+  what: string
+  built: string
   decisions: { title: string; detail: string }[]
-  result: string
   stack: string[]
   seed: number
   link?: string
-  /** Extra datasheet rows — used on Kiblo to lead with pace / why / how. */
-  pace?: string
-  why?: string
-  how?: string
+  linkLabel?: string
 }
 
 export const CASES: CaseStudy[] = [
@@ -51,211 +44,166 @@ export const CASES: CaseStudy[] = [
     slug: 'kiblo',
     index: '01',
     name: 'Kiblo',
-    tagline: 'Pet-food iOS app — full consumer loop, in App Store review',
-    status: { text: 'In review · US & Canada', tone: 'accent' },
-    layout: 'lead',
-    pace:
-      'Concept locked 16 Aug 2026. By 18 Aug: onboarding → scan → portions → home bowl → reorder → multi-dog Plus (RevenueCat) → push reminders → deterministic feeding-tips engine → 14-day trends. One person, no designer, no backend team — speed is the point of the case.',
-    why:
-      'After TRACE went live on the US App Store I wanted a consumer product that can make money without B2B sales calls. Pet food is a weekly habit (bags empty, people repurchase). Kiblo is Mealia for dogs: scan what is in the cupboard, portion from the dog, reorder before the bag ends. Built to prove I can ship a full consumer loop fast — not a tutorial clone.',
-    how:
-      'Directed in Cursor with Claude as the pair-programmer: I set product, visual lock (circular home), and constraints (no invented UPCs, no home rescale, no LLM where a rule engine is safer). Claude/Cursor write and iterate the Expo app; I review, reject, and ship. Native-feeling iOS via Expo SDK 57, local-first then Firebase catalog + Auth, IAP through RevenueCat. The AI does not own the product — I do.',
-    problem:
-      'Pet food is guesswork: owners over-scoop, bags run out mid-week, and "good food" is marketing copy. Kiblo turns the cupboard into a bowl you can act on.',
-    approach: [
-      'Expo / React Native, expo-router, TypeScript: onboarding (Waltham RER/MER) → ~50-bag US catalog → camera barcode (exact GTIN) → extras swipe-plan → home bowl + share + Chewy/Amazon reorder.',
-      'Firebase Auth (anonymous, then link email) and Firestore foods (public read, local catalog fallback). Free = one dog on-device; Plus = multi-dog + 14-day trends + a rule-based feeding-tips engine.',
-      'Local push reminders (expo-notifications, no backend): a bag or extra 2 days from empty nudges straight to the reorder link instead of waiting for the user to notice a "5d" chip; daily meal-time reminders per dog. Reorder links prefer the verified UPC as the search query over a text name — lands closer to the exact product.',
-      'IAP: RevenueCat entitlement plus, App Store bundle com.arnolop.goodbowl (display name Kiblo). Import was empty until that bundle matched Connect. Custom paywall (not RevenueCat\'s hosted template) after the default converted like a bare price list.',
-    ],
+    role: 'Founder',
+    tagline: 'Pet-food iOS — full consumer loop, App Store review',
+    status: { text: 'Founder · in review US & Canada', tone: 'accent' },
+    what:
+      'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. Built to prove I can ship a full consumer loop alone — onboarding, catalog, paywall, push, App Store. In review for the US and Canada. Not live, no revenue.',
+    built:
+      'Solo, 16–23 Aug 2026. I lock product and constraints; Cursor/Claude implement; I reject and ship. Expo 57, React Native, Firebase, RevenueCat. Speed is the case — a startup can see how I decide what to automate and what not to fake.',
     decisions: [
       {
-        title: 'Exact barcodes, never invented UPCs',
+        title: 'Never invent a barcode',
         detail:
-          'Catalog matches GTIN exactly (UPC-A ↔ EAN-13 with a leading zero). Fresh and subscription packs with no retail code stay unscannable rather than fake a hit — a wrong bag is worse than no scan. Same rule extended to ingredient panels: only real, sourced label text, cited, or left blank.',
+          'Catalog matches GTIN exactly. Packs with no retail code stay unscannable. A wrong bag is worse than no scan — same bar as a checkout error.',
       },
       {
-        title: 'Feeding advice: deterministic, not an LLM call',
+        title: 'Feeding tips are a rule engine, not an LLM',
         detail:
-          'Asked for Mealia-style "recipe advice." Built it as a rule engine instead of a wired-up LLM: treat-calorie budget vs a vet 10% guideline, food-flag surfacing, senior→joint-supplement and active→omega suggestions with a one-tap add. Same reasoning as Dross — deterministic-first where a wrong answer about a dog\'s health is worse than a missing one, and it ships free of per-call cost or a backend.',
+          'Treat budget vs a vet 10% guideline, food flags, one-tap extras. A wrong answer about a dog’s health is worse than a missing one, and it has no per-call cost.',
       },
       {
-        title: 'Home geometry is a product decision',
+        title: 'The home screen stays a bowl',
         detail:
-          'The bowl, ring and four ingredient sats are sized once and not "fixed" with a global rescale. Grade lives in copy ("Great choice"), not as a letter on the orbit — the screen has to stay a bowl, not a poster.',
+          'Geometry is locked; grade lives in copy, not a letter on the orbit. The screen has to stay a product, not a poster.',
       },
       {
-        title: 'Cursor + Claude, with me as the bottleneck on purpose',
+        title: 'Plus is extra dogs, not a fake lock',
         detail:
-          'Speed comes from a tight loop: I specify (home geometry, exact barcodes, Plus = multi-dog not a fake lock, LLM vs. rule engine), the agent implements, I run the simulator and change what is wrong. Claiming "AI built it" would be false — claiming I typed every line by hand would also be false. The stack includes the tools.',
+          'Free is one dog on-device. Plus is multi-dog, 14-day trends, the tips engine. Custom paywall after RevenueCat’s default converted like a bare price list.',
       },
     ],
-    result:
-      'In App Store review for the US and Canada: scan, portion, log, reorder (with push nudges before the bag runs out), Plus paywall, 14-day trends, deterministic feeding tips. Not a prototype. Not live on the store yet — territories are US & Canada. Pace plus judgment — what to automate, what to lock, what not to fake.',
-    stack: [
-      'Cursor',
-      'Claude',
-      'React Native',
-      'Expo SDK 57',
-      'TypeScript',
-      'Firebase',
-      'RevenueCat',
-      'expo-camera',
-      'expo-notifications',
-    ],
+    stack: ['Cursor', 'Claude', 'React Native', 'Expo SDK 57', 'TypeScript', 'Firebase', 'RevenueCat'],
     seed: 418,
+    link: 'https://kiblo-web.vercel.app',
+    linkLabel: 'Open site',
   },
   {
-    slug: 'dross',
+    slug: 'aithority',
     index: '02',
-    name: 'Dross',
-    tagline: 'macOS app + CLI — detects when your app and your backend stop agreeing',
-    status: { text: 'Live · notarized DMG', tone: 'ok' },
-    layout: 'constraints',
-    problem:
-      'The bugs that actually bite AI-written code aren\'t syntax errors — they\'re meaning errors: a live endpoint nobody calls anymore, demo data stamped into production, a client calling an API that suddenly demands a token it never sends. Static analysis can\'t catch these; they only surface when you read both sides of a system at once.',
-    approach: [
-      'Built as a native macOS app (SwiftUI) with the engine as an embedded TypeScript CLI. Deterministic checks run first — dead exports, env drift, TODO density, hardcoded demo data — free, fully offline, instant.',
-      'Contract drift is the hook: scan a full-stack repo and it flags where the client\'s calls no longer match the routes the server actually serves. Parsed with the TypeScript compiler API, so string literals that only look like routes don\'t count.',
-      'Shipped with its own eval harness instead of trusting demos: a golden corpus of fixtures whose precision AND recall must both hold at 100%, CI fails the build otherwise — every false positive found is locked in as a regression fixture.',
-      'Monetized like the product it\'s for: Ed25519-signed license keys verified fully offline. The free tier never touches the network; the Pro LLM drift pass runs with your own Anthropic key, never proxying or reselling tokens.',
-    ],
+    name: 'Aithority',
+    role: 'Technical cofounder',
+    tagline: 'EU AI Act compliance · Lanzadera (the company)',
+    status: { text: 'Cofounder · Lanzadera · first client', tone: 'ok' },
+    what:
+      'EU AI Act compliance for companies using AI in HR, credit or biometrics: inventory, Annex III risk, dated evidence. The company is accepted into Lanzadera in Spain — not a personal solo admission. First paying client. I own backend, frontend, integrations, classification, and UI. Sales and legal stay with the commercial cofounder.',
+    built:
+      'Classification API and dashboard in Next.js. Microsoft Graph is read-only; no stored third-party tokens. Built for a team that has to survive counsel, not a demo that overclaims “fully automatic compliance.”',
     decisions: [
       {
-        title: 'Contract drift is the one-liner, not "another linter"',
+        title: 'Discovery is not classification',
         detail:
-          'Three real production bugs in the creator\'s own repos all had the same shape: two sides of one system that stopped agreeing. That specific failure is what CodeRabbit, Augment, Factory and Code Metal don\'t check — they review single repos at PR time.',
+          'Microsoft 365 can fill the inventory. “Notion AI showed up” does not mean high-risk — that depends on use. Selling fully automatic classification would fail in two questions from counsel.',
       },
       {
-        title: 'For the solo builder, not a PR-time team service',
+        title: 'The engine suggests. It does not certify.',
         detail:
-          'The funded competitors are cloud, team, PR-time products. Dross targets the developer deploying straight to main with heavy AI assistance — no PR process to hook into. A native app for the human, a CI-ready CLI for the pipeline.',
+          'Rules plus an LLM propose risk and remediation. The customer validates with their own legal counsel. We log what was declared, when, and by whom.',
       },
       {
-        title: 'AST over regex, eval over vibes',
+        title: 'Split the company like a real startup',
         detail:
-          'Moving contract-drift parsing to the TypeScript compiler API killed a whole false-positive class (precision 83% → 100% on the worst fixture), and the golden-corpus eval made the improvement permanent instead of a vibes-based demo.',
+          'I own the product surface and the engine. The commercial cofounder owns sales and legal. Lanzadera is the company’s path, not a badge on my CV as a lone founder.',
       },
       {
-        title: 'Dogfooding was the pitch',
+        title: 'No Graph tokens on disk',
         detail:
-          'Dross found real contract drift inside TRACE and Aithority during development — a backend demanding a Firebase token the client wasn\'t sending yet. The story it tells is literally something it caught on the creator\'s own shipped code.',
+          'App-only token per sync, read-only directory consent. Less surface to protect when the product is evidence for an audit.',
       },
     ],
-    result:
-      'v1 shipped as a notarized macOS DMG with an offline license system and a CI-ready CLI — validated against the exact kind of AI-written full-stack repos where this class of bug actually happens.',
-    stack: ['SwiftUI', 'macOS', 'TypeScript', 'TS compiler API', 'Ed25519', 'Claude API', 'Eval harness'],
-    seed: 222,
-    link: 'https://github.com/lopezsellesarnau-cmd/dross',
+    stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act · Annex III'],
+    seed: 655,
+    link: 'https://landing-claude-chi.vercel.app/#motor',
+    linkLabel: 'Open landing',
   },
   {
     slug: 'trace',
     index: '03',
     name: 'TRACE',
-    tagline: 'Privacy iOS app — find your exposed data, then get it removed',
-    status: { text: 'Live · App Store US', tone: 'ok' },
-    layout: 'surface',
-    problem:
-      'Personal data is already scattered across old breaches and dozens of US data-broker sites — most people never find out until it\'s used against them. Every "data removal" app on the market either scrapes to confirm a listing first (expensive, fragile) or fakes the confirmation step to look automated. TRACE does neither — and unlike an Incogni-style to-do list, it\'s designed to be shared, not buried in a dashboard.',
-    approach: [
-      'React Native/Expo app + Node/Express backend (Render): checks a user\'s email against real breach records and computes an Exposure Score from actual breach severity, not a black-box number.',
-      'Proactive removal, not detected removal: instead of paying for a per-user broker-search API to confirm a listing before acting, TRACE requests removal from all 24 targeted US brokers directly — GDPR Art. 17 and CCPA don\'t require proof of listing first, so that cost doesn\'t need to exist.',
-      'For the 2 brokers with a verified privacy-contact email (Spokeo, ZoomInfo — checked against their live policy pages, not a stale registry), the backend sends the removal request for real via Resend. The other 22 open the broker\'s own opt-out page with the request pre-drafted — no fake automation for what genuinely can\'t be automated yet.',
-      'Designed around the share card: the report is a vertical, story-sized card (score + breach/broker counts) built for one tap to share. The growth engine is a screenshot people want to post, not a generic dashboard.',
-    ],
+    role: 'Founder',
+    tagline: 'Privacy iOS — live App Store US',
+    status: { text: 'Founder · live US', tone: 'ok' },
+    what:
+      'Privacy iOS. Live on the App Store in the US — not Canada. Breach scan, Exposure Score from real severity, removal to 24 US brokers. The share object is a vertical report card, not an Incogni-style to-do list.',
+    built:
+      'React Native / Expo and Node. Two brokers get a real Resend email. The rest open the broker’s own opt-out. RevenueCat subscription. Status only moves when something actually happened.',
     decisions: [
       {
-        title: 'Two-step status, not optimistic UI',
+        title: 'The product people share is the report card',
         detail:
-          'Tapping "Request deletion" on a form-only broker used to mark it "Submitted" immediately — before the user had actually filled anything in. Fixed to a real two-step flow: opening the page doesn\'t change status, only the user\'s own "I submitted this" confirmation does. Every status shown is something that actually happened.',
+          'Growth is a screenshot people want to post. Removal is the paid second act, not a dashboard of chores.',
       },
       {
-        title: 'Rate-limited by default, not after an incident',
+        title: 'Opening a form is not “submitted”',
         detail:
-          'A security pass on the backend found every endpoint was unauthenticated by design (no login wall on scanning) and unlimited — usable as a free breach-lookup proxy, a push-notification spam relay, or a way to flood real brokers with junk email through the verified sending domain. Added per-route rate limits before shipping, tightest on the one route that sends a real email to a real company.',
+          'Optimistic “Submitted” on tap was a lie. Opening the page does nothing to status; only the user’s confirmation does.',
       },
       {
-        title: 'Delete account means delete, not mostly delete',
+        title: 'Delete account means delete',
         detail:
-          'Found — before shipping — that "Delete account" only removed the Firebase Auth login, leaving the Firestore record (name, email, breach data, broker history) orphaned. For an app built on GDPR/CCPA right-to-erasure messaging, that gap would have been the app failing its own premise. Fixed to delete the record first, in the order the security rules actually require.',
-      },
-      {
-        title: 'The product is the share card, not the dashboard',
-        detail:
-          'Most data-removal products read like Incogni: a to-do list of brokers. TRACE\'s report is a forensically-styled share card people actually want to post, and removal is the paid second act behind it. The one-liner competitors can\'t copy without lying: "the breach you can screenshot."',
+          'Auth-only delete would have left Firestore PII. For a GDPR/CCPA product that would fail the premise. Record first, in the order the rules require.',
       },
     ],
-    result:
-      'Live on the App Store in the US: RevenueCat subscription, verified email to real brokers, activity log where every status is real — not a prototype. Not listed in Canada. v2: share-card-first home, deletion as the paid second act.',
     stack: ['React Native', 'Expo', 'Node/Express', 'Firebase', 'RevenueCat', 'Resend'],
     seed: 641,
+    link: 'https://github.com/lopezsellesarnau-cmd/trace-app',
+    linkLabel: 'Open repository',
   },
   {
-    slug: 'aithority',
+    slug: 'dross',
     index: '04',
-    name: 'Aithority',
-    tagline: 'EU AI Act compliance — technical cofounder',
-    status: { text: 'Cofounder · in production', tone: 'ok' },
-    layout: 'constraints',
-    problem:
-      'A company using AI in HR, credit or biometrics has to comply with the AI Act: inventory every system, classify its risk and document it. Today they do it by hand, in spreadsheets, without knowing what applies or what\'s missing.',
-    approach: [
-      'A real classification engine: feed in a system\'s description and out comes its risk under Annex III and the concrete obligations that apply, with the reasoning — not a black box.',
-      'Automatic inventory discovery: connect Microsoft 365 over OAuth (admin consent, read-only) and detect the AI tools the organization has already authorized.',
-      'Art. 11 documentation and a dated evidence log, so the audit file composes itself and never describes a stale state.',
-    ],
+    name: 'Dross',
+    role: 'Founder',
+    tagline: 'Mac app + CLI — notarized DMG',
+    status: { text: 'Founder · notarized DMG', tone: 'ok' },
+    what:
+      'Finds when your client and your backend stop agreeing. Notarized Mac app plus CI CLI. Built for a solo/full-stack team deploying with AI assistance — not another PR-time cloud linter.',
+    built:
+      'SwiftUI + TypeScript CLI. Compiler API, not regex. Golden corpus: 100% precision and recall or CI fails. Ed25519 licences, verified offline. Caught real drift in TRACE and Aithority.',
     decisions: [
       {
-        title: "Detecting isn't classifying",
+        title: 'Contract drift is the one-liner',
         detail:
-          'Discovery fills the inventory, but doesn\'t decide the risk: "Notion AI" showing up doesn\'t say whether it\'s high-risk — that depends on use. Selling "fully automatic classification" would be the overpromise you get caught on in two questions.',
+          'The failure is two sides of one system that stopped agreeing. That is what PR-time single-repo tools do not check.',
       },
       {
-        title: 'No third-party tokens stored',
+        title: 'AST over regex, eval over a demo',
         detail:
-          'The Microsoft Graph flow requests an app-only token on each sync instead of persisting it — less surface to protect, and consent is read-only over the directory.',
-      },
-      {
-        title: "Suggests, doesn't decide",
-        detail:
-          'The classification engine and remediation roadmaps are suggestions from a rules engine plus an LLM — the customer validates them with their own legal counsel. Aithority tracks evidence of what was declared, when and by whom; it does not certify compliance.',
+          'Compiler API killed a false-positive class. The corpus makes the improvement permanent instead of a vibes demo.',
       },
     ],
-    result:
-      'Technical cofounder: own backend (classification engine + API) and dashboard in production, evidence system shipping. First paying client; accepted into Lanzadera. Building with AI is not enough if you do not also understand governance — that is the interview case.',
-    stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act · Annex III'],
-    seed: 655,
+    stack: ['SwiftUI', 'macOS', 'TypeScript', 'TS compiler API', 'Ed25519'],
+    seed: 222,
+    link: 'https://github.com/lopezsellesarnau-cmd/dross',
+    linkLabel: 'Open repository',
   },
   {
     slug: 'blockflow',
     index: '05',
     name: 'BlockFlow',
-    tagline: 'UK proptech — live voice agent (in production; not a sales push)',
+    role: 'Founder',
+    tagline: 'UK proptech voice agent — in production',
     status: { text: 'In production · not selling', tone: 'ok' },
-    layout: 'quiet',
-    problem:
-      'A property manager fields calls all day about the same incidents — a leak, a stuck lift, a noise complaint — and each one interrupts whatever they were doing. Answering well costs time they don\'t have; not answering costs clients.',
-    approach: [
-      'A voice agent that picks up, understands the incident through natural conversation (not a "press 1" tree), and decides what to do with it.',
-      'Automatic triage: it classifies urgency and incident type from what was said on the call, with no human in the happy path.',
-      'It files the ticket already structured (property, type, urgency, summary) into the management system — ready for the manager to just decide, not transcribe.',
-    ],
+    what:
+      'UK property ops. Out-of-hours voice agent: conversation, triage, structured ticket. In production. No paying customers. Unlike Kiblo, this is not a product I am distributing right now — the work is the live system.',
+    built:
+      'Happy path never touches a human. Not a press-1 tree. Next.js, voice AI, LLM, ticket automation.',
     decisions: [
       {
         title: 'Conversation, not a phone tree',
         detail:
-          'The challenge wasn\'t "make it talk", it was making the call resolve just as well whether the caller describes the problem in any order, at any level of detail — structured field extraction has to survive a real conversation, not a script.',
+          'The call has to resolve if the caller describes the leak in any order. Extraction has to survive a real conversation.',
       },
       {
-        title: 'No human intervention as the goal, not an option',
+        title: 'Human only on the exception',
         detail:
-          'The system is built so the happy path (clear, non-urgent incident) never touches anyone on the team — a human steps in only on the exception, not on every call.',
+          'Clear, non-urgent incidents never hit the team. A person steps in on the edge case, not on every call.',
       },
     ],
-    result:
-      'In production: real out-of-hours calls, triage, structured tickets, no human on the happy path. No paying customers yet. Unlike Kiblo, this is not a product I am distributing or selling right now — the work is the live system.',
-    stack: ['Voice AI', 'LLM', 'Ticket automation', 'Production'],
+    stack: ['Voice AI', 'LLM', 'Ticket automation', 'Next.js'],
     seed: 100,
+    link: 'https://github.com/lopezsellesarnau-cmd/blockflow',
+    linkLabel: 'Open repository',
   },
 ]
 
@@ -263,8 +211,8 @@ export type LightProject = {
   name: string
   tagline: string
   status: string
-  blurb: string
-  fields: { label: string; value: string }[]
+  what: string
+  built: string
   stack: string[]
   seed: number
   link?: string
@@ -275,13 +223,8 @@ export const LIGHT: LightProject[] = [
     name: 'Louvr Labs',
     tagline: 'Ranking & reporting platform for Meta Ads',
     status: 'In production',
-    blurb:
-      'Automatic weekly report by email, zero manual work, in production with real clients. Rules rank ads (Scale / Pause / Hold / Refresh); Claude writes the insight over that ranking, not in its place.',
-    fields: [
-      { label: 'Role', value: 'Solo — product, ranking, reports' },
-      { label: 'Type', value: 'B2B · Meta Ads + weekly email' },
-      { label: 'Result', value: 'In production with real clients' },
-    ],
+    what: 'Weekly Meta Ads report by email. Rules rank ads (Scale / Pause / Hold / Refresh); Claude writes the insight on top of that ranking. In production with real clients.',
+    built: 'Solo. OAuth, Meta Ads API, Python, Make.com. Rules first — the model does not replace the rank.',
     stack: ['OAuth', 'Meta Ads API', 'Python', 'Claude (Sonnet) API', 'Make.com'],
     seed: 322,
   },
@@ -289,14 +232,8 @@ export const LIGHT: LightProject[] = [
     name: 'F1 Strategy Agent',
     tagline: 'ML + agentic — race strategy prediction',
     status: 'Open source · public repo',
-    blurb:
-      'A machine-learning project on F1 race strategy: predicting lap times and simulating pit-stop strategies, with a self-contained HTML report (no server) and an animated SVG track. The lesson is the honest evaluation: a simple model fails to generalize across circuits (MAE 3.49s) until the objective changes from absolute lap time to the delta over each circuit\'s base pace — which drops error to 0.73s. Published open source because the community asked for the code.',
-    fields: [
-      { label: 'Role', value: 'Solo — ML, evaluation, content' },
-      { label: 'Type', value: 'ML · prediction + simulation' },
-      { label: 'Lesson', value: 'The right objective beats more features' },
-      { label: 'Distribution', value: 'Vertical video → comments asked for the code' },
-    ],
+    what: 'ML race strategy: lap times, pit simulations, a self-contained HTML report. Open because viewers asked for the code.',
+    built: 'A simple model fails across circuits (MAE 3.49s) until the target is the delta over each circuit’s base pace — then 0.73s. Python, scikit-learn.',
     stack: ['Python', 'scikit-learn', 'RandomForest', 'Evaluation', 'Open source'],
     seed: 261,
     link: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent',
@@ -305,13 +242,8 @@ export const LIGHT: LightProject[] = [
     name: 'ai-act-eval',
     tagline: 'Open, honestly-evaluated EU AI Act risk classifier',
     status: 'Open source · public repo',
-    blurb:
-      'A two-layer risk classifier for the EU AI Act — deterministic rules over Art. 5, Annex III and the Art. 6(3) carve-outs, corrected by an LLM-as-judge that degrades cleanly with no API key. The point isn\'t the classifier, it\'s the evaluation: 43 labelled cases, each citing the article that justifies its label, scored per "trap" so the weak spots are visible instead of averaged away. Rules alone score 86% overall but 0% on emotion-context — the judge closes that gap and pushes combined accuracy to 100%.',
-    fields: [
-      { label: 'Role', value: 'Solo — engine, eval harness, report' },
-      { label: 'Type', value: 'Compliance · rules + LLM-as-judge' },
-      { label: 'Result', value: '86% rules → 100% combined tier-acc' },
-    ],
+    what: 'Two-layer EU AI Act risk classifier: deterministic rules, then an LLM-as-judge that degrades with no API key.',
+    built: '43 labelled cases citing the article. Rules 86% overall, 0% on emotion-context; combined tier-acc 100%. TypeScript eval harness.',
     stack: ['TypeScript', 'LLM-as-judge', 'Eval harness', 'Open source'],
     seed: 419,
     link: 'https://github.com/lopezsellesarnau-cmd/ai-act-eval',
@@ -320,13 +252,8 @@ export const LIGHT: LightProject[] = [
     name: 'Volea',
     tagline: 'Booking SaaS for padel clubs — courts, leagues, payments.',
     status: 'Live — deployed',
-    blurb:
-      'A full booking SaaS for padel clubs: a real-time court timeline that spots peak and off-peak hours, league management, and public booking with no login. Each club connects its own bank through Stripe Connect, so reservations are charged straight to the club — Volea never touches the money. Built end to end and deployed; it\'s where SMASH\'s club bookings point.',
-    fields: [
-      { label: 'Role', value: 'Solo — product, backend, deploy' },
-      { label: 'Type', value: 'B2B SaaS · booking + leagues' },
-      { label: 'Payments', value: 'Stripe Connect · direct-to-club' },
-    ],
+    what: 'Padel-club booking: court timeline, leagues, public booking. Stripe Connect so money goes to the club, not through Volea.',
+    built: 'Solo. Next.js, Supabase, Stripe Connect, Vercel. SMASH books courts through this.',
     stack: ['Next.js', 'Supabase', 'Stripe Connect', 'TypeScript', 'Vercel'],
     seed: 803,
   },
@@ -334,13 +261,8 @@ export const LIGHT: LightProject[] = [
     name: 'SMASH',
     tagline: 'Social padel app — short-form video, squads, clubs.',
     status: 'Live on the App Store',
-    blurb:
-      'A TikTok-style feed built for one sport: padel highlights, squads to organize matches, and real clubs where you can book a court (through Volea). Live on the App Store — shipped end to end through Apple\'s review, with UGC moderation (block, report, EULA), in-app purchases and DAC7 compliance all handled solo.',
-    fields: [
-      { label: 'Role', value: 'Solo — product, design, build, submission' },
-      { label: 'Platform', value: 'iOS · Flutter + Firebase' },
-      { label: 'Cleared solo', value: 'UGC moderation · IAP · DAC7' },
-    ],
+    what: 'TikTok-style padel feed, squads, club booking via Volea. Live on the App Store.',
+    built: 'Flutter + Firebase. UGC moderation, IAP and DAC7 handled solo through Apple review.',
     stack: ['Flutter', 'Firebase', 'iOS'],
     seed: 951,
   },

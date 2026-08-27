@@ -10,7 +10,7 @@ import { MockupFrame, Chip, INK, TERRA, OK } from './frame'
 export function DrossMockup() {
   return (
     <MockupFrame title="Dross · macOS" context="scan ./trace-app —also ./trace-backend" status="notarized · v0.1" tone={OK}>
-      <div className="overflow-hidden border border-ink bg-[#F0F0F0]">
+      <div className="overflow-hidden rounded-[16px] border border-ink bg-[#F0F0F0]">
         <div className="checker h-[7px] w-full border-b border-ink" aria-hidden />
 
         <div className="flex items-center gap-3 border-b border-ink px-3 py-2.5">

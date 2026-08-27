@@ -1,30 +1,22 @@
 'use client'
 
 /**
- * Work as a STACK OF FOLDERS — same drawer look as StackD's folder-stack:
- * each project is its own folder with its own staggered tab, folders overlap,
- * and a dark base closes the stack. Interactive: click a folder (tab or
- * header) to open it — a light sheet drops out with the fields, a wide
- * horizontal plant band woven between the text and the mockup, and a mockup
- * built for that product. An × closes it.
+ * Work as a STACK OF FOLDERS. Five cases only. Click tab or header to open:
+ * what it is, how it was developed, product decisions, mockup.
  *
- * Aithority is folder 04 — technical cofounder, interview case.
+ * 40px top radius stays. Side spines (1px) close the notch where the curve
+ * meets the sheet above. Open state lives on the stack so the next file
+ * stops tucking up and cannot paint over the open sheet.
  */
 
 import { useState } from 'react'
-import { PlantCanvas } from './plant-canvas'
+import { CASES, type CaseStudy } from './copy'
 import { KibloMockup } from './mockups/kiblo-mockup'
 import { BlockFlowMockup } from './mockups/blockflow-mockup'
 import { DrossMockup } from './mockups/dross-mockup'
-import { LouvrMockup } from './mockups/louvr-mockup'
 import { TraceMockup } from './mockups/trace-mockup'
-import { VoleaMockup } from './mockups/volea-mockup'
-import { SmashMockup } from './mockups/smash-mockup'
-import { F1Mockup } from './mockups/f1-mockup'
-import { AiActEvalMockup } from './mockups/ai-act-eval-mockup'
 import { AithorityMockup } from './mockups/aithority-mockup'
 import { AithorityTree } from './mockups/aithority-tree'
-import { CASES, LIGHT, type CaseStudy, type LightProject } from './copy'
 
 const TERRA = '#B8433F'
 const OK = '#3F7A4E'
@@ -33,19 +25,11 @@ const MOCKUP: Record<string, React.ComponentType> = {
   kiblo: KibloMockup,
   blockflow: BlockFlowMockup,
   dross: DrossMockup,
-  'louvr-labs': LouvrMockup,
   trace: TraceMockup,
   aithority: AithorityMockup,
 }
 
-const MOCKUP_LIGHT: Record<string, React.ComponentType> = {
-  Volea: VoleaMockup,
-  SMASH: SmashMockup,
-  'F1 Strategy Agent': F1Mockup,
-  'ai-act-eval': AiActEvalMockup,
-}
-
-const LEFTS = ['4%', '23%', '42%', '13%', '32%']
+const LEFTS = ['6%', '18%', '30%', '42%', '54%']
 
 function CloseIcon() {
   return (
@@ -59,6 +43,22 @@ function PlusIcon() {
     <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden>
       <path d="M5 0v10M0 5h10" stroke="currentColor" strokeWidth="1" />
     </svg>
+  )
+}
+
+/** Vertical ink from the file below, filling the 40px-radius notch. */
+function Spines({ tucked }: { tucked: boolean }) {
+  return (
+    <>
+      <span
+        className={`pointer-events-none absolute left-0 z-[1] w-px bg-ink ${tucked ? 'top-2 h-8' : 'top-0 h-10'}`}
+        aria-hidden
+      />
+      <span
+        className={`pointer-events-none absolute right-0 z-[1] w-px bg-ink ${tucked ? 'top-2 h-8' : 'top-0 h-10'}`}
+        aria-hidden
+      />
+    </>
   )
 }
 
@@ -83,15 +83,6 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-function PlantBand({ seed }: { seed: number }) {
-  return (
-    <div className="relative h-[180px] w-full overflow-hidden border border-line bg-raised sm:h-[210px]">
-      <PlantCanvas seed={seed} len={360} depth={5} anchor="center" growAngle={2.82} mirror fit="cover" color="#111111" className="pointer-events-none absolute inset-0 h-full w-full" />
-      <span className="absolute bottom-2 left-3 font-mono text-[8.5px] uppercase tracking-[0.14em] text-fg-faint">Fig. {String(seed).slice(0, 2)} · procedural</span>
-    </div>
-  )
-}
-
 function Sheet({ open, children }: { open: boolean; children: React.ReactNode }) {
   return (
     <div className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
@@ -106,52 +97,59 @@ function Folder({
   index,
   left,
   name,
+  role,
   tagline,
   statusText,
   statusTone,
   z,
   first,
+  tuck,
+  open,
+  onToggle,
   children,
 }: {
   index: string
   left: string
   name: string
+  role: string
   tagline: string
   statusText: string
   statusTone: string
   z: number
   first: boolean
+  tuck: boolean
+  open: boolean
+  onToggle: () => void
   children: React.ReactNode
 }) {
-  const [open, setOpen] = useState(false)
   return (
-    <div className={`relative ${first ? '' : '-mt-3'}`} style={{ zIndex: open ? 50 : z }}>
+    <div className={`relative ${first ? '' : tuck ? '-mt-2' : 'pt-6'}`} style={{ zIndex: z }}>
+      {!first && <Spines tucked={tuck} />}
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={onToggle}
         aria-expanded={open}
-        className="absolute -top-[19px] left-[var(--l)] flex h-[20px] items-center gap-2 rounded-t-[7px] border border-b-0 border-ink bg-bg px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink"
+        className="absolute -top-[24px] left-[var(--l)] flex h-[24px] items-center gap-2 rounded-t-[20px] border border-b-0 border-ink bg-bg px-3.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink"
         style={{ '--l': left } as React.CSSProperties}
       >
         <span className="text-accent">{index}</span>
         <span className="hidden sm:inline">{name}</span>
       </button>
 
-      <div className={`rounded-t-[18px] border border-b-0 border-ink ${open ? 'bg-bg' : 'bg-surface'}`}>
+      <div className={`overflow-hidden rounded-t-[40px] border border-b-0 border-ink ${open ? 'bg-bg' : 'bg-surface'}`}>
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={onToggle}
           aria-expanded={open}
-          className="peek-row flex w-full items-center justify-between gap-4 px-5 pb-6 pt-7 text-left sm:px-7"
+          className="peek-row flex w-full items-center justify-between gap-4 px-5 pb-5 pt-6 text-left sm:px-7"
         >
           <div className="min-w-0">
-            <p className="truncate text-[16px] font-medium text-ink">{name}</p>
-            <p className="mt-1 truncate font-mono text-[10px] uppercase tracking-[0.1em]" style={{ color: TERRA }}>
-              {tagline}
-            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">{role}</p>
+            <p className="mt-1 truncate text-[16px] font-medium text-ink">{name}</p>
+            <p className="mt-1 truncate font-mono text-[10px] uppercase tracking-[0.1em] text-fg-dim">{tagline}</p>
           </div>
           <div className="flex shrink-0 items-center gap-3">
-            <span className="hidden items-center gap-1.5 whitespace-nowrap border px-1.5 py-[3px] font-mono text-[9px] uppercase tracking-[0.08em] sm:inline-flex" style={{ borderColor: statusTone, color: statusTone }}>
+            <span className="hidden items-center gap-1.5 whitespace-nowrap rounded-[6px] border px-1.5 py-[3px] font-mono text-[9px] uppercase tracking-[0.08em] sm:inline-flex" style={{ borderColor: statusTone, color: statusTone }}>
               <span className="h-1 w-1" style={{ backgroundColor: statusTone }} aria-hidden />
               {statusText}
             </span>
@@ -164,94 +162,92 @@ function Folder({
   )
 }
 
-function DeepFolder({ caso, index, left, z, first }: { caso: CaseStudy; index: string; left: string; z: number; first: boolean }) {
+function DeepFolder({
+  caso,
+  index,
+  left,
+  z,
+  first,
+  tuck,
+  open,
+  onToggle,
+}: {
+  caso: CaseStudy
+  index: string
+  left: string
+  z: number
+  first: boolean
+  tuck: boolean
+  open: boolean
+  onToggle: () => void
+}) {
   const tone = caso.status.tone === 'ok' ? OK : TERRA
   const Mockup = MOCKUP[caso.slug]
   return (
     <div id={caso.slug} className="scroll-mt-20">
-      <Folder index={index} left={left} name={caso.name} tagline={caso.tagline} statusText={caso.status.text} statusTone={tone} z={z} first={first}>
+      <Folder
+        index={index}
+        left={left}
+        name={caso.name}
+        role={caso.role}
+        tagline={caso.tagline}
+        statusText={caso.status.text}
+        statusTone={tone}
+        z={z}
+        first={first}
+        tuck={tuck}
+        open={open}
+        onToggle={onToggle}
+      >
         <div className="px-5 pb-8 pt-5 sm:px-7">
-          {(caso.pace || caso.why || caso.how) && (
-            <div className="mb-7 grid gap-6 sm:grid-cols-3">
-              {caso.pace && (
-                <Field label="Pace">
-                  <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.pace}</p>
-                </Field>
-              )}
-              {caso.why && (
-                <Field label="Why">
-                  <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.why}</p>
-                </Field>
-              )}
-              {caso.how && (
-                <Field label="How">
-                  <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.how}</p>
-                </Field>
-              )}
-            </div>
-          )}
           <div className="grid gap-6 sm:grid-cols-2">
-            <Field label="Problem">
-              <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.problem}</p>
+            <Field label="What it is">
+              <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.what}</p>
             </Field>
-            <Field label="Approach">
-              <ul className="space-y-2">
-                {caso.approach.map((e, i) => (
-                  <li key={i} className="flex gap-2 text-[13px] leading-relaxed text-fg-muted">
-                    <span className="mt-[6px] h-1 w-1 shrink-0 bg-accent" aria-hidden />
-                    <span>{e}</span>
-                  </li>
-                ))}
-              </ul>
+            <Field label="How it was developed">
+              <p className="text-[13.5px] leading-relaxed text-fg-muted">{caso.built}</p>
             </Field>
           </div>
 
-          <div className="my-7">
-            <PlantBand seed={caso.seed} />
+          <div className="mt-7">
+            <p className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">Product decisions</p>
+            <dl className="mt-3 divide-y divide-hair border-y border-hair">
+              {caso.decisions.map((d) => (
+                <div key={d.title} className="grid gap-1 py-3 sm:grid-cols-[minmax(0,14rem)_1fr] sm:gap-6">
+                  <dt className="text-[13px] font-medium text-ink">{d.title}</dt>
+                  <dd className="text-[13px] leading-relaxed text-fg-muted">{d.detail}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            <Field label="Technical decisions">
-              <div className="space-y-3">
-                {caso.decisions.map((d) => (
-                  <div key={d.title}>
-                    <p className="text-[12.5px] font-medium text-ink">{d.title}</p>
-                    <p className="mt-0.5 text-[12.5px] leading-relaxed text-fg-muted">{d.detail}</p>
-                  </div>
-                ))}
-              </div>
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+            <Field label="Stack">
+              <StackChips stack={caso.stack} />
             </Field>
-            <div className="flex flex-col justify-between gap-4">
-              <Field label="Result">
-                <p className="text-[13.5px] leading-relaxed text-ink">{caso.result}</p>
-              </Field>
-              <Field label="Stack">
-                <StackChips stack={caso.stack} />
-              </Field>
-              {caso.link && (
-                <a
-                  href={caso.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-fit items-center gap-2 border border-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ink hover:text-bg"
-                >
-                  Open repository ↗
-                </a>
-              )}
-            </div>
+            {caso.link && (
+              <a
+                href={caso.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-2 border border-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ink hover:text-bg"
+              >
+                {caso.linkLabel ?? 'Open repository'} ↗
+              </a>
+            )}
           </div>
 
           {Mockup && (
             <div className="mt-7">
               <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">
-                {caso.slug === 'aithority' ? 'Dashboard · how it looks' : 'How it works, live'}
+                {caso.slug === 'aithority' ? 'Dashboard' : 'Mockup'}
               </p>
               <Mockup />
             </div>
           )}
           {caso.slug === 'aithority' && (
             <div className="mt-8">
-              <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">The engine · how it reasons</p>
+              <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">The engine</p>
               <AithorityTree />
             </div>
           )}
@@ -261,71 +257,40 @@ function DeepFolder({ caso, index, left, z, first }: { caso: CaseStudy; index: s
   )
 }
 
-function LightFolder({ p, index, left, z }: { p: LightProject; index: string; left: string; z: number }) {
-  const tone = p.status.toLowerCase().includes('production') ? OK : TERRA
-  const Mockup = MOCKUP_LIGHT[p.name]
-  return (
-    <Folder index={index} left={left} name={p.name} tagline={p.tagline} statusText={p.status} statusTone={tone} z={z} first={false}>
-      <div className="px-5 pb-8 pt-5 sm:px-7">
-        <div className="grid gap-6 sm:grid-cols-2">
-          <Field label="What it is">
-            <p className="text-[13.5px] leading-relaxed text-fg-muted">{p.blurb}</p>
-          </Field>
-          <Field label="At a glance">
-            <div className="space-y-2.5">
-              {p.fields.map((f) => (
-                <div key={f.label} className="flex gap-3 text-[12.5px] leading-relaxed">
-                  <span className="w-[92px] shrink-0 font-mono text-[10.5px] uppercase tracking-[0.12em] text-fg-faint">
-                    {f.label}
-                  </span>
-                  <span className="text-ink">{f.value}</span>
-                </div>
-              ))}
-            </div>
-          </Field>
-        </div>
-        <div className="my-6">
-          <PlantBand seed={p.seed} />
-        </div>
-        <StackChips stack={p.stack} />
-
-        {p.link && (
-          <a
-            href={p.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 border border-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ink hover:text-bg"
-          >
-            Open repository ↗
-          </a>
-        )}
-        {Mockup && (
-          <div className="mt-7">
-            <p className="mb-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">How it works, live</p>
-            <Mockup />
-          </div>
-        )}
-      </div>
-    </Folder>
-  )
-}
-
 export function ProjectArchive() {
-  const total = CASES.length + LIGHT.length
+  const total = CASES.length
+  const [openSlug, setOpenSlug] = useState<string | null>(null)
+  const lastOpen = openSlug === CASES[total - 1].slug
+
   return (
-    <div className="relative pt-7">
-      {CASES.map((c, i) => (
-        <DeepFolder key={c.slug} caso={c} index={c.index} left={LEFTS[i % LEFTS.length]} z={i + 1} first={i === 0} />
-      ))}
-      {LIGHT.map((p, i) => {
-        const idx = CASES.length + i
-        return <LightFolder key={p.name} p={p} index={`0${idx + 1}`} left={LEFTS[idx % LEFTS.length]} z={idx + 1} />
+    <div className="relative pt-9">
+      {CASES.map((c, i) => {
+        const prevSlug = i === 0 ? null : CASES[i - 1].slug
+        const tuck = i > 0 && openSlug !== prevSlug
+        return (
+          <DeepFolder
+            key={c.slug}
+            caso={c}
+            index={c.index}
+            left={LEFTS[i % LEFTS.length]}
+            z={i + 1}
+            first={i === 0}
+            tuck={tuck}
+            open={openSlug === c.slug}
+            onToggle={() => setOpenSlug((s) => (s === c.slug ? null : c.slug))}
+          />
+        )
       })}
 
-      <div className="relative -mt-3 rounded-t-[18px] bg-ink px-5 py-6 text-bg sm:px-7" style={{ zIndex: total + 1 }}>
-        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]">Every line above is real — shipped, in review, or open source.</p>
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: TERRA }}>Built solo, end to end</p>
+      <div className={`relative ${lastOpen ? 'pt-6' : '-mt-2'}`} style={{ zIndex: total + 1 }}>
+        <Spines tucked={!lastOpen} />
+        <div className="overflow-hidden rounded-t-[40px] bg-ink px-5 py-5 text-bg sm:px-7">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]">Five products — founder and technical cofounder.</p>
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: TERRA }}>
+              Design + engineering, same person
+            </p>
+          </div>
         </div>
       </div>
     </div>

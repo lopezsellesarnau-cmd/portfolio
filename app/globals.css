@@ -53,6 +53,14 @@
   background-image: repeating-linear-gradient(45deg, rgba(17, 17, 17, 0.035) 0 1px, transparent 1px 7px);
 }
 
+/* Same gutter on all four sides of the hero card. On desktop the sides come
+   from centering a 1320px card; top/bottom used to stay at 24px. */
+.hero-frame {
+  box-sizing: border-box;
+  width: 100%;
+  padding: max(1.5rem, calc((100% - 1320px) / 2));
+}
+
 /* Damero — 1-bit ruler, same cell size as Dross CheckerStrip. */
 .checker {
   background-image: conic-gradient(#111111 25%, transparent 0 50%, #111111 0 75%, transparent 0);

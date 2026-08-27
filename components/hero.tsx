@@ -34,20 +34,10 @@ export function Hero() {
     <section id="top" className="grain border-b border-line">
       <div className="checker h-3 w-full border-b border-ink" aria-hidden />
 
-      <div className="mx-auto w-full max-w-[1320px] px-6 py-8 sm:py-12">
-        <div className="relative border border-ink bg-surface">
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-ink px-5 py-3 sm:px-7">
-            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink">
-              <span className="text-fg-faint">Type:</span> {PROFILE.role}
-            </p>
-            <p className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-fg-dim md:block">
-              Alcoy · NL / DE · UK if sponsored
-            </p>
-            <span className="bg-ink px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-[0.14em] text-bg">Available</span>
-          </div>
-
+      <div className="hero-frame">
+        <div className="relative mx-auto w-full max-w-[1320px] border border-ink bg-surface">
           <div className="grid gap-0 lg:grid-cols-[1fr_1.1fr]">
-            <div className="border-b border-ink px-5 py-8 sm:px-7 sm:py-9 lg:border-b-0 lg:border-r">
+            <div className="border-b border-ink px-5 py-6 sm:px-7 sm:py-7 lg:border-b-0 lg:border-r">
               <p className="fade-up font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{PROFILE.eyebrow}</p>
 
               <h1 className="display fade-up mt-4 text-[clamp(2.5rem,6.5vw,4.4rem)] font-medium text-ink" style={{ animationDelay: '60ms' }}>
@@ -83,8 +73,8 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="flex flex-col">
-              <div className="grain relative min-h-[180px] flex-1 overflow-hidden sm:min-h-[220px]">
+            <div className="flex min-h-0 flex-col lg:h-full">
+              <div className="grain relative h-[160px] min-h-0 overflow-hidden sm:h-[190px] lg:h-auto lg:min-h-[210px] lg:flex-1">
                 <PlantCanvas
                   seed={HERO_PLANT_SEED}
                   len={430}
@@ -112,11 +102,11 @@ export function Hero() {
             <div className="flex items-center gap-4 px-5 py-4 sm:px-7">
               <Marks />
               <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint sm:inline">
-                Kiblo · Dross · TRACE · BlockFlow
+                Kiblo · Aithority · TRACE · Dross
               </span>
             </div>
             <div className="grid flex-1 grid-cols-3 divide-x divide-hair border-l border-ink sm:max-w-[440px]">
-              <SpecField label="Live" value="04" sub="not prototypes" />
+              <SpecField label="Live" value="05" sub="not prototypes" />
               <SpecField label="Design" value="+ code" sub="same person" />
               <SpecField label="Markets" value="NL DE" sub="UK if sponsor" />
             </div>

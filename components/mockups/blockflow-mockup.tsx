@@ -33,7 +33,7 @@ export function BlockFlowMockup() {
     <MockupFrame title="Voice agent · live" context="call → ticket" status="status: ticket created" tone={OK}>
       <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
         {/* Llamada */}
-        <div className="border border-line bg-surface">
+        <div className="overflow-hidden rounded-[14px] border border-line bg-surface">
           <div className="flex items-center justify-between border-b border-hair px-3 py-2 font-mono text-[9.5px] uppercase tracking-[0.12em] text-fg-dim">
             <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-[#B8433F] pulse-dot" aria-hidden />
@@ -63,7 +63,7 @@ export function BlockFlowMockup() {
         </div>
 
         {/* Ticket */}
-        <div className="border border-ink bg-surface">
+        <div className="overflow-hidden rounded-[14px] border border-ink bg-surface">
           <div className="flex items-center justify-between border-b border-hair px-3 py-2 font-mono text-[9.5px] uppercase tracking-[0.12em] text-ink">
             <span>Ticket #4471</span>
             <Chip label="Auto" tone={OK} />
