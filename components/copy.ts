@@ -16,7 +16,7 @@ export const PROFILE = {
   role: 'Product Engineer · Full-stack',
   eyebrow: '[ 22 · Alcoy · NL / DE · UK if sponsored ]',
   hero: 'Founder of Kiblo — pet-food iOS, in App Store review for the US and Canada. Technical cofounder of Aithority (EU AI Act); the company is in Lanzadera, Spain. TRACE live on the App Store US. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
-  sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. ~2 years in Paderborn at Deutsche Post / DHL. NL / DE; UK when the role sponsors.',
+  sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL.',
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -48,29 +48,34 @@ export const CASES: CaseStudy[] = [
     tagline: 'Pet-food iOS — full consumer loop, App Store review',
     status: { text: 'Founder · in review US & Canada', tone: 'accent' },
     what:
-      'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. Built to prove I can ship a full consumer loop alone — onboarding, catalog, paywall, push, App Store. In review for the US and Canada. Not live, no revenue.',
+      'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. In App Store review for the US and Canada. Not live, no revenue. I am getting the first users through social media and building in public — not waiting for the listing to do the distribution.',
     built:
-      'Solo, 16–23 Aug 2026. I lock product and constraints; Cursor/Claude implement; I reject and ship. Expo 57, React Native, Firebase, RevenueCat. Speed is the case — a startup can see how I decide what to automate and what not to fake.',
+      'Solo. Expo 57, React Native, Firebase, RevenueCat. I lock product and constraints; AI implements in loops (conditions, then fix what failed); I reject and ship.',
     decisions: [
       {
-        title: 'Never invent a barcode',
+        title: 'Feeding tips are a rule engine, not an LLM call',
         detail:
-          'Catalog matches GTIN exactly. Packs with no retail code stay unscannable. A wrong bag is worse than no scan — same bar as a checkout error.',
+          'The first plan was an LLM for every tip. A wrong answer about a dog’s health is worse than a missing one, and it has a per-call cost. I built a deterministic engine instead.',
       },
       {
-        title: 'Feeding tips are a rule engine, not an LLM',
+        title: 'Home stays a bowl — details live on the bowl',
         detail:
-          'Treat budget vs a vet 10% guideline, food flags, one-tap extras. A wrong answer about a dog’s health is worse than a missing one, and it has no per-call cost.',
+          'Home was getting noisy. I redesigned so the homepage stays clean. Feeding tips, details and extras sit on the bowl’s detail screen, not on home.',
       },
       {
-        title: 'The home screen stays a bowl',
+        title: 'Plans use real US recipes, not generated meals',
         detail:
-          'Geometry is locked; grade lives in copy, not a letter on the orbit. The screen has to stay a product, not a poster.',
+          'Creating a plan means choosing meals that already exist in a US dog-food catalogue. Not an LLM suggestion of a recipe.',
       },
       {
-        title: 'Plus is extra dogs, not a fake lock',
+        title: 'Grams per day from the RER formula vets use',
         detail:
-          'Free is one dog on-device. Plus is multi-dog, 14-day trends, the tips engine. Custom paywall after RevenueCat’s default converted like a bare price list.',
+          'Daily amount comes from Resting Energy Requirement: age, weight, activity, meals per day. Not a model guess.',
+      },
+      {
+        title: 'RevenueCat “valid credentials” was a bundle ID',
+        detail:
+          'The In-App Purchase key in App Store Connect was created and valid. RevenueCat said the credentials were valid and still could not connect. The App Bundle ID was not exactly the one on the app.',
       },
     ],
     stack: ['Cursor', 'Claude', 'React Native', 'Expo SDK 57', 'TypeScript', 'Firebase', 'RevenueCat'],
@@ -88,30 +93,35 @@ export const CASES: CaseStudy[] = [
     what:
       'EU AI Act compliance for companies using AI in HR, credit or biometrics: inventory, Annex III risk, dated evidence. The company is accepted into Lanzadera in Spain — not a personal solo admission. First paying client. I own backend, frontend, integrations, classification, and UI. Sales and legal stay with the commercial cofounder.',
     built:
-      'Classification API and dashboard in Next.js. Microsoft Graph is read-only; no stored third-party tokens. Built for a team that has to survive counsel, not a demo that overclaims “fully automatic compliance.”',
+      'I own product, UI, classification, and backend. Sales and legal stay with the commercial cofounder — I do not claim the commercial motion. Next.js, Node, Microsoft 365 / Google Workspace / provider admin APIs, Claude Haiku for a suggested class, Turso after Render’s disk kept wiping state.',
     decisions: [
       {
-        title: 'Discovery is not classification',
+        title: 'Time-to-value was over seven minutes',
         detail:
-          'Microsoft 365 can fill the inventory. “Notion AI showed up” does not mean high-risk — that depends on use. Selling fully automatic classification would fail in two questions from counsel.',
+          'Creating an AI system was a long, complex flow. I cut it to a three-step onboarding: connect Microsoft 365, Google Workspace, or an Anthropic / OpenAI admin API key; auto-create the system; suggest a classification (Claude Haiku); a human confirms; then the dashboard.',
       },
       {
-        title: 'The engine suggests. It does not certify.',
+        title: 'The engine suggests. A human confirms.',
         detail:
-          'Rules plus an LLM propose risk and remediation. The customer validates with their own legal counsel. We log what was declared, when, and by whom.',
+          'Haiku proposes the class via API. The customer confirms. Selling fully automatic compliance would fail the first serious legal question.',
       },
       {
-        title: 'Split the company like a real startup',
+        title: 'UI is a large popup, editorial-minimal',
         detail:
-          'I own the product surface and the engine. The commercial cofounder owns sales and legal. Lanzadera is the company’s path, not a badge on my CV as a lone founder.',
+          'Intentional: one focused surface at a time, not a dense admin grid. Time-to-value and trust over chrome.',
       },
       {
-        title: 'No Graph tokens on disk',
+        title: 'A PDF the customer can send',
         detail:
-          'App-only token per sync, read-only directory consent. Less surface to protect when the product is evidence for an audit.',
+          'Classification alone does not close a deal. The product exports a PDF the company can send to their client as evidence they are working the Act.',
+      },
+      {
+        title: 'Departments vanished on every reload',
+        detail:
+          'Render’s filesystem is wiped on cold start and redeploy. Data lived there, so created departments disappeared. I did not buy a higher Render tier — I moved the database to Turso.',
       },
     ],
-    stack: ['Next.js', 'Node / Express', 'Microsoft Graph', 'OAuth', 'AI Act · Annex III'],
+    stack: ['Next.js', 'Node / Express', 'Turso', 'Microsoft Graph', 'Claude Haiku', 'AI Act · Annex III'],
     seed: 655,
     link: 'https://landing-claude-chi.vercel.app/#motor',
     linkLabel: 'Open landing',
@@ -305,24 +315,24 @@ export const CREDENTIALS: Credential[] = [
 
 export const HOW_I_WORK = {
   eyebrow: 'How I work',
-  title: 'Pair with AI. Lock the constraints. Own the product.',
+  title: 'Loop engineering. Lock the conditions. Own the product.',
   lead:
-    'I specify product, visual lock, and what must not be faked. Cursor and Claude write and iterate; I review, reject, and ship. The AI does not own the product — I do.',
+    'I do not send the model one long prompt and hope the result is right. I run loops with AI: build against explicit conditions; if they fail, inspect why, then rebuild. I own the constraints and the ship. The model does not.',
   points: [
     {
-      title: 'AI as pair, not owner',
+      title: 'Loops, not a lucky prompt',
       detail:
-        'Speed comes from a tight loop: I set the constraints, the agent implements, I run the simulator and change what is wrong. Claiming “AI built it” would be false — claiming I typed every line by hand would also be false.',
+        'Each loop has conditions that must hold (tests, a visual lock, a rule that must not be faked). If they are not met, the next pass is “why did this fail?” then a correct build — not a longer prompt. Claude, Cursor, or whatever the job uses: same loop.',
     },
     {
-      title: 'Constraints I lock first',
+      title: 'Problems first, then the stack',
       detail:
-        'Exact barcodes, never invented UPCs. Feeding advice as a rule engine, not an LLM call. Contract drift via the TypeScript compiler API, not regex. Status that only changes when something actually happened. Deterministic-first where a wrong answer is worse than a missing one.',
+        'Kiblo: no LLM for feeding advice; RER for grams; real US recipes in the plan; home stays a bowl. Aithority: seven-minute setup down to a three-step confirm flow; Turso when Render’s disk wiped departments. Dross: compiler API, not regex.',
     },
     {
       title: 'Team outcomes, not a founder pitch',
       detail:
-        'I want to own outcomes on a team product — design and code in the same person, shipped software, not a YC co-founder deck. Solo shipping is proof I can carry a surface; the job is to do that with a team.',
+        'Solo shipping is proof I can carry a surface. On Aithority the commercial cofounder owns sales and legal; I own product and engineering. The job I want is the same split on a team: design and code, same person, shipped software.',
     },
   ],
 }

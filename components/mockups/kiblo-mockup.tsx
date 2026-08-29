@@ -34,7 +34,7 @@ export function KibloMockup() {
         </div>
         <div className="space-y-3 font-mono text-[10px] uppercase tracking-[0.12em]">
           <p className="text-fg-faint">Great choice · portions from Waltham RER</p>
-          <p className="text-[13px] normal-case tracking-normal text-ink">Days, not months — Cursor + Claude, I own the product calls.</p>
+          <p className="text-[13px] normal-case tracking-normal text-ink">Days, not months — AI in loops, I own the product calls.</p>
           <div className="flex gap-2 pt-1">
             <span className="flex-1 rounded-[10px] bg-ink py-2 text-center text-[9px] text-bg">Share bowl</span>
             <span className="rounded-[10px] border border-ink px-3 py-2 text-[9px]">Reorder</span>

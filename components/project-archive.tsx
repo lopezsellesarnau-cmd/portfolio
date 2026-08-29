@@ -210,7 +210,7 @@ function DeepFolder({
           </div>
 
           <div className="mt-7">
-            <p className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">Product decisions</p>
+            <p className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-faint">Problems solved</p>
             <dl className="mt-3 divide-y divide-hair border-y border-hair">
               {caso.decisions.map((d) => (
                 <div key={d.title} className="grid gap-1 py-3 sm:grid-cols-[minmax(0,14rem)_1fr] sm:gap-6">
