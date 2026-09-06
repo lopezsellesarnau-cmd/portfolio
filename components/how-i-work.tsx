@@ -1,46 +1,27 @@
-import { HOW_I_WORK, HERO_PLANT_SEED } from './copy'
-import { PlantCanvas } from './plant-canvas'
+import { HOW_I_WORK } from './copy'
+import { CropMarks } from './crop-frame'
 
-/**
- * Same ficha as the hero: checker, grain, ink-bordered surface — not a black band.
- */
 export function HowIWork() {
   return (
-    <section id="how" className="grain scroll-mt-16 border-b border-line">
-      <div className="checker h-3 w-full border-b border-ink" aria-hidden />
-      <div className="hero-frame">
-        <div className="relative border border-ink bg-surface">
-          <div className="grid gap-0 lg:grid-cols-[1fr_1.1fr]">
-            <div className="border-b border-ink px-5 py-6 sm:px-7 sm:py-7 lg:border-b-0 lg:border-r">
-              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{HOW_I_WORK.eyebrow}</p>
-              <h2 className="display mt-4 text-[clamp(2rem,5vw,3.2rem)] font-medium text-ink">{HOW_I_WORK.title}</h2>
-              <p className="mt-5 max-w-[48ch] text-[15px] leading-relaxed text-fg-muted">{HOW_I_WORK.lead}</p>
-            </div>
-            <div className="flex flex-col lg:self-start lg:w-full">
-              <div className="grain relative h-[120px] overflow-hidden sm:h-[140px] lg:h-[160px]">
-                <PlantCanvas
-                  seed={HERO_PLANT_SEED}
-                  len={280}
-                  depth={4}
-                  anchor="center"
-                  fit="cover"
-                  color="#111111"
-                  className="pointer-events-none absolute inset-0 h-full w-full"
-                />
+    <section id="how" className="crop-frame relative scroll-mt-20 py-20 sm:py-28">
+      <CropMarks />
+      <div className="wide-col">
+        <span className="pill-tag">{HOW_I_WORK.eyebrow}</span>
+        <h2 className="display mt-5 max-w-[22ch] text-[clamp(1.9rem,4vw,2.8rem)] text-ink">
+          {HOW_I_WORK.title}
+        </h2>
+        <p className="mt-5 max-w-[58ch] text-[18px] leading-relaxed text-fg-muted">{HOW_I_WORK.lead}</p>
+
+        <div className="mt-14 space-y-10">
+          {HOW_I_WORK.points.map((p, i) => (
+            <div key={p.title} className="grid gap-2 md:grid-cols-[3rem_1fr] md:gap-6">
+              <span className="display text-[15px] text-accent tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <p className="text-[16px] font-medium text-ink">{p.title}</p>
+                <p className="mt-1.5 max-w-[60ch] text-[15px] leading-relaxed text-fg-muted">{p.detail}</p>
               </div>
-              <ol className="divide-y divide-ink border-t border-ink">
-                {HOW_I_WORK.points.map((p, i) => (
-                  <li key={p.title} className="grid grid-cols-[auto_1fr] gap-4 px-5 py-4 sm:px-6">
-                    <span className="font-mono text-[10px] tabular-nums text-accent">0{i + 1}</span>
-                    <div>
-                      <p className="text-[15px] font-medium text-ink">{p.title}</p>
-                      <p className="mt-1 text-[13.5px] leading-relaxed text-fg-muted">{p.detail}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

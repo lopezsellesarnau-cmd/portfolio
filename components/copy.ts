@@ -16,7 +16,7 @@ export const PROFILE = {
   role: 'Product Engineer · Full-stack',
   eyebrow: '[ 22 · Alcoy · NL / DE · UK if sponsored ]',
   hero: 'Founder of Kiblo — pet-food iOS, in App Store review for the US and Canada. Technical cofounder of Aithority (EU AI Act); the company is in Lanzadera, Spain. TRACE live on the App Store US. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
-  sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL.',
+  sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL; interested in product engineering roles in Germany (DE).',
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -30,6 +30,8 @@ export type CaseStudy = {
   role: string
   tagline: string
   status: { text: string; tone: 'ok' | 'accent' }
+  /** Three lines, plain: what the product is. Shown above "problems solved". */
+  blurb: string
   what: string
   built: string
   decisions: { title: string; detail: string }[]
@@ -47,6 +49,8 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'Pet-food iOS — full consumer loop, App Store review',
     status: { text: 'Founder · in review US & Canada', tone: 'accent' },
+    blurb:
+      'A weekly habit app for dog owners: scan the food bag already in the cupboard, portion the meal from the dog’s weight, and reorder before it runs out.',
     what:
       'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. In App Store review for the US and Canada. Not live, no revenue. I am getting the first users through social media and building in public — not waiting for the listing to do the distribution.',
     built:
@@ -90,6 +94,8 @@ export const CASES: CaseStudy[] = [
     role: 'Technical cofounder',
     tagline: 'EU AI Act compliance · Lanzadera (the company)',
     status: { text: 'Cofounder · Lanzadera · first client', tone: 'ok' },
+    blurb:
+      'EU AI Act compliance for companies using AI in hiring, credit or biometrics. It inventories every system, classifies its risk, and produces dated evidence a client will accept.',
     what:
       'EU AI Act compliance for companies using AI in HR, credit or biometrics: inventory, Annex III risk, dated evidence. The company is accepted into Lanzadera in Spain — not a personal solo admission. First paying client. I own backend, frontend, integrations, classification, and UI. Sales and legal stay with the commercial cofounder.',
     built:
@@ -133,6 +139,8 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'Privacy iOS — live App Store US',
     status: { text: 'Founder · live US', tone: 'ok' },
+    blurb:
+      'A privacy app that scans for breaches, scores your real exposure from severity, and walks removals to 24 US data brokers. The thing people share is a report card, not a chore list.',
     what:
       'Privacy iOS. Live on the App Store in the US — not Canada. Breach scan, Exposure Score from real severity, removal to 24 US brokers. The share object is a vertical report card, not an Incogni-style to-do list.',
     built:
@@ -166,6 +174,8 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'Mac app + CLI — notarized DMG',
     status: { text: 'Founder · notarized DMG', tone: 'ok' },
+    blurb:
+      'A Mac app and CLI that catches the moment your frontend and backend stop agreeing on their contract — built for a solo team shipping with AI, not another PR-time cloud linter.',
     what:
       'Finds when your client and your backend stop agreeing. Notarized Mac app plus CI CLI. Built for a solo/full-stack team deploying with AI assistance — not another PR-time cloud linter.',
     built:
@@ -194,6 +204,8 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'UK proptech voice agent — in production',
     status: { text: 'In production · not selling', tone: 'ok' },
+    blurb:
+      'An out-of-hours voice agent for UK property managers: it holds a real conversation, triages the issue, and files a structured ticket. Only the edge case ever reaches a person.',
     what:
       'UK property ops. Out-of-hours voice agent: conversation, triage, structured ticket. In production. No paying customers. Unlike Kiblo, this is not a product I am distributing right now — the work is the live system.',
     built:
@@ -369,3 +381,63 @@ export const CONTACT = {
   cta: 'Email me',
   note: 'Product Engineer · Full-stack. GitHub, LinkedIn, and CV below.',
 }
+
+/* ── Skills · Abilities · Milestones — one section, three registers ──────────
+   Skills: the concrete stack. Abilities: what I can carry end to end.
+   Milestones: dated proof, newest first. Kept honest — see the vault. */
+
+export const SKILLS: { group: string; items: string[] }[] = [
+  { group: 'Languages', items: ['TypeScript', 'Python', 'Dart', 'SQL', 'Swift'] },
+  { group: 'Frameworks', items: ['Next.js', 'React', 'React Native / Expo', 'Flutter', 'Node / Express', 'SwiftUI'] },
+  { group: 'Data & infra', items: ['Firebase', 'Turso / SQLite', 'Supabase', 'Vercel', 'Render', 'RevenueCat'] },
+  { group: 'Integrations', items: ['Stripe Connect', 'Microsoft Graph', 'Meta Ads API', 'OAuth', 'OpenAI / Anthropic admin APIs', 'Resend'] },
+  { group: 'AI', items: ['Claude API', 'LLM orchestration', 'Eval design · LLM-as-judge', 'Voice AI', 'Deterministic rules over LLM', 'RAG'] },
+]
+
+export const ABILITIES: { title: string; detail: string }[] = [
+  {
+    title: 'Design the product and its visual system — no handoff',
+    detail: 'Interface, identity, typography and motion, then the code that ships it. I do not need a designer to put a product in front of users.',
+  },
+  {
+    title: 'Ship to the App Store solo',
+    detail: 'IAP, subscriptions, privacy manifests, DAC7, UGC moderation, and Apple review — carried end to end on TRACE, SMASH and Kiblo.',
+  },
+  {
+    title: 'Run AI in loops against locked constraints',
+    detail: 'Conditions first — tests, a visual lock, a rule that must not be faked — then rebuild what failed. I own the constraints and the ship; the model does not.',
+  },
+  {
+    title: 'Own the backend and the integrations',
+    detail: 'Classification logic, admin-API connections, auth, data models, and the move off a platform when it fights the product (Render → Turso on Aithority).',
+  },
+  {
+    title: 'Distribute what I build',
+    detail: 'Short-form video, written, recorded and published solo. The F1 repo went public because viewers asked for the code.',
+  },
+]
+
+/* ── Exploded-stack diagrams — each project (and the hero) as a layered
+   blueprint, top layer first. `side` places the callout label; `texture`
+   is the plate's surface treatment. ─────────────────────────────────────── */
+
+export type StackLayer = {
+  label: string
+  desc: string
+  side: 'left' | 'right'
+  texture?: 'grid' | 'dots' | 'pins' | 'plain'
+  href?: string
+}
+
+/* The exploded-stack illustration builds its layers from CASES (see work.tsx). */
+
+export type Milestone = { date: string; title: string; detail?: string }
+
+export const MILESTONES: Milestone[] = [
+  { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app — breach scan, exposure score, broker removals. Shipped and public.' },
+  { date: 'Aug 2026', title: 'Kiblo submitted — in App Store review (US & Canada)', detail: 'Concept to review build in days, Cursor + Claude in loops.' },
+  { date: '2026', title: 'Dross shipped — notarized Mac app + CLI', detail: 'Contract-drift checker with a golden corpus at 100% precision and recall.' },
+  { date: '2026', title: 'Aithority accepted into Lanzadera, first paying client', detail: 'EU AI Act compliance. The company is in the accelerator — technical cofounder.' },
+  { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Building and shipping products end to end alongside the job.' },
+  { date: 'Live', title: 'SMASH on the App Store · Volea and Louvr Labs in production', detail: 'Earlier products still running with real users and clients.' },
+]

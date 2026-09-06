@@ -1,116 +1,67 @@
 import { PROFILE, HERO_PLANT_SEED } from './copy'
 import { PlantCanvas } from './plant-canvas'
-
-/** Decorative technical marks — the crosshair, the frame and the checker square. */
-function Marks() {
-  return (
-    <div className="flex items-center gap-3 text-ink" aria-hidden>
-      <svg width="20" height="20" viewBox="0 0 20 20">
-        <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1" />
-      </svg>
-      <svg width="18" height="18" viewBox="0 0 18 18">
-        <rect x="1.5" y="1.5" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1" />
-      </svg>
-      <svg width="18" height="18" viewBox="0 0 18 18">
-        <rect x="0" y="0" width="9" height="9" fill="currentColor" />
-        <rect x="9" y="9" width="9" height="9" fill="currentColor" />
-      </svg>
-    </div>
-  )
-}
-
-function SpecField({ label, value, sub }: { label: string; value: string; sub?: string }) {
-  return (
-    <div className="px-4 py-3 sm:px-5">
-      <p className="font-mono text-[9px] uppercase leading-tight tracking-[0.14em] text-fg-faint">{label}</p>
-      <p className="mt-1 font-mono text-[22px] tabular-nums leading-none text-ink sm:text-[26px]">{value}</p>
-      {sub && <p className="mt-1 font-mono text-[8.5px] uppercase tracking-[0.1em] text-fg-dim">{sub}</p>}
-    </div>
-  )
-}
+import { CropMarks } from './crop-frame'
 
 export function Hero() {
   return (
-    <section id="top" className="grain border-b border-line">
-      <div className="checker h-3 w-full border-b border-ink" aria-hidden />
+    <section id="top" className="crop-frame relative scroll-mt-20 overflow-hidden py-16 sm:py-24">
+      <CropMarks />
+      <div className="wide-col grid items-center gap-8 lg:grid-cols-[1fr_0.82fr] lg:gap-4">
+        <div className="relative z-10">
+          <span className="pill-tag fade-up">{PROFILE.role}</span>
 
-      <div className="hero-frame">
-        <div className="relative mx-auto w-full max-w-[1320px] border border-ink bg-surface">
-          <div className="grid gap-0 lg:grid-cols-[1fr_1.1fr]">
-            <div className="border-b border-ink px-5 py-6 sm:px-7 sm:py-7 lg:border-b-0 lg:border-r">
-              <p className="fade-up font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{PROFILE.eyebrow}</p>
+          <h1
+            className="display fade-up mt-6 max-w-[14ch] text-[clamp(2rem,7vw,4.1rem)] text-ink"
+            style={{ animationDelay: '60ms' }}
+          >
+            I design the interface and write the <span className="display-italic">software</span>.
+          </h1>
 
-              <h1 className="display fade-up mt-4 text-[clamp(2.5rem,6.5vw,4.4rem)] font-medium text-ink" style={{ animationDelay: '60ms' }}>
-                Product
-                <br />
-                Engineer
-              </h1>
+          <p
+            className="fade-up mt-7 max-w-[52ch] text-[18px] leading-relaxed text-fg-muted"
+            style={{ animationDelay: '120ms' }}
+          >
+            {PROFILE.hero}
+          </p>
+          <p
+            className="fade-up mt-3 max-w-[52ch] text-[15px] leading-relaxed text-fg-dim"
+            style={{ animationDelay: '160ms' }}
+          >
+            {PROFILE.sub}
+          </p>
 
-              <div className="fade-up mt-6 space-y-1.5" style={{ animationDelay: '120ms' }}>
-                <p className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.1em] text-ink">
-                  Full-stack · design + engineering <span className="text-fg-faint">&gt;&gt;&gt;&gt;&gt;&gt;</span>
-                </p>
-                <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-fg-dim">Live products · not prototypes</p>
-              </div>
-
-              <p className="fade-up mt-5 max-w-[48ch] text-[15px] leading-relaxed text-fg-muted" style={{ animationDelay: '160ms' }}>
-                {PROFILE.hero}
-              </p>
-              <p className="fade-up mt-2 max-w-[48ch] font-mono text-[11px] leading-relaxed text-fg-dim" style={{ animationDelay: '180ms' }}>
-                {PROFILE.sub}
-              </p>
-
-              <div className="fade-up mt-7 flex flex-wrap gap-3" style={{ animationDelay: '220ms' }}>
-                <a href="#work" className="btn-solid">
-                  See the work
-                </a>
-                <a href="#contact" className="btn-ghost">
-                  Contact
-                </a>
-                <a href="/Arnau-Lopez-Selles-CV.pdf" className="btn-ghost">
-                  CV
-                </a>
-              </div>
-            </div>
-
-            <div className="flex min-h-0 flex-col lg:h-full">
-              <div className="grain relative h-[160px] min-h-0 overflow-hidden sm:h-[190px] lg:h-auto lg:min-h-[210px] lg:flex-1">
-                <PlantCanvas
-                  seed={HERO_PLANT_SEED}
-                  len={430}
-                  depth={5}
-                  anchor="center"
-                  fit="cover"
-                  color="#111111"
-                  className="pointer-events-none absolute inset-0 h-full w-full"
-                />
-              </div>
-              <div className="grid grid-cols-2 divide-x divide-hair border-t border-ink font-mono text-[10px] uppercase tracking-[0.12em]">
-                <div className="px-4 py-3">
-                  <span className="text-fg-faint">Serial</span>
-                  <p className="mt-0.5 text-ink">AI-2026-ALS</p>
-                </div>
-                <div className="px-4 py-3">
-                  <span className="text-fg-faint">Status</span>
-                  <p className="mt-0.5" style={{ color: '#3F7A4E' }}>Active</p>
-                </div>
-              </div>
-            </div>
+          <div
+            className="fade-up mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-[15px]"
+            style={{ animationDelay: '210ms' }}
+          >
+            <a href="#work" className="btn-pill">
+              See the work <span className="arrow" aria-hidden>→</span>
+            </a>
+            <a href="#contact" className="link-underline">
+              Contact
+            </a>
+            <a href="/Arnau-Lopez-Selles-CV.pdf" className="link-underline">
+              CV ↗
+            </a>
           </div>
+        </div>
 
-          <div className="flex flex-wrap items-stretch justify-between gap-y-4 border-t border-ink">
-            <div className="flex items-center gap-4 px-5 py-4 sm:px-7">
-              <Marks />
-              <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-fg-faint sm:inline">
-                Kiblo · Aithority · TRACE · Dross
-              </span>
-            </div>
-            <div className="grid flex-1 grid-cols-3 divide-x divide-hair border-l border-ink sm:max-w-[440px]">
-              <SpecField label="Live" value="05" sub="not prototypes" />
-              <SpecField label="Design" value="+ code" sub="same person" />
-              <SpecField label="Markets" value="NL DE" sub="UK if sponsor" />
-            </div>
-          </div>
+        {/* Procedural tree — the site's one drawn motif, grey, on the right,
+            bleeding off the edge. Hidden on small screens. */}
+        <div
+          aria-hidden
+          className="fade-up pointer-events-none relative hidden min-h-[460px] self-stretch lg:block"
+          style={{ animationDelay: '260ms' }}
+        >
+          <PlantCanvas
+            seed={HERO_PLANT_SEED}
+            len={470}
+            depth={6}
+            anchor="center"
+            fit="cover"
+            color="rgba(20,19,16,0.30)"
+            className="absolute inset-y-0 left-0 h-full w-[46vw] max-w-[640px]"
+          />
         </div>
       </div>
     </section>

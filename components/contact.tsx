@@ -1,58 +1,45 @@
 import { CONTACT } from './copy'
+import { CropMarks } from './crop-frame'
 
 const LINKS = [
-  { label: 'GitHub', href: 'https://github.com/lopezsellesarnau-cmd', handle: '@lopezsellesarnau-cmd' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/arnau-lopez-selles/', handle: 'in/arnau-lopez-selles' },
-  { label: 'X', href: 'https://x.com/ArnauSelles', handle: '@ArnauSelles' },
-  { label: 'Email', href: 'mailto:lopezsellesarnau@gmail.com', handle: 'lopezsellesarnau@gmail.com' },
+  { label: 'GitHub', href: 'https://github.com/lopezsellesarnau-cmd' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/arnau-lopez-selles/' },
+  { label: 'X', href: 'https://x.com/ArnauSelles' },
+  { label: 'CV', href: '/Arnau-Lopez-Selles-CV.pdf' },
 ]
 
 export function Contact() {
   return (
-    <footer id="contact" className="border-t border-ink py-16 sm:py-20">
-      <div className="container-page">
-        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-fg-faint">{CONTACT.eyebrow}</p>
-        <h2 className="display mt-3 max-w-[16ch] text-[clamp(2rem,6vw,3.4rem)] font-medium text-ink">{CONTACT.title}</h2>
-        <p className="mt-3 max-w-[48ch] text-[15px] leading-relaxed text-fg-muted">{CONTACT.note}</p>
+    <footer id="contact" className="crop-frame relative scroll-mt-20 py-24 sm:py-32">
+      <CropMarks />
+      <div className="wide-col">
+        <span className="pill-tag">{CONTACT.eyebrow}</span>
+        <h2 className="display mt-5 max-w-[14ch] text-[clamp(2.2rem,5vw,3.4rem)] text-ink">{CONTACT.title}</h2>
+        <p className="mt-4 max-w-[48ch] text-[17px] leading-relaxed text-fg-muted">{CONTACT.note}</p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <a href="mailto:lopezsellesarnau@gmail.com" className="btn-solid">
-            {CONTACT.cta}
-          </a>
-          <a href="https://github.com/lopezsellesarnau-cmd" target="_blank" rel="noopener noreferrer" className="btn-ghost">
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/arnau-lopez-selles/" target="_blank" rel="noopener noreferrer" className="btn-ghost">
-            LinkedIn
-          </a>
-          <a href="/Arnau-Lopez-Selles-CV.pdf" className="btn-ghost">
-            CV
+        <div className="mt-8">
+          <a href="mailto:lopezsellesarnau@gmail.com" className="btn-pill">
+            Email me <span className="arrow" aria-hidden>→</span>
           </a>
         </div>
 
-        <div className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-[14px]">
           {LINKS.map((l) => (
             <a
               key={l.label}
               href={l.href}
               target={l.href.startsWith('http') ? '_blank' : undefined}
               rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="group flex flex-col gap-1 bg-surface px-4 py-4 transition-colors hover:bg-raised"
+              className="link-underline"
             >
-              <span className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-fg-faint">
-                {l.label}
-                <span className="text-fg-ghost transition-colors group-hover:text-accent" aria-hidden>
-                  ↗
-                </span>
-              </span>
-              <span className="truncate font-mono text-[12px] text-ink">{l.handle}</span>
+              {l.label} ↗
             </a>
           ))}
         </div>
 
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-ink pt-5">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Arnau Lopez — Product Engineer · Full-stack</p>
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg-faint">Alcoy · NL / DE · UK if sponsored</p>
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-6 text-[12px] uppercase tracking-[0.1em] text-fg-faint">
+          <p>Arnau Lopez — Product Engineer · Full-stack</p>
+          <p>Alcoy · NL / DE · UK if sponsored</p>
         </div>
       </div>
     </footer>
