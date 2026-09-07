@@ -14,7 +14,7 @@ const serif = Newsreader({
 
 const TITLE = 'Arnau Lopez — Product Engineer · Full-stack'
 const DESCRIPTION =
-  'I design the interface and write the software. Passionate about tech, architecture, geopolitics, and shipping real products — not prototypes. TRACE is live on the App Store in the US; Kiblo is in App Store review for the US and Canada; Dross is a notarized Mac app; Aithority is EU AI Act compliance (technical cofounder). Based in Alcoy; Netherlands and Germany; UK if sponsored. Deutsche Post / DHL, Paderborn.'
+  'I design the interface and write the software. Passionate about tech, architecture, geopolitics, and shipping real products — not prototypes. F1 Strategy Agent is an open-source ML race-strategy pipeline; Kiblo is in App Store review for the US and Canada; Dross is a notarized Mac app; Aithority is EU AI Act compliance (technical cofounder). Based in Alcoy; Netherlands and Germany; UK if sponsored. Deutsche Post / DHL, Paderborn.'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),

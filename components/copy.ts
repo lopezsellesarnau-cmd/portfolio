@@ -15,7 +15,7 @@ export const PROFILE = {
   name: 'Arnau Lopez',
   role: 'Product Engineer · Full-stack',
   eyebrow: '[ 22 · Alcoy · NL / DE · UK if sponsored ]',
-  hero: 'Founder of Kiblo — pet-food iOS, in App Store review for the US and Canada. Technical cofounder of Aithority (EU AI Act); the company is in Lanzadera, Spain. TRACE live on the App Store US. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
+  hero: 'Founder of Kiblo — pet-food iOS, in App Store review for the US and Canada. Technical cofounder of Aithority (EU AI Act); the company is in Lanzadera, Spain. F1 Strategy Agent open-sourced after viewers asked for the code. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
   sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL; interested in product engineering roles in Germany (DE).',
 }
 
@@ -133,38 +133,43 @@ export const CASES: CaseStudy[] = [
     linkLabel: 'Open landing',
   },
   {
-    slug: 'trace',
+    slug: 'f1-strategy-agent',
     index: '03',
-    name: 'TRACE',
+    name: 'F1 Strategy Agent',
     role: 'Founder',
-    tagline: 'Privacy iOS — live App Store US',
-    status: { text: 'Founder · live US', tone: 'ok' },
+    tagline: 'ML race strategy — open-sourced after viewers asked for the code',
+    status: { text: 'Open source · public repo', tone: 'ok' },
     blurb:
-      'A privacy app that scans for breaches, scores your real exposure from severity, and walks removals to 24 US data brokers. The thing people share is a report card, not a chore list.',
+      'A race-strategy model trained on real F1 telemetry: it predicts lap time from tyre compound and wear, evaluated on a Grand Prix it never saw, then simulates pit strategy on a real-traced circuit.',
     what:
-      'Privacy iOS. Live on the App Store in the US — not Canada. Breach scan, Exposure Score from real severity, removal to 24 US brokers. The share object is a vertical report card, not an Incogni-style to-do list.',
+      'A RandomForest model trained on real FastF1 lap data (Jeddah + Bahrain), evaluated on Suzuka — a race the model never trained on. Renders a self-contained HTML report with an animated pit-strategy simulation on a real-traced Suzuka circuit, not a generic track shape. Built while filming the build in public; went open source because people watching asked for the repo.',
     built:
-      'React Native / Expo and Node. Two brokers get a real Resend email. The rest open the broker’s own opt-out. RevenueCat subscription. Status only moves when something actually happened.',
+      'Python, FastF1 API, pandas, scikit-learn. Later extended into a companion data-engineering pipeline: real ingestion, SQLite staging and marts, automated data-quality checks, CI — turning the same real race data into a proper pipeline story, not just a model.',
     decisions: [
       {
-        title: 'The product people share is the report card',
+        title: 'A naive model failed across circuits — MAE 3.49s',
         detail:
-          'Growth is a screenshot people want to post. Removal is the paid second act, not a dashboard of chores.',
+          'Raw lap time confuses "different circuit" with "tyre wear": Bahrain and Miami have very different base pace regardless of tyres. Predicting the delta over each circuit’s own baseline instead dropped the error to 0.73s.',
       },
       {
-        title: 'Opening a form is not “submitted”',
+        title: 'Train on two races, test on one the model never saw',
         detail:
-          'Optimistic “Submitted” on tap was a lie. Opening the page does nothing to status; only the user’s confirmation does.',
+          'Trained on Jeddah and Bahrain, evaluated on Suzuka — a genuine generalization check, not the same race scored twice.',
       },
       {
-        title: 'Delete account means delete',
+        title: 'The track is real geometry, not a rounded blob',
         detail:
-          'Auth-only delete would have left Firestore PII. For a GDPR/CCPA product that would fail the premise. Record first, in the order the rules require.',
+          'Suzuka’s centerline is sampled from a public track map via the SVG’s own getPointAtLength()/getScreenCTM(), including the real figure-8 crossover — not hand-drawn.',
+      },
+      {
+        title: 'From a model to a pipeline',
+        detail:
+          'The same FastF1 data now also feeds a separate, tested SQL pipeline (staging → marts, 5 data-quality checks, CI) — one real dataset, two real projects.',
       },
     ],
-    stack: ['React Native', 'Expo', 'Node/Express', 'Firebase', 'RevenueCat', 'Resend'],
-    seed: 641,
-    link: 'https://github.com/lopezsellesarnau-cmd/trace-app',
+    stack: ['Python', 'FastF1 API', 'scikit-learn', 'RandomForest', 'pandas', 'SQL / SQLite'],
+    seed: 261,
+    link: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent',
     linkLabel: 'Open repository',
   },
   {
@@ -249,16 +254,6 @@ export const LIGHT: LightProject[] = [
     built: 'Solo. OAuth, Meta Ads API, Python, Make.com. Rules first — the model does not replace the rank.',
     stack: ['OAuth', 'Meta Ads API', 'Python', 'Claude (Sonnet) API', 'Make.com'],
     seed: 322,
-  },
-  {
-    name: 'F1 Strategy Agent',
-    tagline: 'ML + agentic — race strategy prediction',
-    status: 'Open source · public repo',
-    what: 'ML race strategy: lap times, pit simulations, a self-contained HTML report. Open because viewers asked for the code.',
-    built: 'A simple model fails across circuits (MAE 3.49s) until the target is the delta over each circuit’s base pace — then 0.73s. Python, scikit-learn.',
-    stack: ['Python', 'scikit-learn', 'RandomForest', 'Evaluation', 'Open source'],
-    seed: 261,
-    link: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent',
   },
   {
     name: 'ai-act-eval',
@@ -364,9 +359,9 @@ export const OTHER_WORK: { name: string; line: string; link?: string }[] = [
     line: 'Padel-club booking SaaS (courts, leagues, Stripe Connect to the club). Built end to end and deployed.',
   },
   {
-    name: 'F1 Strategy Agent',
-    line: 'Open-source ML race strategy. Honest eval: MAE 3.49s → 0.73s after changing the objective to delta over base pace.',
-    link: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent',
+    name: 'TRACE',
+    line: 'Privacy iOS — breach scan, exposure score, broker removals. Live on the App Store, US only.',
+    link: 'https://github.com/lopezsellesarnau-cmd/trace-app',
   },
   {
     name: 'ai-act-eval',
