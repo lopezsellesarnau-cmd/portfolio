@@ -38,7 +38,7 @@ export function Contact() {
         </div>
 
         <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-6 text-[12px] uppercase tracking-[0.1em] text-fg-faint">
-          <p>Arnau Lopez — Product Engineer · Full-stack</p>
+          <p>Arnau Lopez — Software Engineer · Backend</p>
           <p>Alcoy · NL / DE · UK if sponsored</p>
         </div>
       </div>

@@ -4,19 +4,24 @@
  * missing (screenshots, links, exact metrics) is asked for at the end of the
  * build, not invented here.
  *
- * Positioning since 22 aug 2026 — product engineer / full-stack software.
- * Recruiter titles: Software Engineer, Product Engineer, Full-stack Developer.
- * AI and design stay in the work (Kiblo, Aithority, visual system) but are not
- * the job title. Lead: Kiblo, Dross, TRACE, Aithority (cofounder), then
- * BlockFlow. NL / DE first; UK if they sponsor.
+ * Positioning since 8 sept 2026 — Software Engineer / Backend. Search title
+ * changed from "Product Engineer · Full-stack": "Software Engineer" is the
+ * larger umbrella (more postings) and full-stack demand specifically is
+ * softening as AI tooling extends individual engineers' reach. TypeScript
+ * stays the primary language; backend-leaning across Next.js/Node/Turso work
+ * is the actual lead, not the visual-design half of the story. AI and design
+ * stay in the work (Kiblo, Aithority, visual system) but are not the job
+ * title. Lead: F1 Strategy Agent, Aithority (cofounder), Dross, Kiblo, then
+ * BlockFlow. Spain first (no visa friction), NL / DE as the 12-18mo target
+ * once past the ~3yr sponsorship threshold; UK if they sponsor.
  */
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'Product Engineer · Full-stack',
-  eyebrow: '[ 22 · Alcoy · NL / DE · UK if sponsored ]',
-  hero: 'Founder of Kiblo — pet-food iOS, in App Store review for the US and Canada. Technical cofounder of Aithority (EU AI Act); the company is in Lanzadera, Spain. F1 Strategy Agent open-sourced after viewers asked for the code. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
-  sub: 'TypeScript · React Native · Next.js · Node · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL; interested in product engineering roles in Germany (DE).',
+  role: 'Software Engineer · Backend',
+  eyebrow: '[ 22 · Alcoy, Spain · open to NL / DE ]',
+  hero: 'Technical cofounder of Aithority (EU AI Act) — backend, integrations, and classification logic; the company is in Lanzadera, Spain. F1 Strategy Agent open-sourced after viewers asked for the code, now extended into a real SQL data pipeline. Founder of Kiblo, in App Store review for the US and Canada. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
+  sub: 'TypeScript · Node · SQL · Next.js · React Native · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL; based in Spain, open to backend/software engineer roles in the Netherlands and Germany.',
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -371,10 +376,10 @@ export const OTHER_WORK: { name: string; line: string; link?: string }[] = [
 ]
 
 export const CONTACT = {
-  eyebrow: 'NL · Germany · UK if sponsored',
+  eyebrow: 'Spain · open to NL / Germany',
   title: "Let's talk",
   cta: 'Email me',
-  note: 'Product Engineer · Full-stack. GitHub, LinkedIn, and CV below.',
+  note: 'Software Engineer · Backend. GitHub, LinkedIn, and CV below.',
 }
 
 /* ── Skills · Abilities · Milestones — one section, three registers ──────────
@@ -391,20 +396,20 @@ export const SKILLS: { group: string; items: string[] }[] = [
 
 export const ABILITIES: { title: string; detail: string }[] = [
   {
-    title: 'Design the product and its visual system — no handoff',
-    detail: 'Interface, identity, typography and motion, then the code that ships it. I do not need a designer to put a product in front of users.',
-  },
-  {
-    title: 'Ship to the App Store solo',
-    detail: 'IAP, subscriptions, privacy manifests, DAC7, UGC moderation, and Apple review — carried end to end on TRACE, SMASH and Kiblo.',
+    title: 'Own the backend and the integrations',
+    detail: 'Classification logic, admin-API connections, auth, data models, and the move off a platform when it fights the product (Render → Turso on Aithority).',
   },
   {
     title: 'Run AI in loops against locked constraints',
     detail: 'Conditions first — tests, a visual lock, a rule that must not be faked — then rebuild what failed. I own the constraints and the ship; the model does not.',
   },
   {
-    title: 'Own the backend and the integrations',
-    detail: 'Classification logic, admin-API connections, auth, data models, and the move off a platform when it fights the product (Render → Turso on Aithority).',
+    title: 'Ship to the App Store solo',
+    detail: 'IAP, subscriptions, privacy manifests, DAC7, UGC moderation, and Apple review — carried end to end on TRACE, SMASH and Kiblo.',
+  },
+  {
+    title: 'Design the product and its visual system — no handoff',
+    detail: 'Interface, identity, typography and motion, then the code that ships it. I do not need a designer to put a product in front of users.',
   },
   {
     title: 'Distribute what I build',
