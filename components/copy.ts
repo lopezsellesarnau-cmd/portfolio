@@ -20,7 +20,7 @@ export const PROFILE = {
   name: 'Arnau Lopez',
   role: 'Software Engineer · Backend',
   eyebrow: '[ 22 · Alcoy, Spain · open to NL / DE ]',
-  hero: 'Technical cofounder of Aithority (EU AI Act) — backend, integrations, and classification logic; the company is in Lanzadera, Spain. F1 Strategy Agent open-sourced after viewers asked for the code, now extended into a real SQL data pipeline. Founder of Kiblo, in App Store review for the US and Canada. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
+  hero: 'Technical cofounder of Aithority (EU AI Act) — backend, integrations, and classification logic; the company is in Lanzadera, Spain. F1 Strategy Agent open-sourced after viewers asked for the code, now extended into a real SQL data pipeline. Founder of Kiblo, live on the App Store in the US and Canada. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
   sub: 'TypeScript · Node · SQL · Next.js · React Native · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL; based in Spain, open to backend/software engineer roles in the Netherlands and Germany.',
 }
 
@@ -52,12 +52,12 @@ export const CASES: CaseStudy[] = [
     index: '01',
     name: 'Kiblo',
     role: 'Founder',
-    tagline: 'Pet-food iOS — full consumer loop, App Store review',
-    status: { text: 'Founder · in review US & Canada', tone: 'accent' },
+    tagline: 'Pet-food iOS — full consumer loop, live on the App Store',
+    status: { text: 'Founder · live US & Canada', tone: 'ok' },
     blurb:
       'A weekly habit app for dog owners: scan the food bag already in the cupboard, portion the meal from the dog’s weight, and reorder before it runs out.',
     what:
-      'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. In App Store review for the US and Canada. Not live, no revenue. I am getting the first users through social media and building in public — not waiting for the listing to do the distribution.',
+      'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. Live on the App Store in the US and Canada. I am getting the first users through social media and building in public — not waiting for the listing to do the distribution.',
     built:
       'Solo. Expo 57, React Native, Firebase, RevenueCat. I lock product and constraints; AI implements in loops (conditions, then fix what failed); I reject and ship.',
     decisions: [
@@ -89,8 +89,8 @@ export const CASES: CaseStudy[] = [
     ],
     stack: ['Cursor', 'Claude', 'React Native', 'Expo SDK 57', 'TypeScript', 'Firebase', 'RevenueCat'],
     seed: 418,
-    link: 'https://kiblo-web.vercel.app',
-    linkLabel: 'Open site',
+    link: 'https://apps.apple.com/app/id6802237827',
+    linkLabel: 'Open on the App Store',
   },
   {
     slug: 'aithority',
@@ -434,8 +434,8 @@ export type StackLayer = {
 export type Milestone = { date: string; title: string; detail?: string }
 
 export const MILESTONES: Milestone[] = [
+  { date: 'Sep 2026', title: 'Kiblo live on the App Store (US & Canada)', detail: 'Approved and released after one revision. Concept to live in weeks, Cursor + Claude in loops.' },
   { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app — breach scan, exposure score, broker removals. Shipped and public.' },
-  { date: 'Aug 2026', title: 'Kiblo submitted — in App Store review (US & Canada)', detail: 'Concept to review build in days, Cursor + Claude in loops.' },
   { date: '2026', title: 'Dross shipped — notarized Mac app + CLI', detail: 'Contract-drift checker with a golden corpus at 100% precision and recall.' },
   { date: '2026', title: 'Aithority accepted into Lanzadera, first paying client', detail: 'EU AI Act compliance. The company is in the accelerator — technical cofounder.' },
   { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Building and shipping products end to end alongside the job.' },

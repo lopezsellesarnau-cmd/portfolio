@@ -14,7 +14,7 @@ const serif = Newsreader({
 
 const TITLE = 'Arnau Lopez — Software Engineer · Backend'
 const DESCRIPTION =
-  'I write the backend and own the integrations, then the interface on top. Passionate about tech, architecture, geopolitics, and shipping real products — not prototypes. F1 Strategy Agent is an open-source ML race-strategy pipeline with a SQL data pipeline extension; Aithority is EU AI Act compliance (technical cofounder); Kiblo is in App Store review for the US and Canada; Dross is a notarized Mac app. Based in Alcoy, Spain; open to the Netherlands and Germany. Deutsche Post / DHL, Paderborn.'
+  'I write the backend and own the integrations, then the interface on top. Passionate about tech, architecture, geopolitics, and shipping real products — not prototypes. F1 Strategy Agent is an open-source ML race-strategy pipeline with a SQL data pipeline extension; Aithority is EU AI Act compliance (technical cofounder); Kiblo is live on the App Store in the US and Canada; Dross is a notarized Mac app. Based in Alcoy, Spain; open to the Netherlands and Germany. Deutsche Post / DHL, Paderborn.'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
