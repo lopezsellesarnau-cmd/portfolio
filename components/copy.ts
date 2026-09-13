@@ -134,7 +134,7 @@ export const CASES: CaseStudy[] = [
     ],
     stack: ['Next.js', 'Node / Express', 'Turso', 'Microsoft Graph', 'Claude Haiku', 'AI Act · Annex III'],
     seed: 655,
-    link: 'https://landing-claude-chi.vercel.app/#motor',
+    link: 'https://www.aithority.com.es',
     linkLabel: 'Open landing',
   },
   {
