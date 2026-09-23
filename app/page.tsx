@@ -3,6 +3,8 @@ import { Hero } from '@/components/hero'
 import { Work } from '@/components/work'
 import { HowIWork } from '@/components/how-i-work'
 import { Highlights } from '@/components/highlights'
+import { EducationSection } from '@/components/education'
+import { Credentials } from '@/components/credentials'
 import { Contact } from '@/components/contact'
 import { CropMarks } from '@/components/crop-frame'
 
@@ -20,6 +22,8 @@ export default function Home() {
 
         <HowIWork />
         <Highlights />
+        <EducationSection />
+        <Credentials />
         <Contact />
       </main>
     </>

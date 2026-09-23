@@ -306,6 +306,11 @@ export type Credential = { name: string; issuer: string; date: string; link?: st
 
 export const CREDENTIALS: Credential[] = [
   {
+    name: 'Claude Code in Action',
+    issuer: 'Anthropic',
+    date: 'Aug 2026',
+  },
+  {
     name: 'Introduction to Generative AI',
     issuer: 'Google Cloud',
     date: 'Aug 2026',
@@ -322,6 +327,24 @@ export const CREDENTIALS: Credential[] = [
     issuer: 'Google Cloud',
     date: 'Aug 2026',
     link: 'https://www.skills.google/paths/118',
+  },
+]
+
+export type Education = { school: string; program: string; detail: string; date: string; link?: string }
+
+export const EDUCATION: Education[] = [
+  {
+    school: 'University of Helsinki',
+    program: 'Programming MOOC (Python) — in progress',
+    detail: 'Self-paced, university-affiliated introductory CS curriculum.',
+    date: '2026',
+    link: 'https://programming-26.mooc.fi',
+  },
+  {
+    school: 'EASD Alcoy',
+    program: 'Plastic Arts Technician and Layout Assistant for Printed Graphic Products',
+    detail: 'Design school — where the visual-design half of the work comes from.',
+    date: 'Sept 2021 – June 2023',
   },
 ]
 
@@ -438,6 +461,6 @@ export const MILESTONES: Milestone[] = [
   { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app — breach scan, exposure score, broker removals. Shipped and public.' },
   { date: '2026', title: 'Dross shipped — notarized Mac app + CLI', detail: 'Contract-drift checker with a golden corpus at 100% precision and recall.' },
   { date: '2026', title: 'Aithority accepted into Lanzadera, first paying client', detail: 'EU AI Act compliance. The company is in the accelerator — technical cofounder.' },
-  { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Building and shipping products end to end alongside the job.' },
+  { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Full-time logistics operations role in the DACH region. Alongside it, built and launched my own Shopify store for beauty products targeting the Netherlands and Germany, first real product I ran solo, end to end.' },
   { date: 'Live', title: 'SMASH on the App Store · Volea and Louvr Labs in production', detail: 'Earlier products still running with real users and clients.' },
 ]
