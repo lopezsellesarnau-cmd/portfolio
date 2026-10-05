@@ -1,31 +1,19 @@
-import { Nav } from '@/components/nav'
-import { Hero } from '@/components/hero'
-import { Work } from '@/components/work'
-import { HowIWork } from '@/components/how-i-work'
-import { Highlights } from '@/components/highlights'
-import { EducationSection } from '@/components/education'
-import { Credentials } from '@/components/credentials'
-import { Contact } from '@/components/contact'
-import { CropMarks } from '@/components/crop-frame'
+import { About, Contact, GridLines, Hero, Menu, Milestones, Work } from '@/components/minimal'
 
 export default function Home() {
   return (
     <>
-      <Nav />
-      <main id="contenido">
+      <GridLines />
+      <Menu />
+      <main id="contenido" className="relative z-10">
         <Hero />
-
-        <section id="work" className="crop-frame relative scroll-mt-20 py-20 sm:py-28">
-          <CropMarks />
-          <Work />
-        </section>
-
-        <HowIWork />
-        <Highlights />
-        <EducationSection />
-        <Credentials />
-        <Contact />
+        <Work />
+        <Milestones />
+        <About />
       </main>
+      <div className="relative z-10">
+        <Contact />
+      </div>
     </>
   )
 }

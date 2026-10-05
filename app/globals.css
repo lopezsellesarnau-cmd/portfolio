@@ -17,10 +17,9 @@
     background: #fcfcfb;
     color: #141310;
     overflow-x: clip;
-    font-family: -apple-system, 'SF Pro Text', 'SF Pro Display', 'Inter', ui-sans-serif,
-      system-ui, 'Segoe UI', Roboto, sans-serif;
-    font-size: 16px;
-    line-height: 1.65;
+    font-family: 'Helvetica Neue', Helvetica, Arial, -apple-system, ui-sans-serif, system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
     text-rendering: optimizeLegibility;
   }
   ::selection {
@@ -34,6 +33,15 @@
 }
 
 @layer components {
+  /* Minimal layout: one frame, six columns, shared by the grid lines and every section. */
+  .frame {
+    @apply mx-auto w-full max-w-[75rem] px-4 md:px-8;
+  }
+  .mono {
+    font-family: var(--font-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.01em;
+  }
+
   /* Editorial columns — intentional width, not full-bleed. */
   .prose-col {
     @apply mx-auto w-full max-w-[42rem] px-6;
@@ -215,6 +223,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .fade-up, .pulse-dot { animation: none; }
   .tree-live .tree-line { animation: none; stroke-dashoffset: 0; }
   .tree-node, .tree-live .tree-node { animation: none; opacity: 1; }

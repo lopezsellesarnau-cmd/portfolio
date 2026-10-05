@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Newsreader } from 'next/font/google'
+import { IBM_Plex_Mono, Newsreader } from 'next/font/google'
 import './globals.css'
 
 const serif = Newsreader({
@@ -12,9 +12,16 @@ const serif = Newsreader({
   adjustFontFallback: false,
 })
 
-const TITLE = 'Arnau Lopez — Software Engineer · Backend'
+const TITLE = 'Arnau Lopez — Software Developer · Full-Stack · UX/UI'
 const DESCRIPTION =
-  'I write the backend and own the integrations, then the interface on top. F1 Strategy Agent is an open-source ML race-strategy pipeline with a SQL data pipeline extension. Aithority is EU AI Act compliance, technical cofounder. Kiblo is live on the App Store in the US and Canada. Dross is a notarized Mac app. Based in Alcoy, Spain, open to the Netherlands and Germany. Deutsche Post / DHL, Paderborn.'
+  'Junior full-stack software developer with a design background. Cofounded and developed Aithority (EU AI Act compliance). Kiblo is live on the App Store in the US and Canada. Dross is a notarized Mac app. F1 Strategy Agent and Dev Job Tracker EU are open source. Based in Alcoy, Spain. EU citizen, open to relocation.'
+
+const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  variable: '--font-mono',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://arnau-lopez.com'),
@@ -40,7 +47,7 @@ export const viewport: Viewport = { themeColor: '#FCFCFB', colorScheme: 'light' 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={serif.variable}>
+    <html lang="en" className={`${serif.variable} ${mono.variable}`}>
       <body>
         <a
           href="#contenido"

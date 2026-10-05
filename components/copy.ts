@@ -510,12 +510,11 @@ export type StackLayer = {
 
 export type Milestone = { date: string; title: string; detail?: string }
 
+// Oldest first: the milestones row reads left to right like a timeline.
 export const MILESTONES: Milestone[] = [
-  { date: 'Sep 2026', title: 'Kiblo live on the App Store (US & Canada)', detail: 'Approved and released after one revision. Concept to live in weeks, Cursor + Claude in loops.' },
-  { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app — breach scan, exposure score, broker removals. Shipped and public.' },
-  { date: '2026', title: 'Dross shipped — notarized Mac app + CLI', detail: 'Contract-drift checker with a golden corpus at 100% precision and recall.' },
-  { date: 'Oct 2026', title: 'Dev Job Tracker EU shipped', detail: 'Python, FastAPI and SQLite. Its data reshaped my own job search toward full-stack and software developer roles.' },
-  { date: 'May–Oct 2026', title: 'Cofounded and developed Aithority', detail: 'EU AI Act compliance SaaS, accepted into Lanzadera. Tested with accelerator companies such as LaiaDesk.' },
-  { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Full-time logistics operations role in the DACH region. Alongside it, built and launched my own Shopify store for beauty products targeting the Netherlands and Germany, first real product I ran solo, end to end.' },
-  { date: 'Live', title: 'SMASH on the App Store · Volea and Louvr Labs in production', detail: 'Earlier products still running with real users and clients.' },
+  { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Full-time logistics operations in the DACH region. Alongside it, my own Shopify store for the Netherlands and Germany.' },
+  { date: 'May 2026', title: 'Cofounded and developed Aithority', detail: 'EU AI Act compliance SaaS, accepted into Lanzadera. Tested with accelerator companies such as LaiaDesk. Until Oct 2026.' },
+  { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app: breach scan, exposure score, broker removals.' },
+  { date: 'Sep 2026', title: 'Kiblo live on the App Store (US & Canada)', detail: 'Approved and released after one revision.' },
+  { date: 'Oct 2026', title: 'Dev Job Tracker EU shipped', detail: 'Python, FastAPI and SQLite. Its data reshaped my own job search.' },
 ]

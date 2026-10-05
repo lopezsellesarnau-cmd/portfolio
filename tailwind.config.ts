@@ -16,6 +16,7 @@ const config: Config = {
         bg: '#FCFCFB',
         surface: '#FFFFFF',
         raised: '#F5F5F3',
+        card: '#EDEDEB',
         ink: '#141310',
         accent: {
           DEFAULT: '#B0413D',
@@ -35,6 +36,7 @@ const config: Config = {
         rule: 'rgba(20,19,16,0.10)',
         line: 'rgba(20,19,16,0.12)',
         hair: 'rgba(20,19,16,0.07)',
+        grid: 'rgba(20,19,16,0.045)',
       },
       backgroundColor: {
         line: 'rgba(20,19,16,0.10)',
