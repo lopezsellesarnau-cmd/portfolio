@@ -261,38 +261,48 @@ export const CASES: CaseStudy[] = [
     linkLabel: 'Open repository',
   },
   {
-    slug: 'blockflow',
+    slug: 'ukraine-war-tracker',
     index: '06',
-    name: 'BlockFlow',
+    name: 'Ukraine War Tracker',
     role: 'Founder',
-    tagline: 'UK proptech voice agent — in production',
-    status: { text: 'In production · not selling', tone: 'ok' },
+    tagline: 'Daily Russian losses in the war in Ukraine, as a quiet report',
+    status: { text: 'Live · updated daily', tone: 'ok' },
     blurb:
-      'An out-of-hours voice agent for UK property managers: it holds a real conversation, triages the issue, and files a structured ticket. Only the edge case ever reaches a person.',
+      'A daily tracker of Russian equipment and personnel losses in the war in Ukraine. The figures are claimed by Ukraine’s General Staff, not independently verified, and the site labels them that way.',
     why:
-      'It started as Fincas Pro, a tool for Spanish property managers, and moved to the UK, where out-of-hours calls are a real cost for agencies.',
-    usedBy: 'In production and working. No paying customers yet.',
+      'My passion for geopolitics and the need to know what is happening and why. I want people in Europe to see the scale of this war, and what we could face if it stops being someone else’s problem.',
     what:
-      'UK property ops. Out-of-hours voice agent: conversation, triage, structured ticket. In production. No paying customers. Unlike Kiblo, this is not a product I am distributing right now — the work is the live system.',
+      'Fetches the daily report from the russianwarship.rip API, stores it in SQLite, serves it with FastAPI and shows it on a minimal HTML/CSS/JS page with a Chart.js line chart. A GitHub Action updates it every day.',
     built:
-      'Happy path never touches a human. Not a press-1 tree. Next.js, voice AI, LLM, ticket automation.',
+      'Python, FastAPI, SQLite, HTML/CSS/JS, Chart.js, GitHub Actions, Vercel. Every decision is in DECISIONS.md.',
     decisions: [
       {
-        title: 'Conversation, not a phone tree',
+        title: 'Vercel cannot write to disk',
         detail:
-          'The call has to resolve if the caller describes the leak in any order. Extraction has to survive a real conversation.',
+          'A GitHub Action runs the fetch every day at 12:00 UTC and commits the database, so the data arrives with the code and Vercel only reads it.',
       },
       {
-        title: 'Human only on the exception',
+        title: 'No duplicates from the start',
         detail:
-          'Clear, non-urgent incidents never hit the team. A person steps in on the edge case, not on every call.',
+          'One row per day and category with (date, category) as the primary key and INSERT OR REPLACE. Running the fetch twice never duplicates a day, a bug I had to fix later in the job tracker.',
+      },
+      {
+        title: 'The history came 50 days at a time',
+        detail:
+          'The history endpoint is paginated, so the backfill moves the offset forward until a page comes back with fewer than 50 days.',
+      },
+      {
+        title: 'Total, not daily noise',
+        detail:
+          'I store both the total and the daily increase, because recalculating increases breaks on days the source skipped. The chart shows the cumulative total: four years of daily numbers are unreadable, the total shows the trend.',
       },
     ],
-    stack: ['Voice AI', 'LLM', 'Ticket automation', 'Next.js'],
-    seed: 100,
-    link: 'https://github.com/lopezsellesarnau-cmd/blockflow',
-    linkLabel: 'Open repository',
+    stack: ['Python', 'FastAPI', 'SQLite', 'Chart.js', 'GitHub Actions'],
+    seed: 612,
+    link: 'https://ukraine-war-tracker.vercel.app',
+    linkLabel: 'Open live site',
   },
+
 ]
 
 export type LightProject = {
