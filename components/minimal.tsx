@@ -3,7 +3,7 @@
 /**
  * Minimal layout (5 oct 2026). Open space, near-white paper, small thin
  * grotesk + mono for labels and numbers. References from Arnau:
- *   Menu       — Fuge: column grid, active link struck through.
+ *   Menu       — Fuge: name, grey title, links; active link underlined.
  *   Hero       — Kseniia Fesan frame 1: centered title, scattered mono text.
  *   Work       — Rick Rubin quote: centered list, corner labels, no mockups.
  *   Popup      — Studio Unravel: small grey label/value block.
@@ -11,6 +11,7 @@
  * Copy stays in copy.ts.
  */
 
+import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   CASES,
@@ -41,25 +42,6 @@ const CONTACT_ROWS: { label: string; value: string; href: string }[] = [
 
 const ext = (href: string) =>
   href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {}
-
-/* ── Grid ─────────────────────────────────────────────────────────────── */
-
-export function GridLines() {
-  return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
-      <div className="frame grid h-full grid-cols-3 md:grid-cols-6">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <span
-            key={i}
-            className={`border-l border-grid ${i >= 3 ? 'hidden md:block' : ''} ${
-              i === 2 ? 'border-r md:border-r-0' : i === 5 ? 'md:border-r' : ''
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
 
 /* ── Menu ─────────────────────────────────────────────────────────────── */
 
@@ -94,7 +76,7 @@ export function Menu() {
             <a
               key={l.id}
               href={`#${l.id}`}
-              className={`transition-colors hover:text-ink ${active === l.id ? 'text-ink line-through' : 'text-fg-muted'}`}
+              className={`transition-colors hover:text-ink ${active === l.id ? 'text-ink underline decoration-1 underline-offset-[6px]' : 'text-fg-muted'}`}
             >
               {l.label}
             </a>
@@ -146,6 +128,27 @@ export function Hero() {
           I design the interface and write the code. I use AI in loops: conditions first, then
           rebuild what failed. ~2 years at Deutsche Post / DHL in Germany before that.
         </p>
+      </div>
+    </section>
+  )
+}
+
+/* ── Portrait ─────────────────────────────────────────────────────────── */
+
+export function Portrait() {
+  return (
+    <section aria-label="Portrait" className="relative flex min-h-[90svh] flex-col justify-between py-24">
+      <div />
+      <Image
+        src="/arnau-portrait.jpg"
+        alt="Arnau Lopez"
+        width={180}
+        height={240}
+        className="mx-auto h-auto w-[140px] grayscale md:w-[180px]"
+      />
+      <div className="frame flex justify-end gap-6 text-[12px] uppercase text-ink">
+        <span>Arnau Lopez</span>
+        <span className="pr-2">Software Developer</span>
       </div>
     </section>
   )

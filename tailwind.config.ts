@@ -36,7 +36,6 @@ const config: Config = {
         rule: 'rgba(20,19,16,0.10)',
         line: 'rgba(20,19,16,0.12)',
         hair: 'rgba(20,19,16,0.07)',
-        grid: 'rgba(20,19,16,0.045)',
       },
       backgroundColor: {
         line: 'rgba(20,19,16,0.10)',
