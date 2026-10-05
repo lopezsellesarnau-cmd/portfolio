@@ -73,6 +73,16 @@ function ProjectPanel({ caso, onClose }: { caso: CaseStudy; onClose: () => void 
 
         <p className="mt-5 text-[16px] leading-relaxed text-ink">{caso.blurb}</p>
 
+        <p className="eyebrow mt-6">Why I built it</p>
+        <p className="mt-3 text-[13px] leading-relaxed text-fg-muted">{caso.why}</p>
+
+        {caso.usedBy && (
+          <>
+            <p className="eyebrow mt-6">Who uses it</p>
+            <p className="mt-3 text-[13px] leading-relaxed text-fg-muted">{caso.usedBy}</p>
+          </>
+        )}
+
         <p className="eyebrow mt-6">Problems solved</p>
         <div className="mt-3 space-y-3">
           {caso.decisions.map((d) => (

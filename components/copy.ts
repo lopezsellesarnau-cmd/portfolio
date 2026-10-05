@@ -1,27 +1,22 @@
 /**
  * Copy — single source of truth, English. The case studies carry real
- * technical content (not filler): what Arnau gave in the brief. What's genuinely
- * missing (screenshots, links, exact metrics) is asked for at the end of the
- * build, not invented here.
+ * technical content (not filler). What's genuinely missing (users, metrics) is
+ * left out, not invented.
  *
- * Positioning since 8 sept 2026 — Software Engineer / Backend. Search title
- * changed from "Product Engineer · Full-stack": "Software Engineer" is the
- * larger umbrella (more postings) and full-stack demand specifically is
- * softening as AI tooling extends individual engineers' reach. TypeScript
- * stays the primary language; backend-leaning across Next.js/Node/Turso work
- * is the actual lead, not the visual-design half of the story. AI and design
- * stay in the work (Kiblo, Aithority, visual system) but are not the job
- * title. Lead: F1 Strategy Agent, Aithority (cofounder), Dross, Kiblo, then
- * BlockFlow. Spain first (no visa friction), NL / DE as the 12-18mo target
- * once past the ~3yr sponsorship threshold; UK if they sponsor.
+ * Positioning since 5 oct 2026 — Software Developer · Full-Stack · UX/UI.
+ * Arnau's own job tracker showed "software developer" and "full-stack" have the
+ * most openings and the fewest senior-only roles; UX/UI is the differentiator,
+ * not the search title. Every project answers three questions: why it was
+ * built, who uses it, and which problems it solved. Same story on the CV,
+ * LinkedIn and in applications. EU citizen: no sponsorship needed.
  */
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'Software Engineer · Backend',
-  eyebrow: '[ 22 · Alcoy, Spain · open to NL / DE ]',
-  hero: 'Technical cofounder of Aithority (EU AI Act) — backend, integrations, and classification logic; the company is in Lanzadera, Spain. F1 Strategy Agent open-sourced after viewers asked for the code, now extended into a real SQL data pipeline. Founder of Kiblo, live on the App Store in the US and Canada. Dross notarized Mac. BlockFlow’s voice agent is in production, not sold like Kiblo.',
-  sub: 'TypeScript · Node · SQL · Next.js · React Native · SwiftUI. I use AI in loops: conditions first, then rebuild what failed — not one long prompt. ~2 years in Paderborn at Deutsche Post / DHL; based in Spain, open to backend/software engineer roles in the Netherlands and Germany.',
+  role: 'Software Developer · Full-Stack · UX/UI',
+  eyebrow: '[ 22 · Alcoy, Spain · EU citizen, open to relocation ]',
+  hero: 'Cofounded and developed Aithority, an EU AI Act compliance SaaS (May to Oct 2026). Founder of Kiblo, live on the App Store in the US and Canada. Dross, a notarized Mac app that catches frontend/backend drift. F1 Strategy Agent, open-sourced after viewers asked for the code. Dev Job Tracker EU, the data behind my own job search.',
+  sub: 'TypeScript · React · React Native · Next.js · Python · FastAPI · SQL · Figma. I design the interface and write the code, and I use AI in loops: conditions first, then rebuild what failed. ~2 years at Deutsche Post / DHL in Germany; based in Spain, EU citizen, open to full-stack and software developer roles across the EU.',
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -37,6 +32,10 @@ export type CaseStudy = {
   status: { text: string; tone: 'ok' | 'accent' }
   /** Three lines, plain: what the product is. Shown above "problems solved". */
   blurb: string
+  /** Why it was built. */
+  why: string
+  /** Who uses it. Omitted when not known yet — never invented. */
+  usedBy?: string
   what: string
   built: string
   decisions: { title: string; detail: string }[]
@@ -56,6 +55,9 @@ export const CASES: CaseStudy[] = [
     status: { text: 'Founder · live US & Canada', tone: 'ok' },
     blurb:
       'A weekly habit app for dog owners: scan the food bag already in the cupboard, portion the meal from the dog’s weight, and reorder before it runs out.',
+    why:
+      'Food-scanner apps stop at a score and trackers stop at a log. None connected the bag in the cupboard to the right portion and the next order.',
+    usedBy: 'Live on the App Store in the US and Canada.',
     what:
       'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. Live on the App Store in the US and Canada. I am getting the first users through social media and building in public — not waiting for the listing to do the distribution.',
     built:
@@ -96,15 +98,19 @@ export const CASES: CaseStudy[] = [
     slug: 'aithority',
     index: '02',
     name: 'Aithority',
-    role: 'Technical cofounder',
-    tagline: 'EU AI Act compliance · Lanzadera (the company)',
-    status: { text: 'Cofounder · Lanzadera · first client', tone: 'ok' },
+    role: 'Cofounder & developer',
+    tagline: 'EU AI Act compliance SaaS · May to Oct 2026',
+    status: { text: 'Cofounder · May–Oct 2026', tone: 'accent' },
     blurb:
       'EU AI Act compliance for companies using AI in hiring, credit or biometrics. It inventories every system, classifies its risk, and produces dated evidence a client will accept.',
+    why:
+      'Startups and scale-ups using AI need to audit their AI systems and know whether they comply with the EU AI Act. Our audits flagged tools like Cursor and Chinese AI models as compliance risks.',
+    usedBy:
+      'Tested with companies in the Lanzadera accelerator, such as LaiaDesk. I ran the conversations with founders about their problems myself.',
     what:
-      'EU AI Act compliance for companies using AI in HR, credit or biometrics: inventory, Annex III risk, dated evidence. The company is accepted into Lanzadera in Spain — not a personal solo admission. First paying client. I own backend, frontend, integrations, classification, and UI. Sales and legal stay with the commercial cofounder.',
+      'EU AI Act compliance for companies using AI in HR, credit or biometrics: inventory, Annex III risk, dated evidence. The company was accepted into Lanzadera in Spain. I built backend, frontend, integrations, classification and UI.',
     built:
-      'I own product, UI, classification, and backend. Sales and legal stay with the commercial cofounder — I do not claim the commercial motion. Next.js, Node, Microsoft 365 / Google Workspace / provider admin APIs, Claude Haiku for a suggested class, Turso after Render’s disk kept wiping state.',
+      'I built product, UI, classification and backend. Next.js, Node, Microsoft 365 / Google Workspace / provider admin APIs, Claude Haiku for a suggested class, Turso after Render’s disk kept wiping state.',
     decisions: [
       {
         title: 'Time-to-value was over seven minutes',
@@ -146,6 +152,10 @@ export const CASES: CaseStudy[] = [
     status: { text: 'Open source · public repo', tone: 'ok' },
     blurb:
       'A race-strategy model trained on real F1 telemetry: it predicts lap time from tyre compound and wear, evaluated on a Grand Prix it never saw, then simulates pit strategy on a real-traced circuit.',
+    why:
+      'To learn ML on data I actually care about, and to film the build for social media.',
+    usedBy:
+      'People watching the build videos asked for the code in the comments, so I open-sourced the repo.',
     what:
       'A RandomForest model trained on real FastF1 lap data (Jeddah + Bahrain), evaluated on Suzuka — a race the model never trained on. Renders a self-contained HTML report with an animated pit-strategy simulation on a real-traced Suzuka circuit, not a generic track shape. Built while filming the build in public; went open source because people watching asked for the repo.',
     built:
@@ -186,6 +196,10 @@ export const CASES: CaseStudy[] = [
     status: { text: 'Founder · notarized DMG', tone: 'ok' },
     blurb:
       'A Mac app and CLI that catches the moment your frontend and backend stop agreeing on their contract — built for a solo team shipping with AI, not another PR-time cloud linter.',
+    why:
+      'My own projects kept shipping bugs that were valid code with the wrong meaning: a dead endpoint, demo data in production, a backend that required a token the app never sent.',
+    usedBy:
+      'Me, on TRACE and Aithority, where it caught real drift. Open source and shared on social media.',
     what:
       'Finds when your client and your backend stop agreeing. Notarized Mac app plus CI CLI. Built for a solo/full-stack team deploying with AI assistance — not another PR-time cloud linter.',
     built:
@@ -208,14 +222,56 @@ export const CASES: CaseStudy[] = [
     linkLabel: 'Open repository',
   },
   {
-    slug: 'blockflow',
+    slug: 'dev-job-tracker',
     index: '05',
+    name: 'Dev Job Tracker EU',
+    role: 'Founder',
+    tagline: 'Junior dev job market in Spain, NL, Germany and Belgium',
+    status: { text: 'Open source · public repo', tone: 'ok' },
+    blurb:
+      'Counts live developer job postings by role and country from the Adzuna API, stores them daily in SQLite, and serves them through FastAPI to a plain HTML/CSS/JS page.',
+    why:
+      'I wanted real numbers for my own job search instead of US articles, and a project where every decision is written down and I can explain every file.',
+    usedBy:
+      'Me. Its data changed my search: generic titles (software developer, full-stack) have the most openings and fewer senior-only roles than frontend or backend.',
+    what:
+      'Seven roles across Spain, the Netherlands, Germany and Belgium. A DECISIONS file records what was chosen, why, and what was rejected.',
+    built:
+      'Python fetcher, SQLite, FastAPI, HTML/CSS/JS. Written to be explained, not just to run.',
+    decisions: [
+      {
+        title: 'The API was searching job descriptions',
+        detail:
+          'Frontend in Germany returned 4,405 jobs because the query matched descriptions. Searching titles only gave 575, the real number.',
+      },
+      {
+        title: 'Job titles change with the language',
+        detail:
+          'Frontend-Entwickler only exists in Germany, Desarrollador front only in Spain. Each role is a list of local variants that get summed.',
+      },
+      {
+        title: 'Some roles cannot be measured honestly',
+        detail:
+          'Product engineer in Germany is mostly hardware jobs. I left it out of v1 instead of showing a wrong number.',
+      },
+    ],
+    stack: ['Python', 'FastAPI', 'SQLite', 'HTML / CSS / JS', 'Adzuna API'],
+    seed: 537,
+    link: 'https://github.com/lopezsellesarnau-cmd/Dev-Job-Tracking-EU',
+    linkLabel: 'Open repository',
+  },
+  {
+    slug: 'blockflow',
+    index: '06',
     name: 'BlockFlow',
     role: 'Founder',
     tagline: 'UK proptech voice agent — in production',
     status: { text: 'In production · not selling', tone: 'ok' },
     blurb:
       'An out-of-hours voice agent for UK property managers: it holds a real conversation, triages the issue, and files a structured ticket. Only the edge case ever reaches a person.',
+    why:
+      'It started as Fincas Pro, a tool for Spanish property managers, and moved to the UK, where out-of-hours calls are a real cost for agencies.',
+    usedBy: 'In production and working. No paying customers yet.',
     what:
       'UK property ops. Out-of-hours voice agent: conversation, triage, structured ticket. In production. No paying customers. Unlike Kiblo, this is not a product I am distributing right now — the work is the live system.',
     built:
@@ -367,7 +423,7 @@ export const HOW_I_WORK = {
     {
       title: 'Team outcomes, not a founder pitch',
       detail:
-        'Solo shipping is proof I can carry a surface. On Aithority the commercial cofounder owns sales and legal; I own product and engineering. The job I want is the same split on a team: design and code, same person, shipped software.',
+        'Solo shipping is proof I can carry a surface. On Aithority I owned product and engineering and talked to founders about their problems. The job I want is the same split on a team: design and code, same person, shipped software.',
     },
   ],
 }
@@ -399,10 +455,10 @@ export const OTHER_WORK: { name: string; line: string; link?: string }[] = [
 ]
 
 export const CONTACT = {
-  eyebrow: 'Spain · open to NL / Germany',
+  eyebrow: 'Spain · EU citizen, open to relocation',
   title: "Let's talk",
   cta: 'Email me',
-  note: 'Software Engineer · Backend. GitHub, LinkedIn, and CV below.',
+  note: 'Software Developer · Full-Stack · UX/UI. GitHub, LinkedIn, and CV below.',
 }
 
 /* ── Skills · Abilities · Milestones — one section, three registers ──────────
@@ -410,17 +466,15 @@ export const CONTACT = {
    Milestones: dated proof, newest first. Kept honest — see the vault. */
 
 export const SKILLS: { group: string; items: string[] }[] = [
-  { group: 'Languages', items: ['TypeScript', 'Python', 'Dart', 'SQL', 'Swift'] },
-  { group: 'Frameworks', items: ['Next.js', 'React', 'React Native / Expo', 'Flutter', 'Node / Express', 'SwiftUI'] },
-  { group: 'Data & infra', items: ['Firebase', 'Turso / SQLite', 'Supabase', 'Vercel', 'Render', 'RevenueCat'] },
-  { group: 'Integrations', items: ['Stripe Connect', 'Microsoft Graph', 'Meta Ads API', 'OAuth', 'OpenAI / Anthropic admin APIs', 'Resend'] },
-  { group: 'AI', items: ['Claude API', 'LLM orchestration', 'Eval design · LLM-as-judge', 'Voice AI', 'Deterministic rules over LLM', 'RAG'] },
+  { group: 'Top skills', items: ['Python', 'JavaScript', 'TypeScript', 'HTML / CSS', 'React', 'React Native / Expo', 'Next.js', 'FastAPI', 'SQL / SQLite', 'Firebase'] },
+  { group: 'Design', items: ['UX / UI', 'Figma', 'Design systems', 'Figma → code'] },
+  { group: 'AI tools', items: ['Claude (Anthropic)', 'Cursor', 'Codex'] },
 ]
 
 export const ABILITIES: { title: string; detail: string }[] = [
   {
-    title: 'Own the backend and the integrations',
-    detail: 'Classification logic, admin-API connections, auth, data models, and the move off a platform when it fights the product (Render → Turso on Aithority).',
+    title: 'Build both sides: interface and backend',
+    detail: 'From the Figma screen to the API and the database behind it, and the move off a platform when it fights the product (Render → Turso on Aithority).',
   },
   {
     title: 'Run AI in loops against locked constraints',
@@ -460,7 +514,8 @@ export const MILESTONES: Milestone[] = [
   { date: 'Sep 2026', title: 'Kiblo live on the App Store (US & Canada)', detail: 'Approved and released after one revision. Concept to live in weeks, Cursor + Claude in loops.' },
   { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app — breach scan, exposure score, broker removals. Shipped and public.' },
   { date: '2026', title: 'Dross shipped — notarized Mac app + CLI', detail: 'Contract-drift checker with a golden corpus at 100% precision and recall.' },
-  { date: '2026', title: 'Aithority accepted into Lanzadera, first paying client', detail: 'EU AI Act compliance. The company is in the accelerator — technical cofounder.' },
+  { date: 'Oct 2026', title: 'Dev Job Tracker EU shipped', detail: 'Python, FastAPI and SQLite. Its data reshaped my own job search toward full-stack and software developer roles.' },
+  { date: 'May–Oct 2026', title: 'Cofounded and developed Aithority', detail: 'EU AI Act compliance SaaS, accepted into Lanzadera. Tested with accelerator companies such as LaiaDesk.' },
   { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Full-time logistics operations role in the DACH region. Alongside it, built and launched my own Shopify store for beauty products targeting the Netherlands and Germany, first real product I ran solo, end to end.' },
   { date: 'Live', title: 'SMASH on the App Store · Volea and Louvr Labs in production', detail: 'Earlier products still running with real users and clients.' },
 ]
