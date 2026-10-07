@@ -265,6 +265,129 @@ function CaseCard({ slot, onClose }: { slot: Slot; onClose: () => void }) {
   )
 }
 
+
+/* ── Built and shipped, skills, numbers ───────────────────────────────── */
+
+type Built = { name: string; what: string; status: string; href?: string; label?: string }
+
+const BUILT: Built[] = [
+  { name: 'Kiblo', what: 'iOS app for dog owners', status: 'App Store, US & Canada', href: 'https://apps.apple.com/app/id6802237827', label: 'App Store' },
+  { name: 'Aithority', what: 'EU AI Act compliance SaaS', status: 'Cofounder, May–Oct 2026', href: 'https://www.aithority.com.es', label: 'Site' },
+  { name: 'Dross', what: 'Mac app + CLI that checks code before deploy', status: 'Open source, notarized', href: 'https://github.com/lopezsellesarnau-cmd/dross', label: 'Repo' },
+  { name: 'SMASH', what: 'Social padel app', status: 'App Store' },
+  { name: 'TRACE', what: 'Privacy app, data exposure and deletion', status: 'App Store, US' },
+  { name: 'F1 Strategy Agent', what: 'Race strategy model with a visual race view', status: 'Open source', href: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent', label: 'Repo' },
+  { name: 'Ukraine War Tracker', what: 'Daily data with time-series charts', status: 'Live', href: 'https://ukraine-war-tracker.vercel.app', label: 'Live' },
+  { name: 'Dev Job Tracker EU', what: 'Junior developer job market in four countries', status: 'Open source', href: 'https://github.com/lopezsellesarnau-cmd/Dev-Job-Tracking-EU', label: 'Repo' },
+  { name: 'StackD', what: 'Studio site in this same design language', status: 'Live', href: 'https://www.stackd.codes', label: 'Site' },
+]
+
+const DESIGN_SKILLS: { group: string; items: string[] }[] = [
+  { group: 'Design', items: ['Figma', 'UI design', 'UX flows & onboarding', 'Prototyping', 'Design systems', 'Reusable components', 'Dashboards & data-dense UI'] },
+  { group: 'Craft', items: ['Layout & typography', 'Editorial composition', 'Apple HIG', 'Branding applied to product', 'Microcopy'] },
+  { group: 'Build', items: ['HTML & CSS', 'Tailwind', 'React', 'Next.js', 'TypeScript', 'React Native / Expo'] },
+  { group: 'Research & AI', items: ['Founder interviews', 'Usability feedback', 'Claude', 'Claude Code', 'Cursor'] },
+]
+
+const NUMBERS: { value: string; label: string }[] = [
+  { value: '3', label: 'apps designed and shipped to the App Store' },
+  { value: '7 min → 3', label: 'steps to first value in Aithority onboarding' },
+  { value: '2 years', label: 'of graphic design training, EASD Alcoy' },
+  { value: '1', label: 'design language across products, sites and posts' },
+]
+
+const ext = (href: string) => (href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})
+
+function BuiltList() {
+  return (
+    <section id="built" className="relative flex min-h-[90svh] flex-col justify-between py-24">
+      <p className="frame text-[12px] uppercase text-ink">
+        <span className="pl-2">Built and shipped</span>
+      </p>
+      <ul className="frame my-16">
+        {BUILT.map((b, i) => (
+          <li key={b.name} className="grid grid-cols-[2rem_1fr_auto] items-baseline gap-x-4 py-[5px] text-[12px] uppercase md:grid-cols-[2rem_14rem_1fr_14rem_7rem]">
+            <span className="mono pl-2 text-[10px] text-fg-faint">{String(i + 1).padStart(2, '0')}</span>
+            <span className="text-ink">{b.name}</span>
+            <span className="hidden text-fg-dim md:block">{b.what}</span>
+            <span className="hidden text-fg-dim md:block">{b.status}</span>
+            <span className="whitespace-nowrap pr-2 text-right">
+              {b.href ? (
+                <a href={b.href} {...ext(b.href)} className="text-ink underline decoration-fg-ghost underline-offset-2 hover:text-accent">
+                  {b.label} ↗
+                </a>
+              ) : null}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div className="frame flex justify-between text-[12px] uppercase">
+        <span className="pl-2 text-ink">
+          {String(BUILT.length).padStart(2, '0')} products
+          <span className="ml-4 text-fg-dim">2024–2026</span>
+        </span>
+        <span className="pr-2 text-fg-dim">Designed and built by me</span>
+      </div>
+    </section>
+  )
+}
+
+function Numbers() {
+  return (
+    <section id="numbers" className="relative flex min-h-[70svh] flex-col justify-between py-24">
+      <div />
+      <div className="frame grid gap-y-8 md:grid-cols-4">
+        {NUMBERS.map((n) => (
+          <div key={n.label} className="pl-2 pr-6">
+            <p className="text-[13px] text-ink">
+              {n.value} <span className="ml-1 text-fg-faint">)</span>
+            </p>
+            <p className="mt-2 max-w-[24ch] text-[11px] leading-[1.45] text-fg-dim">{n.label}</p>
+          </div>
+        ))}
+      </div>
+      <div className="frame grid md:grid-cols-6">
+        <div className="pl-2 md:col-span-2">
+          <p className="text-[13px] text-ink">Design engineer.</p>
+          <p className="mt-4 max-w-[36ch] text-[11px] leading-[1.5] text-fg-muted">
+            I trained in graphic design before I started coding. I design in Figma, then build what I design, so every
+            decision survives the trip to production.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Skills() {
+  return (
+    <section id="skills" className="relative py-32">
+      <div className="frame grid gap-y-16 md:grid-cols-6">
+        <h2 className="pl-2 text-[clamp(1.1rem,2vw,1.4rem)] font-normal uppercase text-ink md:col-span-2">Skills</h2>
+        <div className="grid gap-y-8 md:col-span-4 md:grid-cols-2">
+          {DESIGN_SKILLS.map((g) => (
+            <div key={g.group} className="pl-2 pr-6">
+              <p className="mono text-[10px] uppercase text-fg-faint">{g.group}</p>
+              <p className="mono mt-2 text-[11px] uppercase leading-[1.6] text-ink">{g.items.join(', ')}</p>
+            </div>
+          ))}
+        </div>
+        <h2 className="pl-2 text-[clamp(1.1rem,2vw,1.4rem)] font-normal uppercase text-ink md:col-span-2">Education</h2>
+        <div className="grid gap-y-8 md:col-span-4 md:grid-cols-2">
+          <div className="pl-2 pr-6">
+            <p className="mono text-[10px] uppercase text-fg-faint">2021–2023</p>
+            <p className="mono mt-2 text-[11px] uppercase leading-[1.6] text-ink">Graphic design and layout, EASD Alcoy</p>
+          </div>
+          <div className="pl-2 pr-6">
+            <p className="mono text-[10px] uppercase text-fg-faint">In progress</p>
+            <p className="mono mt-2 text-[11px] uppercase leading-[1.6] text-ink">Programming MOOC (Python), University of Helsinki</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ── Page ─────────────────────────────────────────────────────────────── */
 
 export function UxPage() {
@@ -311,9 +434,13 @@ export function UxPage() {
           ))}
         </section>
 
+        <BuiltList />
+        <Numbers />
+        <Skills />
+
         <footer className="frame flex justify-between pb-10 text-[11px] uppercase text-fg-dim">
           <span className="pl-2">Arnau Lopez</span>
-          <span className="pr-2">Press a project</span>
+          <a href="mailto:lopezsellesarnau@gmail.com" className="pr-2 hover:text-ink">lopezsellesarnau@gmail.com</a>
         </footer>
       </main>
       {open && <CaseCard slot={open} onClose={close} />}
