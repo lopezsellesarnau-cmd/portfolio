@@ -285,7 +285,6 @@ const BUILT: Built[] = [
   { name: 'Aithority', what: 'EU AI Act compliance SaaS', status: 'Cofounder, May–Oct 2026', href: 'https://www.aithority.com.es', label: 'Site' },
   { name: 'Dross', what: 'Mac app + CLI that checks code before deploy', status: 'Open source, notarized', href: 'https://github.com/lopezsellesarnau-cmd/dross', label: 'Repo' },
   { name: 'SMASH', what: 'Social padel app', status: 'App Store' },
-  { name: 'TRACE', what: 'Privacy app, data exposure and deletion', status: 'App Store, US' },
   { name: 'F1 Strategy Agent', what: 'Race strategy model with a visual race view', status: 'Open source', href: 'https://github.com/lopezsellesarnau-cmd/F1-Strategy-Agent', label: 'Repo' },
   { name: 'Ukraine War Tracker', what: 'Daily data with time-series charts', status: 'Live', href: 'https://ukraine-war-tracker.vercel.app', label: 'Live' },
   { name: 'Dev Job Tracker EU', what: 'Junior developer job market in four countries', status: 'Open source', href: 'https://github.com/lopezsellesarnau-cmd/Dev-Job-Tracking-EU', label: 'Repo' },
@@ -300,7 +299,7 @@ const DESIGN_SKILLS: { group: string; items: string[] }[] = [
 ]
 
 const NUMBERS: { value: string; label: string }[] = [
-  { value: '3', label: 'apps designed and shipped to the App Store' },
+  { value: '2', label: 'apps designed and shipped to the App Store' },
   { value: '7 min → 3', label: 'steps to first value in Aithority onboarding' },
   { value: '2 years', label: 'of graphic design training, EASD Alcoy' },
   { value: '1', label: 'design language across products, sites and posts' },
