@@ -34,14 +34,80 @@ type Slot = {
 
 // Positions taken from the reference sketch (1500 × 985).
 const SLOTS: Slot[] = [
-  { id: 'a', left: 33.8, top: 0, w: 10.9, h: 16.4, project: 'Aithority', caption: 'Inventory dashboard' },
-  { id: 'b', left: 5.2, top: 20.1, w: 10.9, h: 16.5, project: 'Kiblo', caption: 'Home screen' },
-  { id: 'c', left: 75.5, top: 12.3, w: 10.9, h: 28.1, project: 'Kiblo', caption: 'Portion flow' },
-  { id: 'd', left: 53.2, top: 38.2, w: 10.9, h: 16.5, project: 'Dross', caption: 'Report' },
-  { id: 'e', left: 13.4, top: 57, w: 20.4, h: 16.5, project: 'Aithority', caption: 'Classification card' },
-  { id: 'f', left: 44.7, top: 73.5, w: 10.9, h: 16.5, project: 'TRACE', caption: 'Exposure report' },
-  { id: 'g', left: 80.9, top: 69.2, w: 10.9, h: 16.5, project: 'StackD', caption: 'Website' },
-  { id: 'h', left: 8, top: 83.1, w: 10.9, h: 16.5, project: 'Portfolio', caption: 'arnau-lopez.com' },
+  {
+    id: 'a', left: 33.8, top: 0, w: 10.9, h: 16.4,
+    src: '/ux/smash-icon.jpg', project: 'SMASH', caption: 'App icon',
+    problem: 'A social padel app needed an icon that reads on a crowded home screen.',
+    decisions: ['A single bold wordmark instead of a symbol, so the name is the brand.'],
+    tools: 'Figma',
+  },
+  {
+    id: 'b', left: 5.2, top: 20.1, w: 10.9, h: 16.5,
+    src: '/ux/kiblo-flows.jpg', project: 'Kiblo', caption: 'Flows in Figma',
+    problem: 'Food apps stop at a score and trackers stop at a log. None connected the bag in the cupboard to the right daily portion.',
+    decisions: [
+      'Designed every flow and how screens connect before writing code.',
+      'The two main actions sit on top; secondary features like reorder live lower down.',
+      'In v1 Share sat where Reorder is now, giving a minor feature more weight than the key one, so I moved it next to the dog’s name.',
+    ],
+    tools: 'Figma, React Native, Expo',
+  },
+  {
+    id: 'c', left: 75.5, top: 12.3, w: 10.9, h: 28.1,
+    src: '/ux/kiblo-meal-info.jpg', project: 'Kiblo', caption: 'Meal info',
+    problem: 'Owners need to trust the portion and know when the bag runs out.',
+    decisions: [
+      'Bag size as one-tap chips, and days left shown right under it.',
+      'Ingredients with their source link, so the data is checkable.',
+    ],
+    tools: 'Figma, React Native',
+  },
+  {
+    id: 'd', left: 53.2, top: 38.2, w: 10.9, h: 16.5,
+    src: '/ux/dross-fix-session.jpg', project: 'Dross', caption: 'Fix session',
+    problem: 'Code that passes the linter but is wrong in meaning, like a request missing its auth token.',
+    decisions: [
+      'Code opens in a focused popup instead of a full-screen editor.',
+      'The auto-fix button only appears where a fix is actually possible.',
+      'An industrial, terminal-inspired style, with minimalism inside each panel.',
+    ],
+    tools: 'Figma, SwiftUI',
+  },
+  {
+    id: 'e', left: 13.4, top: 57, w: 20.4, h: 16.5,
+    src: '/ux/aithority-ui-kit.jpg', project: 'Aithority', caption: 'Compliance dashboard, UI kit v1',
+    problem: 'Founders with no compliance background had to see at a glance which AI systems were high risk and what was missing.',
+    decisions: [
+      'Four numbers first: systems, high risk, undocumented and compliance %.',
+      'A progress bar against the August 2026 deadline.',
+      'Built as a UI kit of reusable components before coding.',
+    ],
+    tools: 'Figma, Next.js',
+  },
+  {
+    id: 'f', left: 44.7, top: 73.5, w: 10.9, h: 16.5,
+    src: '/ux/dross-repos.jpg', project: 'Dross', caption: 'Repository index',
+    problem: 'Seeing the state of every project at once before shipping.',
+    decisions: [
+      'One dot per check, red where something failed, readable in a second.',
+      'Scan / Fix / Verify / Commit as the whole flow, always visible.',
+    ],
+    tools: 'Figma, SwiftUI',
+  },
+  {
+    id: 'g', left: 80.9, top: 69.2, w: 10.9, h: 16.5,
+    src: '/ux/smash-landing.jpg', project: 'SMASH', caption: 'Landing page',
+    problem: 'Explaining a social padel app (squads, videos, analytics) in one scroll.',
+    decisions: ['One card per feature, each with its real screen next to a single sentence.'],
+    tools: 'Figma',
+  },
+  {
+    id: 'h', left: 8, top: 83.1, w: 10.9, h: 16.5,
+    src: '/ux/stackd-v1.jpg', project: 'StackD', caption: 'Earlier concept',
+    problem: 'An automation offer for property managers, before StackD became a freelance practice.',
+    decisions: ['Big editorial type and one strong claim per block.'],
+    tools: 'Figma',
+  },
 ]
 
 /* ── Header ───────────────────────────────────────────────────────────── */
