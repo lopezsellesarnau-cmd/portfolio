@@ -26,6 +26,8 @@ type Slot = {
   left: number
   top: number
   w: number
+  // Mobile canvas (narrower, taller): same idea, its own composition.
+  m: { left: number; top: number; w: number }
   images: Img[] // first one is the grid tile, all of them show in the popup
   project: string
   caption: string
@@ -39,6 +41,7 @@ type Slot = {
 const SLOTS: Slot[] = [
   {
     id: 'a', left: 33, top: 0, w: 14.5,
+    m: { left: 52, top: 0.0, w: 44 },
     images: [{ src: '/ux/smash-icon.jpg', w: 1800, h: 1200 }],
     project: 'SMASH', caption: 'App icon',
     problem: 'A social padel app needed an icon that reads on a crowded home screen.',
@@ -47,6 +50,7 @@ const SLOTS: Slot[] = [
   },
   {
     id: 'c', left: 66, top: 8, w: 26,
+    m: { left: 4, top: 11.4, w: 70 },
     images: [
       { src: '/ux/aithority-overview.jpg', w: 1800, h: 923 },
       { src: '/ux/aithority-sign-in.jpg', w: 1800, h: 899 },
@@ -63,6 +67,7 @@ const SLOTS: Slot[] = [
   },
   {
     id: 'b', left: 4, top: 18, w: 14.5,
+    m: { left: 56, top: 25.7, w: 42 },
     images: [{ src: '/ux/kiblo-flows.jpg', w: 1800, h: 1595 }],
     project: 'Kiblo', caption: 'Flows in Figma',
     problem: 'Food apps stop at a score and trackers stop at a log. None connected the bag in the cupboard to the right daily portion.',
@@ -75,6 +80,7 @@ const SLOTS: Slot[] = [
   },
   {
     id: 'd', left: 50, top: 37, w: 14.5,
+    m: { left: 6, top: 33.7, w: 40 },
     images: [{ src: '/ux/dross-fix-session.jpg', w: 1800, h: 1573 }],
     project: 'Dross', caption: 'Fix session',
     problem: 'Code that passes the linter but is wrong in meaning, like a request missing its auth token.',
@@ -87,6 +93,7 @@ const SLOTS: Slot[] = [
   },
   {
     id: 'e', left: 14, top: 50, w: 26,
+    m: { left: 30, top: 48.0, w: 66 },
     images: [{ src: '/ux/aithority-ui-kit.jpg', w: 1693, h: 1129 }],
     project: 'Aithority', caption: 'Dashboard, UI kit v1',
     problem: 'Before coding, the product needed one set of components every screen could share.',
@@ -99,6 +106,7 @@ const SLOTS: Slot[] = [
   },
   {
     id: 'h', left: 68, top: 55, w: 26,
+    m: { left: 2, top: 65.1, w: 70 },
     images: [{ src: '/ux/aithority-onboarding.jpg', w: 1800, h: 914 }],
     project: 'Aithority', caption: 'Onboarding in three steps',
     problem: 'Setup took over 7 minutes before a user saw any value.',
@@ -111,6 +119,7 @@ const SLOTS: Slot[] = [
   },
   {
     id: 'f', left: 46, top: 72, w: 14.5,
+    m: { left: 56, top: 79.4, w: 40 },
     images: [{ src: '/ux/dross-repos.jpg', w: 1800, h: 1555 }],
     project: 'Dross', caption: 'Repository index',
     problem: 'Seeing the state of every project at once before shipping.',
@@ -122,6 +131,7 @@ const SLOTS: Slot[] = [
   },
   {
     id: 'g', left: 6, top: 82, w: 14.5,
+    m: { left: 8, top: 85.7, w: 42 },
     images: [{ src: '/ux/smash-landing.jpg', w: 1470, h: 1200 }],
     project: 'SMASH', caption: 'Landing page',
     problem: 'Explaining a social padel app (squads, videos, analytics) in one scroll.',
@@ -425,13 +435,19 @@ export function UxPage() {
           </div>
         </section>
 
-        {/* Mobile: simple two-column list */}
-        <section className="frame grid grid-cols-2 gap-x-4 gap-y-10 pb-24 md:hidden">
-          {SLOTS.map((s) => (
-            <div key={s.id}>
-              <Tile slot={s} onOpen={() => setOpenId(s.id)} dimmed={false} />
-            </div>
-          ))}
+        {/* Mobile: same scattered idea on a taller canvas (100 × 350) */}
+        <section className="px-4 pb-24 md:hidden">
+          <div className="relative w-full" style={{ aspectRatio: '100 / 350' }}>
+            {SLOTS.map((s) => (
+              <div
+                key={s.id}
+                className="absolute"
+                style={{ left: `${s.m.left}%`, top: `${s.m.top}%`, width: `${s.m.w}%` }}
+              >
+                <Tile slot={s} onOpen={() => setOpenId(s.id)} dimmed={!!openId && openId !== s.id} />
+              </div>
+            ))}
+          </div>
         </section>
 
         <BuiltList />
