@@ -3,7 +3,7 @@
  * technical content (not filler). What's genuinely missing (users, metrics) is
  * left out, not invented.
  *
- * Positioning since 5 oct 2026 — Software Developer · Full-Stack · UX/UI.
+ * Positioning since 7 oct 2026: Full-Stack Developer · Design Engineer (before: Software Developer · Full-Stack · UX/UI). UX work lives on /ux.
  * Arnau's own job tracker showed "software developer" and "full-stack" have the
  * most openings and the fewest senior-only roles; UX/UI is the differentiator,
  * not the search title. Every project answers three questions: why it was
@@ -13,7 +13,7 @@
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'Software Developer · Full-Stack · UX/UI',
+  role: 'Full-Stack Developer · Design Engineer',
   eyebrow: '[ 22 · Alcoy, Spain · EU citizen, open to relocation ]',
   hero: 'Cofounded and developed Aithority, an EU AI Act compliance SaaS (May to Oct 2026). Founder of Kiblo, live on the App Store in the US and Canada. Dross, a notarized Mac app that catches frontend/backend drift. F1 Strategy Agent, open-sourced after viewers asked for the code. Dev Job Tracker EU, the data behind my own job search.',
   sub: 'TypeScript · React · React Native · Next.js · Python · FastAPI · SQL · Figma. I design the interface and write the code, and I use AI in loops: conditions first, then rebuild what failed. ~2 years at Deutsche Post / DHL in Germany; based in Spain, EU citizen, open to full-stack and software developer roles across the EU.',
@@ -468,7 +468,7 @@ export const CONTACT = {
   eyebrow: 'Spain · EU citizen, open to relocation',
   title: "Let's talk",
   cta: 'Email me',
-  note: 'Software Developer · Full-Stack · UX/UI. GitHub, LinkedIn, and CV below.',
+  note: 'Full-Stack Developer · Design Engineer. GitHub, LinkedIn, and CV below.',
 }
 
 /* ── Skills · Abilities · Milestones — one section, three registers ──────────

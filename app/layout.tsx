@@ -12,7 +12,7 @@ const serif = Newsreader({
   adjustFontFallback: false,
 })
 
-const TITLE = 'Arnau Lopez — Software Developer · Full-Stack · UX/UI'
+const TITLE = 'Arnau Lopez | Full-Stack Developer & Design Engineer'
 const DESCRIPTION =
   'Junior full-stack software developer with a design background. Cofounded and developed Aithority (EU AI Act compliance). Kiblo is live on the App Store in the US and Canada. Dross is a notarized Mac app. F1 Strategy Agent and Dev Job Tracker EU are open source. Based in Alcoy, Spain. EU citizen, open to relocation.'
 

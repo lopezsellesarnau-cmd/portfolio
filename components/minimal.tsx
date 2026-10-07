@@ -67,9 +67,9 @@ export function Menu() {
           Arnau Lopez.
         </a>
         <p className="hidden pl-2 text-fg-faint md:block">
-          Software Developer
+          Full-Stack Developer
           <br />
-          Full-Stack &amp; UX/UI
+          Design Engineer
         </p>
         <nav className="col-span-2 flex justify-end gap-5 pr-2 md:col-span-4">
           {LINKS.map((l) => (
@@ -106,10 +106,10 @@ export function Hero() {
         <h1 className="text-[clamp(1.25rem,2.6vw,1.75rem)] font-normal uppercase leading-[1.15] tracking-[-0.01em] text-ink">
           I&rsquo;m Arnau Lopez
           <br />
-          Software Developer
+          Full-Stack Developer
         </h1>
         <p className="mt-3 text-[12px] uppercase tracking-[0.04em] text-fg-dim">
-          Full-Stack · UX/UI · Alcoy, Spain · EU citizen, open to relocation
+          Design Engineer · Alcoy, Spain · EU citizen, open to relocation
         </p>
       </div>
 
@@ -148,7 +148,7 @@ export function Portrait() {
       />
       <div className="frame flex justify-end gap-6 text-[12px] uppercase text-ink">
         <span>Arnau Lopez</span>
-        <span className="pr-2">Software Developer</span>
+        <span className="pr-2">Full-Stack Developer</span>
       </div>
     </section>
   )
