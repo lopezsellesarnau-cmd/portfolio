@@ -12,6 +12,7 @@
  */
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   CASES,
@@ -71,12 +72,12 @@ export function Menu() {
           <br />
           Design Engineer
         </p>
-        <nav className="col-span-2 flex justify-end gap-5 pr-2 md:col-span-4">
+        <nav className="col-span-2 flex justify-end gap-4 pr-2 sm:gap-5 md:col-span-4">
           {LINKS.map((l) => (
             <a
               key={l.id}
               href={`#${l.id}`}
-              className={`transition-colors hover:text-ink ${active === l.id ? 'text-ink underline decoration-1 underline-offset-[6px]' : 'text-fg-muted'}`}
+              className={`transition-colors hover:text-ink ${l.id === 'milestones' || l.id === 'about' ? 'hidden sm:inline' : ''} ${active === l.id ? 'text-ink underline decoration-1 underline-offset-[6px]' : 'text-fg-muted'}`}
             >
               {l.label}
             </a>
@@ -84,6 +85,10 @@ export function Menu() {
           <a href={CV} className="text-fg-muted transition-colors hover:text-ink">
             CV
           </a>
+          {/* The design portfolio lives on its own page, so this site stays full-stack. */}
+          <Link href="/ux" className="text-fg-muted transition-colors hover:text-ink">
+            Design ↗
+          </Link>
         </nav>
       </div>
     </header>
