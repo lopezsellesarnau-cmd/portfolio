@@ -341,18 +341,9 @@ export const LIGHT: LightProject[] = [
     tagline: 'Booking SaaS for padel clubs — courts, leagues, payments.',
     status: 'Live — deployed',
     what: 'Padel-club booking: court timeline, leagues, public booking. Stripe Connect so money goes to the club, not through Volea.',
-    built: 'Solo. Next.js, Supabase, Stripe Connect, Vercel. SMASH books courts through this.',
+    built: 'Solo. Next.js, Supabase, Stripe Connect, Vercel.',
     stack: ['Next.js', 'Supabase', 'Stripe Connect', 'TypeScript', 'Vercel'],
     seed: 803,
-  },
-  {
-    name: 'SMASH',
-    tagline: 'Social padel app — short-form video, squads, clubs.',
-    status: 'Live on the App Store',
-    what: 'TikTok-style padel feed, squads, club booking via Volea. Live on the App Store.',
-    built: 'Flutter + Firebase. UGC moderation, IAP and DAC7 handled solo through Apple review.',
-    stack: ['Flutter', 'Firebase', 'iOS'],
-    seed: 951,
   },
 ]
 
@@ -445,10 +436,6 @@ export const OTHER_WORK: { name: string; line: string; link?: string }[] = [
     line: 'Meta Ads ranking & weekly reports — rules first, Claude on the insight. In production with real clients.',
   },
   {
-    name: 'SMASH',
-    line: 'Social padel app — live on the App Store. UGC moderation, IAP and DAC7 handled solo.',
-  },
-  {
     name: 'Volea',
     line: 'Padel-club booking SaaS (courts, leagues, Stripe Connect to the club). Built end to end and deployed.',
   },
@@ -492,7 +479,7 @@ export const ABILITIES: { title: string; detail: string }[] = [
   },
   {
     title: 'Ship to the App Store solo',
-    detail: 'IAP, subscriptions, privacy manifests, DAC7, UGC moderation, and Apple review — carried end to end on TRACE, SMASH and Kiblo.',
+    detail: 'Subscriptions, privacy manifests and Apple review, carried end to end on Kiblo.',
   },
   {
     title: 'Design the product and its visual system — no handoff',
