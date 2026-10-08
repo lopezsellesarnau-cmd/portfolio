@@ -64,7 +64,8 @@ export function Menu() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 bg-paper/85 backdrop-blur-[2px]">
       <div className="frame grid grid-cols-3 py-5 text-[12px] leading-[1.45] md:grid-cols-6">
-        <a href="#top" className="pl-2 text-ink">
+        <a href="#top" className="flex items-center gap-2 pl-2 text-ink">
+          <Image src="/logo.png" alt="" width={16} height={16} className="h-4 w-4" />
           Arnau Lopez.
         </a>
         <p className="hidden pl-2 text-fg-faint md:block">
