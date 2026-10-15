@@ -12,7 +12,6 @@
  */
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   CASES,
@@ -28,6 +27,7 @@ const CV = '/Arnau-Lopez-Selles-CV.pdf'
 
 const LINKS = [
   { id: 'work', label: 'Work' },
+  { id: 'design', label: 'Design' },
   { id: 'milestones', label: 'Milestones' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
@@ -86,10 +86,6 @@ export function Menu() {
           <a href={CV} className="text-fg-muted transition-colors hover:text-ink">
             CV
           </a>
-          {/* The design portfolio lives on its own page, so this site stays full-stack. */}
-          <Link href="/ux" className="text-fg-muted transition-colors hover:text-ink">
-            Design ↗
-          </Link>
         </nav>
       </div>
     </header>
