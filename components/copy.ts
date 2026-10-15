@@ -15,7 +15,7 @@ export const PROFILE = {
   name: 'Arnau Lopez',
   role: 'Full-Stack Developer · Design Engineer',
   eyebrow: '[ 22 · Alcoy, Spain · EU citizen, open to relocation ]',
-  hero: 'Cofounded and developed Aithority, an EU AI Act compliance SaaS (May to Oct 2026). Founder of Kiblo, live on the App Store in the US and Canada. Dross, a notarized Mac app that catches frontend/backend drift. F1 Strategy Agent, open-sourced after viewers asked for the code. Dev Job Tracker EU, the data behind my own job search.',
+  hero: 'Cofounded and developed Aithority, an EU AI Act compliance SaaS (May to Oct 2026). Building Hilo, an AI voice companion for older people, now in TestFlight on iPhone and iPad. Founder of Kiblo, live on the App Store in the US and Canada. Dross, a notarized Mac app that catches frontend/backend drift. F1 Strategy Agent, open-sourced after viewers asked for the code. Dev Job Tracker EU, the data behind my own job search.',
   sub: 'TypeScript · React · React Native · Next.js · Python · FastAPI · SQL · Figma. I design the interface and write the code, and I use AI in loops: conditions first, then rebuild what failed. ~2 years at Deutsche Post / DHL in Germany; based in Spain, EU citizen, open to full-stack and software developer roles across the EU.',
 }
 
@@ -47,56 +47,8 @@ export type CaseStudy = {
 
 export const CASES: CaseStudy[] = [
   {
-    slug: 'kiblo',
-    index: '01',
-    name: 'Kiblo',
-    role: 'Founder',
-    tagline: 'Pet-food iOS — full consumer loop, live on the App Store',
-    status: { text: 'Founder · live US & Canada', tone: 'ok' },
-    blurb:
-      'A weekly habit app for dog owners: scan the food bag already in the cupboard, portion the meal from the dog’s weight, and reorder before it runs out.',
-    why:
-      'Food-scanner apps stop at a score and trackers stop at a log. None connected the bag in the cupboard to the right portion and the next order.',
-    usedBy: 'Live on the App Store in the US and Canada.',
-    what:
-      'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. Live on the App Store in the US and Canada. I am getting the first users through social media and building in public — not waiting for the listing to do the distribution.',
-    built:
-      'Solo. Expo 57, React Native, Firebase, RevenueCat. I lock product and constraints; AI implements in loops (conditions, then fix what failed); I reject and ship.',
-    decisions: [
-      {
-        title: 'Feeding tips are a rule engine, not an LLM call',
-        detail:
-          'The first plan was an LLM for every tip. A wrong answer about a dog’s health is worse than a missing one, and it has a per-call cost. I built a deterministic engine instead.',
-      },
-      {
-        title: 'Home stays a bowl — details live on the bowl',
-        detail:
-          'Home was getting noisy. I redesigned so the homepage stays clean. Feeding tips, details and extras sit on the bowl’s detail screen, not on home.',
-      },
-      {
-        title: 'Plans use real US recipes, not generated meals',
-        detail:
-          'Creating a plan means choosing meals that already exist in a US dog-food catalogue. Not an LLM suggestion of a recipe.',
-      },
-      {
-        title: 'Grams per day from the RER formula vets use',
-        detail:
-          'Daily amount comes from Resting Energy Requirement: age, weight, activity, meals per day. Not a model guess.',
-      },
-      {
-        title: 'RevenueCat “valid credentials” was a bundle ID',
-        detail:
-          'The In-App Purchase key in App Store Connect was created and valid. RevenueCat said the credentials were valid and still could not connect. The App Bundle ID was not exactly the one on the app.',
-      },
-    ],
-    stack: ['Cursor', 'Claude', 'React Native', 'Expo SDK 57', 'TypeScript', 'Firebase', 'RevenueCat'],
-    seed: 418,
-    link: 'https://apps.apple.com/app/id6802237827',
-    linkLabel: 'Open on the App Store',
-  },
-  {
     slug: 'aithority',
-    index: '02',
+    index: '01',
     name: 'Aithority',
     role: 'Cofounder & developer',
     tagline: 'EU AI Act compliance SaaS · May to Oct 2026',
@@ -144,8 +96,103 @@ export const CASES: CaseStudy[] = [
     linkLabel: 'Open landing',
   },
   {
-    slug: 'f1-strategy-agent',
+    slug: 'hilo',
+    index: '02',
+    name: 'Hilo',
+    role: 'Founder',
+    tagline: 'AI voice companion for older people · iPhone and iPad, in TestFlight',
+    status: { text: 'Founder · in TestFlight', tone: 'accent' },
+    blurb:
+      'A voice app for older people who live alone. Every day it talks with them, reminds them about their pills and asks them about their life. Their answers become a book of their life for the family.',
+    why:
+      'Many older people live alone, and their families call to ask the same things: how are you, did you take your pills. Kiblo, TRACE and SMASH were built first and looked for users later. Hilo started the other way round: the customer first, then the code.',
+    what:
+      'A daily voice talk with one big button, pill reminders inside the talk, and a book of their life written only with their words. The family sees the day on their phone and approves every story before it reaches the book.',
+    built:
+      'Solo. Designed in Figma, built with Expo 57, React Native and TypeScript. Supabase in Frankfurt with row level security. A Deno Edge Function runs the talk: Claude Haiku 5.5 for the conversation, Azure for the voice, Claude Sonnet 5.5 writes the story in the background.',
+    decisions: [
+      {
+        title: 'Tap to talk, not hold to talk',
+        detail:
+          'Holding a button was tiring and cut people off in the middle of a sentence. Now they tap once, and the turn ends after a pause of 3.5 seconds, when they tap “He terminado”, or after two minutes.',
+      },
+      {
+        title: 'The book does not invent',
+        detail:
+          'A test story added a sunny day nobody mentioned. The writer now uses only their words, and the app marks any word they did not say, so the family checks it before approving.',
+      },
+      {
+        title: 'The pill answer is code, not AI',
+        detail:
+          'Whether a pill was taken is health data. Hilo asks with Sí / No buttons and plain code records it, so the answer is never a guess from a model.',
+      },
+      {
+        title: 'Their voice stays on the phone',
+        detail:
+          'Speech recognition runs on the device. Only the text of the talk is saved, never the audio.',
+      },
+      {
+        title: 'Cost per user from day one',
+        detail:
+          'Tokens and voice characters are counted per person and day, and a daily limit per plan is checked on the server before a new talk starts.',
+      },
+    ],
+    stack: ['Claude Code', 'React Native', 'Expo SDK 57', 'TypeScript', 'Supabase', 'Claude API', 'Azure Speech'],
+    seed: 507,
+    link: 'https://hilo-web.vercel.app',
+    linkLabel: 'Open landing',
+  },
+  {
+    slug: 'kiblo',
     index: '03',
+    name: 'Kiblo',
+    role: 'Founder',
+    tagline: 'Pet-food iOS — full consumer loop, live on the App Store',
+    status: { text: 'Founder · live US & Canada', tone: 'ok' },
+    blurb:
+      'A weekly habit app for dog owners: scan the food bag already in the cupboard, portion the meal from the dog’s weight, and reorder before it runs out.',
+    why:
+      'Food-scanner apps stop at a score and trackers stop at a log. None connected the bag in the cupboard to the right portion and the next order.',
+    usedBy: 'Live on the App Store in the US and Canada.',
+    what:
+      'A weekly habit product: scan the bag already in the cupboard, portion from the dog, reorder before it runs out. Live on the App Store in the US and Canada. I am getting the first users through social media and building in public — not waiting for the listing to do the distribution.',
+    built:
+      'Solo. Expo 57, React Native, Firebase, RevenueCat. I lock product and constraints; AI implements in loops (conditions, then fix what failed); I reject and ship.',
+    decisions: [
+      {
+        title: 'Feeding tips are a rule engine, not an LLM call',
+        detail:
+          'The first plan was an LLM for every tip. A wrong answer about a dog’s health is worse than a missing one, and it has a per-call cost. I built a deterministic engine instead.',
+      },
+      {
+        title: 'Home stays a bowl — details live on the bowl',
+        detail:
+          'Home was getting noisy. I redesigned so the homepage stays clean. Feeding tips, details and extras sit on the bowl’s detail screen, not on home.',
+      },
+      {
+        title: 'Plans use real US recipes, not generated meals',
+        detail:
+          'Creating a plan means choosing meals that already exist in a US dog-food catalogue. Not an LLM suggestion of a recipe.',
+      },
+      {
+        title: 'Grams per day from the RER formula vets use',
+        detail:
+          'Daily amount comes from Resting Energy Requirement: age, weight, activity, meals per day. Not a model guess.',
+      },
+      {
+        title: 'RevenueCat “valid credentials” was a bundle ID',
+        detail:
+          'The In-App Purchase key in App Store Connect was created and valid. RevenueCat said the credentials were valid and still could not connect. The App Bundle ID was not exactly the one on the app.',
+      },
+    ],
+    stack: ['Cursor', 'Claude', 'React Native', 'Expo SDK 57', 'TypeScript', 'Firebase', 'RevenueCat'],
+    seed: 418,
+    link: 'https://apps.apple.com/app/id6802237827',
+    linkLabel: 'Open on the App Store',
+  },
+  {
+    slug: 'f1-strategy-agent',
+    index: '04',
     name: 'F1 Strategy Agent',
     role: 'Founder',
     tagline: 'ML race strategy — open-sourced after viewers asked for the code',
@@ -189,7 +236,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'dross',
-    index: '04',
+    index: '05',
     name: 'Dross',
     role: 'Founder',
     tagline: 'Mac app + CLI — notarized DMG',
@@ -223,7 +270,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'dev-job-tracker',
-    index: '05',
+    index: '06',
     name: 'Dev Job Tracker EU',
     role: 'Founder',
     tagline: 'Junior dev job market in Spain, NL, Germany and Belgium',
@@ -262,7 +309,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'ukraine-war-tracker',
-    index: '06',
+    index: '07',
     name: 'Ukraine War Tracker',
     role: 'Founder',
     tagline: 'Daily Russian losses in the war in Ukraine, as a quiet report',
@@ -513,5 +560,6 @@ export const MILESTONES: Milestone[] = [
   { date: 'May 2026', title: 'Cofounded and developed Aithority', detail: 'EU AI Act compliance SaaS, accepted into Lanzadera. Tested with accelerator companies such as LaiaDesk. Until Oct 2026.' },
   { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app: breach scan, exposure score, broker removals.' },
   { date: 'Sep 2026', title: 'Kiblo live on the App Store (US & Canada)', detail: 'Approved and released after one revision.' },
+  { date: 'Oct 2026', title: 'Started Hilo', detail: 'AI voice companion for older people. iPhone and iPad in TestFlight.' },
   { date: 'Oct 2026', title: 'Dev Job Tracker EU shipped', detail: 'Python, FastAPI and SQLite. Its data reshaped my own job search.' },
 ]
