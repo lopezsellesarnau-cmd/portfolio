@@ -5,7 +5,7 @@
  * Reference: the Nomad Coffee archive cover. A centred plate with a mono caption,
  * a column of small numbered images on the right, the index in vertical text on the left.
  * The centre stays empty until a number is pressed; pressing it again empties it.
- * No mockups or frames: the screens as they are.
+ * Each plate is a device mockup made in Figma (16 oct 2026), all the same 2531x1807 canvas.
  */
 
 import Image from 'next/image'
@@ -14,16 +14,16 @@ import { useState } from 'react'
 type Plate = { src: string; w: number; h: number; project: string; caption: string; year: string; tools: string }
 
 const PLATES: Plate[] = [
-  { src: '/design/hilo-ipad-talk.png', w: 1024, h: 670, project: 'Hilo', caption: 'Talk, iPad', year: '2026', tools: 'Figma' },
-  { src: '/design/hilo-ipad-home.png', w: 1024, h: 670, project: 'Hilo', caption: 'Home, iPad', year: '2026', tools: 'Figma' },
-  { src: '/design/hilo-home.png', w: 402, h: 874, project: 'Hilo', caption: 'Home, iPhone', year: '2026', tools: 'Figma' },
-  { src: '/ux/kiblo-flows.jpg', w: 1800, h: 1595, project: 'Kiblo', caption: 'Flows', year: '2026', tools: 'Figma' },
-  { src: '/kiblo/02.png', w: 479, h: 900, project: 'Kiblo', caption: 'The bowl', year: '2026', tools: 'React Native' },
-  { src: '/kiblo/04.png', w: 479, h: 900, project: 'Kiblo', caption: 'Pick the food', year: '2026', tools: 'React Native' },
-  { src: '/ux/aithority-overview.jpg', w: 1800, h: 923, project: 'Aithority', caption: 'Compliance overview', year: '2026', tools: 'Figma, Next.js' },
-  { src: '/ux/aithority-onboarding.jpg', w: 1800, h: 914, project: 'Aithority', caption: 'Onboarding', year: '2026', tools: 'Figma, Next.js' },
-  { src: '/ux/dross-fix-session.jpg', w: 1800, h: 1573, project: 'Dross', caption: 'Fix session', year: '2026', tools: 'Figma, SwiftUI' },
-  { src: '/ux/dross-repos.jpg', w: 1800, h: 1555, project: 'Dross', caption: 'Repositories', year: '2026', tools: 'Figma, SwiftUI' },
+  { src: '/design/mockups/01-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'iPhone screens', year: '2026', tools: 'Figma' },
+  { src: '/design/mockups/02-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Pills, iPad', year: '2026', tools: 'Figma' },
+  { src: '/design/mockups/03-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Repositories', year: '2026', tools: 'SwiftUI' },
+  { src: '/design/mockups/04-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Meal plan and trends', year: '2026', tools: 'React Native' },
+  { src: '/design/mockups/05-ukraine-tracker.webp', w: 1600, h: 1142, project: 'Ukraine Tracker', caption: 'Losses chart', year: '2026', tools: 'Python, JS' },
+  { src: '/design/mockups/06-aithority.webp', w: 1600, h: 1142, project: 'Aithority', caption: 'Compliance overview', year: '2026', tools: 'Next.js' },
+  { src: '/design/mockups/07-f1-strategy-agent.webp', w: 1600, h: 1142, project: 'F1 Strategy Agent', caption: 'Suzuka strategy', year: '2026', tools: 'Python' },
+  { src: '/design/mockups/08-aithority.webp', w: 1600, h: 1142, project: 'Aithority', caption: 'Onboarding', year: '2026', tools: 'Next.js' },
+  { src: '/design/mockups/09-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Review before ship', year: '2026', tools: 'SwiftUI' },
+  { src: '/design/mockups/10-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Pick the food', year: '2026', tools: 'React Native' },
 ]
 
 const num = (i: number) => String(i + 1).padStart(2, '0')
@@ -59,8 +59,8 @@ export function Design() {
                 alt={`${plate.project}, ${plate.caption}`}
                 width={plate.w}
                 height={plate.h}
-                sizes="(min-width: 768px) 560px, 90vw"
-                className="h-auto max-h-[56vh] w-auto max-w-[min(560px,100%)] object-contain"
+                sizes="(min-width: 768px) 760px, 90vw"
+                className="h-auto max-h-[56vh] w-auto max-w-[min(760px,100%)] object-contain"
               />
               <div className="mono text-center text-[11px] uppercase leading-[1.5] text-ink">
                 <p className="text-fg-faint">[{num(active)}]</p>
@@ -72,6 +72,13 @@ export function Design() {
               </div>
             </>
           ) : null}
+
+          {/* Same src and sizes as the plate, loaded up front, so pressing a number shows it at once */}
+          <div aria-hidden className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0">
+            {PLATES.map((p) => (
+              <Image key={p.src} src={p.src} alt="" width={p.w} height={p.h} sizes="(min-width: 768px) 760px, 90vw" loading="eager" />
+            ))}
+          </div>
         </div>
 
         {/* Numbered images: a column on the right, a row under the plate on a phone */}
@@ -88,7 +95,7 @@ export function Design() {
                 aria-current={i === active}
                 className={`block h-[44px] w-[64px] overflow-hidden bg-card transition-opacity ${i === active ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
               >
-                <Image src={p.src} alt="" width={128} height={88} className="h-full w-full object-cover object-top" />
+                <Image src={p.src} alt="" width={128} height={88} className="h-full w-full object-cover object-center" />
               </button>
             </li>
           ))}
@@ -105,7 +112,7 @@ export function Design() {
               aria-current={i === active}
               className={`block h-[44px] w-[64px] overflow-hidden bg-card ${i === active ? 'opacity-100' : 'opacity-60'}`}
             >
-              <Image src={p.src} alt="" width={128} height={88} className="h-full w-full object-cover object-top" />
+              <Image src={p.src} alt="" width={128} height={88} className="h-full w-full object-cover object-center" />
             </button>
           </li>
         ))}
@@ -113,7 +120,7 @@ export function Design() {
 
       <div className="frame flex justify-between text-[12px] uppercase">
         <span className="pl-2 text-ink">
-          {String(PLATES.length).padStart(2, '0')} screens
+          {String(PLATES.length).padStart(2, '0')} mockups
           <span className="ml-4 text-fg-dim">2024–2026</span>
         </span>
         <span className="pr-2 text-fg-dim">Press a number</span>
