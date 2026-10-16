@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 /**
- * Editorial language (Sept 2026): near-white paper, ink type, rust used sparingly
+ * Editorial language (Sept 2026): white paper (#FFFFFF since 16 oct 2026, to match the mockup backgrounds), ink type, rust used sparingly
  * as an accent. Serif (Newsreader) for select headings; body is the Apple system
  * stack (SF Pro) with a generic fallback. The previous "ficha técnica" style
  * (bone #F0F0F0 + hard ink borders + checker/grain) is snapshotted in the vault:
@@ -12,8 +12,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: '#FCFCFB',
-        bg: '#FCFCFB',
+        paper: '#FFFFFF',
+        bg: '#FFFFFF',
         surface: '#FFFFFF',
         raised: '#F5F5F3',
         card: '#EDEDEB',
