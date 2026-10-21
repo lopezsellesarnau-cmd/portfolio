@@ -48,6 +48,9 @@ export const viewport: Viewport = { themeColor: '#FFFFFF', colorScheme: 'light' 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${serif.variable} ${mono.variable}`}>
+      <head>
+        <meta name="p:domain_verify" content="1ac2b98e6023920f745e0b0aaf6bf789" />
+      </head>
       <body>
         <a
           href="#contenido"
