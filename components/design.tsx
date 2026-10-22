@@ -15,7 +15,7 @@ type Plate = { src: string; w: number; h: number; project: string; caption: stri
 
 const PLATES: Plate[] = [
   { src: '/design/mockups/01-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'iPhone screens', year: '2026', tools: 'Figma' },
-  { src: '/design/mockups/02-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Pills, iPad', year: '2026', tools: 'Figma' },
+  { src: '/design/mockups/02-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Book and pills, iPad', year: '2026', tools: 'Figma' },
   { src: '/design/mockups/03-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Repositories', year: '2026', tools: 'SwiftUI' },
   { src: '/design/mockups/04-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Meal plan and trends', year: '2026', tools: 'React Native' },
   { src: '/design/mockups/05-ukraine-tracker.webp', w: 1600, h: 1142, project: 'Ukraine Tracker', caption: 'Losses chart', year: '2026', tools: 'Python, JS' },
