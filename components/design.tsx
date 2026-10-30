@@ -16,14 +16,14 @@ type Plate = { src: string; w: number; h: number; project: string; caption: stri
 const PLATES: Plate[] = [
   { src: '/design/mockups/01-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'iPhone screens', year: '2026', tools: 'Figma' },
   { src: '/design/mockups/02-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Book and pills, iPad', year: '2026', tools: 'Figma' },
-  { src: '/design/mockups/03-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Repositories', year: '2026', tools: 'SwiftUI' },
+  { src: '/design/mockups/03-hilo-staff.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Web for care staff', year: '2026', tools: 'Figma' },
   { src: '/design/mockups/04-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Meal plan and trends', year: '2026', tools: 'React Native' },
-  { src: '/design/mockups/05-ukraine-tracker.webp', w: 1600, h: 1142, project: 'Ukraine Tracker', caption: 'Losses chart', year: '2026', tools: 'Python, JS' },
+  { src: '/design/mockups/05-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Pick the food', year: '2026', tools: 'React Native' },
   { src: '/design/mockups/06-aithority.webp', w: 1600, h: 1142, project: 'Aithority', caption: 'Compliance overview', year: '2026', tools: 'Next.js' },
-  { src: '/design/mockups/07-f1-strategy-agent.webp', w: 1600, h: 1142, project: 'F1 Strategy Agent', caption: 'Suzuka strategy', year: '2026', tools: 'Python' },
-  { src: '/design/mockups/08-aithority.webp', w: 1600, h: 1142, project: 'Aithority', caption: 'Onboarding', year: '2026', tools: 'Next.js' },
+  { src: '/design/mockups/07-aithority.webp', w: 1600, h: 1142, project: 'Aithority', caption: 'Onboarding', year: '2026', tools: 'Next.js' },
+  { src: '/design/mockups/08-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Repositories', year: '2026', tools: 'SwiftUI' },
   { src: '/design/mockups/09-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Review before ship', year: '2026', tools: 'SwiftUI' },
-  { src: '/design/mockups/10-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Pick the food', year: '2026', tools: 'React Native' },
+  { src: '/design/mockups/10-f1-strategy-agent.webp', w: 1600, h: 1142, project: 'F1 Strategy Agent', caption: 'Suzuka strategy', year: '2026', tools: 'Python' },
 ]
 
 const num = (i: number) => String(i + 1).padStart(2, '0')
