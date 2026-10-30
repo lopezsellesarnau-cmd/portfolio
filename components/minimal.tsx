@@ -69,9 +69,9 @@ export function Menu() {
           Arnau Lopez.
         </a>
         <p className="hidden pl-2 text-fg-faint md:block">
-          Full-Stack Developer
+          Product Engineer (AI)
           <br />
-          Design Engineer
+          I design and build AI products
         </p>
         <nav className="col-span-2 flex justify-end gap-4 pr-2 sm:gap-5 md:col-span-4">
           {LINKS.map((l) => (
@@ -95,10 +95,10 @@ export function Menu() {
 /* ── Hero ─────────────────────────────────────────────────────────────── */
 
 const HERO_NOTES: { n: string; lines: string[]; pos: string }[] = [
-  { n: '1', lines: ['Aithority', 'cofounder & developer', 'EU AI Act', '2026'], pos: 'md:col-start-1 md:row-start-1' },
-  { n: '2', lines: ['Kiblo', 'iOS · live in US & Canada', '2026'], pos: 'md:col-start-2 md:row-start-2' },
+  { n: '1', lines: ['Hilo', 'AI voice companion', 'iPhone · web for care staff', '2026'], pos: 'md:col-start-1 md:row-start-1' },
+  { n: '2', lines: ['Casa', 'hackathon · team of three', 'AI agents', '2026'], pos: 'md:col-start-2 md:row-start-2' },
   { n: '3', lines: ['TypeScript · React', 'React Native · Next.js'], pos: 'md:col-start-1 md:row-start-3' },
-  { n: '4', lines: ['Python · FastAPI', 'SQL · Figma'], pos: 'md:col-start-2 md:row-start-4' },
+  { n: '4', lines: ['Supabase · Claude API', 'Python · SQL · Figma'], pos: 'md:col-start-2 md:row-start-4' },
 ]
 
 export function Hero() {
@@ -108,10 +108,10 @@ export function Hero() {
         <h1 className="text-[clamp(1.25rem,2.6vw,1.75rem)] font-normal uppercase leading-[1.15] tracking-[-0.01em] text-ink">
           I&rsquo;m Arnau Lopez
           <br />
-          Full-Stack Developer
+          Product Engineer (AI)
         </h1>
         <p className="mt-3 text-[12px] uppercase tracking-[0.04em] text-fg-dim">
-          Design Engineer · Alcoy, Spain · EU citizen, open to relocation
+          I design and build AI products · Alcoy, Spain · EU citizen, open to relocation
         </p>
       </div>
 
@@ -150,7 +150,7 @@ export function Portrait() {
       />
       <div className="frame flex justify-end gap-6 text-[12px] uppercase text-ink">
         <span>Arnau Lopez</span>
-        <span className="pr-2">Full-Stack Developer</span>
+        <span className="pr-2">Product Engineer (AI)</span>
       </div>
     </section>
   )
@@ -202,6 +202,18 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
           <span className="block text-fg-dim">{caso.role}</span>
         </Row>
         <Row label="Status">{caso.status.text}</Row>
+        {caso.video && (
+          <div className="mt-3 aspect-video w-full bg-paper">
+            <iframe
+              src={caso.video}
+              title={`${caso.name} demo video`}
+              loading="lazy"
+              allow="encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full border-0"
+            />
+          </div>
+        )}
         <div className="h-3" />
         <Row label="What">
           <span className="normal-case">{caso.blurb}</span>
@@ -209,6 +221,11 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
         <Row label="Why">
           <span className="normal-case">{caso.why}</span>
         </Row>
+        {caso.team && (
+          <Row label="Team">
+            <span className="normal-case">{caso.team}</span>
+          </Row>
+        )}
         {caso.usedBy && (
           <Row label="Used by">
             <span className="normal-case">{caso.usedBy}</span>

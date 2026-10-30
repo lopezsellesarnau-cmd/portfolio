@@ -3,7 +3,8 @@
  * technical content (not filler). What's genuinely missing (users, metrics) is
  * left out, not invented.
  *
- * Positioning since 7 oct 2026: Full-Stack Developer · Design Engineer (before: Software Developer · Full-Stack · UX/UI). UX work lives on /ux.
+ * Positioning since 30 oct 2026: Product Engineer (AI) (before: Full-Stack Developer · Design Engineer). What
+ * the last months were: choosing models and technology, long prompts, and the UX/UI, in AI products. UX work lives on /ux.
  * Arnau's own job tracker showed "software developer" and "full-stack" have the
  * most openings and the fewest senior-only roles; UX/UI is the differentiator,
  * not the search title. Every project answers three questions: why it was
@@ -13,10 +14,10 @@
 
 export const PROFILE = {
   name: 'Arnau Lopez',
-  role: 'Full-Stack Developer · Design Engineer',
+  role: 'Product Engineer (AI)',
   eyebrow: '[ 22 · Alcoy, Spain · EU citizen, open to relocation ]',
-  hero: 'Cofounded and developed Aithority, an EU AI Act compliance SaaS (May to Oct 2026). Building Hilo, an AI voice companion for older people, now in TestFlight on iPhone and iPad. Founder of Kiblo, live on the App Store in the US and Canada. Dross, a notarized Mac app that catches frontend/backend drift. F1 Strategy Agent, open-sourced after viewers asked for the code. Dev Job Tracker EU, the data behind my own job search.',
-  sub: 'TypeScript · React · React Native · Next.js · Python · FastAPI · SQL · Figma. I design the interface and write the code, and I use AI in loops: conditions first, then rebuild what failed. ~2 years at Deutsche Post / DHL in Germany; based in Spain, EU citizen, open to full-stack and software developer roles across the EU.',
+  hero: 'Building Hilo, an AI voice companion for older people who live alone, in App Store review, with a web app for care organisations. Built Casa with a remote team in a 6-day hackathon: agents that check a rental listing before you pay the deposit. Cofounded and developed Aithority, an EU AI Act compliance SaaS (May to Oct 2026). Founder of Kiblo, live on the App Store in the US and Canada.',
+  sub: 'TypeScript · React · React Native · Next.js · Supabase · Python · SQL · Claude API · Figma. I decide what to build, design the interface and write the code, and I use AI in loops: conditions first, then rebuild what failed. ~2 years at Deutsche Post / DHL in Germany; based in Spain, EU citizen, open to product engineer and AI product roles across the EU.',
 }
 
 // The same "long" hero tree as StackD and Aithority (their DotTree uses SEED
@@ -36,19 +37,110 @@ export type CaseStudy = {
   why: string
   /** Who uses it. Omitted when not known yet — never invented. */
   usedBy?: string
+  /** Who built it with me, when it wasn't solo. */
+  team?: string
   what: string
   built: string
   decisions: { title: string; detail: string }[]
   stack: string[]
   seed: number
+  /** A demo video (embed URL), shown at the top of the project card. */
+  video?: string
   link?: string
   linkLabel?: string
 }
 
 export const CASES: CaseStudy[] = [
   {
-    slug: 'aithority',
+    slug: 'hilo',
     index: '01',
+    name: 'Hilo',
+    role: 'Founder',
+    tagline: 'AI voice companion for older people · iPhone, iPad and web for care organisations',
+    status: { text: 'Founder · in App Store review', tone: 'accent' },
+    blurb:
+      'A voice app for older people who live alone. Every day it talks with them, reminds them about their pills and asks them about their life. Their answers become a book of their life for the family, and care organisations get a web app that shows who to call today.',
+    why:
+      'Many older people live alone, and their families call to ask the same things: how are you, did you take your pills. Kiblo, TRACE and SMASH were built first and looked for users later. Hilo started the other way round: the customer first, then the code.',
+    what:
+      'A daily voice talk with one big button, pill reminders inside the talk, and a book of their life written only with their words. The family gets one sentence about each talk and approves every story. For organisations: a daily list of who to call and why, a page per person and monthly reports with a validated loneliness scale (UCLA-3).',
+    built:
+      'Solo. Designed in Figma, built with Expo, React Native and TypeScript, plus a web app for families and one for care staff. Supabase in Frankfurt with row level security. A Deno Edge Function runs the talk: Claude Haiku 5.5 for the conversation, Azure for the voice, Claude Sonnet 5.5 writes the story in the background.',
+    decisions: [
+      {
+        title: 'Staff see signals, never the conversation',
+        detail:
+          'Only she can read her talks. The family gets one sentence, staff get signals (no talk in 2 days, pills not confirmed, she says she feels bad). Talks are deleted after 90 days, staff sign in with two-factor and every page they open is logged.',
+      },
+      {
+        title: 'The book does not invent',
+        detail:
+          'A test story added a sunny day nobody mentioned. The writer now uses only their words, and the app marks any word they did not say, so the family checks it before approving.',
+      },
+      {
+        title: 'The AI never guesses feelings',
+        detail:
+          'How she feels is three buttons she presses herself, and whether a pill was taken is Sí / No and plain code. Health data is never a guess from a model.',
+      },
+      {
+        title: 'Their voice stays on the phone',
+        detail:
+          'Speech recognition runs on the device. Only the text of the talk is saved, never the audio.',
+      },
+      {
+        title: 'Cost per user from day one',
+        detail:
+          'Tokens and voice characters are counted per person and day, and a daily limit per plan is checked on the server before a new talk starts.',
+      },
+    ],
+    stack: ['React Native', 'TypeScript', 'Supabase', 'Claude API', 'Azure Speech', 'Expo'],
+    seed: 507,
+    link: 'https://hilo-web.vercel.app',
+    linkLabel: 'Open landing',
+  },
+  {
+    slug: 'casa',
+    index: '02',
+    name: 'Casa',
+    role: 'Backend, data & agents · team of three',
+    tagline: 'Open Agent Hackathon 2026 · agents that check a rental listing before you pay',
+    status: { text: 'Hackathon · submitted Oct 2026', tone: 'accent' },
+    blurb:
+      'Before you pay the deposit on a flat in Spain, Casa checks the listing: the size against Catastro, the price against the official rent index, the deposit and fees against the law, and signs of a scam. It drafts an email to the landlord that only sends when you approve it.',
+    why:
+      'Renters find out the flat is smaller, or the fees are illegal, after they have paid. The data to check it is public, but nobody checks it by hand.',
+    team:
+      'Built in 6 days for the Open Agent Hackathon 2026 with Juna Han (product, UX, web app, video) and Ayoub Arramdani (API, deploy, contract PDFs), a remote team across different countries. We split the work, reviewed each other’s pull requests and agreed on what went into the demo.',
+    what:
+      'A planner agent sends each check to a specialist agent (size, price, law, photos, scams), and a critic agent goes over every finding. If confidence is low, it asks a person to review.',
+    built:
+      'My part: the backend, the data and the agents. TypeScript and Node, Nemotron through NVIDIA NIM, Catastro live, and the official SERPAVI rent index queried through Zetaris. Built in Cursor with Claude Code.',
+    decisions: [
+      {
+        title: 'The critic drops anything without a source',
+        detail:
+          'Every finding needs a quote or a data source. With the real model, the critic caught an invented “0 months” guarantee and explanations with no citation.',
+      },
+      {
+        title: 'The price is checked on the real size',
+        detail:
+          'The demo flat was listed as 72 m², Catastro says 56. By the listing the rent looked normal; on the real size it was 25.9 €/m², above the district’s 75th percentile (21.78).',
+      },
+      {
+        title: 'If the data source is down, it says so',
+        detail:
+          'When Zetaris is not available, Casa uses a local copy of the rent index and writes it in the trace, so the renter knows where each number came from.',
+      },
+    ],
+    stack: ['TypeScript', 'Node', 'NVIDIA Nemotron', 'Zetaris', 'Catastro API', 'Cursor'],
+    seed: 344,
+    video: 'https://iframe.mediadelivery.net/embed/778121/debca8ee-f5de-4942-a2b8-5c995c3658e0',
+    link: 'https://github.com/lopezsellesarnau-cmd/before-you-pay',
+    linkLabel: 'Open repository',
+  },
+  {
+    slug: 'aithority',
+    index: '03',
     name: 'Aithority',
     role: 'Cofounder & developer',
     tagline: 'EU AI Act compliance SaaS · May to Oct 2026',
@@ -96,55 +188,8 @@ export const CASES: CaseStudy[] = [
     linkLabel: 'Open landing',
   },
   {
-    slug: 'hilo',
-    index: '02',
-    name: 'Hilo',
-    role: 'Founder',
-    tagline: 'AI voice companion for older people · iPhone and iPad, in TestFlight',
-    status: { text: 'Founder · in TestFlight', tone: 'accent' },
-    blurb:
-      'A voice app for older people who live alone. Every day it talks with them, reminds them about their pills and asks them about their life. Their answers become a book of their life for the family.',
-    why:
-      'Many older people live alone, and their families call to ask the same things: how are you, did you take your pills. Kiblo, TRACE and SMASH were built first and looked for users later. Hilo started the other way round: the customer first, then the code.',
-    what:
-      'A daily voice talk with one big button, pill reminders inside the talk, and a book of their life written only with their words. The family sees the day on their phone and approves every story before it reaches the book.',
-    built:
-      'Solo. Designed in Figma, built with Expo 57, React Native and TypeScript. Supabase in Frankfurt with row level security. A Deno Edge Function runs the talk: Claude Haiku 5.5 for the conversation, Azure for the voice, Claude Sonnet 5.5 writes the story in the background.',
-    decisions: [
-      {
-        title: 'Tap to talk, not hold to talk',
-        detail:
-          'Holding a button was tiring and cut people off in the middle of a sentence. Now they tap once, and the turn ends after a pause of 3.5 seconds, when they tap “He terminado”, or after two minutes.',
-      },
-      {
-        title: 'The book does not invent',
-        detail:
-          'A test story added a sunny day nobody mentioned. The writer now uses only their words, and the app marks any word they did not say, so the family checks it before approving.',
-      },
-      {
-        title: 'The pill answer is code, not AI',
-        detail:
-          'Whether a pill was taken is health data. Hilo asks with Sí / No buttons and plain code records it, so the answer is never a guess from a model.',
-      },
-      {
-        title: 'Their voice stays on the phone',
-        detail:
-          'Speech recognition runs on the device. Only the text of the talk is saved, never the audio.',
-      },
-      {
-        title: 'Cost per user from day one',
-        detail:
-          'Tokens and voice characters are counted per person and day, and a daily limit per plan is checked on the server before a new talk starts.',
-      },
-    ],
-    stack: ['Claude Code', 'React Native', 'Expo SDK 57', 'TypeScript', 'Supabase', 'Claude API', 'Azure Speech'],
-    seed: 507,
-    link: 'https://hilo-web.vercel.app',
-    linkLabel: 'Open landing',
-  },
-  {
     slug: 'kiblo',
-    index: '03',
+    index: '04',
     name: 'Kiblo',
     role: 'Founder',
     tagline: 'Pet-food iOS — full consumer loop, live on the App Store',
@@ -192,7 +237,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'f1-strategy-agent',
-    index: '04',
+    index: '05',
     name: 'F1 Strategy Agent',
     role: 'Founder',
     tagline: 'ML race strategy — open-sourced after viewers asked for the code',
@@ -236,7 +281,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'dross',
-    index: '05',
+    index: '06',
     name: 'Dross',
     role: 'Founder',
     tagline: 'Mac app + CLI — notarized DMG',
@@ -266,45 +311,6 @@ export const CASES: CaseStudy[] = [
     stack: ['SwiftUI', 'macOS', 'TypeScript', 'TS compiler API', 'Ed25519'],
     seed: 222,
     link: 'https://github.com/lopezsellesarnau-cmd/dross',
-    linkLabel: 'Open repository',
-  },
-  {
-    slug: 'dev-job-tracker',
-    index: '06',
-    name: 'Dev Job Tracker EU',
-    role: 'Founder',
-    tagline: 'Junior dev job market in Spain, NL, Germany and Belgium',
-    status: { text: 'Open source · public repo', tone: 'ok' },
-    blurb:
-      'Counts live developer job postings by role and country from the Adzuna API, stores them daily in SQLite, and serves them through FastAPI to a plain HTML/CSS/JS page.',
-    why:
-      'I wanted real numbers for my own job search instead of US articles, and a project where every decision is written down and I can explain every file.',
-    usedBy:
-      'Me. Its data changed my search: generic titles (software developer, full-stack) have the most openings and fewer senior-only roles than frontend or backend.',
-    what:
-      'Seven roles across Spain, the Netherlands, Germany and Belgium. A DECISIONS file records what was chosen, why, and what was rejected.',
-    built:
-      'Python fetcher, SQLite, FastAPI, HTML/CSS/JS. Written to be explained, not just to run.',
-    decisions: [
-      {
-        title: 'The API was searching job descriptions',
-        detail:
-          'Frontend in Germany returned 4,405 jobs because the query matched descriptions. Searching titles only gave 575, the real number.',
-      },
-      {
-        title: 'Job titles change with the language',
-        detail:
-          'Frontend-Entwickler only exists in Germany, Desarrollador front only in Spain. Each role is a list of local variants that get summed.',
-      },
-      {
-        title: 'Some roles cannot be measured honestly',
-        detail:
-          'Product engineer in Germany is mostly hardware jobs. I left it out of v1 instead of showing a wrong number.',
-      },
-    ],
-    stack: ['Python', 'FastAPI', 'SQLite', 'HTML / CSS / JS', 'Adzuna API'],
-    seed: 537,
-    link: 'https://github.com/lopezsellesarnau-cmd/Dev-Job-Tracking-EU',
     linkLabel: 'Open repository',
   },
   {
@@ -349,7 +355,6 @@ export const CASES: CaseStudy[] = [
     link: 'https://ukraine-war-tracker.vercel.app',
     linkLabel: 'Open live site',
   },
-
 ]
 
 export type LightProject = {
@@ -502,7 +507,7 @@ export const CONTACT = {
   eyebrow: 'Spain · EU citizen, open to relocation',
   title: "Let's talk",
   cta: 'Email me',
-  note: 'Full-Stack Developer · Design Engineer. GitHub, LinkedIn, and CV below.',
+  note: 'Product Engineer (AI). GitHub, LinkedIn, and CV below.',
 }
 
 /* ── Skills · Abilities · Milestones — one section, three registers ──────────
@@ -560,6 +565,6 @@ export const MILESTONES: Milestone[] = [
   { date: 'May 2026', title: 'Cofounded and developed Aithority', detail: 'EU AI Act compliance SaaS, accepted into Lanzadera. Tested with accelerator companies such as LaiaDesk. Until Oct 2026.' },
   { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app: breach scan, exposure score, broker removals.' },
   { date: 'Sep 2026', title: 'Kiblo live on the App Store (US & Canada)', detail: 'Approved and released after one revision.' },
-  { date: 'Oct 2026', title: 'Started Hilo', detail: 'AI voice companion for older people. iPhone and iPad in TestFlight.' },
-  { date: 'Oct 2026', title: 'Dev Job Tracker EU shipped', detail: 'Python, FastAPI and SQLite. Its data reshaped my own job search.' },
+  { date: 'Oct 2026', title: 'Started Hilo', detail: 'AI voice companion for older people. iPhone and iPad in App Store review, and a web app for care organisations.' },
+  { date: 'Oct 2026', title: 'Open Agent Hackathon 2026', detail: 'Built Casa in 6 days with a remote team of three: agents that check a rental listing before you pay.' },
 ]
