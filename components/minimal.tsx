@@ -202,6 +202,16 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
           <span className="block text-fg-dim">{caso.role}</span>
         </Row>
         <Row label="Status">{caso.status.text}</Row>
+        {caso.image && (
+          <Image
+            src={caso.image.src}
+            alt={caso.image.alt}
+            width={caso.image.w}
+            height={caso.image.h}
+            sizes="470px"
+            className="mt-3 h-auto w-full"
+          />
+        )}
         {caso.video && (
           <div className="mt-3 aspect-video w-full bg-paper">
             <iframe

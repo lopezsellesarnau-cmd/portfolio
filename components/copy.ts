@@ -46,6 +46,8 @@ export type CaseStudy = {
   seed: number
   /** A demo video (embed URL), shown at the top of the project card. */
   video?: string
+  /** A still image (mockups), shown at the top of the project card. */
+  image?: { src: string; w: number; h: number; alt: string }
   link?: string
   linkLabel?: string
 }
@@ -58,6 +60,12 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'AI voice companion for older people · iPhone, iPad and web for care organisations',
     status: { text: 'Founder · in App Store review', tone: 'accent' },
+    image: {
+      src: '/design/hilo-board.webp',
+      w: 1600,
+      h: 1035,
+      alt: 'Hilo: app icon, the bot, the iPhone app and the web for care staff',
+    },
     blurb:
       'A voice app for older people who live alone. Every day it talks with them, reminds them about their pills and asks them about their life. Their answers become a book of their life for the family, and care organisations get a web app that shows who to call today.',
     why:
