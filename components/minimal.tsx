@@ -13,6 +13,7 @@
 
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   CASES,
   CREDENTIALS,
@@ -192,7 +193,7 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-3 top-3 text-fg-faint transition-colors hover:text-ink"
+          className="sticky top-0 z-10 float-right -mr-1 -mt-1 bg-card px-1 text-fg-faint transition-colors hover:text-ink"
         >
           Close
         </button>
@@ -319,7 +320,7 @@ export function Work() {
         <span className="pr-2 text-fg-dim">Press a project</span>
       </div>
 
-      {open && <ProjectCard caso={open} onClose={close} />}
+      {open && createPortal(<ProjectCard caso={open} onClose={close} />, document.body)}
     </section>
   )
 }
