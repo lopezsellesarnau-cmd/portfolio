@@ -186,7 +186,7 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
         aria-label={caso.name}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        className="relative max-h-[78vh] w-[min(470px,100%)] overflow-y-auto bg-card px-5 py-5 text-[11px] uppercase leading-[1.45] tracking-[0.01em] shadow-[0_1px_0_rgba(20,19,16,0.04)] outline-none"
+        className={`relative max-h-[88vh] ${caso.image ? 'w-[min(1200px,100%)]' : 'w-[min(470px,100%)]'} overflow-y-auto bg-card px-5 py-5 text-[11px] uppercase leading-[1.45] tracking-[0.01em] shadow-[0_1px_0_rgba(20,19,16,0.04)] outline-none`}
       >
         <button
           type="button"
@@ -208,7 +208,7 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
             alt={caso.image.alt}
             width={caso.image.w}
             height={caso.image.h}
-            sizes="470px"
+            sizes="(min-width: 1200px) 1200px, 100vw"
             className="mt-3 h-auto w-full"
           />
         )}

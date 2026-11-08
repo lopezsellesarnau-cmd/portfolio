@@ -62,8 +62,8 @@ export const CASES: CaseStudy[] = [
     status: { text: 'Founder · in App Store review', tone: 'accent' },
     image: {
       src: '/design/hilo-board.webp',
-      w: 1600,
-      h: 1035,
+      w: 2400,
+      h: 1552,
       alt: 'Hilo: app icon, the bot, the iPhone app and the web for care staff',
     },
     blurb:
