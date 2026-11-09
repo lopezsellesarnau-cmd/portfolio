@@ -1,4 +1,3 @@
-import { Design } from '@/components/design'
 import { About, Contact, Hero, Menu, Milestones, Portrait, Work } from '@/components/minimal'
 
 export default function Home() {
@@ -9,7 +8,6 @@ export default function Home() {
         <Hero />
         <Portrait />
         <Work />
-        <Design />
         <Milestones />
         <About />
       </main>

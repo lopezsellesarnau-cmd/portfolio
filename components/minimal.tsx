@@ -23,12 +23,12 @@ import {
   SKILLS,
   type CaseStudy,
 } from './copy'
+import { PLATES, type Plate } from './design'
 
 const CV = '/Arnau-Lopez-Selles-CV.pdf'
 
 const LINKS = [
   { id: 'work', label: 'Work' },
-  { id: 'design', label: 'Design' },
   { id: 'milestones', label: 'Milestones' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
@@ -158,28 +158,173 @@ export function Portrait() {
 }
 
 /* ── Work ─────────────────────────────────────────────────────────────── */
+/* List: Vincent S portfolio. [ 0n ] label | content | [ meta ] columns on light paper,
+   a small picture top-right that follows the project under the cursor.
+   Card: design (mockups), engineering and data together, in the same columns. */
 
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
+/** Spreads the letters of a text over the full width of its box. */
+function Spread({ text, className = '' }: { text: string; className?: string }) {
   return (
-    <div className="grid grid-cols-[5.5rem_1fr] gap-x-4 py-[3px]">
-      <span className="text-right text-fg-faint">{label}</span>
-      <div className="text-ink">{children}</div>
+    <span aria-label={text} className={`flex justify-between ${className}`}>
+      {Array.from(text).map((ch, i) => (
+        <span key={i} aria-hidden="true" className="inline-block min-w-[0.5em] text-center">
+          {ch === ' ' ? ' ' : ch}
+        </span>
+      ))}
+    </span>
+  )
+}
+
+/** Spreads whole words over the full width; words in `strong` are set darker. */
+function SpreadWords({ words, strong = [] }: { words: string[]; strong?: string[] }) {
+  return (
+    <p className="flex flex-wrap justify-between gap-x-4 px-2">
+      {words.map((w, i) => (
+        <span key={i} className={strong.includes(w) ? 'font-medium text-ink' : 'text-fg-dim'}>
+          {w}
+        </span>
+      ))}
+    </p>
+  )
+}
+
+const platesOf = (c: CaseStudy) => PLATES.filter((p) => p.project === c.name)
+const tagOf = (c: CaseStudy) => {
+  const kind = platesOf(c).length ? 'Design & Development' : 'Development'
+  return /team/i.test(c.role) ? `${kind} · Team` : kind
+}
+const n2 = (i: number) => String(i + 1).padStart(2, '0')
+
+/** The small framed picture: first mockup of the project, or its name when there is none yet. */
+function Thumb({ caso }: { caso: CaseStudy }) {
+  const plate = platesOf(caso)[0]
+  return (
+    <div className="relative aspect-[1600/1142] w-[150px] overflow-hidden bg-card md:w-[200px]">
+      {plate ? (
+        <Image key={plate.src} src={plate.src} alt={`${caso.name}: ${plate.caption}`} fill sizes="200px" className="object-cover" />
+      ) : (
+        <span className="absolute inset-0 grid place-items-center text-fg-faint">
+          [ {caso.index} ] {caso.name}
+        </span>
+      )}
+    </div>
+  )
+}
+
+function Block({ n, label, children, meta }: { n: number; label: string; children: React.ReactNode; meta?: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-[7rem_1fr] gap-x-4 md:grid-cols-[1fr_2fr_1fr]">
+      <p className="text-ink">
+        [ {n2(n)} ] {label}
+      </p>
+      <div className="max-w-[64ch] normal-case">{children}</div>
+      {meta && <div className="col-start-2 mt-2 md:col-start-3 md:mt-0">{meta}</div>}
     </div>
   )
 }
 
 function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }) {
   const ref = useRef<HTMLDivElement>(null)
+  /** The mockup shown large in the centre; Escape closes it first, then the card. */
+  const [zoom, setZoom] = useState<Plate | null>(null)
 
   useEffect(() => {
     ref.current?.focus()
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+  }, [])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      if (zoom) setZoom(null)
+      else onClose()
+    }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [onClose])
+  }, [onClose, zoom])
+
+  const plates = platesOf(caso)
+  const blocks: { label: string; body: React.ReactNode; meta?: React.ReactNode }[] = [
+    { label: 'What', body: caso.blurb, meta: `[ ${caso.status.text} ]` },
+    { label: 'Why', body: caso.why },
+    ...(caso.team ? [{ label: 'Team', body: caso.team }] : []),
+    ...(caso.usedBy ? [{ label: 'Used by', body: caso.usedBy }] : []),
+    ...(plates.length
+      ? [
+          {
+            label: 'Design',
+            body: (
+              <div className="grid gap-4 sm:grid-cols-2">
+                {plates.map((p) => (
+                  <figure key={p.src}>
+                    <button type="button" onClick={() => setZoom(p)} aria-label={`Open ${p.caption}`} className="block w-full cursor-zoom-in">
+                      <Image src={p.src} alt={`${caso.name}: ${p.caption}`} width={p.w} height={p.h} sizes="(min-width: 768px) 360px, 90vw" className="h-auto w-full bg-card" />
+                    </button>
+                    <figcaption className="mt-1 flex justify-between text-fg-dim">
+                      <span>{p.caption}</span>
+                      <span>[ {p.tools} ]</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ),
+          },
+        ]
+      : []),
+    {
+      label: 'Engineering',
+      body: (
+        <div className="space-y-3">
+          <p>{caso.built}</p>
+          <ul className="space-y-3">
+            {caso.decisions.slice(0, 3).map((d) => (
+              <li key={d.title}>
+                <span className="text-ink">{d.title.replace(/\.$/, '')}.</span>{' '}
+                <span className="text-fg-muted">{d.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ),
+      meta: (
+        <ul className="uppercase">
+          {caso.stack.slice(0, 6).map((s) => (
+            <li key={s}>[ {s} ]</li>
+          ))}
+        </ul>
+      ),
+    },
+    ...(caso.data?.length
+      ? [
+          {
+            label: 'Data',
+            body: (
+              <ul className="space-y-3">
+                {caso.data.map((d) => (
+                  <li key={d}>{d}</li>
+                ))}
+              </ul>
+            ),
+          },
+        ]
+      : []),
+    ...(caso.link
+      ? [
+          {
+            label: 'Link',
+            body: (
+              <a href={caso.link} {...ext(caso.link)} className="underline decoration-fg-ghost underline-offset-2 hover:text-accent">
+                ↗ {caso.linkLabel ?? 'Open'}
+              </a>
+            ),
+          },
+        ]
+      : []),
+  ]
+
+  const big = caso.image?.size === 'large'
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-paper/70 px-4" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/10 px-4" onClick={onClose}>
       <div
         ref={ref}
         role="dialog"
@@ -187,34 +332,37 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
         aria-label={caso.name}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        className={`relative max-h-[88vh] ${caso.image ? 'w-[min(1200px,100%)]' : 'w-[min(470px,100%)]'} overflow-y-auto bg-card px-5 py-5 text-[11px] uppercase leading-[1.45] tracking-[0.01em] shadow-[0_1px_0_rgba(20,19,16,0.04)] outline-none`}
+        className="relative max-h-[88vh] w-[min(1100px,100%)] overflow-y-auto bg-paper px-5 py-5 text-[11px] leading-[1.45] text-fg-muted shadow-[0_0_0_1px_rgba(20,19,16,0.08)] outline-none md:px-6"
       >
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close"
-          className="sticky top-0 z-10 float-right -mr-1 -mt-1 bg-card px-1 text-fg-faint transition-colors hover:text-ink"
-        >
-          Close
-        </button>
+        <div className="flex items-start justify-between gap-6">
+          <div>
+            <p className="text-ink">
+              [ {caso.index} ] {caso.name}
+            </p>
+            <p>{caso.role}</p>
+            <p className="mt-6 max-w-[32ch]">{caso.tagline}</p>
+          </div>
+          <div className="flex flex-col items-end gap-3">
+            <button type="button" onClick={onClose} aria-label="Close" className="text-fg-faint transition-colors hover:text-ink">
+              [ Close ]
+            </button>
+            {caso.image ? (
+              <Image
+                src={caso.image.src}
+                alt={caso.image.alt}
+                width={caso.image.w}
+                height={caso.image.h}
+                sizes={big ? '(min-width: 1100px) 640px, 60vw' : '200px'}
+                className={`h-auto ${big ? 'w-[min(640px,60vw)]' : 'w-[150px] md:w-[200px]'}`}
+              />
+            ) : (
+              <Thumb caso={caso} />
+            )}
+          </div>
+        </div>
 
-        <Row label={caso.index}>
-          {caso.name}
-          <span className="block text-fg-dim">{caso.role}</span>
-        </Row>
-        <Row label="Status">{caso.status.text}</Row>
-        {caso.image && (
-          <Image
-            src={caso.image.src}
-            alt={caso.image.alt}
-            width={caso.image.w}
-            height={caso.image.h}
-            sizes="(min-width: 1200px) 1200px, 100vw"
-            className="mt-3 h-auto w-full"
-          />
-        )}
         {caso.video && (
-          <div className="mt-3 aspect-video w-full bg-paper">
+          <div className="mt-8 aspect-video w-full bg-card">
             <iframe
               src={caso.video}
               title={`${caso.name} demo video`}
@@ -225,50 +373,47 @@ function ProjectCard({ caso, onClose }: { caso: CaseStudy; onClose: () => void }
             />
           </div>
         )}
-        <div className="h-3" />
-        <Row label="What">
-          <span className="normal-case">{caso.blurb}</span>
-        </Row>
-        <Row label="Why">
-          <span className="normal-case">{caso.why}</span>
-        </Row>
-        {caso.team && (
-          <Row label="Team">
-            <span className="normal-case">{caso.team}</span>
-          </Row>
-        )}
-        {caso.usedBy && (
-          <Row label="Used by">
-            <span className="normal-case">{caso.usedBy}</span>
-          </Row>
-        )}
-        <div className="h-3" />
-        <Row label="Solved">
-          <ul className="space-y-2 normal-case">
-            {caso.decisions.slice(0, 3).map((d) => (
-              <li key={d.title}>
-                <span className="text-ink">{d.title.replace(/\.$/, '')}.</span>{' '}
-                <span className="text-fg-muted">{d.detail}</span>
-              </li>
-            ))}
-          </ul>
-        </Row>
-        <div className="h-3" />
-        <Row label="Stack">{caso.stack.slice(0, 5).join(', ')}</Row>
-        {caso.link && (
-          <Row label="Link">
-            <a href={caso.link} {...ext(caso.link)} className="underline decoration-fg-ghost underline-offset-2 hover:text-accent">
-              {caso.linkLabel ?? 'Open'} ↗
-            </a>
-          </Row>
-        )}
+
+        <div className="mt-20 space-y-10 md:mt-28">
+          {blocks.map((b, i) => (
+            <Block key={b.label} n={i} label={b.label} meta={b.meta}>
+              {b.body}
+            </Block>
+          ))}
+        </div>
       </div>
+
+      {zoom && (
+        <div
+          className="fixed inset-0 z-[60] flex cursor-zoom-out flex-col items-center justify-center gap-3 bg-paper/95 p-6"
+          onClick={(e) => {
+            e.stopPropagation()
+            setZoom(null)
+          }}
+        >
+          <Image
+            src={zoom.src}
+            alt={`${caso.name}: ${zoom.caption}`}
+            width={zoom.w}
+            height={zoom.h}
+            sizes="90vw"
+            className="h-auto max-h-[82vh] w-auto max-w-[min(1400px,92vw)]"
+          />
+          <p className="flex w-full max-w-[min(1400px,92vw)] justify-between text-[11px] text-fg-dim">
+            <span>
+              [ {caso.index} ] {caso.name} · {zoom.caption}
+            </span>
+            <span>[ Close ]</span>
+          </p>
+        </div>
+      )}
     </div>
   )
 }
 
 export function Work() {
   const [openSlug, setOpenSlug] = useState<string | null>(null)
+  const [hover, setHover] = useState(CASES[0].slug)
 
   const close = useCallback(() => {
     setOpenSlug(null)
@@ -286,38 +431,53 @@ export function Work() {
   }, [])
 
   const open = openSlug ? CASES.find((c) => c.slug === openSlug) ?? null : null
+  const shown = CASES.find((c) => c.slug === hover) ?? CASES[0]
 
   return (
-    <section id="work" className="relative flex min-h-[100svh] flex-col justify-between py-24">
-      <p className="frame text-[12px] uppercase text-ink">
-        <span className="pl-2">Selected work</span>
-      </p>
+    <section id="work" className="relative flex min-h-[100svh] flex-col justify-between py-24 text-[11px] leading-[1.45] text-fg-muted md:text-[12px]">
+      <div className="frame flex items-start justify-between gap-6 px-2">
+        <div>
+          <p className="text-ink">[ 01 ] Selected work</p>
+          <p className="max-w-[30ch]">Design and engineering in the same project. Press one to open it.</p>
+        </div>
+        <Thumb caso={shown} />
+      </div>
 
-      <ul className="mx-auto my-16 flex flex-col items-center gap-[6px] text-center text-[12px] font-medium uppercase leading-[1.3] tracking-[0.01em]">
-        {CASES.map((c) => (
-          <li key={c.slug}>
-            <a
-              href={`#${c.slug}`}
-              onClick={(e) => {
-                e.preventDefault()
-                setOpenSlug(c.slug)
-                history.replaceState(null, '', `#${c.slug}`)
-              }}
-              className={`relative inline-block transition-colors ${openSlug && openSlug !== c.slug ? 'text-fg-ghost' : 'text-ink'} hover:text-accent`}
-            >
-              <span className="mono absolute right-full top-[1px] mr-3 text-[10px] font-normal text-fg-faint">{c.index}</span>
-              {c.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="frame flex justify-between text-[12px] uppercase">
-        <span className="pl-2 text-ink">
-          {String(CASES.length).padStart(2, '0')} projects
-          <span className="ml-4 text-fg-dim">2024–2026</span>
-        </span>
-        <span className="pr-2 text-fg-dim">Press a project</span>
+      <div className="frame mt-24 space-y-10 px-2">
+        <div className="grid grid-cols-[7rem_1fr] gap-x-4 md:grid-cols-[1fr_2fr_1fr]">
+          <p className="text-ink">[ 02 ] Projects</p>
+          <ul>
+            {CASES.map((c) => (
+              <li key={c.slug}>
+                <a
+                  href={`#${c.slug}`}
+                  onMouseEnter={() => setHover(c.slug)}
+                  onFocus={() => setHover(c.slug)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setOpenSlug(c.slug)
+                    history.replaceState(null, '', `#${c.slug}`)
+                  }}
+                  className={`transition-colors hover:text-ink ${hover === c.slug ? 'text-ink' : ''}`}
+                >
+                  ↗ {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <ul className="col-start-2 mt-2 md:col-start-3 md:mt-0">
+            {CASES.map((c) => (
+              <li key={c.slug} className={hover === c.slug ? 'text-ink' : ''}>
+                [ {tagOf(c)} ]
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="grid grid-cols-[7rem_1fr] gap-x-4 md:grid-cols-[1fr_2fr_1fr]">
+          <p className="text-ink">[ 03 ] Years</p>
+          <p>{String(CASES.length).padStart(2, '0')} projects</p>
+          <p className="col-start-2 md:col-start-3">[ 2024 – 2026 ]</p>
+        </div>
       </div>
 
       {open && createPortal(<ProjectCard caso={open} onClose={close} />, document.body)}

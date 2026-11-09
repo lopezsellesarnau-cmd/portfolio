@@ -47,7 +47,9 @@ export type CaseStudy = {
   /** A demo video (embed URL), shown at the top of the project card. */
   video?: string
   /** A still image (mockups), shown at the top of the project card. */
-  image?: { src: string; w: number; h: number; alt: string }
+  image?: { src: string; w: number; h: number; alt: string; size?: 'small' | 'large' }
+  /** Numbers that back the project: what it measures, research behind it. Only real, sourced numbers. */
+  data?: string[]
   link?: string
   linkLabel?: string
 }
@@ -65,6 +67,7 @@ export const CASES: CaseStudy[] = [
       w: 2400,
       h: 1552,
       alt: 'Hilo: app icon, the bot, the iPhone app and the web for care staff',
+      size: 'large',
     },
     blurb:
       'A voice app for older people who live alone. Every day it talks with them, reminds them about their pills and asks them about their life. Their answers become a book of their life for the family, and care organisations get a web app that shows who to call today.',
@@ -103,6 +106,10 @@ export const CASES: CaseStudy[] = [
     ],
     stack: ['React Native', 'TypeScript', 'Supabase', 'Claude API', 'Azure Speech', 'Expo'],
     seed: 507,
+    data: [
+      'Monthly report for care organisations: people who talk 4+ days a week, pills confirmed, alerts solved the same day, and loneliness on the UCLA-3 scale.',
+      'Research: in Cádiz (2020), 32% of calls to the alarm-button service were people who wanted to talk, not emergencies; 60% of users lived alone.',
+    ],
     link: 'https://hilo-web.vercel.app',
     linkLabel: 'Open landing',
   },
