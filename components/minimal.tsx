@@ -94,43 +94,92 @@ export function Menu() {
 }
 
 /* ── Hero ─────────────────────────────────────────────────────────────── */
+/* WAVE record sleeve: letters spread over the grid, rows stepping like A A A A / B B B B.
+   Each row sits at its own depth; the plane tilts a little with the mouse, so the type
+   reads as a 3D space. No motion when the user asks for reduced motion. */
 
-const HERO_NOTES: { n: string; lines: string[]; pos: string }[] = [
-  { n: '1', lines: ['Hilo', 'AI voice companion', 'iPhone · web for care staff', '2026'], pos: 'md:col-start-1 md:row-start-1' },
-  { n: '2', lines: ['Casa', 'hackathon · team of three', 'AI agents', '2026'], pos: 'md:col-start-2 md:row-start-2' },
-  { n: '3', lines: ['TypeScript · React', 'React Native · Next.js'], pos: 'md:col-start-1 md:row-start-3' },
-  { n: '4', lines: ['Supabase · Claude API', 'Python · SQL · Figma'], pos: 'md:col-start-2 md:row-start-4' },
+const HERO_ROWS: { mark: string; step: number; text: string; note: string; z: number }[] = [
+  { mark: 'A', step: 0, text: 'TYPESCRIPT', note: '01', z: 60 },
+  { mark: 'A', step: 1, text: 'REACT NATIVE', note: '02', z: 30 },
+  { mark: 'A', step: 2, text: 'NEXT.JS', note: '03', z: 0 },
+  { mark: 'A', step: 3, text: 'SUPABASE', note: '04', z: -30 },
+  { mark: 'B', step: 3, text: 'CLAUDE API', note: '05', z: -30 },
+  { mark: 'B', step: 2, text: 'PYTHON', note: '06', z: 0 },
+  { mark: 'B', step: 1, text: 'SQL', note: '07', z: 30 },
+  { mark: 'B', step: 0, text: 'FIGMA', note: 'LAST', z: 60 },
 ]
 
 export function Hero() {
-  return (
-    <section id="top" className="relative flex min-h-[100svh] flex-col pt-28">
-      <div className="frame text-center">
-        <h1 className="text-[clamp(1.25rem,2.6vw,1.75rem)] font-normal uppercase leading-[1.15] tracking-[-0.01em] text-ink">
-          I&rsquo;m Arnau Lopez
-          <br />
-          Product Engineer (AI)
-        </h1>
-        <p className="mt-3 text-[12px] uppercase tracking-[0.04em] text-fg-dim">
-          I design and build AI products · Alcoy, Spain · EU citizen, open to relocation
-        </p>
-      </div>
+  const plane = useRef<HTMLDivElement>(null)
 
-      <div className="frame mt-16 grid grid-cols-2 content-start gap-y-10 pb-16 md:mt-20 md:grid-cols-6 md:gap-y-12">
-        {HERO_NOTES.map((h) => (
-          <p key={h.n} className={`mono pl-2 text-[11px] uppercase leading-[1.55] text-fg-muted ${h.pos}`}>
-            <span className="mr-3 text-ink">{h.n}</span>
-            {h.lines.map((l, i) => (
-              <span key={i} className="block">
-                {l}
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const el = plane.current
+    if (!el) return
+    const onMove = (e: PointerEvent) => {
+      const x = e.clientX / window.innerWidth - 0.5
+      const y = e.clientY / window.innerHeight - 0.5
+      el.style.transform = `rotateX(${(-y * 10).toFixed(2)}deg) rotateY(${(x * 14).toFixed(2)}deg)`
+    }
+    window.addEventListener('pointermove', onMove)
+    return () => window.removeEventListener('pointermove', onMove)
+  }, [])
+
+  return (
+    <section id="top" className="relative flex min-h-[100svh] flex-col pt-28 text-[11px] uppercase md:text-[12px]" style={{ perspective: '1200px' }}>
+      <div
+        ref={plane}
+        className="frame flex flex-1 flex-col justify-between gap-16 pb-16 transition-transform duration-300 ease-out"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        <h1 className="px-2 font-medium text-ink" style={{ transform: 'translateZ(80px)' }}>
+          <Spread text="ARNAU LOPEZ" />
+        </h1>
+
+        <div className="space-y-[6px] px-2" style={{ transformStyle: 'preserve-3d' }}>
+          {HERO_ROWS.map((r, i) => (
+            <div
+              key={r.text}
+              className={`grid grid-cols-12 items-baseline ${i === 4 ? 'pt-10' : ''}`}
+              style={{ transform: `translateZ(${r.z}px)` }}
+            >
+              <span className="relative col-span-4 md:col-span-6">
+                <span className="absolute top-0 text-fg-dim" style={{ left: `${r.step * 30}%` }}>
+                  {r.mark}
+                </span>
+                &nbsp;
               </span>
-            ))}
-          </p>
-        ))}
-        <p className="col-span-2 max-w-[34ch] pl-2 text-[12px] leading-[1.6] text-fg-muted md:col-span-2 md:col-start-5 md:row-start-3">
-          I design the interface and write the code. I use AI in loops: conditions first, then
-          rebuild what failed. ~2 years at Deutsche Post / DHL in Germany before that.
-        </p>
+              <Spread text={r.text} className="col-span-6 text-ink md:col-span-5" />
+              <span className="col-span-2 text-right text-fg-dim md:col-span-1">{r.note}</span>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ transform: 'translateZ(20px)' }}>
+          <SpreadWords
+            words={['I', 'design', 'and', 'build', 'AI', 'products', 'Alcoy,', 'Spain', 'EU', 'citizen']}
+            strong={['design', 'build', 'AI']}
+          />
+        </div>
+
+        <div className="grid gap-8 px-2 md:grid-cols-2" style={{ transform: 'translateZ(-20px)' }}>
+          <div>
+            <p className="font-medium text-ink">Product Engineer (AI)</p>
+            <p className="max-w-[46ch] normal-case text-fg-muted">
+              I design the interface and write the code. I use AI in loops: conditions first, then rebuild what
+              failed. ~2 years at Deutsche Post / DHL in Germany before that.
+            </p>
+          </div>
+          <div className="md:text-right">
+            <p className="font-medium text-ink">Now</p>
+            <p className="text-fg-muted">Hilo · AI voice companion · iPhone and web for care staff</p>
+            <p className="text-fg-muted">Casa · hackathon · team of three · AI agents</p>
+          </div>
+        </div>
+
+        <h2 className="px-2 font-medium text-ink" style={{ transform: 'translateZ(80px)' }}>
+          <Spread text="PRODUCT ENGINEER" />
+        </h2>
       </div>
     </section>
   )
