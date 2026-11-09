@@ -11,9 +11,9 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-type Plate = { src: string; w: number; h: number; project: string; caption: string; year: string; tools: string }
+export type Plate = { src: string; w: number; h: number; project: string; caption: string; year: string; tools: string }
 
-const PLATES: Plate[] = [
+export const PLATES: Plate[] = [
   { src: '/design/mockups/01-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'iPhone screens', year: '2026', tools: 'Figma' },
   { src: '/design/mockups/02-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Book and pills, iPad', year: '2026', tools: 'Figma' },
   { src: '/design/mockups/03-hilo-staff.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Web for care staff', year: '2026', tools: 'Figma' },
@@ -24,6 +24,8 @@ const PLATES: Plate[] = [
   { src: '/design/mockups/08-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Repositories', year: '2026', tools: 'SwiftUI' },
   { src: '/design/mockups/09-dross.webp', w: 1600, h: 1142, project: 'Dross', caption: 'Review before ship', year: '2026', tools: 'SwiftUI' },
   { src: '/design/mockups/10-f1-strategy-agent.webp', w: 1600, h: 1142, project: 'F1 Strategy Agent', caption: 'Suzuka strategy', year: '2026', tools: 'Python' },
+  { src: '/design/mockups/11-casa.webp', w: 1600, h: 1143, project: 'Casa', caption: 'Rental listing report', year: '2026', tools: 'TypeScript' },
+  { src: '/design/mockups/12-ukraine.webp', w: 1600, h: 1143, project: 'Ukraine War Tracker', caption: 'Cumulative losses chart', year: '2026', tools: 'Python' },
 ]
 
 const num = (i: number) => String(i + 1).padStart(2, '0')
