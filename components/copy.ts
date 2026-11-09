@@ -578,7 +578,6 @@ export type Milestone = { date: string; title: string; detail?: string }
 export const MILESTONES: Milestone[] = [
   { date: '2024–2026', title: '~2 years at Deutsche Post / DHL, Paderborn', detail: 'Full-time logistics operations in the DACH region. Alongside it, my own Shopify store for the Netherlands and Germany.' },
   { date: 'May 2026', title: 'Cofounded and developed Aithority', detail: 'EU AI Act compliance SaaS, accepted into Lanzadera. Tested with accelerator companies such as LaiaDesk. Until Oct 2026.' },
-  { date: 'Aug 2026', title: 'TRACE live on the App Store (US)', detail: 'Privacy app: breach scan, exposure score, broker removals.' },
   { date: 'Sep 2026', title: 'Kiblo live on the App Store (US & Canada)', detail: 'Approved and released after one revision.' },
   { date: 'Oct 2026', title: 'Started Hilo', detail: 'AI voice companion for older people. iPhone and iPad in App Store review, and a web app for care organisations.' },
   { date: 'Oct 2026', title: 'Open Agent Hackathon 2026', detail: 'Built Casa in 6 days with a remote team of three: agents that check a rental listing before you pay.' },
