@@ -14,7 +14,7 @@ const serif = Newsreader({
 
 const TITLE = 'Arnau Lopez | Product Engineer (AI)'
 const DESCRIPTION =
-  'Product Engineer (AI) with a design background: I design and build AI products. Building Hilo, an AI voice companion for older people. Built Casa with a remote team at the Open Agent Hackathon 2026. Cofounded and developed Aithority (EU AI Act compliance). Kiblo is live on the App Store in the US and Canada. Based in Alcoy, Spain. EU citizen, open to relocation.'
+  'Product Engineer (AI) with a design background: I design and build AI products. Building Hilo, an AI voice companion for older people. Built Casa with a remote team at the Open Agent Hackathon 2026. Cofounded and developed Aithority (EU AI Act compliance). Kiblo is live on the App Store in the US and Canada. Based in Amsterdam, Netherlands. EU citizen, open to relocation.'
 
 const mono = IBM_Plex_Mono({
   subsets: ['latin'],

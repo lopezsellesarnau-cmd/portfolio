@@ -15,7 +15,7 @@
 export const PROFILE = {
   name: 'Arnau Lopez',
   role: 'Product Engineer (AI)',
-  eyebrow: '[ 22 · Alcoy, Spain · EU citizen, open to relocation ]',
+  eyebrow: '[ 22 · Amsterdam, Netherlands · EU citizen, open to relocation ]',
   hero: 'Building Hilo, an AI voice companion for older people who live alone, in App Store review, with a web app for care organisations. Built Casa with a remote team in a 6-day hackathon: agents that check a rental listing before you pay the deposit. Cofounded and developed Aithority, an EU AI Act compliance SaaS (May to Oct 2026). Founder of Kiblo, live on the App Store in the US and Canada.',
   sub: 'TypeScript · React · React Native · Next.js · Supabase · Python · SQL · Claude API · Figma. I decide what to build, design the interface and write the code, and I use AI in loops: conditions first, then rebuild what failed. ~2 years at Deutsche Post / DHL in Germany; based in Spain, EU citizen, open to product engineer and AI product roles across the EU.',
 }
@@ -519,7 +519,7 @@ export const OTHER_WORK: { name: string; line: string; link?: string }[] = [
 ]
 
 export const CONTACT = {
-  eyebrow: 'Spain · EU citizen, open to relocation',
+  eyebrow: 'Netherlands · EU citizen, open to relocation',
   title: "Let's talk",
   cta: 'Email me',
   note: 'Product Engineer (AI). GitHub, LinkedIn, and CV below.',

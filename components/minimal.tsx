@@ -157,7 +157,7 @@ export function Hero() {
 
         <div style={{ transform: 'translateZ(20px)' }}>
           <SpreadWords
-            words={['I', 'design', 'and', 'build', 'AI', 'products', 'Alcoy,', 'Spain', 'EU', 'citizen']}
+            words={['I', 'design', 'and', 'build', 'AI', 'products', 'Amsterdam,', 'Netherlands', 'EU', 'citizen']}
             strong={['design', 'build', 'AI']}
           />
         </div>
@@ -623,7 +623,7 @@ export function Contact() {
       </div>
       <div className="frame flex justify-between text-[11px] uppercase text-fg-dim">
         <span className="pl-2">Arnau Lopez</span>
-        <span className="pr-2">Alcoy, Spain · EU</span>
+        <span className="pr-2">Amsterdam, Netherlands · EU</span>
       </div>
     </footer>
   )
