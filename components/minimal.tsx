@@ -238,10 +238,6 @@ function SpreadWords({ words, strong = [] }: { words: string[]; strong?: string[
 }
 
 const platesOf = (c: CaseStudy) => PLATES.filter((p) => p.project === c.name)
-const tagOf = (c: CaseStudy) => {
-  const kind = platesOf(c).length ? 'Design & Development' : 'Development'
-  return /team/i.test(c.role) ? `${kind} · Team` : kind
-}
 const n2 = (i: number) => String(i + 1).padStart(2, '0')
 
 /** The small framed picture: first mockup of the project, or its name when there is none yet. */
@@ -517,7 +513,7 @@ export function Work() {
           <ul className="col-start-2 mt-2 md:col-start-3 md:mt-0">
             {CASES.map((c) => (
               <li key={c.slug} className={hover === c.slug ? 'text-ink' : ''}>
-                [ {tagOf(c)} ]
+                [ {c.tag} ]
               </li>
             ))}
           </ul>

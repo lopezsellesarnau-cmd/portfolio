@@ -31,6 +31,8 @@ export type CaseStudy = {
   role: string
   tagline: string
   status: { text: string; tone: 'ok' | 'accent' }
+  /** My role, shown in [ brackets ] next to the name in the project list. */
+  tag: string
   /** Three lines, plain: what the product is. Shown above "problems solved". */
   blurb: string
   /** Why it was built. */
@@ -62,6 +64,7 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'AI voice companion for older people · iPhone, iPad and web for care organisations',
     status: { text: 'Founder · in App Store review', tone: 'accent' },
+    tag: 'Cofounder · Product Engineer',
     image: {
       src: '/design/hilo-board.webp',
       w: 2400,
@@ -120,6 +123,7 @@ export const CASES: CaseStudy[] = [
     role: 'Backend, data & agents · team of three',
     tagline: 'Open Agent Hackathon 2026 · agents that check a rental listing before you pay',
     status: { text: 'Hackathon · submitted Oct 2026', tone: 'accent' },
+    tag: 'Hackathon · Backend & AI',
     blurb:
       'Before you pay the deposit on a flat in Spain, Casa checks the listing: the size against Catastro, the price against the official rent index, the deposit and fees against the law, and signs of a scam. It drafts an email to the landlord that only sends when you approve it.',
     why:
@@ -160,6 +164,7 @@ export const CASES: CaseStudy[] = [
     role: 'Cofounder & developer',
     tagline: 'EU AI Act compliance SaaS · May to Oct 2026',
     status: { text: 'Cofounder · May–Oct 2026', tone: 'accent' },
+    tag: 'Cofounder · Product Engineer',
     blurb:
       'EU AI Act compliance for companies using AI in hiring, credit or biometrics. It inventories every system, classifies its risk, and produces dated evidence a client will accept.',
     why:
@@ -209,6 +214,7 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'Pet-food iOS — full consumer loop, live on the App Store',
     status: { text: 'Founder · live US & Canada', tone: 'ok' },
+    tag: 'Product Engineer',
     blurb:
       'A weekly habit app for dog owners: scan the food bag already in the cupboard, portion the meal from the dog’s weight, and reorder before it runs out.',
     why:
@@ -257,6 +263,7 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'ML race strategy — open-sourced after viewers asked for the code',
     status: { text: 'Open source · public repo', tone: 'ok' },
+    tag: 'Machine Learning',
     blurb:
       'A race-strategy model trained on real F1 telemetry: it predicts lap time from tyre compound and wear, evaluated on a Grand Prix it never saw, then simulates pit strategy on a real-traced circuit.',
     why:
@@ -301,6 +308,7 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'Mac app + CLI — notarized DMG',
     status: { text: 'Founder · notarized DMG', tone: 'ok' },
+    tag: 'Software Engineer',
     blurb:
       'A Mac app and CLI that catches the moment your frontend and backend stop agreeing on their contract — built for a solo team shipping with AI, not another PR-time cloud linter.',
     why:
@@ -335,6 +343,7 @@ export const CASES: CaseStudy[] = [
     role: 'Founder',
     tagline: 'Daily Russian losses in the war in Ukraine, as a quiet report',
     status: { text: 'Live · updated daily', tone: 'ok' },
+    tag: 'Data · Software Engineer',
     blurb:
       'A daily tracker of Russian equipment and personnel losses in the war in Ukraine. The figures are claimed by Ukraine’s General Staff, not independently verified, and the site labels them that way.',
     why:
