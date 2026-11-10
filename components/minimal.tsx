@@ -206,6 +206,20 @@ export function Portrait() {
   )
 }
 
+/* ── Quote ────────────────────────────────────────────────────────────── */
+/* From his Y Combinator co-founder matching profile (10 nov 2026). Between the work and the timeline. */
+
+export function Quote() {
+  return (
+    <section aria-label="Quote" className="frame flex min-h-[60svh] flex-col items-center justify-center py-24 text-center">
+      <blockquote className="max-w-[34ch] text-[15px] uppercase leading-[1.4] text-ink">
+        “Arnau has an impressive CV of products, all built &amp; shipped solo!”
+      </blockquote>
+      <p className="mono mt-5 text-[11px] uppercase text-fg-dim">Alistair Stafford · Y Combinator · co-founder matching</p>
+    </section>
+  )
+}
+
 /* ── Work ─────────────────────────────────────────────────────────────── */
 /* List: Vincent S portfolio. [ 0n ] label | content | [ meta ] columns on light paper,
    a small picture top-right that follows the project under the cursor.
