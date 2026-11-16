@@ -17,6 +17,7 @@ export const PLATES: Plate[] = [
   { src: '/design/mockups/01-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'iPhone screens', year: '2026', tools: 'Figma' },
   { src: '/design/mockups/02-hilo.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Book and pills, iPad', year: '2026', tools: 'Figma' },
   { src: '/design/mockups/03-hilo-staff.webp', w: 1600, h: 1142, project: 'Hilo', caption: 'Web for care staff', year: '2026', tools: 'Figma' },
+  { src: '/design/mockups/13-stackd.webp', w: 1600, h: 1142, project: 'StackD', caption: 'Components', year: '2026', tools: 'React' },
   { src: '/design/mockups/04-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Meal plan and trends', year: '2026', tools: 'React Native' },
   { src: '/design/mockups/05-kiblo.webp', w: 1600, h: 1142, project: 'Kiblo', caption: 'Pick the food', year: '2026', tools: 'React Native' },
   { src: '/design/mockups/06-aithority.webp', w: 1600, h: 1142, project: 'Aithority', caption: 'Compliance overview', year: '2026', tools: 'Next.js' },
