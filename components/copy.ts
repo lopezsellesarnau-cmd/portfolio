@@ -117,8 +117,53 @@ export const CASES: CaseStudy[] = [
     linkLabel: 'Open landing',
   },
   {
-    slug: 'casa',
+    slug: 'stackd',
     index: '02',
+    name: 'StackD',
+    role: 'Founder',
+    tagline: 'UI component store · React code, Figma files and a way in for AI agents',
+    status: { text: 'Live · stackd.codes', tone: 'ok' },
+    tag: 'Founder · Design Engineer',
+    image: {
+      src: '/design/stackd-board.webp',
+      w: 2472,
+      h: 1422,
+      alt: 'StackD components: card swap, prompt bar, before / after slider and split-flap display',
+      size: 'large',
+    },
+    blurb:
+      'A store of 18 animated interface components. Each one comes as React code and as a Figma file. Some are free and the rest are paid, and developers can also get them straight from their AI agent.',
+    why:
+      'Designers and developers keep rebuilding the same small pieces of interface, and most free components look the same. I wanted a few with more care in the motion, ready in both Figma and code.',
+    what:
+      'Components like a card swap, a before / after slider with a jelly line, a split-flap display and a prompt bar with a small bot. Designers download the Figma file or use the StackD Kit plugin. Developers install with the shadcn CLI, or ask Claude or Codex to add one through the MCP server.',
+    built:
+      'Solo. Components in React, TypeScript and Tailwind with no other dependencies. The store is Next.js on Vercel, payments and license keys through Gumroad. The Figma files are built by plugins I wrote, so each component comes with its variants and states.',
+    decisions: [
+      {
+        title: 'Agents are customers too',
+        detail:
+          'A shadcn registry and an MCP server serve the same components, so a developer can say "add the before / after slider" to their agent and get the code, the files and the install command.',
+      },
+      {
+        title: 'The license key is the only account',
+        detail:
+          'Paid components are checked against the buyer\'s Gumroad license key. No sign-up and no user database.',
+      },
+      {
+        title: 'Motion outside React',
+        detail:
+          'Springs run in one animation loop that sleeps when nothing moves, so the components stay smooth and cost nothing when still. All of them respect reduced motion.',
+      },
+    ],
+    stack: ['React', 'TypeScript', 'Tailwind', 'Next.js', 'MCP', 'Figma Plugin API', 'Gumroad'],
+    seed: 418,
+    link: 'https://www.stackd.codes',
+    linkLabel: 'Open store',
+  },
+  {
+    slug: 'casa',
+    index: '03',
     name: 'Casa',
     role: 'Backend, data & agents · team of three',
     tagline: 'Open Agent Hackathon 2026 · agents that check a rental listing before you pay',
@@ -159,7 +204,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'aithority',
-    index: '03',
+    index: '04',
     name: 'Aithority',
     role: 'Cofounder & developer',
     tagline: 'EU AI Act compliance SaaS · May to Oct 2026',
@@ -209,7 +254,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'kiblo',
-    index: '04',
+    index: '05',
     name: 'Kiblo',
     role: 'Founder',
     tagline: 'Pet-food iOS — full consumer loop, live on the App Store',
@@ -258,7 +303,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'f1-strategy-agent',
-    index: '05',
+    index: '06',
     name: 'F1 Strategy Agent',
     role: 'Founder',
     tagline: 'ML race strategy — open-sourced after viewers asked for the code',
@@ -303,7 +348,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'dross',
-    index: '06',
+    index: '07',
     name: 'Dross',
     role: 'Founder',
     tagline: 'Mac app + CLI — notarized DMG',
@@ -338,7 +383,7 @@ export const CASES: CaseStudy[] = [
   },
   {
     slug: 'ukraine-war-tracker',
-    index: '07',
+    index: '08',
     name: 'Ukraine War Tracker',
     role: 'Founder',
     tagline: 'Daily Russian losses in the war in Ukraine, as a quiet report',
