@@ -125,10 +125,10 @@ export const CASES: CaseStudy[] = [
     status: { text: 'Live · stackd.codes', tone: 'ok' },
     tag: 'Founder · Design Engineer',
     image: {
-      src: '/design/stackd-board.webp',
-      w: 2472,
-      h: 1422,
-      alt: 'StackD components: card swap, prompt bar, before / after slider and split-flap display',
+      src: '/design/stackd-launch.webp',
+      w: 2400,
+      h: 1350,
+      alt: 'The StackD logo surrounded by its components: Bot, voice memo, heat word, dot morph, card swap, before / after, spending ring and stacked bars',
       size: 'large',
     },
     blurb:
